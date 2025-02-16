@@ -25,7 +25,7 @@
                 <div class="card-body text-center">
                     <h5 class="mt-0">Total Orders</h5>
                     <h2 class="my-2" id="active-users-count">{{ $total_orders }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.purchase-orders.index') }}">
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index') }}">
                         <small>View Details </small>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="card-body text-center">
                     <h5 class="mt-0">Not Started</h5>
                     <h2 class="my-2" id="active-users-count">{{ $not_started }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.purchase-orders.index', ['status' => 'PO Generated']) }}">
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'PO Generated']) }}">
                         <small>View Details </small>
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="card-body text-center">
                     <h5 class="mt-0">In Progress</h5>
                     <h2 class="my-2" id="active-users-count">{{ $in_progress }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.purchase-orders.index', ['status' => 'In Progress']) }}">
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'In Progress']) }}">
                         <small>View Details </small>
                     </a>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="card-body text-center">
                     <h5 class="mt-0">Completed</h5>
                     <h2 class="my-2" id="active-users-count">{{ $completed }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.purchase-orders.index', ['status' => 'Completed']) }}">
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'Completed']) }}">
                         <small>View Details </small>
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="card-body text-center">
                     <h5 class="mt-0">Delivered</h5>
                     <h2 class="my-2" id="active-users-count">{{ $delivered }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.purchase-orders.index', ['status' => 'Delivered']) }}">
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'Delivered']) }}">
                         <small>View Details </small>
                     </a>
                 </div>

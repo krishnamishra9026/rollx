@@ -11,7 +11,6 @@ use App\Http\Controllers\Franchise\OrderController;
 use App\Http\Controllers\Franchise\SaleController;
 use App\Http\Controllers\Franchise\SettingController;
 use App\Http\Controllers\Franchise\ChefController;
-use App\Http\Controllers\Franchise\PurchaseOrderController;
 use App\Http\Controllers\Franchise\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,7 +59,6 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('purchase-orders', PurchaseOrderController::class);
 
     Route::resource('wallet', WalletController::class);
     
@@ -93,10 +91,7 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::delete('products/{id}/delete-document', [ProductController::class, 'deleteDocument'])->name('products.delete-document');
 
 
-    Route::put('purchase-orders/{id}/add-history', [PurchaseOrderController::class, 'addHistory'])->name('purchase-orders.add-history');
-    Route::post('purchase-orders/change-status', [PurchaseOrderController::class, 'changeStatus'])->name('purchase-orders.change-status');
-
-    /*
+   /*
     |--------------------------------------------------------------------------
     | Settings > My Account Route
     |--------------------------------------------------------------------------
