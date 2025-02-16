@@ -1,0 +1,173 @@
+.invalid-feedback{
+    display: block;
+}
+body[data-leftbar-theme="dark"] .side-nav .menuitem-active > a {
+    color: #46D4D1 !important;
+}
+body[data-leftbar-theme="dark"] .side-nav .side-nav-link {
+    color: #ffffff;
+}
+
+body[data-leftbar-theme="dark"] .side-nav .side-nav-link:hover, body[data-leftbar-theme="dark"] .side-nav .side-nav-link:focus, body[data-leftbar-theme="dark"] .side-nav .side-nav-link:active {
+    color: #46D4D1;
+}
+
+body[data-leftbar-theme="dark"] .side-nav .side-nav-second-level li a:focus, body[data-leftbar-theme="dark"] .side-nav .side-nav-second-level li a:hover, body[data-leftbar-theme="dark"] .side-nav .side-nav-third-level li a:focus, body[data-leftbar-theme="dark"] .side-nav .side-nav-third-level li a:hover, body[data-leftbar-theme="dark"] .side-nav .side-nav-forth-level li a:focus, body[data-leftbar-theme="dark"] .side-nav .side-nav-forth-level li a:hover {
+    color: #46D4D1;
+}
+body[data-leftbar-theme="dark"] .side-nav .side-nav-second-level li a, body[data-leftbar-theme="dark"] .side-nav .side-nav-third-level li a, body[data-leftbar-theme="dark"] .side-nav .side-nav-forth-level li a {
+    color: #ffffff;
+}
+body[data-leftbar-theme="dark"][data-leftbar-compact-mode="condensed"] .side-nav .side-nav-item:hover .side-nav-link {
+    background-color: #46D4D1;
+    color: #000 !important;
+}
+body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) .side-nav .side-nav-item:hover > .collapse > ul a:hover, body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) .side-nav .side-nav-item:hover > .collapsing > ul a:hover {
+    background-color: #46D4D1;
+    color: #000 !important;
+}
+.dropdown-menu.dashboard-filter-dropdown.show {
+    transform: translate(0px, 40px) !important;
+    min-width: 8.09rem !important;
+}
+.date-width {
+    max-width: 150px;
+    margin-left: 13px;
+}
+.tilebox-one .card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.0rem 1.0rem;
+}
+.label-small {
+    padding-bottom: 0px;
+    font-size: 90%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+table#basic-datatable {
+    font-size: 13px;
+}
+.bg-nav-pills {
+    background-color: #222222;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #000;
+    background-color: #46D4D1;
+}
+body[data-leftbar-theme="dark"] .leftside-menu {
+    background: #001D3A !important;
+}
+body[data-leftbar-theme="dark"] .leftside-menu .logo {
+    background: #001D3A !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #F2F2F2;
+    color: #000;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+    --bs-table-accent-bg: #fff;
+    color: #000;
+}
+.text-body {
+    color: #2E97FF !important;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #000;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #000;
+    font-weight: 700;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.nav-tabs.nav-bordered .nav-item {
+    margin-bottom: -1px;
+    margin-right: 40px;
+}
+.nav-tabs.nav-bordered li a {
+    border: 0;
+    padding: 0.625rem 0rem;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image {
+    opacity: 1;
+    display: inline-block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.image-delete-button {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.image-container:hover .image {
+    opacity: 0.3;
+}
+
+.image-container:hover .image-delete-button {
+    opacity: 1;
+}
+.document-container {
+    position: relative;
+}
+
+.document {
+    opacity: 1;
+    display: inline-block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.document-delete-button {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.document-container:hover .document {
+    opacity: 0.3;
+}
+
+.document-container:hover .document-delete-button {
+    opacity: 1;
+}
+
+.Local_Orders .table tr td .btn-success {
+    min-width: 150px;
+}
+.Purchase_Orders .table tr td .btn-success {
+    min-width: 120px;
+}
