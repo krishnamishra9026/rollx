@@ -23,16 +23,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $customers = User::count();
-        $equipments = Equipment::count();
-        $parts = Product::count();
-        $suppliers = Franchise::count();
+        $franchises = Franchise::count();
         $orders = Order::count();
-        $jobs = 266;
         $users = Administrator::count();
-        $technicians = Technician::count();
-        $recent_jobs = Job::where('status', 'completed')->orderBy('id', 'desc')->take(5)->get();       
-        return view('admin.dashboard.dashboard', compact('customers', 'equipments', 'parts', 'suppliers', 'orders', 'jobs', 'users', 'technicians', 'recent_jobs'));
+        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users'));
     }
 
     public function updateToken(Request $request){

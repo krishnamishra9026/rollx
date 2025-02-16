@@ -5,25 +5,14 @@ use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\MyAccountController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CloneOrderController;
-use App\Http\Controllers\Admin\CompanyController;
-use App\Http\Controllers\Admin\CustomerCompanyController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EquipmentController;
-use App\Http\Controllers\Admin\InventoryEquipmentController;
-use App\Http\Controllers\Admin\JobCalendarController;
-use App\Http\Controllers\Admin\JobController;
-use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\LeadController;
-use App\Http\Controllers\Admin\TechnicianController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
 use App\Http\Controllers\Admin\UserManagement\SuperadminController;
 use Illuminate\Support\Facades\Route;
@@ -76,9 +65,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('customers', CustomerCompanyController::class);
-    Route::post('customers/bulk-delete', [CustomerCompanyController::class, 'bulkDelete'])->name('customers.bulk-delete');
-    Route::post('customers/get-addresses', [CustomerCompanyController::class, 'getAddresses'])->name('customers.get-addresses');
 
      /*
     |--------------------------------------------------------------------------
@@ -122,67 +108,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::delete('orders/{id}/delete-document', [OrderController::class, 'deleteDocument'])->name('orders.delete-document');
     Route::post('orders/change-status', [OrderController::class, 'changeStatus'])->name('orders.change-status');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Purchase Order Route
-    |--------------------------------------------------------------------------
-    */
-
-    Route::resource('purchase-orders', PurchaseOrderController::class);
-
-    Route::get('purchase-orders/{id}/equipment-info', [PurchaseOrderController::class, 'equipmentInfo'])->name('purchase-orders.equipment-info');
-    Route::put('purchase-/{id}/equipment-info', [PurchaseOrderController::class, 'saveEquipmentInfo'])->name('purchase-orders.save-equipment-info');
-    Route::delete('purchase-orders/{id}/equipment-part', [PurchaseOrderController::class, 'deleteEquipmentPart'])->name('purchase-orders.delete-equipment-part');
-    Route::get('purchase-orders/{id}/add-parts', [PurchaseOrderController::class, 'createPart'])->name('purchase-orders.createPart');
-    Route::post('purchase-orders/get-categories', [PurchaseOrderController::class, 'getSubcategories'])->name('purchase-orders.get-categories');
-    Route::post('purchase-orders/add-part', [PurchaseOrderController::class, 'addPart'])->name('purchase-orders.add-part');
-    Route::get('purchase-orders/{id}/clone', [PurchaseOrderController::class, 'clone'])->name('purchase-orders.clone');
-    Route::put('purchase-orders/{id}/add-history', [PurchaseOrderController::class, 'addHistory'])->name('purchase-orders.add-history');
-    Route::delete('purchase-orders/{id}/delete-image', [PurchaseOrderController::class, 'deleteImage'])->name('purchase-orders.delete-image');
-    Route::delete('purchase-orders/{id}/delete-document', [PurchaseOrderController::class, 'deleteDocument'])->name('purchase-orders.delete-document');
-    Route::post('purchase-orders/change-status', [PurchaseOrderController::class, 'changeStatus'])->name('purchase-orders.change-status');
-    /*
-    |--------------------------------------------------------------------------
-    | Equipment Route
-    |--------------------------------------------------------------------------
-    */
-
-    Route::resource('equipments', EquipmentController::class);
-    Route::get('equipment/export', [EquipmentController::class,'exports'])->name('equipments.exports');
-
-    Route::post('address/get-equipments', [EquipmentController::class, 'getEquipmentsByAddress'])->name('address.get-equipments');
-
-    Route::post('address/get-part-details', [EquipmentController::class, 'getPartDetails'])->name('equipments.get-part-details');
-
-     /*
-    |--------------------------------------------------------------------------
-    | Job Route
-    |--------------------------------------------------------------------------
-    */
-
-    Route::resource('jobs', JobController::class);
-    Route::get('jobs/epod/{id}', [JobController::class, 'epod'])->name('jobs.epod');
-
-    //Download Hotel images
-    Route::get('jobs/downloads/{id}', [JobController::class, 'downloadImages'])->name('download.epod');
-
-    Route::get('jobs/{id}/parts-replacement', [JobController::class, 'partReplacement'])->name('jobs.parts-replacement');
-    Route::put('jobs/{id}/parts-replacement-info', [JobController::class, 'savePartReplacement'])->name('jobs.save-parts-replacement');
-    Route::get('jobs/{id}/delete-equipment-part', [JobController::class, 'deleteEquipmentPart'])->name('jobs.delete-equipment-part');
-    Route::delete('jobs/{id}/delete-image', [JobController::class, 'deleteImage'])->name('jobs.delete-image');
-    Route::resource('job-calendar', JobCalendarController::class);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Technicians Route
-    |--------------------------------------------------------------------------
-    */
-
-    Route::resource('technicians', TechnicianController::class);
-
-    Route::post('technicians/reset-password', [TechnicianController::class, 'resetPassword'])->name('technicians.reset-password');
-    Route::post('technicians/bulk-delete', [TechnicianController::class, 'bulkDelete'])->name('technicians.bulk-delete');
-
+   
     /*
     |--------------------------------------------------------------------------
     | Suppliers Route
@@ -231,25 +157,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('roles/bulk-delete', [RoleController::class, 'bulkDelete'])->name('roles.bulk-delete');
 
 
-    Route::resource('job-types', JobTypeController::class);
-    Route::post('job-types/bulk-delete', [JobTypeController::class, 'bulkDelete'])->name('job-types.bulk-delete');
-
-    Route::resource('inventory/equipments', InventoryEquipmentController::class, [
-        'names' => [
-            'index'         => 'inventory-equipment.index',
-            'create'        => 'inventory-equipment.create',
-            'update'        => 'inventory-equipment.update',
-            'edit'          => 'inventory-equipment.edit',
-            'store'         => 'inventory-equipment.store',
-            'show'          => 'inventory-equipment.show',
-            'destroy'       => 'inventory-equipment.destroy',
-        ]
-    ]);
-
-    Route::delete('inventory/equipments/{id}/part', [InventoryEquipmentController::class, 'deleteEquipmentPart'])->name('inventory-equipment.delete-part');
-    Route::get('inventory/equipments/{id}/add-parts', [InventoryEquipmentController::class, 'createPart'])->name('inventory-equipment.createPart');
-    Route::post('inventory-equipments/add-part', [InventoryEquipmentController::class, 'addPart'])->name('inventory-equipment.add-part');
-    Route::post('inventory-equipments/get-serials', [InventoryEquipmentController::class, 'getSerials'])->name('inventory-equipment.get-serials');
+    
     Route::resource('user-management/admins', AdminController::class, [
         'names' => [
             'index'         => 'admins.index',
