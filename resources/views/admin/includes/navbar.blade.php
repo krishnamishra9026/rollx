@@ -16,7 +16,7 @@
                 <span>
                     <span class="account-user-name text-dark">{{ Auth::guard('administrator')->user()->firstname }}
                         {{ Auth::guard('administrator')->user()->lastname }}</span>
-                    <span class="account-position">Administrator</span>
+                    <span class="account-position">{{ Auth::guard('administrator')->user()->roles()->first()->name ?? 'Administrator'}}</span>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
@@ -63,6 +63,6 @@
                 </path>
             </svg>
         </button>
-        <button type="button" class="btn btn-sm btn-dark" style="margin-top: 22px;">Welcome {{ Auth::user()->role == 'Admin' ? 'Administrator' : 'Superadmin' }}</button>
+        <button type="button" class="btn btn-sm btn-dark" style="margin-top: 22px;">Welcome {{ Auth::guard('administrator')->user()->roles()->first()->name ?? 'Administrator'}}</button>
     </div>
 </div>

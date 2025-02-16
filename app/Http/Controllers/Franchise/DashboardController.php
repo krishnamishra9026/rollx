@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Administrator;
 use App\Models\Equipment;
 use App\Models\Job;
-use App\Models\Order;
 use App\Models\Part;
-use App\Models\PurchaseOrder;
+use App\Models\Order;
+use App\Models\Sale;
 use App\Models\Franchise;
 use App\Models\Technician;
 use App\Models\User;
@@ -24,12 +24,13 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $total_orders = PurchaseOrder::count();
-        $not_started = PurchaseOrder::where('status', 'PO Generated')->count();
-        $in_progress = PurchaseOrder::where('status', 'In Progress')->count();
-        $delivered = PurchaseOrder::where('status', 'Delivered')->count();
-        $completed = PurchaseOrder::where('status', 'Completed')->count();
-        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed'));
+        $total_orders = Order::count();
+        $total_sales = Sale::count();
+        $not_started = Order::where('status', 'PO Generated')->count();
+        $in_progress = Order::where('status', 'In Progress')->count();
+        $delivered = Order::where('status', 'Delivered')->count();
+        $completed = Order::where('status', 'Completed')->count();
+        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'total_sales'));
     }
 
     public function updateToken(Request $request){

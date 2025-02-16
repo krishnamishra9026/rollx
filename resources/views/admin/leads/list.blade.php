@@ -40,7 +40,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>City</th>
-                                            <th>Status</th>
+                                            <th>Status(Select to change)</th>
                                             <th>Next Call Date Time</th>
                                             <th></th>
                                         </tr>
@@ -66,27 +66,17 @@
                                                         id="changeSelect{{ $lead->id }}"
                                                         onchange="changeStatus({{ $lead->id }}, this.value)"
                                                         style="display: block">
-                                                            <option value="pending"
-                                                                {{ $lead->status == 'pending' ? 'selected' : '' }}>Pending
-                                                            </option>
-                                                            <option value="processed"
-                                                                {{ $lead->status == 'processed' ? 'selected' : '' }}>
-                                                                Processed</option>
-                                                        
-                                                            <option value="cancelled"
-                                                                {{ $lead->status == 'cancelled' ? 'selected' : '' }}>
-                                                                Cancelled</option>                                                        
-                                                            
-                                                            <option value="shipped"
-                                                                {{ $lead->status == 'shipped' ? 'selected' : '' }}>Shipped
-                                                            </option>
-                                                        
-                                                            <option value="completed"
-                                                                {{ $lead->status == 'completed' ? 'selected' : '' }}>
-                                                                Completed</option>
+                                                            <option value="">Please select Status</option>
+                                                            <option value="Pending" {{ $lead->status == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                                            <option value="Fresh" {{ $lead->status == 'Fresh' ? 'selected' : ''}}>Fresh</option>
+                                                            <option value="Interested" {{ $lead->status == 'Interested' ? 'selected' : ''}}>Interested</option>
+                                                            <option value="Non Contactable" {{ $lead->status == 'Non Contactable' ? 'selected' : ''}}>Non Contactable</option>
+                                                            <option value="Paspect" {{ $lead->status == 'Paspect' ? 'selected' : ''}}>Paspect</option>
+                                                            <option value="Closed" {{ $lead->status == 'Closed' ? 'selected' : ''}}>Closed</option>
+                                                            <option value="Converted" {{ $lead->status == 'Converted' ? 'selected' : ''}}>Converted</option>
+                                                            <option value="Not Interested" {{ $lead->status == 'Not Interested' ? 'selected' : ''}}>Not Interested</option>
                                                     </select>
 
-                                                    <!-- @if(!$lead->status) Pending @else Convertd @endif</td> -->
                                                 <td>                                                  
                                                 <input type="datetime-local" data-id="{{ $lead->id }}" id="next_call_datetime" name="next_call_datetime" value="{{ $lead->next_call_datetime }}" class="form-control datetimepicker" required >
                                                 </td>
@@ -108,11 +98,9 @@
                                                             View Lead</a>
                                                         @endcan
 
-                                                        @if(!$lead->status)
                                                         <a href="{{ route('admin.leads.convert', $lead->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             Conver to Franchise</a>
-                                                        @endif
 
                                                         @can('Delete Lead')
                                                          <a href="javascript:void(0);"

@@ -59,6 +59,17 @@
                 </a>
             </li>
 
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+            <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.transactions.index') }}" class="side-nav-link">
+                    <i class="uil-shopping-cart-alt"></i>
+                    <span> Financial Transactions </span>
+                </a>
+            </li>
+
+            @endif
+
             <li class="side-nav-item {{ request()->is('admin/wallet') || request()->is('admin/wallet/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.wallet.index') }}" class="side-nav-link">
                     <i class="uil-shopping-cart-alt"></i>
@@ -70,7 +81,7 @@
             <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
                     <i class="uil-user-check"></i>
-                    <span> Lead </span>
+                    <span> Leads </span>
                 </a>
             </li>
             @endcan

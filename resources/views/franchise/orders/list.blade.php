@@ -35,6 +35,7 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Model Number</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
                                             <th class="fw-bold">Action</th>
@@ -47,6 +48,7 @@
                                                 <td>{{ $order->product_name }}</td>
                                                 <td>{{ $order->model_number }}</td>
                                                 <td>{{ $order->quantity }}</td>
+                                                <td>{{ $order->stock }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"

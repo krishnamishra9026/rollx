@@ -76,6 +76,19 @@
             </div>
         </div>
 
+
+        <div class="col-xl-4 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">
+                    <h5 class="mt-0">Total Sales</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $total_sales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'Delivered']) }}">
+                        <small>View Details </small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div> <!-- container -->

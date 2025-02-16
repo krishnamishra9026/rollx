@@ -49,7 +49,7 @@ class ContactController extends Controller
         $supplier->zipcode              = $request->zipcode;
         $supplier->iso2                 = $request->iso2;
         $supplier->remarks                 = $request->remarks;
-        $supplier->status               = false;
+        $supplier->status               = 'Fresh';
         $supplier->email_verified_at    = now();
 
         if ($request->hasfile('avatar')) {

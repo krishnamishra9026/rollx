@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
@@ -73,6 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     */
 
     Route::resource('wallet', WalletController::class);
+    Route::resource('transactions', TransactionController::class);
     
     Route::resource('categories', CategoryController::class);
     Route::post('categories/get-subcategories', [CategoryController::class, 'getSubcategories'])->name('categories.get-subcategories');

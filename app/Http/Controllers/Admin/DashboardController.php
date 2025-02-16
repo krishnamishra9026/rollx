@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Administrator;
 use App\Models\Equipment;
 use App\Models\Help;
-use App\Models\Job;
+use App\Models\Lead;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Franchise;
@@ -25,8 +25,19 @@ class DashboardController extends Controller
     {
         $franchises = Franchise::count();
         $orders = Order::count();
+        $products = Product::count();
+
+        $leads = Lead::count();
+        $fresh_leads = Lead::where('status', 'Fresh')->count();
+        $interested_leads = Lead::where('status', 'Interested')->count();
+        $non_leads = Lead::where('status', 'Non Contactable')->count();
+        $paspect_leads = Lead::where('status', 'Paspect')->count();
+        $closed_leads = Lead::where('status', 'Closed')->count();
+        $not_interested_leads = Lead::where('status', 'Not Interested')->count();
+        $converted_leads = Lead::where('status', 'Converted')->count();
+
         $users = Administrator::count();
-        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users'));
+        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products'));
     }
 
     public function updateToken(Request $request){

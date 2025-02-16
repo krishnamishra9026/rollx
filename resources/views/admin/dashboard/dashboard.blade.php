@@ -21,7 +21,19 @@
             </div>
         </div>
     </div>
-    <div class="row">         
+    <div class="row">       
+
+    <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Products</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $products }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.products.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>  
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
@@ -51,7 +63,7 @@
                 <div class="card-body text-center">                    
                     <h5 class="mt-0">Users</h5>
                     <h2 class="my-2" id="active-users-count">{{ $users }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('admin.admins.index') }}">    
+                    <a class="mb-0 text-dark" href="{{ route('admin.users.index') }}">    
                         <small>View Details </small>                   
                     </a>
                 </div>
@@ -59,6 +71,124 @@
         </div>
 
     </div>
+
+
+    @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">                        
+                        <li class="breadcrumb-item">Leads</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Leads</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">         
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Total Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Fresh Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $fresh_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Interested Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $interested_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Non Contactable Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $non_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Paspect Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $paspect_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Closed Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $closed_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Not Interested Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $not_interested_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Converted Leads</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $converted_leads }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+    </div>
+
+    @endif
     <!-- end page title -->
 
 </div> <!-- container -->

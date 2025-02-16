@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('Fresh')->nullable();
             $table->text('fcm_token')->nullable();
             $table->longText('remarks')->nullable();
             $table->datetime('next_call_datetime')->nullable();

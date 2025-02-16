@@ -81,7 +81,7 @@ class LeadController extends Controller
         $lead->zipcode              = $request->zipcode;
         $lead->iso2                 = $request->iso2;
         $lead->remarks                 = $request->remarks;
-        $lead->status               = false;
+        $lead->status               = 'Fresh';
         $lead->email_verified_at    = now();
 
         if ($request->hasfile('avatar')) {
@@ -183,7 +183,7 @@ class LeadController extends Controller
 
         $lead                       = Lead::find($id);
 
-        $lead->status = true;
+        $lead->status = 'Converted';
 
         $lead->save();
 

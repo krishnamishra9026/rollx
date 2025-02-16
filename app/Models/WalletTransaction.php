@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class WalletTransaction extends Model
 {
     use HasFactory;
+
+    public function wallet()
+    {
+        return $this->morphOne(config('wallet.wallet_model'), 'owner')->where('wallet_id')->withDefault();
+    }
+
 }
