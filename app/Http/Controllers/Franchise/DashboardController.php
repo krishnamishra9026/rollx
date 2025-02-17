@@ -25,12 +25,15 @@ class DashboardController extends Controller
     {
 
         $total_orders = Order::count();
-        $total_sales = Sale::count();
         $not_started = Order::where('status', 'PO Generated')->count();
         $in_progress = Order::where('status', 'In Progress')->count();
         $delivered = Order::where('status', 'Delivered')->count();
         $completed = Order::where('status', 'Completed')->count();
-        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'total_sales'));
+
+        $totalSales = Sale::sum('price');
+        $monthlySales = Sale::whereMonth('created_at', now()->month)->sum('price');
+
+        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'totalSales', 'monthlySales'));
     }
 
     public function updateToken(Request $request){

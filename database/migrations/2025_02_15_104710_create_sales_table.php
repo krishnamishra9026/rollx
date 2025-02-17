@@ -20,6 +20,12 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
 
+            $table->unsignedBigInteger('franchise_id')->nullable();
+            $table->foreign('franchise_id')->references('id')->on('franchises')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedBigInteger('chef_id')->nullable();
+            $table->foreign('chef_id')->references('id')->on('chefs')->onUpdate('cascade')->onDelete('cascade');
+
             $table->integer('quantity')->default(1);
             $table->decimal('price', 10, 2);
 

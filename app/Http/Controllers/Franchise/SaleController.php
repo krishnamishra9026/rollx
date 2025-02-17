@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Sale;
 
 class SaleController extends Controller
@@ -13,25 +14,41 @@ class SaleController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:franchise');
+    }
+        
     public function index(Request $request)
     {
         $filter                     = [];
         $filter['date']       = $request->date;
         $filter['status']           = $request->status;
+        $filter['product']           = $request->product;
+        $filter['order']           = $request->order;
 
         $order_id = $request->order_id;
 
+        if (isset($order_id)) {
+            $sales = Sale::where('order_id', $order_id)->with('order', 'product');
+        }
 
         $sales              = Sale::with('order', 'product');
         $sales              = isset($filter['date']) ? $sales->whereDate('created_at', $filter['date']) : $sales;
         $sales              = isset($filter['status']) ? $sales->where('status', 'LIKE', '%' . $filter['status'] . '%') : $sales;
+        $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
+        $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
 
-        $sales              = $sales->orderBy('id', 'desc')->paginate(20);
+        $sales              = $sales->where('franchise_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
 
 
         $order = Order::where('id', $order_id)->first();
 
-        return view('franchise.orders.sales.list', compact('sales', 'filter', 'order'));
+        $orders = Order::all();
+        $products = Product::all();
+
+        return view('franchise.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products'));
     }
 
     /**
@@ -75,6 +92,7 @@ class SaleController extends Controller
         Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
+            'franchise_id' => auth()->user()->id,
             'quantity' => $request->quantity,
             'price' => $request->quantity * $request->price,
             'status' => 'Sold'

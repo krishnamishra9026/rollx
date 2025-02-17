@@ -68,6 +68,7 @@ class ProductController extends Controller
         $part->description   = $request->description;
         $part->price         = $request->price;
         $part->model_number  = $request->model_number;
+        $part->sold_color  = $request->sold_color;
         $part->serial_number = $request->serial_number;
         $part->quantity      = $request->quantity;
         $part->refrence      = $request->refrence;
@@ -127,6 +128,7 @@ class ProductController extends Controller
         $part->price         = $request->price;
         $part->model_number  = $request->model_number;
         $part->serial_number = $request->serial_number;
+        $part->sold_color  = $request->sold_color;
         $part->quantity      = $request->quantity;
         $part->refrence      = $request->refrence;
         $part->status        = $request->status;

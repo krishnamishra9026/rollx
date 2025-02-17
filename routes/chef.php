@@ -64,11 +64,12 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     
     Route::resource('orders', OrderController::class);
 
+    Route::get('sales/save', [SaleController::class, 'save'])->name('sales.save');
     Route::resource('sales', SaleController::class);
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
-        Route::post('sales/save', [SaleController::class, 'save'])->name('sales.save');
+        Route::post('sales/save', [SaleController::class, 'saveOld'])->name('sales.save');
     });
 
     Route::put('orders/{id}/add-history', [OrderController::class, 'addHistory'])->name('orders.add-history');

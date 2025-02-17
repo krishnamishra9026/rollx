@@ -34,7 +34,7 @@
         </div>
         @include('chef.includes.flash-message')
 
-        <div class="row">
+        <div class="row" style="display: none;">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">                        
@@ -92,6 +92,62 @@
 
 
         @include('chef.orders.sales.filter')
+
+        @if(isset($order_id))
+
+        <div class="row">       
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Total Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Sold Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Remaining Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+             <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Not Sold Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div>  
+
+        </div>
+        @endif
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -109,15 +165,14 @@
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($sales as $sale)
                                             <tr>
-                                                <td>{{ $sale->id }}</td>
-                                                <td>{{ $sale->order_id }}</td>
-                                                <td>{{ $sale->order->product_name }}</td>
+                                                <td>#{{ $sale->id }}</td>
+                                                <td>#{{ $sale->order_id }}</td>
+                                                <td>{{ $sale->order->product->name }}</td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
                                                 <td>

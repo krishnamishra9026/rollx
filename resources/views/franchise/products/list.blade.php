@@ -27,19 +27,29 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+
                 <div class="page-title-box">
-                    <h4 class="page-title">Products</h4>
+                    <div class="page-title-right">
+
+
+                        <a href="{{ route('franchise.products.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
+                            class="mdi mdi-refresh"></i> Reset</a>
+                            
+                            <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
+                                class="mdi mdi-filter"></i> Filter</button>
+                            <button type="submit" class="btn btn-sm btn-success float-end me-1" form="CreateOrders">Create Orders</button>
+                            </div>
+                            <h4 class="page-title">Products</h4>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-        </div>
         @include('franchise.includes.flash-message')
         @include('franchise.products.filter')
         <div class="row py-3">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header text-end">
-                        Points : <span class="points">{{ auth()->user()->balance }}</span>
-                    </div>
+                    
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">
@@ -53,13 +63,18 @@
                                             <th>Price</th>
                                             <th>Total Price</th>
                                             <th>Date Added</th>
-                                            <th></th>
+                                            <th class="text-end">Action</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($products as $product)
+                                    </thead>    
 
+                                    <form method="POST" action="{{ route('franchise.orders.save') }}"  id="CreateOrders">
+                                    @csrf
+                                        <tbody>
+                                        @foreach ($products as $key => $product)
+                                            
                                             <tr>
+                                                <input type="hidden" name="data[{{ $key }}][product_id]" value="{{ $product->id }}">
+                                                <input type="hidden" name="data[{{ $key }}][price]" value="{{ $product->price }}">
                                                 <td>{{ $product->id }}</td>
                                                 <td><a href="{{ route('franchise.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
@@ -67,7 +82,7 @@
                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
-                                                        <input type="number" name="quantity" class="quantity quantity-select"  data-id="{{ $product->id }}" data-price="{{ $product->price }}" value="1" min="1" max="{{ $product->quantity }}">
+                                                        <input type="number" name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->price }}" value="0" min="0" max="{{ $product->quantity }}">
                                                         <button type="button" class="increase">+</button>
                                                     </div>
                                                 </td>
@@ -82,38 +97,36 @@
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a href="{{ route('franchise.products.edit', $product->id) }}"
-                                                            class="dropdown-item"><i class="fa fa-edit me-1"></i>
-                                                            Edit
-                                                        </a>
+                                                 
                                                         <a href="{{ route('franchise.products.show', $product->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View</a>
 
                                                         <a href="{{ route('franchise.orders.create', ['product_id' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            Place Order</a>
+                                                            Place Order</a> 
 
-                                                        <a href="javascript:void(0);"
-                                                            onclick="confirmDelete({{ $product->id }})"
-                                                            class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
-                                                            Delete
-                                                        </a>
                                                         
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr>                                          
+                                        @endforeach
+                                        </tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                        <button type="submit" class="btn btn-success text-end" form="CreateOrders" style="float: right;">Create Orders</button>
+                                        </td>
+                                    </tr>
 
-                                            <form id='delete-form{{ $product->id }}'
+                                    </form>
+
+                                    <form id='delete-form{{ $product->id }}'
                                                 action='{{ route('franchise.products.destroy', $product->id) }}'
                                                 method='POST'>
                                                 <input type='hidden' name='_token'
                                                 value='{{ csrf_token() }}'>
                                                 <input type='hidden' name='_method' value='DELETE'>
                                             </form>
-                                            
-                                        @endforeach
-                                    </tbody>
                                 </table>
                                 {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
                             </div>
@@ -131,34 +144,6 @@
     <script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/responsive.bootstrap4.min.js') }}"></script>
 
-    <script type="text/javascript">
-        
-        $(document).on("blur", '.quantity-box .quantity-select', function(event) {
-
-            let quantity = $(this).val();
-            let rowId = $(this).attr("data-id");
-            let price = $(this).attr("data-price");
-
-
-            $.ajax({
-                url: "{{ route('franchise.orders.save') }}",
-                method: "POST",
-                data: {
-                    id: rowId,
-                    quantity: quantity,
-                    price: price,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function (response) {
-                    location.reload();
-                },
-                error: function () {
-                    console.error("Error updating quantity for row");
-                },
-            });
-        });
-
-    </script>
 
     <!-- Datatable Init js -->
     <script>
@@ -220,34 +205,36 @@
             $(".increase").click(function () {
                 let input = $(this).siblings(".quantity");
                 let value= parseInt(input.val()) + 1;
-                input.val(value);
-                //input.trigger('focus');
                 var price = input.attr('data-price');
                 let total = value * price;
                 let points = parseInt($('.points').html());
                 $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
-                $('.points').html(points - total);
+                let rPoints = points - price;
+                if (rPoints > 0) {
+                $('.points').html(points - price);
+                input.val(value);
+            }else{
+                alert('Not sufficiant points to create order!');
+            }
 
 
             });
 
             $(".decrease").click(function () {
                 let input = $(this).siblings(".quantity");
-                if (parseInt(input.val()) > 1) {
+                if (parseInt(input.val()) > 0) {
 
                     let value= parseInt(input.val()) - 1;
                     input.val(value);
-                    //input.trigger('focus');
 
                     var price = input.attr('data-price');
                     let total = value * price;
                     $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
                     let points = parseInt($('.points').html());
-                    $('.points').html(points - total);
+                    $('.points').html(points + parseInt(price));
 
                 }
             });
         });
     </script>
-s
 @endpush

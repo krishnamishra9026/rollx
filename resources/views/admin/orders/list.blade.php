@@ -55,7 +55,7 @@ session()->put('route', $route);
                                     <tbody>
                                         @foreach ($orders as $order)
                                             <tr>
-                                                <td>{{ $order->id }}</td>
+                                                <td>#{{ $order->id }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->date)->format('M d, Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.franchises.show', $order->franchise_id) }}"
@@ -64,7 +64,7 @@ session()->put('route', $route);
                                                 <td>
                                                     <a href="{{ route('admin.products.show', $order->product_id) }}"
                                                         class="text-body fw-semibold">
-                                                    {{ $order->product_name }}   
+                                                    {{ $order->product->name }}   
                                                     </a>                                                
                                                 </td>
                                         

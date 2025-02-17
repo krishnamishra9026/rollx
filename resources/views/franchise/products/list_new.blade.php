@@ -59,10 +59,7 @@
                                     <tbody>
                                         @foreach ($products as $product)
 
-                                            <form method="POST" action="{{ route('franchise.orders.store') }}">
-                                            @csrf
                                             <tr>
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                 <td>{{ $product->id }}</td>
                                                 <td><a href="{{ route('franchise.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
@@ -70,7 +67,7 @@
                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
-                                                        <input type="number" name="quantity" class="quantity" data-price="{{ $product->price }}" value="1" min="1">
+                                                        <input type="number" name="quantity" class="quantity quantity-select"  data-id="{{ $product->id }}" data-price="{{ $product->price }}" value="1" min="1" max="{{ $product->quantity }}">
                                                         <button type="button" class="increase">+</button>
                                                     </div>
                                                 </td>
@@ -80,7 +77,6 @@
                                                 <td class="total-cost">{{ $product->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
-                                                    <button type="submit" class="btn btn-success">Create Order</button>
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="mdi mdi-dots-vertical"></i>
@@ -107,7 +103,6 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            </form>
 
                                             <form id='delete-form{{ $product->id }}'
                                                 action='{{ route('franchise.products.destroy', $product->id) }}'
@@ -136,6 +131,34 @@
     <script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/responsive.bootstrap4.min.js') }}"></script>
 
+    <script type="text/javascript">
+        
+        $(document).on("blur", '.quantity-box .quantity-select', function(event) {
+
+            let quantity = $(this).val();
+            let rowId = $(this).attr("data-id");
+            let price = $(this).attr("data-price");
+
+
+            $.ajax({
+                url: "{{ route('franchise.orders.save') }}",
+                method: "POST",
+                data: {
+                    id: rowId,
+                    quantity: quantity,
+                    price: price,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function () {
+                    console.error("Error updating quantity for row");
+                },
+            });
+        });
+
+    </script>
 
     <!-- Datatable Init js -->
     <script>
@@ -198,6 +221,7 @@
                 let input = $(this).siblings(".quantity");
                 let value= parseInt(input.val()) + 1;
                 input.val(value);
+                //input.trigger('focus');
                 var price = input.attr('data-price');
                 let total = value * price;
                 let points = parseInt($('.points').html());
@@ -212,13 +236,14 @@
                 if (parseInt(input.val()) > 1) {
 
                     let value= parseInt(input.val()) - 1;
-                input.val(value);
+                    input.val(value);
+                    //input.trigger('focus');
 
-                var price = input.attr('data-price');
-                let total = value * price;
-                $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
-                let points = parseInt($('.points').html());
-                $('.points').html(points - total);
+                    var price = input.attr('data-price');
+                    let total = value * price;
+                    $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
+                    let points = parseInt($('.points').html());
+                    $('.points').html(points - total);
 
                 }
             });

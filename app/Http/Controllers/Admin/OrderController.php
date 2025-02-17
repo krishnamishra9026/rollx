@@ -20,6 +20,7 @@ use App\Models\PurchaseOrder;
 use App\Models\Supplier;
 use App\Models\Franchise;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\UserAddress;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -43,14 +44,21 @@ class OrderController extends Controller
         $filter                     = [];
         $filter['date']             = $request->date;
         $filter['status']           = $request->status;
+        $filter['product']           = $request->product;
+        $filter['franchise']           = $request->franchise;
 
         $orders              = Order::query();
         $orders              = isset($filter['date']) ? $orders->where('date', $filter['date']) : $orders;
         $orders              = isset($filter['status']) ? $orders->where('status', 'LIKE', '%' . $filter['status'] . '%') : $orders;
+        $orders              = isset($filter['product']) ? $orders->where('product_id',  $filter['product'] ) : $orders;
+        $orders              = isset($filter['franchise']) ? $orders->where('franchise_id',  $filter['franchise'] ) : $orders;
 
         $orders              = $orders->orderBy('id', 'desc')->paginate(20);
+
+        $products = Product::all();
+        $franchises = Franchise::all();
         
-        return view('admin.orders.list', compact('orders', 'filter'));
+        return view('admin.orders.list', compact('orders', 'filter', 'products', 'franchises'));
     }
 
     /**

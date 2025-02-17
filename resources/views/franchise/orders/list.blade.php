@@ -33,7 +33,6 @@
                                         <tr>
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold">Model Number</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Order Date</th>
@@ -44,9 +43,8 @@
                                     <tbody>
                                         @foreach ($orders as $order)
                                             <tr>
-                                                <td>{{ $order->id }}</td>
-                                                <td>{{ $order->product_name }}</td>
-                                                <td>{{ $order->model_number }}</td>
+                                                <td>#{{ $order->id }}</td>
+                                                <td><a href="{{ route('franchise.products.show', $order->product->id)  }}">{{ $order->product_name }}</a></td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->stock }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y') }}</td>

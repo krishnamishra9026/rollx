@@ -29,7 +29,7 @@ class ChefController extends Controller
         $filter['email']        = $request->email;
         $filter['phone']        = $request->phone;                
 
-        $chefs              = Chef::query();
+        $chefs              = Chef::where('franchise_id', auth()->user()->id);
         $chefs              = isset($filter['name']) ? $chefs->where(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $filter['name'] . '%') : $chefs;
         $chefs              = isset($filter['email']) ? $chefs->where('email', 'LIKE', '%' . $filter['email'] . '%') : $chefs;
         $chefs              = isset($filter['phone']) ? $chefs->where('phone', 'LIKE', '%' . $filter['phone'] . '%') : $chefs;       

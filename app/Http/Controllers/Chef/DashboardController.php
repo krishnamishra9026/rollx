@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\Chef;
 use App\Models\Technician;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -36,7 +37,9 @@ class DashboardController extends Controller
                           ->orWhere('status', 'delivered');
                 })->orderBy("id", "desc")->paginate(20);
 
-        return view('chef.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders'));
+        $quantity_per_plate = Setting::get('quantity_per_plate');
+
+        return view('chef.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders', 'quantity_per_plate'));
     }
 
     public function updateToken(Request $request){

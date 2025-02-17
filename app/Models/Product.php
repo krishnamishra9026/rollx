@@ -15,6 +15,7 @@ class Product extends Model
         'description',
         'refrence',
         'model_number',
+        'sold_color',
         'serial_number',
         'quantity',
         'price',

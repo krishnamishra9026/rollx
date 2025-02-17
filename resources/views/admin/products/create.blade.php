@@ -131,6 +131,32 @@
 
 
                             <div class="row mb-2">
+                                <label for="sold_color"
+                                    class="col-md-2 col-form-label text-md-start">{{ __('Sold Color') }}</label>
+                                <div class="col-md-10">
+                                    <select id="statuses" class="form-select @error('contact') is-invalid @enderror"
+                                        name="sold_color">
+                                        <option value="">Select Sold Color</option>
+                                        <option value="primary" {{ old('sold_color') == 'primary' ? 'selected' : '' }}>Primary</option>
+                                        <option value="secondary" {{ old('sold_color') == 'secondary' ? 'selected' : '' }}>Secondary</option>
+                                        <option value="success" {{ old('sold_color') == 'success' ? 'selected' : '' }}>Success</option>
+                                        <option value="danger" {{ old('sold_color') == 'danger' ? 'selected' : '' }}>Danger</option>
+                                        <option value="warning" {{ old('sold_color') == 'warning' ? 'selected' : '' }}>Warning</option>
+                                        <option value="info" {{ old('sold_color') == 'info' ? 'selected' : '' }}>Info</option>
+                                        <option value="light" {{ old('sold_color') == 'light' ? 'selected' : '' }}>Light</option>
+                                        <option value="dark" {{ old('sold_color') == 'dark' ? 'selected' : '' }}>Dark</option>
+                                        <option value="link" {{ old('sold_color') == 'link' ? 'selected' : '' }}>Link</option>
+                                    </select>
+                                    @error('sold_color')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2">
                                 <label for="statuses"
                                     class="col-md-2 col-form-label text-md-start">{{ __('Status') }}</label>
                                 <div class="col-md-10">

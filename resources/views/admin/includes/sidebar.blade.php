@@ -59,6 +59,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('admin/sales') || request()->is('admin/sales/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.sales.index') }}" class="side-nav-link">
+                    <i class="uil-shopping-cart-alt"></i>
+                    <span> Sales </span>
+                </a>
+            </li>
+
             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
 
             <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">

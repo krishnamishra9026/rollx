@@ -28,6 +28,7 @@ class OrderController extends Controller
         $filter['due_date']         = $request->due_date;
         $filter['created_at']       = $request->created_at;
         $filter['status']           = $request->status;
+        $filter['product']           = $request->product;
 
         $orders              = Order::where('franchise_id', auth()->user()->franchise_id)
                                     ->where('stock', '>', 0)
@@ -40,10 +41,13 @@ class OrderController extends Controller
         $orders              = isset($filter['status']) ? $orders->where('status', $filter['status']) : $orders;
         $orders              = isset($filter['due_date']) ? $orders->where('due_date', $filter['due_date']) : $orders;
         $orders              = isset($filter['model_number']) ? $orders->where('model_number', $filter['model_number']) : $orders;
+        $orders              = isset($filter['product']) ? $orders->where('product_id',  $filter['product'] ) : $orders;
         $orders              = isset($filter['created_at']) ? $orders->whereDate('created_at', $filter['created_at']) : $orders;
         $orders              = $orders->orderBy("id", "desc")->paginate(20);
 
-        return view('chef.orders.list', compact('orders', 'filter'));
+        $products = Product::all();
+
+        return view('chef.orders.list', compact('orders', 'filter', 'products'));
     }
 
     /**

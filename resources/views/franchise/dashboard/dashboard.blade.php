@@ -34,14 +34,27 @@
         <div class="col-xl-4 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center">
-                    <h5 class="mt-0">Not Started</h5>
-                    <h2 class="my-2" id="active-users-count">{{ $not_started }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'PO Generated']) }}">
+                    <h5 class="mt-0">Total Sales</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $totalSales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('franchise.sales.index', ['status' => 'PO Generated']) }}">
                         <small>View Details </small>
                     </a>
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-4 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">
+                    <h5 class="mt-0">This Month Sales</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $monthlySales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('franchise.sales.index', ['status' => 'PO Generated']) }}">
+                        <small>View Details </small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="col-xl-4 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center">
@@ -77,17 +90,6 @@
         </div>
 
 
-        <div class="col-xl-4 col-lg-4">
-            <div class="card tilebox-one">
-                <div class="card-body text-center">
-                    <h5 class="mt-0">Total Sales</h5>
-                    <h2 class="my-2" id="active-users-count">{{ $total_sales }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'Delivered']) }}">
-                        <small>View Details </small>
-                    </a>
-                </div>
-            </div>
-        </div>
 
     </div>
 

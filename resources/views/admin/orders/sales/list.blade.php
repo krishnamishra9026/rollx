@@ -1,4 +1,4 @@
-@extends('layouts.franchise')
+@extends('layouts.admin')
 @section('title', 'Sales')
 @section('head')
     <link href="{{ asset('assets/css/vendor/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -12,18 +12,18 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         @isset($order->id)
-                        <a href="{{ route('franchise.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i
+                        <a href="{{ route('admin.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i
                                 class="mdi mdi-plus"></i> Add
                             New</a>
                             @else
 
-                            <a href="{{ route('franchise.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i
+                            <a href="{{ route('admin.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i
                                 class="mdi mdi-plus"></i> Add
                             New</a>
 
                             @endisset
 
-                                <a href="{{ route('franchise.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
+                                <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
                                     class="mdi mdi-refresh"></i> Reset</a>
                                     <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
                                         class="mdi mdi-filter"></i> Filter</button>
@@ -32,8 +32,8 @@
                 </div>
             </div>
         </div>
-        @include('franchise.includes.flash-message')
-        @include('franchise.orders.sales.filter')
+        @include('admin.includes.flash-message')
+        @include('admin.orders.sales.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -48,6 +48,8 @@
                                             <th class="fw-bold">Sale Id</th>
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
+                                            <th class="fw-bold">Francise Name</th>
+                                            <th class="fw-bold">Shef Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
@@ -56,9 +58,11 @@
                                     <tbody>
                                         @foreach ($sales as $sale)
                                             <tr>
-                                                <td>#{{ $sale->id }}</td>
-                                                <td>#{{ $sale->order_id }}</td>
-                                                <td>{{ $sale->order->product->name }}</td>
+                                                <td>{{ $sale->id }}</td>
+                                                <td>{{ $sale->order_id }}</td>
+                                                <td><a href="{{ route('admin.products.show', $sale->order->product->id)  }}">{{ $sale->order->product->name }}</a> </td>
+                                                <td>{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</td>
+                                                <td>{{ @$sale->chef->firstname }} {{ @$sale->chef->lastname }}</td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
                                                 <td>
