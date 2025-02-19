@@ -32,9 +32,10 @@ class SaleController extends Controller
 
         if (isset($order_id)) {
             $sales = Sale::where('order_id', $order_id)->with('order', 'product');
-        }
+        }else{
 
-        $sales              = Sale::with('order', 'product');
+            $sales              = Sale::with('order', 'product');
+        }
         $sales              = isset($filter['date']) ? $sales->whereDate('created_at', $filter['date']) : $sales;
         $sales              = isset($filter['status']) ? $sales->where('status', 'LIKE', '%' . $filter['status'] . '%') : $sales;
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
