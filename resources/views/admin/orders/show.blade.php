@@ -128,7 +128,7 @@
             </div>
 
 
-
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
 
                 <div class="col-md-12">
                     <div class="card">
@@ -187,9 +187,12 @@
                     </div>
                 </div>
 
+            @endif
+
 
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header"> <h4>Order Status History</h4> </div>
                     <div class="card-body">
                         <div class="col-md-12 table-responive">
                             <table class="table table-striped" style="font-size: 14px" id="parts-table">

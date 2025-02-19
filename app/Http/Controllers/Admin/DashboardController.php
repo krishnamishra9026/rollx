@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrator;
-use App\Models\Equipment;
-use App\Models\Help;
 use App\Models\Lead;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Franchise;
-use App\Models\Technician;
 use App\Models\User;
 use Illuminate\Http\Request;
 

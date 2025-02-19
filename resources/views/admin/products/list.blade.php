@@ -6,14 +6,30 @@
 @endsection
 
 @section('content')
+<style type="text/css">
+    .notification::before {
+        content: "🔔 ";
+        font-size: 16px;
+    }
+</style>
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
+
+                    <div class="page-title-right">
+
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Add  Product</a>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
+                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
+                    </div>
+
                     <h4 class="page-title">Products</h4>
                 </div>
             </div>
         </div>
+
         @include('admin.includes.flash-message')
         @include('admin.products.filter')
         <div class="row py-3">
@@ -29,7 +45,8 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Qty</th>
+                                            <th>Outlet Name</th>
+                                            <th title="Double Click on quantity to edit quantity of a particular product after enter quantity click outside to save Quantity!"> <i class="mdi mdi-map-marker-outline" style="color: red;"></i> Qty</th>
                                             <th>Price</th>
                                             <th>Model Number</th>
                                             <th>Serial Number</th>
@@ -44,8 +61,10 @@
                                                 <td><a href="{{ route('admin.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
+                                                <td>{{ $product->outlet_name }}</td>
                                                <td>
-                                                        {{ $product->quantity }}
+                                                    <span class="quantity-text" style="cursor: pointer;" data-id="{{ $product->id }}">{{ $product->quantity }}</span>
+                                                    <input type="number" class="edit-quantity" data-id="{{ $product->id }}" value="{{ $product->quantity }}" style="display: none; width: 40%">
                                                 </td>
 
 
@@ -100,6 +119,53 @@
     <script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/responsive.bootstrap4.min.js') }}"></script>
 
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+
+        $(".quantity-text").on("click", function() {
+        let $span = $(this);
+        let $input = $span.siblings(".edit-quantity");
+
+        $span.hide(); // Hide the span
+        $input.show().focus(); // Show the input and focus on it
+    });
+
+    $(".edit-quantity").on("blur", function() {
+        let $input = $(this);
+        let newQuantity = $input.val();
+        let productId = $input.data("id");
+        let $span = $input.siblings(".quantity-text");
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        });
+        $.ajax({
+            url: "{{ route('admin.products.update.quantity') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: productId,
+                quantity: newQuantity
+            },
+            success: function(response) {
+                $span.text(newQuantity); // Update span text
+            },
+            error: function(xhr) {
+                alert("Error updating quantity.");
+            },
+            complete: function() {
+                $input.hide(); // Hide input after update
+                $span.show(); // Show the span again
+            }
+        });
+    });
+});
+
+</script>
 
     <!-- Datatable Init js -->
     <script>

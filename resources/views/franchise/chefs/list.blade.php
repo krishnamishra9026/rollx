@@ -35,11 +35,8 @@
                                     style="font-size: 14px;">
                                     <thead class="bg-dark">
                                         <tr>
-                                            <th class="all" width="3%">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="all-rows">
-                                                    <label class="form-check-label">&nbsp;</label>
-                                                </div>
+                                            <th >
+                                                Id
                                             </th>
                                             <th>Chef</th>                                            
                                             <th>Email</th>
@@ -51,13 +48,7 @@
                                         @foreach ($chefs as $chef)
                                             <tr>
                                                 <td>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input checkbox-row"
-                                                            name="rows" id="customCheck{{ $chef->id }}"
-                                                            value="{{ $chef->id }}">
-                                                        <label class="form-check-label"
-                                                            for="customCheck{{ $chef->id }}">&nbsp;</label>
-                                                    </div>
+                                                    #{{ $chef->id }}
                                                 </td>
                                                 <td class="table-user">
 

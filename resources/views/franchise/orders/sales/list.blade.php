@@ -48,6 +48,7 @@
                                             <th class="fw-bold">Sale Id</th>
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
+                                            <th class="fw-bold">Chef Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
@@ -58,7 +59,8 @@
                                             <tr>
                                                 <td>#{{ $sale->id }}</td>
                                                 <td>#{{ $sale->order_id }}</td>
-                                                <td>{{ $sale->order->product->name }}</td>
+                                                <td><a href="{{ route('franchise.products.show', $sale->order->product_id) }}">{{ $sale->order->product->name }}</a></td>
+                                                <td><a href="{{ route('franchise.chefs.show', $sale->chef_id) }}">{{ $sale->chef->firstname }} {{ $sale->chef->lastname }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
                                                 <td>

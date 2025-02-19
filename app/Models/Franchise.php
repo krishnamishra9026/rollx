@@ -72,14 +72,14 @@ class Franchise extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public function equipment()
+    public function productPrices()
     {
-        return $this->hasMany(Equipment::class, 'supplier_id', 'id');
+        return $this->hasMany(ProductPrice::class);
     }
 
-    public function purchaseOrder()
+    public function products()
     {
-        return $this->hasOne(PurchaseOrder::class, 'supplier_id', 'id');
+        return $this->belongsToMany(Product::class, 'product_prices');
     }
 
 }

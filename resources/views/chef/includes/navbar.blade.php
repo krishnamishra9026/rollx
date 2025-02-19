@@ -63,6 +63,6 @@
                 </path>
             </svg>
         </button>
-        <button type="button" class="btn btn-sm btn-dark" style="margin-top: 22px;">Welcome Franchise</button>
+        <button type="button" class="btn btn-sm btn-dark" style="margin-top: 22px;">Welcome Chef</button>
     </div>
 </div>

@@ -48,6 +48,9 @@
                         <li>
                             <a href="{{ route('admin.products.create') }}">Add Products</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.product-prices.index') }}">Product Pricing</a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -77,6 +80,18 @@
 
             @endif
 
+
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Warehouse' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+            <li class="side-nav-item {{ request()->is('admin/warehouse-items') || request()->is('admin/warehouse-items/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.warehouse-items.index') }}" class="side-nav-link">
+                    <i class="uil-shopping-cart-alt"></i>
+                    <span> Warehouse Items </span>
+                </a>
+            </li>
+
+            @endif
+
             <li class="side-nav-item {{ request()->is('admin/wallet') || request()->is('admin/wallet/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.wallet.index') }}" class="side-nav-link">
                     <i class="uil-shopping-cart-alt"></i>
@@ -100,6 +115,15 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('admin/chefs') || request()->is('admin/chefs/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.chefs.index') }}" class="side-nav-link">
+                    <i class="uil-user-check"></i>
+                    <span> Chefs </span>
+                </a>
+            </li>
+
+            
+            @canany(['Users', 'Roles'])
             <li
                 class="side-nav-item {{ request()->is('admin/users/') || request()->is('admin/users/*') || request()->is('admin/roles/') || request()->is('admin/roles/*') ? 'menuitem-active' : '' }}">
                 <a data-bs-toggle="collapse" href="#sidebarUserManagement" aria-expanded="false"
@@ -111,20 +135,24 @@
                 <div class="collapse {{ request()->is('admin/users/') || request()->is('admin/users/*') || request()->is('admin/roles/') || request()->is('admin/roles/*') ? 'show' : '' }}"
                     id="sidebarUserManagement">
                     <ul class="side-nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.roles.index') }}"
-                                    class="{{ request()->is('admin/roles/') || request()->is('admin/roles/*') ? 'active' : '' }}"><i
-                                        class="dripicons-chevron-right me-1"></i>Roles</a>
-                            </li>
-                    
-                            <li>
-                                <a href="{{ route('admin.users.index') }}"
-                                    class="{{ request()->is('admin/users/') || request()->is('administrator/users/*') ? 'active' : '' }}"><i
-                                        class="dripicons-chevron-right me-1"></i>Users</a>
-                            </li>
+                        @can('Roles')
+                        <li>
+                            <a href="{{ route('admin.roles.index') }}"
+                                class="{{ request()->is('admin/roles/') || request()->is('admin/roles/*') ? 'active' : '' }}"><i
+                                    class="dripicons-chevron-right me-1"></i>Roles</a>
+                        </li>
+                        @endcan
+                        @can('Users')
+                        <li>
+                            <a href="{{ route('admin.users.index') }}"
+                                class="{{ request()->is('admin/users/') || request()->is('administrator/users/*') ? 'active' : '' }}"><i
+                                    class="dripicons-chevron-right me-1"></i>Users</a>
+                        </li>
+                        @endcan
                     </ul>
                 </div>
             </li>
+            @endcan
 
 
             <li class="side-nav-item">

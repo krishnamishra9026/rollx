@@ -48,53 +48,6 @@
 
 
 
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="{{ route('franchise.orders.add-history', $order->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                        <div class="row mb-2">
-                            <label for="statuses" class="col-sm-2 col-form-label text-sm-start">Order Status</label>
-                            <div class="col-sm-10">
-                                <select id="statuses" class="form-select " name="status">
-                                    <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                    <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
-                                    <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                    <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                    <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                    <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                    <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                    <option value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label for="comment"
-                                class="col-md-2 col-form-label text-md-start">{{ __('Comment') }}</label>
-
-                            <div class="col-md-10">
-                                <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment"
-                                    rows="3" placeholder="Write Comment here">{{ old('comment') }}</textarea>
-                                @error('comment')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <div class="col-sm-12 text-end">
-                                <button type="submit" class="btn btn-sm btn-primary">Add History</button>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
 
 
             <div class="col-md-12">

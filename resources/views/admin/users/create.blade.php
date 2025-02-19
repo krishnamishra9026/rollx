@@ -143,9 +143,11 @@
 
                                         @foreach($roles as $role)
                                         @if($role->name != 'Admin')
+
                                         <option value="{{ $role->name }}"
-                                            {{ in_array($role->name, old('role', [])) || (isset($user) && $user->roles->pluck('name')->contains($role->name)) ? 'selected' : '' }}>
+                                            {{ in_array($role->name, old('role', [])) }}>
                                             {{ $role->name }}</option>
+                                            
                                         @endif
                                         @endforeach
 

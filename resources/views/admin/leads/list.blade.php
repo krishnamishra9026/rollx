@@ -18,6 +18,9 @@
                             Lead</a>
                         @endcan
 
+                        <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark float-end"><i
+                                class="mdi mdi-plus"></i> Assign Leads</a>
+
                     </div>
                     <h4 class="page-title">Leads</h4>
                 </div>
@@ -40,6 +43,9 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>City</th>
+                                            @if( Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+                                            <th>Sale Emplaoye(Select to assign)</th>
+                                            @endif
                                             <th>Status(Select to change)</th>
                                             <th>Next Call Date Time</th>
                                             <th></th>
@@ -60,6 +66,21 @@
                                                 <td>{{ $lead->email }}</td>
                                                 <td>{{ $lead->phone }}</td>
                                                 <td>{{ $lead->city }}</td>
+
+                                                @if( Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+                                                <td>
+
+                                                    <select class="form-select form-select-sm custom-select" id="changeSelect{{ $lead->id }}"  onchange="changeAdmin({{ $lead->id }}, this.value)">
+                                                            <option value="">Please select</option>
+                                                            @if($sale_employees && count($sale_employees))
+                                                                @foreach($sale_employees as $sale_employee)
+                                                                <option value="{{ $sale_employee->id }}" {{ $lead->admin_id ==  $sale_employee->id ? 'selected' : ''}}>{{ $sale_employee->firstname }} {{ $sale_employee->lastname }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                    </select>
+                                                </td>
+                                                @endif
+
                                                 <td>
 
                                                     <select class="form-select form-select-sm custom-select"
@@ -73,10 +94,10 @@
                                                             <option value="Non Contactable" {{ $lead->status == 'Non Contactable' ? 'selected' : ''}}>Non Contactable</option>
                                                             <option value="Paspect" {{ $lead->status == 'Paspect' ? 'selected' : ''}}>Paspect</option>
                                                             <option value="Closed" {{ $lead->status == 'Closed' ? 'selected' : ''}}>Closed</option>
-                                                            <option value="Converted" {{ $lead->status == 'Converted' ? 'selected' : ''}}>Converted</option>
                                                             <option value="Not Interested" {{ $lead->status == 'Not Interested' ? 'selected' : ''}}>Not Interested</option>
+                                                            <option disabled value="Converted" {{ $lead->status == 'Converted' ? 'selected' : ''}}>Converted</option>
                                                     </select>
-
+                                                </td>
                                                 <td>                                                  
                                                 <input type="datetime-local" data-id="{{ $lead->id }}" id="next_call_datetime" name="next_call_datetime" value="{{ $lead->next_call_datetime }}" class="form-control datetimepicker" required >
                                                 </td>
@@ -200,6 +221,33 @@
             });
 
         });
+
+        function changeAdmin(id, value) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                }
+            });
+            var formData = {
+                lead_id: id,
+                admin_id: value
+            };
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.leads.assign-admin') }}',
+                data: formData,
+                dataType: 'json',
+                beforeSend: function() {
+                    console.log(formData);
+                },
+                success: function(res, status) {
+                    window.location.reload();
+                },
+                error: function(res, status) {
+                    console.log(res);
+                }
+            });
+        }
 
         function changeStatus(id, value) {
             $.ajaxSetup({

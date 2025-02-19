@@ -9,12 +9,16 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductPriceController;
+use App\Http\Controllers\Admin\WarehouseItemController;
+use App\Http\Controllers\Admin\WarehouseInventoryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\LeadController;
+use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
 use App\Http\Controllers\Admin\UserManagement\SuperadminController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +79,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     */
 
     Route::resource('wallet', WalletController::class);
+
+    Route::resource('chefs', ChefController::class);
+       Route::post('chefs/reset-password', [FranchiseController::class, 'resetPassword'])->name('chefs.reset-password');
+    Route::post('chefs/bulk-delete', [FranchiseController::class, 'bulkDelete'])->name('chefs.bulk-delete');
+
+
     Route::resource('transactions', TransactionController::class);
     Route::resource('sales', SaleController::class);
         
@@ -95,8 +105,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     */
 
     Route::resource('products', ProductController::class);
+    Route::resource('product-prices', ProductPriceController::class);
+    Route::post('product-prices/update-price', [ProductPriceController::class, 'updatePrice'])->name('product-prices.update.price');
+
     Route::delete('products/{id}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete-image');
     Route::delete('products/{id}/delete-document', [ProductController::class, 'deleteDocument'])->name('products.delete-document');
+    Route::post('products/update-quantity', [ProductController::class, 'updateQuantity'])->name('products.update.quantity');
+
+
+    Route::resource('warehouse-items', WarehouseItemController::class);
+    Route::delete('warehouse-items/{id}/delete-image', [WarehouseItemController::class, 'deleteImage'])->name('warehouse-items.delete-image');
+    Route::delete('warehouse-items/{id}/delete-document', [WarehouseItemController::class, 'deleteDocument'])->name('warehouse-items.delete-document');
+    Route::post('warehouse-items/update-quantity', [WarehouseItemController::class, 'updateQuantity'])->name('warehouse-items.update.quantity');
+
+    Route::resource('warehouse-inventory', WarehouseInventoryController::class);
+    Route::delete('warehouse-inventory/{id}/delete-image', [WarehouseInventoryController::class, 'deleteImage'])->name('warehouse-inventory.delete-image');
+    Route::delete('warehouse-inventory/{id}/delete-document', [WarehouseInventoryController::class, 'deleteDocument'])->name('warehouse-inventory.delete-document');
+    Route::post('warehouse-inventory/update-quantity', [WarehouseInventoryController::class, 'updateQuantity'])->name('warehouse-inventory.update.quantity');
+
 
      /*
     |--------------------------------------------------------------------------
@@ -132,10 +158,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('franchises/bulk-delete', [FranchiseController::class, 'bulkDelete'])->name('franchises.bulk-delete');
 
     
+    Route::get('leads/assign-leads', [LeadController::class, 'assignLeads'])->name('leads.assign-leads');
+    Route::post('leads/assign-leads/save', [LeadController::class, 'assignLeadsSave'])->name('leads.assign-leads-save');
     Route::resource('leads', LeadController::class);
     Route::get('leads/convert/{id}', [LeadController::class, 'convert'])->name('leads.convert');
     Route::post('leads/update-date', [LeadController::class, 'updateDate'])->name('leads.update-date');
     Route::post('leads/change-status', [LeadController::class, 'updateStatus'])->name('leads.change-status');
+    Route::post('leads/assign-admin', [LeadController::class, 'assignAdmin'])->name('leads.assign-admin');
 
     Route::post('leads/reset-password', [FranchiseController::class, 'resetPassword'])->name('leads.reset-password');
     Route::post('leads/bulk-delete', [FranchiseController::class, 'bulkDelete'])->name('leads.bulk-delete');

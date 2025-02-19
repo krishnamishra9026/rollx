@@ -58,7 +58,7 @@ class OrderController extends Controller
      */
 
     public function save(Request $request)
-    {
+    {              
 
         foreach ($request->data as $key => $value) {                  
 
@@ -70,20 +70,20 @@ class OrderController extends Controller
 
             $input = [];
 
-            $total = $product->price * $value['quantity'];
+            $total = $value['price'] * $value['quantity'];
 
             $user = auth()->user();
 
             $input['product_id'] = $product->id;
-            $input['sub_total'] = $product->price;
+            $input['sub_total'] = $value['price'];
             $input['product_name'] = $product->name;
             $input['model_number'] = $product->model_number;
             $input['stock'] = $value['quantity'];
             $input['quantity'] = $value['quantity'];
-            $input['product_price'] = $product->price;
+            $input['product_price'] = $value['price'];
             $input['total_price'] = $total;
             $input['franchise_id'] = auth()->user()->id;
-            $input['total'] = $product->price * $value['quantity'];
+            $input['total'] = $value['price'] * $value['quantity'];
 
             $order = Order::create($input);
 

@@ -3,21 +3,26 @@
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('admin.transactions.index') }}" id="filterForm">
-                    <div class="row">
-                        <div class="col-sm-12 mb-2">
-                            <div class="col-sm-4 mb-2">
-                                <label class="col-form-label" for="name">Franchises name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name name" value="{{ $filter['name'] }}">
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <a href="{{ route('admin.transactions.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
-                                    class="mdi mdi-refresh"></i> Reset</a>
-                                    <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
-                                        class="mdi mdi-filter"></i> Filter</button>
-
-                                    </div>
-                                </div>
-                            </div>
+                     <div class="row">
+                        <div class="col-sm-12 mb-1 d-flex align-items-center">
+                            <label class="col-form-label me-2" for="franchise">Franchises:</label>
+                            <select class="form-select me-2 w-auto" id="name" name="name">
+                                <option value="">All</option>
+                                @foreach($franchises as $franchise)
+                                    <option value="{{ $franchise->firstname.' '.$franchise->lastname }}" 
+                                        {{ request('name') == $franchise->firstname.' '.$franchise->lastname ? 'selected' : '' }}>
+                                        {{ $franchise->firstname }} {{ $franchise->lastname }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            
+                            <button type="submit" class="btn btn-sm btn-danger me-1" form="filterForm">
+                                <i class="mdi mdi-filter"></i> Filter
+                            </button>
+                            <a href="{{ route('admin.transactions.index') }}" class="btn btn-sm btn-primary">
+                                <i class="mdi mdi-refresh"></i> Reset
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>

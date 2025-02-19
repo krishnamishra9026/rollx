@@ -74,7 +74,7 @@
                                             
                                             <tr>
                                                 <input type="hidden" name="data[{{ $key }}][product_id]" value="{{ $product->id }}">
-                                                <input type="hidden" name="data[{{ $key }}][price]" value="{{ $product->price }}">
+                                                <input type="hidden" name="data[{{ $key }}][price]" value="{{ $product->getPriceByFranchise(auth()->user()->id) }}">
                                                 <td>{{ $product->id }}</td>
                                                 <td><a href="{{ route('franchise.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
@@ -82,14 +82,14 @@
                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
-                                                        <input type="number" name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->price }}" value="0" min="0" max="{{ $product->quantity }}">
+                                                        <input type="number" name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->getPriceByFranchise(auth()->user()->id) }}" value="0" min="0" max="{{ $product->quantity }}">
                                                         <button type="button" class="increase">+</button>
                                                     </div>
                                                 </td>
 
 
-                                                <td>{{ $product->price }}</td>
-                                                <td class="total-cost">{{ $product->price }}</td>
+                                                <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
+                                                <td class="total-cost">{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
@@ -109,6 +109,7 @@
                                                         
                                                     </div>
                                                 </td>
+
                                             </tr>                                          
                                         @endforeach
                                         </tbody>
@@ -120,13 +121,7 @@
 
                                     </form>
 
-                                    <form id='delete-form{{ $product->id }}'
-                                                action='{{ route('franchise.products.destroy', $product->id) }}'
-                                                method='POST'>
-                                                <input type='hidden' name='_token'
-                                                value='{{ csrf_token() }}'>
-                                                <input type='hidden' name='_method' value='DELETE'>
-                                            </form>
+                                    
                                 </table>
                                 {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
                             </div>

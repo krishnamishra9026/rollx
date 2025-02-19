@@ -53,26 +53,28 @@
                         <div class="row">
 
                             @foreach ($orders as $order)
+                                @if($order->product_name == 'Momo')
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate]) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
+                                            Full Plate {{ $order->product->name }}
+                                        </a>
+                                    </div>
 
-                            @if($order->product_name == 'Momo')
-                            <div class="col-sm-3 mt-2">
-
-                                <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate]) }}" class="btn  btn-{{ $order->product->sold_color ?? 'success' }}" >Full Plate {{ $order->product->name }}</a>
-                            
-                            </div>
-
-                            <div class="col-sm-3 mt-2">
-
-                                <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate/2]) }}" class="btn  btn-{{ $order->product->sold_color ?? 'danger' }}" >Half Plate {{ $order->product->name }}</a>
-
-                            </div>
-                            @else
-                            <div class="col-sm-3 mt-2">
-
-                                <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1]) }}" class="btn  btn-{{ $order->product->sold_color ?? 'success' }}" >Full Plate {{ $order->product->name }}</a>
-
-                            </div>
-                            @endif
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate/2]) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'danger' }} w-100 d-flex align-items-center justify-content-center">
+                                            Half Plate {{ $order->product->name }}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1]) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
+                                            Full Plate {{ $order->product->name }}
+                                        </a>
+                                    </div>
+                                @endif
                             @endforeach
 
                      

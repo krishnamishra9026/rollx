@@ -61,8 +61,8 @@
                                                 <td>{{ $sale->id }}</td>
                                                 <td>{{ $sale->order_id }}</td>
                                                 <td><a href="{{ route('admin.products.show', $sale->order->product->id)  }}">{{ $sale->order->product->name }}</a> </td>
-                                                <td>{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</td>
-                                                <td>{{ @$sale->chef->firstname }} {{ @$sale->chef->lastname }}</td>
+                                                <td><a href="{{ route('admin.franchises.show', $sale->franchise->id)  }}">{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</a></td>
+                                                <td><a href="{{ route('admin.chefs.show', $sale->chef->id)  }}">{{ @$sale->chef->firstname }} {{ @$sale->chef->lastname }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
                                                 <td>

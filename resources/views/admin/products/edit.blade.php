@@ -51,6 +51,19 @@
                             </div>
 
                             <div class="row mb-2">
+                                <label class="col-form-label col-sm-2" for="outlet_name">Outlet Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="outlet_name" name="outlet_name"
+                                        placeholder="Enter Outlet Name" value="{{ old('outlet_name', $product->outlet_name) }}">
+                                    @error('outlet_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
                                 <label for="description" class="col-md-2 col-form-label text-md-start">Product Description</label>
 
                                 <div class="col-md-10">

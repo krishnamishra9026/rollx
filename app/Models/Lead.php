@@ -22,6 +22,7 @@ class Lead extends Authenticatable
     protected $fillable = [
         'company',
         'fax',
+        'admin_id',
         'remarks',
         'firstname',
         'lastname',

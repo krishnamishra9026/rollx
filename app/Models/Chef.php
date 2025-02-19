@@ -73,9 +73,9 @@ class Chef extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public function equipment()
+    public function franchise()
     {
-        return $this->hasMany(Equipment::class, 'supplier_id', 'id');
+        return $this->belongsTo(Franchise::class, 'franchise_id', 'id');
     }
 
     public function purchaseOrder()

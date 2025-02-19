@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Administrator;
 use App\Models\Lead;
 use App\Models\Franchise;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class LeadController extends Controller
 {
@@ -29,14 +31,21 @@ class LeadController extends Controller
         $filter['phone']        = $request->phone;
 
         $leads              = Lead::query();
+
+
+        if ( Auth::guard('administrator')->user()->roles()->first()->name == 'Sales') {
+            $leads              = Lead::where('admin_id', auth()->user()->id);
+        }
+
         $leads              = isset($filter['name']) ? $leads->where(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $filter['name'] . '%') : $leads;
         $leads              = isset($filter['email']) ? $leads->where('email', 'LIKE', '%' . $filter['email'] . '%') : $leads;
         $leads              = isset($filter['phone']) ? $leads->where('phone', 'LIKE', '%' . $filter['phone'] . '%') : $leads;
 
 
         $leads              = $leads->orderBy('id', 'desc')->paginate(20);
+        $sale_employees     = Administrator::role('Sales')->orderBy('id', 'desc')->get(['id', 'firstname', 'lastname']);
 
-        return view('admin.leads.list', compact('leads', 'filter'));
+        return view('admin.leads.list', compact('leads', 'filter', 'sale_employees'));
     }
 
     /**
@@ -45,6 +54,18 @@ class LeadController extends Controller
     public function create()
     {
         return view('admin.leads.create');
+    }
+
+    public function assignLeads()
+    {
+
+        $leads = Lead::whereNull('admin_id')->get(['id', 'firstname', 'lastname']);
+
+              
+
+        $sale_employees     = Administrator::role('Sales')->orderBy('id', 'desc')->get(['id', 'firstname', 'lastname']);
+
+        return view('admin.leads.assign', compact('leads', 'sale_employees'));
     }
 
     /**
@@ -240,8 +261,31 @@ class LeadController extends Controller
         return 1;
     }
 
-    public function resetPassword(Request $request)
+    public function assignAdmin(Request $request)
     {
+        $lead = Lead::find($request->lead_id);
+        Lead::find($request->lead_id)->update(['admin_id' => $request->admin_id]);
+        return 1;
+    }
+
+
+    public function assignLeadsSave(Request $request)
+    {          
+
+        $this->validate($request, [
+            'lead_id'         => ['required'],
+            'admin_id'             => ['required'],
+        ]);   
+
+        foreach ($request->lead_id as $key => $lead_id) {
+            Lead::find($lead_id)->update(['admin_id' => $request->admin_id]);
+        }
+
+        return redirect()->route('admin.leads.index')->with('success', 'Lead assined to Sale Admin successfully!');
+    }
+
+    public function resetPassword(Request $request)
+    {   
         $this->validate($request, [
             'password' => ['required', 'min:6', 'confirmed']
         ]);

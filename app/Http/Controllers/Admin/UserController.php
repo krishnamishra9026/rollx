@@ -70,8 +70,8 @@ class UserController extends Controller
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:administrators'],
             'phone'     => ['required', 'min:8', 'unique:administrators'],
             'password'  => ['required', 'string', 'min:8', 'confirmed'],
-            'gender'    => ['required'],
-            'status'    => ['required'],
+           /* 'gender'    => ['required'],
+            'status'    => ['required'],*/
             'role'      => ['required'],
         ]);
 

@@ -65,6 +65,7 @@ class ProductController extends Controller
 
         $part                = new Product();
         $part->name          = $request->name;
+        $part->outlet_name   = $request->outlet_name;
         $part->description   = $request->description;
         $part->price         = $request->price;
         $part->model_number  = $request->model_number;
@@ -113,6 +114,21 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:0'
+        ]);
+
+        $product = Product::find($request->id);
+        $product->quantity = $request->quantity;
+        $product->save();
+
+        return response()->json(['success' => true, 'message' => 'Quantity updated successfully!']);
+    }
+    
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
@@ -124,6 +140,7 @@ class ProductController extends Controller
 
         $part                       = Product::find($id);
         $part->name          = $request->name;
+        $part->outlet_name   = $request->outlet_name;
         $part->description   = $request->description;
         $part->price         = $request->price;
         $part->model_number  = $request->model_number;

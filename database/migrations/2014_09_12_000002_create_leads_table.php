@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('administrators')->onUpdate('cascade')->onDelete('cascade');
+
             $table->string('company')->nullable();
             $table->string('firstname');
             $table->string('lastname')->nullable();

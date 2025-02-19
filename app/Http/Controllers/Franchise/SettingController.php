@@ -13,7 +13,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('Franchise.settings.setting', [
+        return view('franchise.settings.setting', [
             'quantity_per_plate' => Setting::get('quantity_per_plate', 1)
         ]);
     }
