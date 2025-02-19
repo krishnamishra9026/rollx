@@ -76,9 +76,15 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
     Route::resource('sales', SaleController::class);
 
+
+    Route::get('sales/save', [SaleController::class, 'save'])->name('sales.save');
+    Route::resource('sales', SaleController::class);
+
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
+        Route::post('sales/save', [SaleController::class, 'saveOld'])->name('sales.save');
     });
+
 
     Route::put('orders/{id}/add-history', [OrderController::class, 'addHistory'])->name('orders.add-history');
 

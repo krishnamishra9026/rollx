@@ -37,6 +37,12 @@
                                             <option value="{{ $order->id }}"> Order #{{ $order->id }}</option>
                                         @endforeach
                                     </select>
+
+                                    @error('order_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                

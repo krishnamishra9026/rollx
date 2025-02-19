@@ -81,6 +81,7 @@ class SaleController extends Controller
         $request->validate([
             'order_id' => 'required|exists:orders,id',
             'quantity' => 'required|integer|min:1',
+            'status' => 'required',
         ]);
 
         $order = Order::findOrFail($request->order_id);
