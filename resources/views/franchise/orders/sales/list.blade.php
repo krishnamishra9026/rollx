@@ -34,6 +34,62 @@
         </div>
         @include('franchise.includes.flash-message')
         @include('franchise.orders.sales.filter')
+
+        @if(isset($order_id))
+
+        <div class="row">       
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Total Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Sold Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Remaining Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+             <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center">                    
+                        <h5 class="mt-0">Not Sold Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div>  
+
+        </div>
+        @endif
+        
         <div class="row">
             <div class="col-12">
                 <div class="card">
