@@ -59,7 +59,11 @@ class SaleController extends Controller
 
         if (!isset($order_id)) {
 
-            $orders = Order::latest()->get();
+            $orders  = Order::where('franchise_id', auth()->user()->franchise_id)
+                    ->where(function ($query) {
+                        $query->where('status', 'completed')
+                              ->orWhere('status', 'delivered');
+                    });
 
             return view('chef.orders.sales.create-sale', compact('orders'));
         }
@@ -73,7 +77,7 @@ class SaleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {                            
+    {                                                   
         $request->validate([
             'order_id' => 'required|exists:orders,id',
             'quantity' => 'required|integer|min:1',
@@ -95,7 +99,7 @@ class SaleController extends Controller
             'chef_id' => auth()->user()->id,
             'quantity' => $request->quantity,
             'price' => $request->quantity * $request->price,
-            'status' => 'Sold'
+            'status' => $request->status ?? 'Sold'
         ]);
 
         return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');

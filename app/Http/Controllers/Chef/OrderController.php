@@ -31,7 +31,6 @@ class OrderController extends Controller
         $filter['product']           = $request->product;
 
         $orders              = Order::where('franchise_id', auth()->user()->franchise_id)
-                                    ->where('stock', '>', 0)
                                     ->where(function ($query) {
                                         $query->where('status', 'completed')
                                               ->orWhere('status', 'delivered');

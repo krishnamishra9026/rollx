@@ -64,7 +64,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/sales') || request()->is('admin/sales/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.sales.index') }}" class="side-nav-link">
-                    <i class="uil-shopping-cart-alt"></i>
+                    <i class="uil-dollar-sign-alt"></i>
                     <span> Sales </span>
                 </a>
             </li>
@@ -73,7 +73,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.transactions.index') }}" class="side-nav-link">
-                    <i class="uil-shopping-cart-alt"></i>
+                    <i class="uil-money-bill"></i>
                     <span> Financial Transactions </span>
                 </a>
             </li>
@@ -85,7 +85,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/warehouse-items') || request()->is('admin/warehouse-items/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.warehouse-items.index') }}" class="side-nav-link">
-                    <i class="uil-shopping-cart-alt"></i>
+                    <i class="uil-box"></i>
                     <span> Warehouse Items </span>
                 </a>
             </li>
@@ -94,7 +94,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/wallet') || request()->is('admin/wallet/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.wallet.index') }}" class="side-nav-link">
-                    <i class="uil-shopping-cart-alt"></i>
+                    <i class="uil-wallet"></i>
                     <span> Wallet/Points </span>
                 </a>
             </li>
@@ -102,7 +102,7 @@
             @can('Leads')
             <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
-                    <i class="uil-user-check"></i>
+                    <i class="uil-users-alt"></i>
                     <span> Leads </span>
                 </a>
             </li>

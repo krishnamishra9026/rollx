@@ -49,13 +49,13 @@
                
                             <div class="row mb-2">
                                 <label for="quantity" class="col-md-3 col-form-label text-md-start">{{ __('Quantity') }}</label>
-                                <label for="quantity" class="col-md-4 col-form-label text-md-start">Avilable Order {{ __('Quantity') }} : {{ $order->quantity }}</label>
+                                <label for="quantity" class="col-md-4 col-form-label text-md-start">Avilable Order {{ __('Quantity') }} : {{ $order->stock }} from total Quantitty {{ $order->quantity }}</label>
                                 <label for="quantity" class="col-md-4 col-form-label text-md-start">Product Price : {{ $order->product->price }}</label>
                                 <div class="col-md-3">Sold Quantity</div>
                                 <div class="col-md-9">
                                     <input id="quantity" type="number"
                                         class="form-control @error('quantity') is-invalid @enderror" name="quantity"
-                                        placeholder="Enter Model Number" min="1" max="{{ $order->quantity }}" 
+                                        placeholder="Enter Model Number" min="1" max="{{ $order->stock }}" 
                                         value="{{ old('quantity', 1) }}">
 
                                     @error('quantity')
@@ -67,35 +67,22 @@
                             </div>
 
                             <div class="row mb-2">
-                                <label class="col-md-3 col-form-label text-md-start" for="price">Price</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="price" name="price"
-                                        placeholder="Enter Quantity" value="{{ old('price', 0) }}">
-                                    @error('price')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row mb-2">
-                                <label for="description"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Order Description') }}</label>
-
+                                <label for="statuses" class="col-md-3 col-form-label text-md-start">{{ __('Status') }}</label>
                                 <div class="col-md-9">
-                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description"
-                                        rows="3" placeholder="Enter Order Remarks">{{ old('description') }}</textarea>
-                                    @error('description')
+                                    <select id="statuses" class="form-select @error('contact') is-invalid @enderror"
+                                        name="status">
+                                        <option value="">Select Status</option>
+                                        <option value="Sold" {{ old('status') == 'Sold' ? 'selected' : '' }}>Sold</option>
+                                        <option value="Wastage" {{ old('status') == 'Wastage' ? 'selected' : '' }}>Wastage</option>
+                                    </select>
+                                    @error('status')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
                         </div>
                         <div class="card-footer">
                             <div class="row mb-2 text-end">
