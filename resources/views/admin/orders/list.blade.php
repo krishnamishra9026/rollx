@@ -126,7 +126,7 @@ session()->put('route', $route);
 
                                                         @can('View Order')
                                                         <a href="{{ route('admin.orders.show', $order->id) }}"
-                                                            class="dropdown-item"><i class="fa fa-eye-alt me-1"></i>
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View</a>
                                                         @endcan
 
