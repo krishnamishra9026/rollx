@@ -32,7 +32,9 @@
                                             <th>Amount</th>
                                             <th>Remaining Balance</th>
                                             <th>Wallet Balance</th>
+                                            <th>Transaction Type</th>
                                             <th>Date Added</th>
+                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

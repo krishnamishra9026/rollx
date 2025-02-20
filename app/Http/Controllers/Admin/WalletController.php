@@ -19,11 +19,18 @@ class WalletController extends Controller
         $this->middleware('auth:administrator');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $franchises = Franchise::with('wallet')->paginate(20);
+        $filter                     = [];
+        $filter['franchise']             = $request->franchise;
 
-        return view('admin.wallet.list', compact('franchises'));
+        $franchises  = franchises::with('wallet');
+        $franchises  = isset($filter['franchise']) ? $franchises->where('id', $filter['franchise']) : $franchises;
+        $franchises  = $franchises->orderBy('created_at', 'desc')->paginate(20);     
+
+        $franchise_list = Franchise::all();
+
+        return view('admin.wallet.list', compact('franchises', 'franchise_list'));
     }
 
     /**
