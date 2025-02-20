@@ -36,12 +36,7 @@
                                 <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                     <thead>
                                         <tr>
-                                            <th class="all bg-green" width="3%">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="all-rows">
-                                                    <label class="form-check-label">&nbsp;</label>
-                                                </div>
-                                            </th>
+                                            <th class="bg-green">User Id</th>
                                             <th class="bg-green">User</th>
                                             <th class="bg-green">Role</th>
                                             <th class="bg-green">Email</th>
@@ -53,15 +48,7 @@
                                     <tbody>
                                         @foreach ($superadmins as $admin)
                                             <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input checkbox-row"
-                                                            name="rows" id="customCheck{{ $admin->id }}"
-                                                            value="{{ $admin->id }}">
-                                                        <label class="form-check-label"
-                                                            for="customCheck{{ $admin->id }}">&nbsp;</label>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $admin->id }}</td>
                                                 <td class="table-user">
 
                                                     <img @isset($admin->avatar) src="{{ asset('storage/uploads/admins/' . $admin->slug . '/' . $admin->avatar) }}" @else src="https://placehold.co/150x150/0657BB/FFF?text={{ $admin->firstname[0] }}{{ $admin->lastname[0]; }}" @endisset

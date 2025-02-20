@@ -59,7 +59,7 @@
                                         @foreach ($items as $item)
                                             <tr>
                                                 <td>{{ $item->id }}</td>
-                                                <td><a href="{{ route('admin.warehouse-items.show', $item->id) }}"
+                                                <td><a href="{{ route('admin.warehouse-items.edit', $item->id) }}"
                                                     class="text-body fw-semibold">{{ $item->name }}</a>
                                                 </td>
                                                 <td>{{ $item->unit }}</td>

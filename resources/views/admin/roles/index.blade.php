@@ -36,12 +36,6 @@
                                         <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                             <thead>
                                                 <tr>
-                                                    <th class="all bg-green" width="3%">
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" id="all-rows">
-                                                            <label class="form-check-label">&nbsp;</label>
-                                                        </div>
-                                                    </th>
                                                     <th>Role ID</th>
                                                     <th>Role</th>
                                                     <th>Guard</th>
@@ -51,13 +45,6 @@
                                             <tbody>
                                                 @foreach ($roles as $role)
                                                     <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input checkbox-row"
-                                                                    name="rows" value="">
-                                                                <label class="form-check-label" for="customCheck"></label>
-                                                            </div>
-                                                        </td>
                                                         <td>{{ $role->id }}</td>
                                                         <td><a href="{{ route('admin.roles.edit', $role->id) }}">{{ $role->name }}
                                                             </a></td>
