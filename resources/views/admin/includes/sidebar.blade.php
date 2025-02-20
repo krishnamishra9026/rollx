@@ -78,6 +78,14 @@
                 </a>
             </li>
 
+
+            <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.sale.reports.index') }}" class="side-nav-link">
+                    <i class="uil-money-bill"></i>
+                    <span> Sales Report </span>
+                </a>
+            </li>
+
             @endif
 
 

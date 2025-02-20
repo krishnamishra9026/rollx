@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Franchise;
 use App\Models\User;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -33,8 +34,12 @@ class DashboardController extends Controller
         $not_interested_leads = Lead::where('status', 'Not Interested')->count();
         $converted_leads = Lead::where('status', 'Converted')->count();
 
+
+        $sales = Sale::sum('price');
+        $monthlySales = Sale::whereMonth('created_at', now()->month)->sum('price');
+
         $users = Administrator::count();
-        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products'));
+        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products', 'sales', 'monthlySales'));
     }
 
     public function updateToken(Request $request){

@@ -189,6 +189,53 @@
     </div>
 
     @endif
+
+
+
+    @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">                        
+                        <li class="breadcrumb-item">Sales</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Sales</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">         
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">Total Sales</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $sales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center">                    
+                    <h5 class="mt-0">This Month Sale</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $monthlySales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                        <small>View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        
+
+    </div>
+
+    @endif
     <!-- end page title -->
 
 </div> <!-- container -->

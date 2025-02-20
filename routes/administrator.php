@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
+use App\Http\Controllers\Admin\SaleReportController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
@@ -92,6 +93,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
+    });
+
+
+    Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+        Route::resource('reports', SaleReportController::class);
     });
     
     Route::resource('categories', CategoryController::class);

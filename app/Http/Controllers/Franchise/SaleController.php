@@ -100,7 +100,7 @@ class SaleController extends Controller
             'product_id' => $order->product_id,
             'franchise_id' => auth()->user()->id,
             'quantity' => $request->quantity,
-            'price' => $request->quantity * $request->price,
+            'price' => $request->quantity * $order->product_price,
             'status' => $request->status ?? 'Sold'
         ]);
 
