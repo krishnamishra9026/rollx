@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
         $total_orders = Order::where('franchise_id', auth()->user()->id)->count();
         $not_started = Order::where('franchise_id', auth()->user()->id)->where('status', 'PO Generated')->count();
-        $in_progress = Order::where('franchise_id', auth()->user()->id)->where('status', 'In Progress')->count();
+        $in_progress = Order::where('franchise_id', auth()->user()->id)->where('status', 'Pending')->count();
         $delivered = Order::where('franchise_id', auth()->user()->id)->where('status', 'Delivered')->count();
         $completed = Order::where('franchise_id', auth()->user()->id)->where('status', 'Completed')->count();
 

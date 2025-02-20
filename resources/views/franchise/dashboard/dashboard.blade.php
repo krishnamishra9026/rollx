@@ -58,7 +58,7 @@
         <div class="col-xl-4 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center">
-                    <h5 class="mt-0">In Progress</h5>
+                    <h5 class="mt-0">Pending</h5>
                     <h2 class="my-2" id="active-users-count">{{ $in_progress }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('franchise.orders.index', ['status' => 'In Progress']) }}">
                         <small>View Details </small>

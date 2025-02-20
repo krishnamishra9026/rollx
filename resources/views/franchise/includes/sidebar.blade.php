@@ -70,6 +70,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('franchise/transactions') || request()->is('franchise/transactions/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.sale.reports.index') }}" class="side-nav-link">
+                    <i class="uil-money-bill"></i>
+                    <span> Sales Report </span>
+                </a>
+            </li>
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"

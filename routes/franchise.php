@@ -8,6 +8,7 @@ use App\Http\Controllers\Franchise\Auth\ResetPasswordController;
 use App\Http\Controllers\Franchise\DashboardController;
 use App\Http\Controllers\Franchise\ProductController;
 use App\Http\Controllers\Franchise\OrderController;
+use App\Http\Controllers\Franchise\SaleReportController;
 use App\Http\Controllers\Franchise\SaleController;
 use App\Http\Controllers\Franchise\SettingController;
 use App\Http\Controllers\Franchise\ChefController;
@@ -83,6 +84,10 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
         Route::post('sales/save', [SaleController::class, 'saveOld'])->name('sales.save');
+    });
+
+    Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+        Route::resource('reports', SaleReportController::class);
     });
 
 
