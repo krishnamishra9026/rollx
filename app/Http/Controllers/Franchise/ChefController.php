@@ -85,7 +85,7 @@ class ChefController extends Controller
 
             $name       = $image->getClientOriginalName();
 
-            $image->storeAs('uploads/technician/', $name, 'public');
+            $image->storeAs('uploads/chef/', $name, 'public');
 
             $chef->avatar = $name;
         }
@@ -102,9 +102,9 @@ class ChefController extends Controller
     public function show(string $id)
     {
         $chef          = Chef::find($id);
-        $chef->avatar  = isset($chef->avatar) ? asset('storage/uploads/technician/' . $chef->avatar) : URL::to('assets/images/users/avatar.png');
+        $chef->avatar  = isset($chef->avatar) ? asset('storage/uploads/chef/' . $chef->avatar) : URL::to('assets/images/users/avatar.png');
         $chef->country = Country::where('code', $chef->iso2)->first()->name;
-        return view('franchise.chefs.show', compact('technician'));
+        return view('franchise.chefs.show', compact('chef'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ChefController extends Controller
     {
         $chef          = Chef::find($id);
         $chef->avatar  = isset($chef->avatar) ? asset('storage/uploads/admin/' . $chef->avatar) : URL::to('assets/images/users/avatar.png');       
-        return view('franchise.chefs.edit', compact('technician'));
+        return view('franchise.chefs.edit', compact('chef'));
     }
 
     /**
@@ -148,11 +148,11 @@ class ChefController extends Controller
 
             $name       = $image->getClientOriginalName();
 
-            $image->storeAs('uploads/technician/', $name, 'public');
+            $image->storeAs('uploads/chef/', $name, 'public');
 
             if (isset($chef->avatar)) {
 
-                $path   = 'public/uploads/technician/' . $chef->avatar;
+                $path   = 'public/uploads/chef/' . $chef->avatar;
 
                 Storage::delete($path);
             }

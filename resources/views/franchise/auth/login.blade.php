@@ -47,7 +47,7 @@
                     </div>
 
                     <!-- title-->
-                    <h4 class="mt-0">Supplier Login</h4>
+                    <h4 class="mt-0">Franchise Login</h4>
                     <p class="text-muted mb-4">Enter your email address and password to access account.</p>
 
                     <!-- form -->

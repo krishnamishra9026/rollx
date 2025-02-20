@@ -74,14 +74,14 @@
                                                                 class="fa fa-lock me-1"></i> Change Password</a>
                                                         <a href="{{ route('franchise.chefs.edit', $chef->id) }}"
                                                             class="dropdown-item"><i class="fa fa-edit me-1"></i>
-                                                            Edit Technican</a>
+                                                            Edit Chef</a>
                                                         <a href="{{ route('franchise.chefs.show', $chef->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            View Technican</a>
+                                                            View Chef</a>
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $chef->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
-                                                            Delete Technican</a>
+                                                            Delete Chef</a>
                                                         <form id='delete-form{{ $chef->id }}'
                                                             action='{{ route('franchise.chefs.destroy', $chef->id) }}'
                                                             method='POST'>
