@@ -24,7 +24,7 @@ class WalletController extends Controller
         $filter                     = [];
         $filter['franchise']             = $request->franchise;
 
-        $franchises  = franchises::with('wallet');
+        $franchises  = Franchises::with('wallet');
         $franchises  = isset($filter['franchise']) ? $franchises->where('id', $filter['franchise']) : $franchises;
         $franchises  = $franchises->orderBy('created_at', 'desc')->paginate(20);     
 
