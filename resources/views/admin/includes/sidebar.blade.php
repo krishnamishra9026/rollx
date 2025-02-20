@@ -99,14 +99,16 @@
                 </a>
             </li>
 
-            @can('Leads')
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
             <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
                     <i class="uil-users-alt"></i>
                     <span> Leads </span>
                 </a>
             </li>
-            @endcan
+
+            @endif
 
 
              @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
