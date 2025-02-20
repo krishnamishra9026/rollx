@@ -14,11 +14,6 @@ session()->put('route', $route);
             <div class="col-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
-                        @can('View Order')
-                        <a href="{{ route('admin.orders.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add
-                            New</a>
-                        @endcan
                         <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
                                 class="mdi mdi-refresh"></i> Reset</a>
                         <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
@@ -128,17 +123,7 @@ session()->put('route', $route);
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        @can('Edit Order')
-                                                        <a href="{{ route('admin.orders.edit', $order->id) }}"
-                                                            class="dropdown-item"><i class="fa fa-edit me-1"></i>
-                                                            Edit</a>
-                                                        @endcan
-                                                        @can('View Order')
-                                                            <a href="{{ route('admin.orders.show', $order->id) }}"
-                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                                View</a>
-                                                        @endcan
-                                                        @can('View Order')
+                                                        @can('Delete Order')
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $order->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>

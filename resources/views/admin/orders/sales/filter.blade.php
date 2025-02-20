@@ -72,14 +72,6 @@
                         <div class="col-sm-12 mb-1 mt-1 text-end">
 
                             <div class="page-title-box">
-                                @isset($order->id)
-
-                                <a href="{{ route('admin.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i class="mdi mdi-plus"></i> Add New</a>
-
-                                @else
-                                <a href="{{ route('admin.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i class="mdi mdi-plus"></i> Add New</a>
-                                
-                                @endisset
 
                                 <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
 
