@@ -59,11 +59,11 @@ class SaleController extends Controller
 
         if (!isset($order_id)) {
 
-            $orders  = Order::where('franchise_id', auth()->user()->franchise_id)
+            $orders  = Order::where('franchise_id', auth()->user()->franchise_id)->where('stock', '>', 0)
                     ->where(function ($query) {
                         $query->where('status', 'completed')
                               ->orWhere('status', 'delivered');
-                    });
+                    })->get(['id']);                          
 
             return view('chef.orders.sales.create-sale', compact('orders'));
         }

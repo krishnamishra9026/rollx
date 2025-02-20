@@ -61,11 +61,11 @@ class SaleController extends Controller
 
         if (!isset($order_id)) {
 
-            $orders  = Order::where('franchise_id', auth()->user()->franchise_id)
-                    ->where(function ($query) {
-                        $query->where('status', 'completed')
-                              ->orWhere('status', 'delivered');
-                    });
+            $orders  = Order::where('franchise_id', auth()->user()->id)->where('stock', '>', 0)
+            ->where(function ($query) {
+                $query->where('status', 'completed')
+                      ->orWhere('status', 'delivered');
+            })->get(['id']);       
 
             return view('franchise.orders.sales.create-sale', compact('orders'));
         }
@@ -86,7 +86,6 @@ class SaleController extends Controller
             'quantity' => 'required|integer|min:1',
             'status' => 'required',
         ]);
-              echo '<pre>'; print_r($request->all()); echo '</pre>'; exit();
 
         $order = Order::findOrFail($request->order_id);
 
