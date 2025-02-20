@@ -53,7 +53,7 @@ class SaleReportController extends Controller
         $total_wastage_sales = Sale::where('status', 'Wastage')->sum('price');
         $total_wastage_quatity = Sale::where('status', 'Wastage')->sum('quantity');    
 
-        if(isset($filter['franchise'])){
+        if( isset($filter['franchise']) && !isset($filter['product']) ){
 
             $total_sales = Sale::where('franchise_id',  $filter['franchise'] )->sum('price');
             $total_quatity = Sale::where('franchise_id',  $filter['franchise'] )->sum('quantity');
@@ -63,6 +63,30 @@ class SaleReportController extends Controller
 
             $total_wastage_sales = Sale::where('franchise_id',  $filter['franchise'] )->where('status', 'Wastage')->sum('price');
             $total_wastage_quatity = Sale::where('franchise_id',  $filter['franchise'] )->where('status', 'Wastage')->sum('quantity');    
+        }
+
+        if( isset($filter['product']) && !isset($filter['franchise']) ){
+
+            $total_sales = Sale::where('product_id',  $filter['product'] )->sum('price');
+            $total_quatity = Sale::where('product_id',  $filter['product'] )->sum('quantity');
+
+            $total_sold_sales = Sale::where('product_id',  $filter['product'] )->where('status', 'Sold')->sum('price');
+            $total_sold_quatity = Sale::where('product_id',  $filter['product'] )->where('status', 'Sold')->sum('quantity');
+
+            $total_wastage_sales = Sale::where('product_id',  $filter['product'] )->where('status', 'Wastage')->sum('price');
+            $total_wastage_quatity = Sale::where('product_id',  $filter['product'] )->where('status', 'Wastage')->sum('quantity');    
+        }
+
+        if( isset($filter['product']) && isset($filter['franchise']) ){
+
+            $total_sales = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->sum('price');
+            $total_quatity = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->sum('quantity');
+
+            $total_sold_sales = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->where('status', 'Sold')->sum('price');
+            $total_sold_quatity = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->where('status', 'Sold')->sum('quantity');
+
+            $total_wastage_sales = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->where('status', 'Wastage')->sum('price');
+            $total_wastage_quatity = Sale::where('franchise_id',  $filter['franchise'] )->where('product_id',  $filter['product'] )->where('status', 'Wastage')->sum('quantity');    
         }
 
               

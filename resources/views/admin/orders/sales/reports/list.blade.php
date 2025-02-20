@@ -68,6 +68,7 @@
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Francise Name</th>
+                                            <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Amount</th>
                                             <th class="fw-bold">Order Date</th>
@@ -78,6 +79,7 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td><a href="{{ route('admin.franchises.show', $sale->franchise->id)  }}">{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</a></td>
+                                                <td><a href="{{ route('admin.products.show', $sale->product->id)  }}">{{ @$sale->product->name }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>

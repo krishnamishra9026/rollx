@@ -88,10 +88,66 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
-</div> <!-- container -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Sales Performance</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        
+
+                        <canvas id="salesChart"></canvas>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> 
 @endsection
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('salesChart').getContext('2d');
+    var salesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($sales->pluck('name')), // Product names
+            datasets: [{
+                label: 'Total Sales (in Rs)',
+                data: @json($sales->pluck('sales')), // Total sales for each product
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Quantity Sold',
+                data: @json($sales->pluck('quantity')), // Quantity sold for each product
+                backgroundColor: 'rgba(153, 102, 255, 0.2)', // Different color for quantity
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+</script>
+
+@endpush
