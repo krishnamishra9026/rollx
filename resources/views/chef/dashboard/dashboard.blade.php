@@ -53,7 +53,7 @@
                         <div class="row">
 
                             @foreach ($orders as $order)
-                                @if($order->product_name == 'Momo')
+                            @if ((strpos($order->product->name, "Momo") !== false) || (strpos($order->product->name, ",momo") !== false)) {
                                     <div class="col-sm-3 mt-2 d-flex">
                                         <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate]) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">

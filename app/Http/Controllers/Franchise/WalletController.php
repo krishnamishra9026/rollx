@@ -20,10 +20,7 @@ class WalletController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $transactions = $user->wallet->transactions()->orderBy('created_at', 'desc')->paginate(10);
-
-              // echo '<pre>'; print_r($transactions->toArray()); echo '</pre>'; exit();
-              
+        $transactions = $user->wallet->transactions()->orderBy('created_at', 'desc')->paginate(10);              
 
         return view('franchise.wallet.list', compact('transactions'));
     }

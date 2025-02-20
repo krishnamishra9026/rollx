@@ -44,7 +44,7 @@
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>#{{ $order->id }}</td>
-                                                <td>{{ $order->product->name }}</td>
+                                                <td> {{ $order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->stock }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y') }}</td>
