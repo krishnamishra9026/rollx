@@ -44,7 +44,7 @@ class SaleController extends Controller
         $sales              = isset($filter['franchise']) ? $sales->where('franchise_id',  $filter['franchise'] ) : $sales;
         $sales              = isset($filter['chef']) ? $sales->where('chef_id',  $filter['chef'] ) : $sales;
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
-        $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
+        $sales              = isset($filter['order']) ? $sales->where('order_id',  $filter['order'] ) : $sales;
 
         $sales              = $sales->orderBy('created_at', 'desc')->paginate(20);             
 

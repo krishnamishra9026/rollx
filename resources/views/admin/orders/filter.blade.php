@@ -49,6 +49,22 @@
                                 <option value="returned" {{ $filter['status'] == 'returned' ? 'selected' : '' }}>Returned</option>
                             </select>
                         </div>
+
+                        <div class="col-sm-12">
+                        @can('View Order')
+                        <a href="{{ route('admin.orders.create') }}" class="btn btn-sm btn-dark float-end"><i
+                                class="mdi mdi-plus"></i> Add
+                            New</a>
+                        @endcan
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
+                                class="mdi mdi-refresh"></i> Reset</a>
+                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
+                                class="mdi mdi-filter"></i> Filter</button>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-danger float-end me-1" style="display: none"
+                            id="delete-all">
+                            <i class="mdi mdi-delete"></i> {{ __('Delete') }}</a>
+                        </div>
+
                     </div>
                 </form>
             </div>

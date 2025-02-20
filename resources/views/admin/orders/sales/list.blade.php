@@ -12,21 +12,17 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         @isset($order->id)
-                        <a href="{{ route('admin.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add
-                            New</a>
-                            @else
 
-                            <a href="{{ route('admin.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add
-                            New</a>
+                        <a href="{{ route('admin.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i class="mdi mdi-plus"></i> Add New</a>
 
-                            @endisset
+                        @else
+                        <a href="{{ route('admin.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i class="mdi mdi-plus"></i> Add New</a>
+                        
+                        @endisset
 
-                                <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i
-                                    class="mdi mdi-refresh"></i> Reset</a>
-                                    <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
-                                        class="mdi mdi-filter"></i> Filter</button>
+                        <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
+
+                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i class="mdi mdi-filter"></i> Filter</button>
                     </div>
                     <h4 class="page-title">Sales</h4>
                 </div>
@@ -59,7 +55,7 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td>{{ $sale->id }}</td>
-                                                <td>{{ $sale->order_id }}</td>
+                                                <td><a href="{{ route('admin.orders.show', $sale->order->id)  }}">#{{ $sale->order->id }}</a> </td>
                                                 <td><a href="{{ route('admin.products.show', $sale->order->product->id)  }}">{{ $sale->order->product->name }}</a> </td>
                                                 <td><a href="{{ route('admin.franchises.show', $sale->franchise->id)  }}">{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</a></td>
                                                 @if($sale->chef_id)

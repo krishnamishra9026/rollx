@@ -18,6 +18,11 @@
                             Lead</a>
                         @endcan
 
+                        <button type="submit" class="btn btn-sm btn-secondary" >Filter </button> 
+
+                        <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1" >Reset</a>
+                        &nbsp;
+
                         <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark float-end"><i
                                 class="mdi mdi-plus"></i> Assign Leads</a>
 
@@ -27,6 +32,7 @@
             </div>
         </div>
         @include('admin.includes.flash-message')
+        @include('admin.leads.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">

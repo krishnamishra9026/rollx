@@ -22,6 +22,7 @@
             </div>
         </div>
         @include('admin.includes.flash-message')
+        @include('admin.franchises.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
