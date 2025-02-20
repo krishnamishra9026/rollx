@@ -123,6 +123,13 @@ session()->put('route', $route);
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end">
+
+                                                        @can('View Order')
+                                                        <a href="{{ route('admin.orders.show', $order->id) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye-alt me-1"></i>
+                                                            View</a>
+                                                        @endcan
+
                                                         @can('Delete Order')
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $order->id }})"
