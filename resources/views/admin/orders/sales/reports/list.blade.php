@@ -10,12 +10,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <div class="page-title-right">
-
-                        <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
-
-                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i class="mdi mdi-filter"></i> Filter</button>
-                    </div>
+               
                     <h4 class="page-title">Sale Report</h4>
                 </div>
             </div>
