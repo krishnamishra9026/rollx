@@ -124,7 +124,7 @@
                                                 <td>---</td>
                                                 @endif
                                                 <td>{{ $sale->quantity }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"
                                                         id="changeStatus{{ $sale->id }}"

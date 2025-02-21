@@ -51,7 +51,7 @@ session()->put('route', $route);
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>#{{ $order->id }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($order->date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.franchises.show', $order->franchise_id) }}"
                                                         class="text-body fw-semibold">{{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</a>

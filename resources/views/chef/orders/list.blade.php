@@ -47,7 +47,7 @@
                                                 <td> {{ $order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->stock }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"
                                                         id="changeStatus{{ $order->id }}"
