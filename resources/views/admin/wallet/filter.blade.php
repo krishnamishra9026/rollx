@@ -3,10 +3,11 @@
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('admin.wallet.index') }}" id="filterForm">
-                     <div class="row">
-                        <div class="col-sm-12 mb-1 d-flex align-items-center">
-                            <label class="col-form-label me-2" for="franchise">Franchises:</label>
-                            <select class="form-select me-2 w-auto" id="franchise" name="franchise">
+
+                    <div class="row">
+                        <div class="col-sm-3 mb-2">
+                            <label class="col-form-label" for="franchise">Franchises</label>
+                            <select class="form-select" id="franchise" name="franchise">
                                 <option value="">All</option>
                                 @foreach($franchise_list as $franchise)
                                     <option value="{{ $franchise->id }}" 
@@ -15,15 +16,17 @@
                                     </option>
                                 @endforeach
                             </select>
-                            
-                            <button type="submit" class="btn btn-sm btn-danger me-1" form="filterForm">
-                                <i class="mdi mdi-filter"></i> Filter
-                            </button>
-                            <a href="{{ route('admin.wallet.index') }}" class="btn btn-sm btn-primary">
-                                <i class="mdi mdi-refresh"></i> Reset
-                            </a>
                         </div>
+
+
+                        <div class="col-sm-12 mb-2">
+                            <a href="{{ route('admin.wallet.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
+                            <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
+                        </div>
+                       
                     </div>
+
+                
                 </form>
             </div>
         </div>

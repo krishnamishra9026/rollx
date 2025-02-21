@@ -41,6 +41,8 @@ session()->put('route', $route);
                                         <tr>
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Date</th>
+                                            <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Franchise</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Status</th>
@@ -52,6 +54,8 @@ session()->put('route', $route);
                                             <tr>
                                                 <td>#{{ $order->id }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
+                                                <td>{{ $order->quantity }}</td>
+                                                <td>{{ $order->stock }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.franchises.show', $order->franchise_id) }}"
                                                         class="text-body fw-semibold">{{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</a>

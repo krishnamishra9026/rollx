@@ -446,7 +446,7 @@ class OrderController extends Controller
 
         //Order Status Notification
 
-        /*$franchise_id = $order->franchise_id;
+        $franchise_id = $order->franchise_id;
 
         $franchise = Franchise::find($franchise_id);
 
@@ -458,7 +458,7 @@ class OrderController extends Controller
                 $chef = Chef::find($chef->id);
                 $chef->notify(new OrderStatusNotification($order, route('chef.orders.show', $order->id)));
             }
-        }*/
+        }
 
         return redirect()->back()->with('success', 'Order History added successfully');
     }

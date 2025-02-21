@@ -90,11 +90,11 @@ class OrderController extends Controller
 
             //Order created notification
 
-            /*$admins = Administrator::role(['Operations', 'Administrator'])->get();
+            $admins = Administrator::role(['Operations', 'Administrator'])->get();
                   
             foreach ($admins as $admin) {
                 $admin->notify(new OrderCreatedNotification($order));
-            }*/
+            }
 
             $user->wallet->withdraw($total, ['description' => 'Purchase of Product Id #'.$product->id.' Order Id #'.$order->id]);
 

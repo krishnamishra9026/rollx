@@ -14,9 +14,14 @@ class OrderSaleNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    
+    private $sale;
+    private $to;
+
+    public function __construct($sale, $to='admin')
     {
-        //
+        $this->sale = $sale;
+        $this->to = $to;
     }
 
     /**
@@ -26,7 +31,7 @@ class OrderSaleNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -47,8 +52,23 @@ class OrderSaleNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            //
-        ];
+        if($this->to == 'admin'){
+            return [
+                'sale_id' => $this->sale->id,
+                'order_id' => $this->sale->order_id,
+                'message' => "New Sale Created.",
+                'sale_url' => route('admin.order.sales.index'),
+                'order_url' => route('admin.orders.show',  $this->sale->order_id),
+            ];
+        }else{
+
+            return [
+                'sale_id' => $this->sale->id,
+                'order_id' => $this->sale->order_id,
+                'message' => "New Sale Created.",
+                'sale_url' => route('franchise.order.sales.index'),
+                'order_url' => route('franchise.orders.show',  $this->sale->order_id),
+            ];
+        }
     }
 }

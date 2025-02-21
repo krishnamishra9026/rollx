@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Franchise;
+use App\Models\Administrator;
 use App\Models\Sale;
+use App\Notifications\OrderSaleNotification;
 
 class SaleController extends Controller
 {
@@ -93,7 +96,7 @@ class SaleController extends Controller
         $order->stock -= $request->quantity;
         $order->save();
 
-        Sale::create([
+        $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
             'franchise_id' => $order->franchise_id,
@@ -102,6 +105,19 @@ class SaleController extends Controller
             'price' => $request->quantity * $order->product_price ,
             'status' => $request->status ?? 'Sold'
         ]);
+
+        //Sale created notification
+
+        $admins = Administrator::role(['Operations', 'Administrator'])->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new OrderSaleNotification($sale));
+        }
+
+         $franchise = Franchise::find($sale->franchise_id);
+
+         $franchise->notify(new OrderSaleNotification($sale, 'franchise'));
+
 
         return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
     }
@@ -117,7 +133,7 @@ class SaleController extends Controller
         $order->stock -= $request->quantity;
         $order->save();
 
-        Sale::create([
+        $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
             'quantity' => $request->quantity,
@@ -126,6 +142,18 @@ class SaleController extends Controller
             'price' => $request->quantity * $order->product_price,
             'status' => 'Sold'
         ]);
+
+        //Sale created notification
+
+        $admins = Administrator::role(['Operations', 'Administrator'])->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new OrderSaleNotification($sale));
+        }
+
+        $franchise = Franchise::find($sale->franchise_id);
+
+        $franchise->notify(new OrderSaleNotification($sale));
 
         return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
     }

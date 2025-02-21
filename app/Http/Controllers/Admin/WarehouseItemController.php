@@ -20,10 +20,20 @@ class WarehouseItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $items = WarehouseItem::latest()->paginate(20);
-        return view('admin.warehouse_items.list', compact('items'));
+
+        $filter                 = [];
+        $filter['name']         = $request->name;
+
+        $items            = WarehouseItem::query();
+
+        $items            = isset($filter['name']) ? $items->where("name", 'LIKE', '%' . $filter['name'] . '%') : $items;
+
+        $items          = $items->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.warehouse_items.list', compact('items', 'filter'));
     }
 
     public function create()

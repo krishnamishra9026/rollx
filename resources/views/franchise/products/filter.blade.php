@@ -3,28 +3,32 @@
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('franchise.products.index') }}" id="filterForm">
-                    <div class="row align-items-center">
-                        <!-- Input field -->
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Product name" value="{{ $filter['name'] }}">
-                        </div>
+                     <div class="row">
 
-                        <!-- Buttons -->
-                        <div class="col-md-5 d-flex gap-2">
-                            <a href="{{ route('franchise.products.index') }}" class="btn btn-sm btn-primary">
-                                <i class="mdi mdi-refresh"></i> Reset
-                            </a>
-                            <button type="submit" class="btn btn-sm btn-danger" form="filterForm">
-                                <i class="mdi mdi-filter"></i> Filter
-                            </button>
-                            <button type="submit" class="btn btn-sm btn-success" form="CreateOrders">
-                                Create Orders
-                            </button>
+                        <div class="col-sm-4 mb-1">
+                            <label class="col-form-label" for="name">Product Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" value="{{ $filter['name'] }}">
                         </div>
+                        <div class="col-sm-4 mb-1">
+                            <label class="col-form-label" for="model_number">Model Number</label>
+                            <input type="text" class="form-control" id="model_number" name="model_number" placeholder="Enter model number" value="{{ $filter['model_number'] }}">
+                        </div>
+                        <div class="col-sm-4 mb-1">
+                            <label class="col-form-label" for="serial_number">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="Enter serial number" value="{{ $filter['serial_number'] }}">
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <div class="d-flex flex-wrap justify-content-end gap-1">
 
-                        <!-- Points display -->
-                        <div class="col-md-3 text-end">
-                            Points: <span class="points">{{ auth()->user()->balance }}</span>
+                                
+                     
+                                <a href="{{ route('franchise.products.index') }}" class="btn btn-sm btn-primary">
+                                    <i class="mdi mdi-refresh"></i> Reset
+                                </a>
+                                <button type="submit" class="btn btn-sm btn-danger" form="filterForm">
+                                    <i class="mdi mdi-filter"></i> Filter
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -32,4 +36,3 @@
         </div>
     </div>
 </div>
-

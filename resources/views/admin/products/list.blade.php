@@ -20,7 +20,7 @@
 
                     <div class="page-title-right">
 
-                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Add  Product</a>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Product</a>
                         <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
                         <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
                     </div>

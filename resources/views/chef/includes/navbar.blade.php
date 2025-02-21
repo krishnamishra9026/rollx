@@ -1,12 +1,12 @@
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
-        <li class="dropdown notification-list" style="display: none;">
+        <li class="dropdown notification-list" style="display: block;">
             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
                 <span class="noti-icon-badge"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg">
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg notification-dropdown">
 
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">

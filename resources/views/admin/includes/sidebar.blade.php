@@ -79,7 +79,7 @@
             </li>
 
 
-            <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
+            <li class="side-nav-item {{ request()->is('admin/sale/reports') || request()->is('admin/sale/reports/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.sale.reports.index') }}" class="side-nav-link">
                     <i class="uil-money-bill"></i>
                     <span> Sales Report </span>

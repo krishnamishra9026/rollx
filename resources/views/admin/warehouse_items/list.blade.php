@@ -33,6 +33,7 @@
         </div>
 
         @include('admin.includes.flash-message')
+        @include('admin.warehouse_items.filter')
         <div class="row py-3">
             <div class="col-12">
                 <div class="card">

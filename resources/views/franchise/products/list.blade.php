@@ -50,6 +50,9 @@
             <div class="col-12">
                 <div class="card">
                     
+                    <div class="card-header text-end">
+                        <strong>Points:</strong> <span class="points">{{ auth()->user()->balance }}</span>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">

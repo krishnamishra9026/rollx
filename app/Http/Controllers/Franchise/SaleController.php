@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\Chef;
+use App\Models\Administrator;
+use App\Notifications\OrderSaleNotification;
 
 class SaleController extends Controller
 {
@@ -39,7 +42,7 @@ class SaleController extends Controller
         $sales              = isset($filter['status']) ? $sales->where('status', 'LIKE', '%' . $filter['status'] . '%') : $sales;
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
         $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
-
+        $sales              = isset($filter['chef']) ? $sales->where('chef_id',  $filter['chef'] ) : $sales;
         $sales              = $sales->where('franchise_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
 
 
@@ -47,8 +50,9 @@ class SaleController extends Controller
 
         $orders = Order::all();
         $products = Product::all();
+        $chefs = Chef::all();
 
-        return view('franchise.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products'));
+        return view('franchise.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products', 'chefs'));
     }
 
     /**
@@ -95,7 +99,7 @@ class SaleController extends Controller
         $order->stock -= $request->quantity;
         $order->save();
 
-        Sale::create([
+        $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
             'franchise_id' => auth()->user()->id,
@@ -103,6 +107,15 @@ class SaleController extends Controller
             'price' => $request->quantity * $order->product_price,
             'status' => $request->status ?? 'Sold'
         ]);
+
+
+        //Sale created notification
+
+        $admins = Administrator::role(['Operations', 'Administrator'])->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new OrderSaleNotification($sale));
+        }
 
         return redirect()->route('franchise.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
     }

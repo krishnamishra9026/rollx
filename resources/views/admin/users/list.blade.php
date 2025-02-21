@@ -37,8 +37,8 @@
                                     <thead>
                                         <tr>
                                             <th class="bg-green">User Id</th>
-                                            <th class="bg-green">User</th>
                                             <th class="bg-green">Role</th>
+                                            <th class="bg-green">User</th>
                                             <th class="bg-green">Email</th>
                                             <th class="bg-green">Phone</th>
                                             <th class="bg-green">Enabled</th>
@@ -49,6 +49,11 @@
                                         @foreach ($superadmins as $admin)
                                             <tr>
                                                 <td>{{ $admin->id }}</td>
+                                                <td class="text-success">
+                                                    @foreach ($admin->roles as $role)
+                                                        {{ $role->name }}
+                                                    @endforeach
+                                                </td>
                                                 <td class="table-user">
 
                                                     <img @isset($admin->avatar) src="{{ asset('storage/uploads/admins/' . $admin->slug . '/' . $admin->avatar) }}" @else src="https://placehold.co/150x150/0657BB/FFF?text={{ $admin->firstname[0] }}{{ $admin->lastname[0]; }}" @endisset
@@ -57,11 +62,7 @@
                                                         class="text-body fw-semibold">{{ $admin->firstname }}
                                                         {{ $admin->lastname }}</a>
                                                 </td>
-                                                <td class="text-success">
-                                                    @foreach ($admin->roles as $role)
-                                                        {{ $role->name }}
-                                                    @endforeach
-                                                </td>
+                                                
                                                 <td>{{ $admin->email }}</td>
                                                 <td>{{ $admin->dialcode }} {{ $admin->phone }}</td>
                                                 <td><input type="checkbox" id="switch{{ $admin->id }}"
