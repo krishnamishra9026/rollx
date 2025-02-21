@@ -50,7 +50,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col-md-12 table-responive">
+                        <!-- Table Wrapper for Responsiveness -->
+                        <div class="table-responsive">
                             <table class="table table-striped" style="font-size: 14px" id="parts-table">
                                 <thead>
                                     <tr>
@@ -67,14 +68,13 @@
                                             <td>{{ $history->comment }}</td>
                                             @if($history->status_changed_by == 'administrator')
                                                 <td>{{ \App\Models\Administrator::find($history->status_changer_id)->firstname }} {{ \App\Models\Administrator::find($history->status_changer_id)->lastname }}</td>
-                                                @else
+                                            @else
                                                 <td>{{ \App\Models\Franchise::find($history->status_changer_id)->firstname }} {{ \App\Models\Franchise::find($history->status_changer_id)->lastname }}</td>
-                                                @endif
+                                            @endif
                                             <td>
                                                 <h4>
                                                     <span class="badge border badge-danger-lighten">{{ ucfirst($history->status) }}</span>
                                                 </h4>
-                                           
                                             </td>
                                         </tr>
                                     @endforeach
@@ -84,6 +84,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div> <!-- container -->
