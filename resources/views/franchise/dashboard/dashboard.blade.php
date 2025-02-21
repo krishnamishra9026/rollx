@@ -19,6 +19,8 @@
     </div>
     <!-- end page title -->
 
+    @include('franchise.includes.flash-message')
+
     <div class="row">
         <div class="col-xl-4 col-lg-4">
             <div class="card tilebox-one">

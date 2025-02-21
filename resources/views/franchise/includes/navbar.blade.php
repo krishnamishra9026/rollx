@@ -1,6 +1,51 @@
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
+        <li class="dropdown notification-list" style="display: none;">
+            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="dripicons-bell noti-icon"></i>
+                <span class="noti-icon-badge"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg">
+
+                <div class="dropdown-item noti-title">
+                    <h5 class="m-0">
+                        <span class="float-end">
+                            @if (auth()->guard('franchise')->user()->unreadNotifications && count(auth()->guard('franchise')->user()->unreadNotifications))
+                            <a href="{{route('franchise.notifications.mark-all-read')}}" class="text-dark" >
+                                <small>Clear All</small>
+                            </a>
+                            @endif
+                        </span>Notification
+                    </h5>
+                </div>
+
+                <div style="max-height: 230px;" data-simplebar>
+                    @if(auth()->guard('franchise')->user()->unreadNotifications  && count(auth()->guard('franchise')->user()->unreadNotifications))
+                    @foreach (auth()->guard('franchise')->user()->unreadNotifications as $key => $notification)
+                    @if($key > 4) 
+                    @php break; @endphp
+                    @endif
+                    <div class="dropdown-item notify-item">
+                        <div class="notify-icon bg-primary">
+                            <i class="mdi mdi-comment-account-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            <strong>{{ $notification->data['message'] }}</strong>
+                            <br/>
+                            <a href="{{ $notification->data['order_url'] }}">View Order #{{ $notification->data['order_id'] }}</a>
+                            <small class="text-muted">{{ $notification->created_at }}</small>
+                        </p>
+                    </div>
+                    @endforeach
+                    @else
+                    <div style="padding-left:20px;padding-bottom:10px">No notifications available</div>
+                    @endif
+                </div>
+
+            </div>
+        </li>
+
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#"
                 role="button" aria-haspopup="false" aria-expanded="false">

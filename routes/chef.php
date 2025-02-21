@@ -7,6 +7,7 @@ use App\Http\Controllers\Chef\Auth\MyAccountController;
 use App\Http\Controllers\Chef\Auth\ResetPasswordController;
 use App\Http\Controllers\Chef\DashboardController;
 use App\Http\Controllers\Chef\ProductController;
+use App\Http\Controllers\Chef\NotificationController;
 use App\Http\Controllers\Chef\OrderController;
 use App\Http\Controllers\Chef\SaleController;
 use App\Http\Controllers\Chef\PurchaseOrderController;
@@ -40,6 +41,10 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
     Route::post('password/update', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+    Route::get('notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.mark-all-read');
+    Route::get('notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::resource('notifications', NotificationController::class);
 
 
     /*

@@ -95,6 +95,8 @@
 
         @if(isset($order_id))
 
+        @if($sales && count($sales))
+
         <div class="row">       
 
             <div class="col-xl-3 col-lg-4">
@@ -146,6 +148,9 @@
             </div>  
 
         </div>
+
+        @endif
+        
         @endif
 
         <div class="row">

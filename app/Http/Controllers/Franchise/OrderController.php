@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Administrator;
 use App\Models\OrderHistory;
+use App\Notifications\OrderCreatedNotification;
 use Auth;
 
 class OrderController extends Controller
@@ -59,7 +61,6 @@ class OrderController extends Controller
 
     public function save(Request $request)
     {              
-
         foreach ($request->data as $key => $value) {                  
 
             if ($value['quantity'] <= 0) {
@@ -86,6 +87,14 @@ class OrderController extends Controller
             $input['total'] = $value['price'] * $value['quantity'];
 
             $order = Order::create($input);
+
+            //Order created notification
+
+            /*$admins = Administrator::role(['Operations', 'Administrator'])->get();
+                  
+            foreach ($admins as $admin) {
+                $admin->notify(new OrderCreatedNotification($order));
+            }*/
 
             $user->wallet->withdraw($total, ['description' => 'Purchase of Product Id #'.$product->id.' Order Id #'.$order->id]);
 
@@ -125,6 +134,11 @@ class OrderController extends Controller
         $input['total'] = $product->price * $request->quantity;
 
         $order = Order::create($input);
+
+        $admins = Administrator::where('role', 'Administrator')->orWhere('role', 'Oprations')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new OrderCreatedNotification($order));
+        }
 
         $user->wallet->withdraw($total, ['description' => 'Purchase of Product Id #'.$product->id.' Order Id #'.$order->id]);
 

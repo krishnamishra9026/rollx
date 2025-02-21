@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\WarehouseItemController;
 use App\Http\Controllers\Admin\WarehouseInventoryController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -109,6 +110,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     | Parts Route
     |--------------------------------------------------------------------------
     */
+
+    Route::get('notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.mark-all-read');
+    Route::get('notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::resource('notifications', NotificationController::class);
 
     Route::resource('products', ProductController::class);
     Route::resource('product-prices', ProductPriceController::class);

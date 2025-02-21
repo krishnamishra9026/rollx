@@ -82,6 +82,11 @@ class Franchise extends Authenticatable
         return $this->belongsToMany(Product::class, 'product_prices');
     }
 
+    public function chefs()
+    {
+        return $this->hasMany(Chef::class, 'franchise_id', 'id');
+    }
+
     public function sales()
     {
         return $this->hasMany(Sale::class);

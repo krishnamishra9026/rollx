@@ -7,18 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SignupNotification extends Notification
+class OrderStatusNotification extends Notification
 {
     use Queueable;
 
-    public $exhibitor;
     /**
      * Create a new notification instance.
      */
-    public function __construct($exhibitor)
+    protected $order;
+    protected $order_url;
+
+    public function __construct($order, $order_url)
     {
-        $this->exhibitor = $exhibitor;
+        $this->order = $order;
+        $this->order_url = $order_url;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -27,7 +31,7 @@ class SignupNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -36,11 +40,9 @@ class SignupNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Exhibitor Signup Notification')
-                    ->line('Welcome Administrator')
-                    ->line('A New Exhibitor just signed up on the platform.')
-                    ->line('You can check the exhibitor by clicking on the button below')
-                    ->action('View Exhibitor', route('admin.suppliers.show', $this->exhibitor->id));
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -48,6 +50,19 @@ class SignupNotification extends Notification
      *
      * @return array<string, mixed>
      */
+
+    // Build the notification data
+    public function toDatabase($notifiable)
+    {
+        return [
+            'order_id' => $this->order->id,
+            'order_status' => $this->order->status ?? 'pending',
+            'message' => 'Order Status changed to ' . ucfirst($this->order->status),
+            'order_url' => $this->order_url,
+        ];
+    }
+
+    
     public function toArray(object $notifiable): array
     {
         return [

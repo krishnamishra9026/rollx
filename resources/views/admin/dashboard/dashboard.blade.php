@@ -21,6 +21,9 @@
             </div>
         </div>
     </div>
+
+    @include('admin.includes.flash-message')
+    
     <div class="row">       
 
     <div class="col-xl-3 col-lg-4">

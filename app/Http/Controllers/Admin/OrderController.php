@@ -11,6 +11,7 @@ use App\Models\OrderImage;
 use App\Models\OrderPart;
 use App\Models\Franchise;
 use App\Models\User;
+use App\Models\Chef;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Kutia\Larafirebase\Facades\Larafirebase;
+use App\Notifications\OrderStatusNotification;
 
 class OrderController extends Controller
 {
@@ -414,74 +416,6 @@ class OrderController extends Controller
         return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully');
     }
 
-    public function createPart(Request $request,$id)
-    {
-        $order              = Order::find($id);
-        $categories         = Category::whereType('main-category')->get();
-         return view('admin.orders.edit.add-parts',compact('id','categories','order'));
-    }
-
-    public function getSubcategories(Request $request)
-    {
-        switch ($request->type) {
-            case 'category':
-                $categories = Category::where('type', 'category')->where("category_id", $request->id)->get(['id', 'category']);
-                break;
-            case 'sub-category':
-                $categories = Category::where('type', 'sub-category')->where("category_id", $request->id)->get(['id', 'category']);
-                break;
-            default:
-                $categories = [];
-                break;
-        }
-
-        $response = array();
-        foreach ($categories as $category) {
-            $response[] = array(
-                "id" => $category->id,
-                "text" => $category->category
-            );
-        }
-        return response()->json($response);
-    }
-
-    public function addPart(Request $request){
-    try {
-                $quantity = Part::find($request->part_id)->quantity;
-
-                $order_part = OrderPart::create([
-                    'order_id'                  => $request->order_id,
-                    'part_id'                   => $request->part_id,
-                    'quantity'                  => $request->quantity,
-                    // 'installation_date'         => $request->part_installation_date,
-                    // 'warranty_upto'             => $request->part_warranty_upto,
-                    // 'warranty_date'             => $request->warranty_date,
-                    'available'                 => $request->quantity < $quantity ? true : false
-                ]);
-
-                $order              = Order::find($request->order_id);
-
-                if($order->equipment_assemble_type == 'inventory'){
-                    Part::where('id', $request->part_id)->decrement('quantity', $request->quantity);
-                }
-
-                $html = view('admin.orders.edit.parts-row', compact('order'))->render();
-                $serial_nos = PartSerialNo::where("part_id", $request->part_id)->where("deducted", false)->where("replaced", false)->take($request->quantity)->get();
-
-                foreach($serial_nos as $serial_no){
-                    $serial_no->update([
-                        'order_id' => $request->order_id,
-                        'deducted' => true
-                    ]);
-                }
-
-                return response()->json(['html' => $html], 200);
-        }
-        catch(\Exception $e) {
-              dd($e);
-            return false;
-        }
-    }
 
     public function addHistory(Request $request, $id){
 
@@ -508,94 +442,28 @@ class OrderController extends Controller
 
         }
 
+        $order = Order::find($id);
+
+        //Order Status Notification
+
+        /*$franchise_id = $order->franchise_id;
+
+        $franchise = Franchise::find($franchise_id);
+
+        $franchise->notify(new OrderStatusNotification($order, route('franchise.orders.show', $order->id)));
+
+        if ($order->status == 'completed' || $order->status == 'delivered') {
+
+            foreach ($franchise->chefs as $key => $chef) {
+                $chef = Chef::find($chef->id);
+                $chef->notify(new OrderStatusNotification($order, route('chef.orders.show', $order->id)));
+            }
+        }*/
+
         return redirect()->back()->with('success', 'Order History added successfully');
     }
 
-    public function generatePurchaseOrder(Request $request, $id){
 
-        $order = Order::find($id)->update(['status' => 'PO Generated']);
-
-       $purchase_order =  PurchaseOrder::create([
-            'order_id'      => $id,
-            'supplier_id'   => 1,
-            'status'        => 'PO Generated'
-        ]);
-
-        OrderHistory::create([
-            'order_id' => $id,
-            'status'   => 'PO Generated',
-            'comment'  => 'Purchase Order for Order #'.$id.  ' has been generated!',
-            'status_changed_by' => 'administrator',
-            'status_changer_id' => Auth::user()->id
-        ]);
-
-        $suppliers = Supplier::whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
-        Larafirebase::withTitle('New Puchase Order Generated')
-        ->withBody('Purchase Order #'.$purchase_order->id. ' has been generated!')
-        ->sendMessage($suppliers);
-        $ord = Order::find($id)->equipment_name;
-        $transdate = Carbon::now()->format('Y-m-d');
-        $dat = str_replace("-", "",$transdate);
-        $string = <<<XML
-        <?xml version='1.0'?>
-        <table name="Transaction">
-            <transaction>
-                <transdate>$dat</transdate>
-                <duedate>$dat</duedate>
-                <type>POI</type>
-                <namecode>1234</namecode>
-                <gross>0.00</gross>
-                <tofrom>GridPlus</tofrom>
-                <paymentmethod>2</paymentmethod>
-                <prodpricecode>A</prodpricecode>
-                <mailingaddress>Grid Plus&#13;F-102&#13;C-6&#13;Sector 7&#13;Noida&#13;UP</mailingaddress>
-                <deliveryaddress>Acme SG01 Ltd&#13;F-102&#13;C-6&#13;Sector 7&#13;Noida&#13;UP</deliveryaddress>
-                <subfile name="Detail">
-                    <detail>
-                        <detail.account>7240-</detail.account>
-                        <detail.taxcode>G</detail.taxcode>
-                        <detail.gross>0.00</detail.gross>
-                        <detail.tax>0.00</detail.tax>
-                        <detail.net>0.00</detail.net>
-                        <detail.description>$ord</detail.description>
-                        <detail.stockqty>100.000000</detail.stockqty>
-                        <detail.stockcode>CC100</detail.stockcode>
-                        <detail.costprice>0.00</detail.costprice>
-                        <detail.unitprice>0.00</detail.unitprice>
-                        <detail.saleunit>ea</detail.saleunit>
-                        <detail.orderqty>1.000000</detail.orderqty>
-                    </detail>
-                </subfile>
-            </transaction>
-        </table>
-        XML;
-
-        // $xml = simplexml_load_string($string);
-
-        // print_r($xml);
-
-        // die();
-
-        $ch = curl_init();
-        // set URL and other appropriate options
-        curl_setopt($ch, CURLOPT_URL, "https://sg01.moneyworks.net.nz:6710/REST/COG%2fDemo%2fAcme%20Widgets%20SGREST.moneyworks/import?table=product&format=xml");
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $string);
-        // set Auth headers for Datacentre login, and document login
-        $headers = array(
-            "Authorization: Basic " . base64_encode("COG/Demo:Datacentre:4S03M6BNCN05SWL~LU2F"),
-            "Authorization: Basic " . base64_encode("Nurul Hasan:Document:Z~E07_PZP3SKV8")
-        );
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        header("Content-Type: text/xml");
-
-        return redirect()->route('admin.purchase-orders.index')->with('success', 'PO Generated successfully on Admin and Moneyworks');
-    }
 
      public function deleteImage(Request $request, $id){
         OrderImage::find($id)->delete();

@@ -8,6 +8,7 @@ use App\Http\Controllers\Franchise\Auth\ResetPasswordController;
 use App\Http\Controllers\Franchise\DashboardController;
 use App\Http\Controllers\Franchise\ProductController;
 use App\Http\Controllers\Franchise\OrderController;
+use App\Http\Controllers\Franchise\NotificationController;
 use App\Http\Controllers\Franchise\SaleReportController;
 use App\Http\Controllers\Franchise\SaleController;
 use App\Http\Controllers\Franchise\SettingController;
@@ -42,6 +43,10 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
     Route::post('password/update', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+    Route::get('notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.mark-all-read');
+    Route::get('notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::resource('notifications', NotificationController::class);
 
 
     /*
