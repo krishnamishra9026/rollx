@@ -42,7 +42,7 @@
                                                 <td>{{ $transaction->amount }}</td>
                                                 <td>{{ $transaction->type }}</td>
                                                 <td>{!!  $transaction->meta['description'] ?? 'Added balance in wallet' !!}</td>
-                                                <td>{{ \Carbon\Carbon::parse($transaction->order_date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

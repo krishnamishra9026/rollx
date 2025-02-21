@@ -71,7 +71,7 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Amount</th>
-                                            <th class="fw-bold">Order Date</th>
+                                            <th class="fw-bold">Order Dcreated_atate</th>
                                             <th class="fw-bold">Status</th>
                                         </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                                                 <td><a href="{{ route('admin.products.show', $sale->product->id)  }}">{{ @$sale->product->name }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success">{{ ucfirst($sale->status) }}</button>
                                                   

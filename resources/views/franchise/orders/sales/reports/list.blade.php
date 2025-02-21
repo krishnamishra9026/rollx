@@ -80,7 +80,7 @@
                                                 <td><a href="{{ route('franchise.products.show', $sale->product->id)  }}">{{ @$sale->product->name }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($sale->order_date)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success">{{ ucfirst($sale->status) }}</button>
                                                   
