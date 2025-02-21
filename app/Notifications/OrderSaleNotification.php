@@ -58,7 +58,7 @@ class OrderSaleNotification extends Notification
                 'order_id' => $this->sale->order_id,
                 'message' => "New Sale Created.",
                 'sale_url' => route('admin.order.sales.index'),
-                'order_url' => route('admin.orders.show',  $this->sale->order_id),
+                'order_url' => route('admin.order.sales.index', ['order_id' => $this->sale->order_id]),
             ];
         }else{
 
@@ -67,7 +67,7 @@ class OrderSaleNotification extends Notification
                 'order_id' => $this->sale->order_id,
                 'message' => "New Sale Created.",
                 'sale_url' => route('franchise.order.sales.index'),
-                'order_url' => route('franchise.orders.show',  $this->sale->order_id),
+                'order_url' => route('franchise.order.sales.index', ['order_id' => $this->sale->order_id]),
             ];
         }
     }
