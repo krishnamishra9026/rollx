@@ -43,7 +43,11 @@
                                 <option value="returned" {{ $filter['status'] == 'returned' ? 'selected' : '' }}>Returned</option>
                             </select>
                         </div>
-                        
+
+                        <div class="col-sm-12 mb-2">
+                            <a href="{{ route('chef.orders.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
+                            <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i class="mdi mdi-filter"></i> Filter</button>
+                        </div>
                     </div>
                 </form>
             </div>
