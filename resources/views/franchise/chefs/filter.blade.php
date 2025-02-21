@@ -18,6 +18,8 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-3 mb-2 text-end">
+                            <a href="{{ route('franchise.chefs.create') }}" class="btn btn-sm btn-dark" style="margin-top:22px;"><i
+                                class="mdi mdi-plus"></i> Add Chef</a>
                             <button type="submit" class="btn btn-sm btn-secondary"
                                 style="margin-top:22px;">Filter</button>
                             <a href="{{ route('franchise.chefs.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1"

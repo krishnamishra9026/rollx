@@ -14,7 +14,7 @@
                         <a href="{{ route('franchise.orders.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
                         <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i class="mdi mdi-filter"></i> Filter</button>
                     </div>
-                    <h4 class="page-title">Overseas Purchase Orders</h4>
+                    <h4 class="page-title">Orders</h4>
                 </div>
             </div>
         </div>
