@@ -37,7 +37,7 @@
                             
                             <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i
                                 class="mdi mdi-filter"></i> Filter</button>
-                            <button type="submit" class="btn btn-sm btn-success float-end me-1" form="CreateOrders">Create Orders</button>
+                            
                             </div>
                             <h4 class="page-title">Products</h4>
                         </div>
@@ -52,6 +52,7 @@
                     
                     <div class="card-header text-end">
                         <strong>Points:</strong> <span class="points">{{ auth()->user()->balance }}</span>
+                        <button type="submit" class="btn btn-sm btn-success me-1" form="CreateOrders">Create Orders</button>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -100,15 +101,26 @@
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end">
+
+                                                        <a href="{{ route('franchise.orders.create', ['product_id' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            Place Order</a> 
                                                  
                                                         <a href="{{ route('franchise.products.show', $product->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View</a>
 
-                                                        <a href="{{ route('franchise.orders.create', ['product_id' => $product->id]) }}"
+                                                        @if($product->franchise_orders(auth()->user()->id)->count() > 0)
+                                                        <a href="{{ route('franchise.orders.index', ['product' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            Place Order</a> 
+                                                            View Orders</a>
+                                                        @endif
 
+                                                        @if($product->franchise_sales(auth()->user()->id)->count() > 0)
+                                                        <a href="{{ route('franchise.sales.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Sales</a>
+                                                        @endif
                                                         
                                                     </div>
                                                 </td>

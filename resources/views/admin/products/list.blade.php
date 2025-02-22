@@ -85,6 +85,19 @@
                                                         <a href="{{ route('admin.products.show', $product->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View</a>
+
+                                                        @if($product->orders->count() > 0)
+                                                        <a href="{{ route('admin.orders.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Orders</a>
+                                                        @endif
+
+                                                        @if($product->sales->count() > 0)
+                                                        <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Sales</a>
+                                                        @endif
+
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $product->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>

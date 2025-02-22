@@ -51,6 +51,26 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'product_id', 'id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'product_id', 'id');
+    }
+
+    public function franchise_orders($franchise_id)
+    {
+        return $this->hasMany(Order::class, 'product_id', 'id')->where('franchise_id', $franchise_id);
+    }
+
+    public function franchise_sales($franchise_id)
+    {
+        return $this->hasMany(Sale::class, 'product_id', 'id')->where('franchise_id', $franchise_id);
+    }
+
     public function franchises()
     {
         return $this->belongsToMany(Franchise::class, 'product_prices');

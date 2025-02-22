@@ -28,10 +28,10 @@
                             </select>
                         </div>
 
-                        <div class="col-sm-3 mb-2">
-                            <a href="{{ route('admin.product-prices.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Product Price</a>
+                        <div class="col-sm-12 mb-2">
+                            <a href="{{ route('admin.product-prices.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Price</a>
                             <a href="{{ route('admin.product-prices.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
-                            <button type="submit" class="btn btn-sm btn-danger float-end me-1 mt-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
+                            <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
                         </div>
                        
                     </div>
