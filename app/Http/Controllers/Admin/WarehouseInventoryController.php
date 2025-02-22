@@ -64,7 +64,7 @@ class WarehouseInventoryController extends Controller
             'quantity' => 'required|integer|min:1',
             'date_inward' => 'required|date',
             'date_outward' => 'nullable|date|after_or_equal:date_inward',
-        ]);
+        ]);              
 
         $item = WarehouseInventory::create($request->all());
 
