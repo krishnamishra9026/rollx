@@ -82,7 +82,14 @@
             <li class="side-nav-item {{ request()->is('admin/sale/reports') || request()->is('admin/sale/reports/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.sale.reports.index') }}" class="side-nav-link">
                     <i class="uil-money-bill"></i>
-                    <span> Sales Report </span>
+                    <span> Franchise Sale Report </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item {{ request()->is('admin/product/sale/reports') || request()->is('admin/product/sale/reports/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.product.sale.reports.index') }}" class="side-nav-link">
+                    <i class="uil-money-bill"></i>
+                    <span> Product Sale Report </span>
                 </a>
             </li>
 

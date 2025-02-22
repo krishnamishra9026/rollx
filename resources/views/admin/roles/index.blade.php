@@ -9,18 +9,18 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <div class="page-title-right">
+                    <div class="page-title">
+                        
+                        <h4 class="page-title">
+                            Roles
+                        </h4>
+
                         @can("Create Role")
-                        <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add Role</a>
-                                @endcan
-                        <a href="javascript:void(0)" class="btn btn-sm btn-danger float-end me-1" style="display: none"
-                            id="delete-all">
-                            <i class="mdi mdi-delete"></i> {{ __('Delete') }}</a>
+                        <a href="{{ route('admin.roles.create') }}" style="margin-top: -60px;" class="btn btn-sm btn-dark mb-2 float-end"><i
+                            class="mdi mdi-plus"></i> Add Role</a>
+                            @endcan
                     </div>
-                    <h4 class="page-title">
-                        Roles
-                    </h4>
+                    
                 </div>
             </div>
         </div>
@@ -123,17 +123,11 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !1
-                }, {
                     orderable: !0
                 }, {
                     orderable: !0
                 }, {
                     orderable: !0
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !1
                 }, {
                     orderable: !1
                 }, ]

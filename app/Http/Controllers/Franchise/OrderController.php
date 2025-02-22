@@ -60,7 +60,7 @@ class OrderController extends Controller
      */
 
     public function save(Request $request)
-    {              
+    {                            
         foreach ($request->data as $key => $value) {                  
 
             if ($value['quantity'] <= 0) {

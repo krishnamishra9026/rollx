@@ -140,7 +140,7 @@ class SaleController extends Controller
             'franchise_id' => $order->franchise_id,
             'chef_id' => auth()->user()->id,
             'price' => $request->quantity * $order->product_price,
-            'status' => 'Sold'
+            'status' => $request->status ?? 'Sold'
         ]);
 
         //Sale created notification

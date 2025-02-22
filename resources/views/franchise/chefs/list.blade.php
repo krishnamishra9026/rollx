@@ -40,7 +40,7 @@
                                             <th>Chef</th>                                            
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th></th>
+                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -169,10 +169,6 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !1
-                }, {
-                    orderable: !0
-                }, {
                     orderable: !0
                 }, {
                     orderable: !0

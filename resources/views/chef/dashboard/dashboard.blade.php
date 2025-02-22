@@ -46,36 +46,88 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h4 class="page-title">Click on bellow buttons to record sale</h4>
+                        <h4 class="page-title">Click on bellow buttons to record Sold Items</h4>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
-
+                            @if ($orders && count($orders))
                             @foreach ($orders as $order)
                                 @if ((strpos($order->product->name, "Momo") !== false) || (strpos($order->product->name, ",momo") !== false))
                                     <div class="col-sm-3 mt-2 d-flex">
-                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate]) }}" 
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate, 'status' => 'Sold']) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
-                                            Full Plate {{ $order->product->name }}
+                                            Full Plate ( {{ $quantity_per_plate}} Quantity) {{ $order->product->name }}
                                         </a>
                                     </div>
 
                                     <div class="col-sm-3 mt-2 d-flex">
-                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate/2]) }}" 
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate/2, 'status' => 'Sold']) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'danger' }} w-100 d-flex align-items-center justify-content-center">
-                                            Half Plate {{ $order->product->name }}
+                                            Half Plate ({{ $quantity_per_plate/2}} Quantity) {{ $order->product->name }}
                                         </a>
                                     </div>
                                 @else
                                     <div class="col-sm-3 mt-2 d-flex">
-                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1]) }}" 
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Sold']) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
-                                            Full Plate {{ $order->product->name }}
+                                            Full Plate (1 Quantity) {{ $order->product->name }}
                                         </a>
                                     </div>
                                 @endif
                             @endforeach
+                            @else
+                            <p>No item avilable to sell...</p>
+                            @endif
+
+                     
+                        </div>
+                    </div>
+                </div>
+
+    </div>
+
+
+
+     <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <h4 class="page-title">Click on bellow buttons to record Wastage Items</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            @if ($orders && count($orders))
+                            @foreach ($orders as $order)
+                                @if ((strpos($order->product->name, "Momo") !== false) || (strpos($order->product->name, ",momo") !== false))
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate, 'status' => 'Wastage']) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
+                                            Full Plate ( {{ $quantity_per_plate}} Quantity) {{ $order->product->name }}
+                                        </a>
+                                    </div>
+
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $quantity_per_plate/2, 'status' => 'Wastage']) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'danger' }} w-100 d-flex align-items-center justify-content-center">
+                                            Half Plate ({{ $quantity_per_plate/2}} Quantity) {{ $order->product->name }}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="col-sm-3 mt-2 d-flex">
+                                        <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Wastage']) }}" 
+                                           class="btn btn-{{ $order->product->sold_color ?? 'success' }} w-100 d-flex align-items-center justify-content-center">
+                                            Full Plate (1 Quantity) {{ $order->product->name }}
+                                        </a>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                            @else
+                            <p>No item avilable to sell...</p>
+                            @endif
 
                      
                         </div>

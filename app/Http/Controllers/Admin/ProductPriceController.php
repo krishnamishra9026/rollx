@@ -23,8 +23,8 @@ class ProductPriceController extends Controller
         $filter['franchise']     = $request->franchise;
 
         $product_prices              = ProductPrice::query();
-        $product_prices              = isset($filter['product']) ? $product_prices->where('product', $filter['product'] ) : $product_prices;
-        $product_prices              = isset($filter['franchise']) ? $product_prices->where('franchise', $filter['franchise'] ) : $product_prices;
+        $product_prices              = isset($filter['product']) ? $product_prices->where('product_id', $filter['product'] ) : $product_prices;
+        $product_prices              = isset($filter['franchise']) ? $product_prices->where('franchise_id', $filter['franchise'] ) : $product_prices;
 
         $product_prices              = $product_prices->orderBy('id', 'desc')->paginate(20);
 

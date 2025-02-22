@@ -43,7 +43,7 @@
                                     <tbody>
                                         @foreach ($orders as $order)
                                             <tr>
-                                                <td>#{{ $order->id }}</td>
+                                                <td>{{ $order->id }}</td>
                                                 <td><a href="{{ route('franchise.products.show', $order->product->id)  }}">{{ $order->product_name }}</a></td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->stock }}</td>
@@ -135,8 +135,6 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
-                }, {
-                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

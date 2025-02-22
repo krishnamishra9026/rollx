@@ -1,4 +1,4 @@
-@extends('layouts.franchise')
+@extends('layouts.admin')
 @section('title', 'Sales')
 @section('head')
     <link href="{{ asset('assets/css/vendor/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -15,46 +15,9 @@
                 </div>
             </div>
         </div>
-        @include('franchise.includes.flash-message')
-        
+        @include('admin.includes.flash-message')
 
-        <div class="row">       
-            <div class="col-xl-4 col-lg-4">
-                <div class="card tilebox-one">
-                    <div class="card-body text-center">                    
-                        <h5 class="mt-0">Total Qty.</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_quatity }}</h2>
-                        <h5 class="mt-0">Total Sale</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_sales }}</h2>
-                    </div>
-                </div>          
-            </div>
-      
-            <div class="col-xl-4 col-lg-4">
-                <div class="card tilebox-one">
-                    <div class="card-body text-center">                    
-                        <h5 class="mt-0">Total Sold Qty.</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_sold_quatity }}</h2>
-                        <h5 class="mt-0">Total Sold Sale</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_sold_sales }}</h2>
-                    </div>
-                </div>          
-            </div>
-       
-            <div class="col-xl-4 col-lg-4">
-                <div class="card tilebox-one">
-                    <div class="card-body text-center">                    
-                        <h5 class="mt-0">Total Wastage Qty.</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_wastage_quatity }}</h2>
-                        <h5 class="mt-0">Total Wastage Sale</h5>
-                        <h2 class="my-2" id="active-users-count">{{ @$total_wastage_sales }}</h2>
-                    </div>
-                </div>          
-            </div>
-   
-        </div>
-
-        @include('franchise.orders.sales.reports.filter')
+        @include('admin.products.reports.filter')
 
         <div class="row">
             <div class="col-12">
@@ -67,28 +30,33 @@
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold">Quantity</th>
-                                            <th class="fw-bold">Amount</th>
-                                            <th class="fw-bold">Order Date</th>
-                                            <th class="fw-bold">Status</th>
+                                            <th>Product Id</th>
+                                            <th>Product Name</th>
+                                            <th>Total Orders</th>
+                                            <th>Total Sales</th>
+                                            <th>Total Quantity Ordered</th>
+                                            <th>Total Quantity Sold</th>
+                                            <th>Total Quantity Wastage</th>
+                                            <th>Total Quantity Remaining</th>
+                                            <th>Total Revenue</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($sales as $sale)
-                                            <tr>
-                                                <td><a href="{{ route('franchise.products.show', $sale->product->id)  }}">{{ @$sale->product->name }}</a></td>
-                                                <td>{{ $sale->quantity }}</td>
-                                                <td>{{ $sale->price }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-success">{{ ucfirst($sale->status) }}</button>
-                                                  
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        @foreach ($sales as $report)
+                                        <tr>
+                                            <td>{{ $report->id }}</td>
+                                           <td> <a href="{{ route('admin.products.show', $report->id) }}" title=""> {{ $report->name }} </a></td>
+                                           <td>{{ $report->total_orders }}</td>
+                                           <td>{{ $report->total_sales }}</td>
+                                           <td>{{ $report->total_quantity_ordered }}</td>
+                                           <td>{{ $report->total_quantity_sold }}</td>
+                                           <td>{{ $report->total_wastage_quantity }}</td>
+                                           <td>{{ $report->total_quantity_ordered - ($report->total_quantity_sold + $report->total_wastage_quantity) }}</td>
+                                           <td>${{ number_format($report->total_revenue, 2) }}</td>
+                                       </tr>
+                                       @endforeach
+                                   </tbody>
+                               </table>
                                 {{ $sales->appends(request()->query())->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
@@ -136,6 +104,14 @@
                     orderable: !0
                 }, {
                     orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !1
                 }, ]
             })
         });

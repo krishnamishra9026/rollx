@@ -34,11 +34,11 @@
                                     style="font-size: 14px;">
                                     <thead class="bg-dark">
                                         <tr>
-                                            <td>Id</td>
+                                            <th>Id</th>
                                             <th>Contact Person</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th></th>
+                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +75,18 @@
                                                             onclick="confirmDelete({{ $franchise->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
                                                             Delete</a>
+
+                                                            @if($franchise->orders->count() > 0)
+                                                            <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}"
+                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                                View Orders</a>
+                                                            @endif
+
+                                                            @if($franchise->sales->count() > 0)
+                                                            <a href="{{ route('admin.sales.index', ['franchise' => $franchise->id]) }}"
+                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                                View Sales</a>
+                                                            @endif
 
                                                              <form id='delete-form{{ $franchise->id }}'
                                                             action='{{ route('admin.franchises.destroy', $franchise->id) }}'
@@ -171,12 +183,7 @@
                     orderable: !0
                 }, {
                     orderable: !0
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
+               
                 }, {
                     orderable: !1
                 }, ]

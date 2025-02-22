@@ -48,10 +48,11 @@
                                             <th>Outlet Name</th>
                                             <th title="Double Click on quantity to edit quantity of a particular product after enter quantity click outside to save Quantity!"> <i class="mdi mdi-map-marker-outline" style="color: red;"></i> Qty</th>
                                             <th>Price</th>
+                                            <th>Orders</th>
+                                            <th>Sales</th>
                                             <th>Model Number</th>
-                                            <th>Serial Number</th>
                                             <th>Date Added</th>
-                                            <th></th>
+                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,8 +70,9 @@
 
 
                                                 <td>{{ $product->price }}</td>
+                                                <td>{{ $product->orders->count() }}</td>
+                                                <td>{{ $product->sales->count() }}</td>
                                                 <td>{{ $product->model_number }}</td>
-                                                <td>{{ $product->serial_number }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
@@ -96,6 +98,12 @@
                                                         <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View Sales</a>
+                                                        @endif
+
+                                                        @if($product->productPrices->count() > 0)
+                                                        <a href="{{ route('admin.product-prices.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Prices</a>
                                                         @endif
 
                                                         <a href="javascript:void(0);"
@@ -211,6 +219,10 @@
                 }, {
                     orderable: !0
                 }, {
+                    orderable: !0
+                },  {
+                    orderable: !0
+                 }, {
                     orderable: !0
                 },  {
                     orderable: !0

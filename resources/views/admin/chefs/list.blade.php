@@ -38,7 +38,7 @@
                                             <th>Franchise</th>                                            
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th></th>
+                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,6 +86,13 @@
                                                             onclick="confirmDelete({{ $chef->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
                                                             Delete Chef</a>
+
+                                                        @if($chef->sales->count() > 0)
+                                                            <a href="{{ route('admin.sales.index', ['chef' => $chef->id]) }}"
+                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                                View Sales</a>
+                                                        @endif
+
                                                         <form id='delete-form{{ $chef->id }}'
                                                             action='{{ route('admin.chefs.destroy', $chef->id) }}'
                                                             method='POST'>
@@ -154,7 +161,7 @@
 
 
     <!-- Datatable Init js -->
-    <script>
+          <script>
         $(function() {
             $("#basic-datatable").DataTable({
                 paging: !1,
@@ -174,8 +181,6 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !1
-                }, {
                     orderable: !0
                 }, {
                     orderable: !0
@@ -191,6 +196,7 @@
             })
         });
     </script>
+
 
     <script type="text/javascript">
         $("#all-rows").change(function() {

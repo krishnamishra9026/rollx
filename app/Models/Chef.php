@@ -82,5 +82,10 @@ class Chef extends Authenticatable
     {
         return $this->hasOne(PurchaseOrder::class, 'supplier_id', 'id');
     }
+    
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 
 }

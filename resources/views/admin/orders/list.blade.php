@@ -52,7 +52,7 @@ session()->put('route', $route);
                                     <tbody>
                                         @foreach ($orders as $order)
                                             <tr>
-                                                <td>#{{ $order->id }}</td>
+                                                <td>{{ $order->id }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->stock }}</td>
@@ -192,6 +192,8 @@ session()->put('route', $route);
                 }],
                 columns: [{
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
