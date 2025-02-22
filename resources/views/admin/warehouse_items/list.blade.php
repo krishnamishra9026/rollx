@@ -21,7 +21,7 @@
                     <div class="page-title-right">
 
                         @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
-                        <a href="{{ route('admin.warehouse-items.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Add  Item</a>
+                        <a href="{{ route('admin.warehouse-items.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Item</a>
                         @endif
                        <!--  <a href="{{ route('admin.warehouse-items.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
                         <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button> -->
@@ -33,6 +33,7 @@
         </div>
 
         @include('admin.includes.flash-message')
+        <p id="message"></p>
         @include('admin.warehouse_items.filter')
         <div class="row py-3">
             <div class="col-12">
@@ -67,7 +68,12 @@
                                                 <td>{{ $item->inventory()->count() }}</td>
                                                
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
-                                                <td><a class="btn btn-success" href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}">View Inventory</a></td>
+
+                                                <td>
+                                                    <a class="btn btn-primary" data-item_id="{{ $item->id }}" id="add-inventory">Add Inventory</a>
+                                                    <a class="btn btn-success" href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}">View Inventory</a>
+                                                </td>
+
                                                 @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
                                                 <td class="text-end">
                                                     
@@ -108,6 +114,53 @@
             </div>
         </div>
     </div>
+
+        <!-- Inventory Modal -->
+        <div class="modal fade" id="inventoryModal" tabindex="-1" aria-labelledby="inventoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="inventoryModalLabel">Add Warehouse Inventory</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="inventoryForm">
+                            <div class="mb-1">
+                                <input type="hidden" name="warehouse_item_id" id="warehouse_item_id">
+                                <label for="name" class="form-label">Unit</label>
+                                <select id="unit" class="form-select @error('unit') is-invalid @enderror" name="unit" required>
+                                    <option value="">Select Unit</option>
+                                    <option value="Kg" {{ old('unit') == 'Kg' ? 'selected' : '' }}>Kg</option>
+                                    <option value="Packet" {{ old('unit') == 'Packet' ? 'selected' : '' }}>Packet</option>
+                                    <option value="Litre" {{ old('unit') == 'Litre' ? 'selected' : '' }}>Litre</option>
+                                    <option value="Piece" {{ old('unit') == 'Piece' ? 'selected' : '' }}>Piece</option>
+                                    <option value="Box" {{ old('unit') == 'Box' ? 'selected' : '' }}>Box</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-1">
+                                <label for="quantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="number" step="0.01" class="form-control" id="cost" name="cost" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="date_inward" class="form-label">Date Inward</label>
+                                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" id="date_inward" name="date_inward" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="date_outward" class="form-label">Date Outward</label>
+                                <input type="date" class="form-control" min="{{ date('Y-m-d') }}" id="date_outward" name="date_outward">
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 @endsection
 @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -117,7 +170,15 @@
     <script src="{{ asset('assets/js/vendor/responsive.bootstrap4.min.js') }}"></script>
 
 
+
 <script type="text/javascript">
+
+    $(document).on('click', '#add-inventory',  function() {
+        var item_id = $(this).data('item_id');
+        $("#warehouse_item_id").val(item_id);
+        $('#inventoryModal').modal('show');
+    });
+
     
     $(document).ready(function() {
 
@@ -128,6 +189,41 @@
         $span.hide(); // Hide the span
         $input.show().focus(); // Show the input and focus on it
     });
+
+        $(document).ready(function() {
+            $('#inventoryForm').submit(function(e) {
+                e.preventDefault();
+                
+                let formData = {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    warehouse_item_id: $('#warehouse_item_id').val(),
+                    unit: $('#unit').val(),
+                    quantity: $('#quantity').val(),
+                    cost: $('#cost').val(),
+                    date_inward: $('#date_inward').val(),
+                    date_outward: $('#date_outward').val()
+                };
+
+                $.ajax({
+                    url: "{{ route('admin.warehouse-inventory.add') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        $('#message').text(response.message).addClass('text-success');
+                        alert(response.message);
+                        $('#inventoryForm')[0].reset();
+                        $('#inventoryModal').modal('hide');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
+                    },
+                    error: function(xhr) {
+                        let errors = xhr.responseJSON.errors;
+                        alert("Error: " + Object.values(errors).join(", "));
+                    }
+                });
+            });
+        });
 
     $(".edit-quantity").on("blur", function() {
         let $input = $(this);

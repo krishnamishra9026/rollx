@@ -10,6 +10,11 @@
                         </div>
 
                         <div class="col-sm-12 mb-2">
+
+                            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+                            <a href="{{ route('admin.warehouse-items.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Item</a>
+                            @endif
+
                             <a href="{{ route('admin.warehouse-items.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
                             <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
                         </div>

@@ -129,6 +129,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::delete('warehouse-items/{id}/delete-document', [WarehouseItemController::class, 'deleteDocument'])->name('warehouse-items.delete-document');
     Route::post('warehouse-items/update-quantity', [WarehouseItemController::class, 'updateQuantity'])->name('warehouse-items.update.quantity');
 
+    Route::post('warehouse-inventory/add', [WarehouseInventoryController::class, 'add'])->name('warehouse-inventory.add');
+
     Route::resource('warehouse-inventory', WarehouseInventoryController::class);
     Route::delete('warehouse-inventory/{id}/delete-image', [WarehouseInventoryController::class, 'deleteImage'])->name('warehouse-inventory.delete-image');
     Route::delete('warehouse-inventory/{id}/delete-document', [WarehouseInventoryController::class, 'deleteDocument'])->name('warehouse-inventory.delete-document');

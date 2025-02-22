@@ -55,10 +55,29 @@ class WarehouseInventoryController extends Controller
         return redirect()->route('admin.warehouse-inventory.index', ['item_id' => $request->warehouse_item_id])->with('success', 'Inventory record added successfully.');
     }
 
+    public function add(Request $request)
+    {              
+        $request->validate([
+            'warehouse_item_id' => 'required|exists:warehouse_items,id',
+            'cost' => 'required|numeric|min:0',
+            'unit' => 'required|string',
+            'quantity' => 'required|integer|min:1',
+            'date_inward' => 'required|date',
+            'date_outward' => 'nullable|date|after_or_equal:date_inward',
+        ]);
+
+        $item = WarehouseInventory::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Inventory record added successfully!',
+            'data' => $item
+        ]);
+
+    }
+
     public function edit(WarehouseInventory $warehouseInventory)
-    {
-              // echo '<pre>'; print_r($warehouseInventory); echo '</pre>'; exit();
-              
+    {              
         $items = WarehouseItem::all();
         return view('admin.warehouse_inventory.edit', compact('warehouseInventory', 'items'));
     }
