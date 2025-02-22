@@ -79,18 +79,23 @@
             </li>
 
 
-            <li class="side-nav-item {{ request()->is('admin/sale/reports') || request()->is('admin/sale/reports/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('admin.sale.reports.index') }}" class="side-nav-link">
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#reportMenu" aria-expanded="false" aria-controls="reportMenu"
+                    class="side-nav-link">
                     <i class="uil-money-bill"></i>
-                    <span> Franchise Sale Report </span>
+                    <span> Reports </span>
+                    <span class="menu-arrow"></span>
                 </a>
-            </li>
-
-            <li class="side-nav-item {{ request()->is('admin/product/sale/reports') || request()->is('admin/product/sale/reports/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('admin.product.sale.reports.index') }}" class="side-nav-link">
-                    <i class="uil-money-bill"></i>
-                    <span> Product Sale Report </span>
-                </a>
+                <div class="collapse" id="reportMenu">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('admin.product.sale.reports.index') }}">Product Sale</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.sale.reports.index') }}">Franchise Sale</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
             @endif
