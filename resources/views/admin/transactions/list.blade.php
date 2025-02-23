@@ -30,11 +30,10 @@
                                             <th>Id</th>
                                             <th>Franchise Name</th>
                                             <th>Amount</th>
-                                            <th>Remaining Balance</th>
+                                            <th>Description</th>
                                             <th>Wallet Balance</th>
                                             <th>Transaction Type</th>
                                             <th>Date Added</th>
-                                            <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,46 +59,21 @@
                                                 <td><a href="{{ route('admin.franchises.show', $transaction->wallet->owner->id) }}"
                                                     class="text-body fw-semibold">{{ $transaction->wallet->owner->firstname }} {{ $transaction->wallet->owner->lastname }}</a>
                                                 </td>
-                                               <td>
-                                                        {{ $transaction->amount }}
+                                                <td>
+                                                    {{ $transaction->amount }}
                                                 </td>
 
                                                 <td>
-                                                        
-                                                    {{ $balances[$ownerId] }}
+                                                    {{ $transaction->meta['description'] ?? 'Added Balance to Wallet' }}
                                                 </td>
+
+                        
 
                                                 <td>{{ $transaction->wallet->balance }}</td>
 
                                                 <td>{{ ucfirst($transaction->type) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
-                                                <td class="text-end" style="display: none;">
-                                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-vertical"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a href="{{ route('admin.transactions.edit', $transaction->id) }}"
-                                                            class="dropdown-item"><i class="fa fa-edit me-1"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a href="{{ route('admin.transactions.show', $transaction->id) }}"
-                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            View</a>
-                                                        <a href="javascript:void(0);"
-                                                            onclick="confirmDelete({{ $transaction->id }})"
-                                                            class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
-                                                            Delete
-                                                        </a>
-                                                        <form id='delete-form{{ $transaction->id }}'
-                                                            action='{{ route('admin.transactions.destroy', $transaction->id) }}'
-                                                            method='POST'>
-                                                            <input type='hidden' name='_token'
-                                                                value='{{ csrf_token() }}'>
-                                                            <input type='hidden' name='_method' value='DELETE'>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                              
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -154,8 +128,6 @@
                 }, {
                     orderable: !0
                 },  {
-                    orderable: !0
-                }, {
                     orderable: !1
                 }, ]
             })

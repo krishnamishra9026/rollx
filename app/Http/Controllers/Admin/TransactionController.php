@@ -35,7 +35,10 @@ class TransactionController extends Controller
             $query->where('firstname', 'LIKE', "%{$searchName}%")
             ->orWhere('lastname', 'LIKE', "%{$searchName}%")
             ->orWhere(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', "%{$searchName}%");
-        })->with(['wallet', 'wallet.owner'])->paginate(20);
+        })->with(['wallet', 'wallet.owner'])->latest()->paginate(60);
+
+              // echo '<pre>'; print_r($transactions->toArray()); echo '</pre>'; exit();
+              
 
         $franchises = Franchise::all();
 
