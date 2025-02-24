@@ -48,10 +48,10 @@
                                            <td> <a href="{{ route('admin.products.show', $report->id) }}" title=""> {{ $report->name }} </a></td>
                                            <td>{{ $report->total_orders }}</td>
                                            <td>{{ $report->total_sales }}</td>
-                                           <td>{{ $report->total_quantity_ordered }}</td>
-                                           <td>{{ $report->total_quantity_sold }}</td>
-                                           <td>{{ $report->total_wastage_quantity }}</td>
-                                           <td>{{ $report->total_quantity_ordered - ($report->total_quantity_sold + $report->total_wastage_quantity) }}</td>
+                                           <td>{{ $report->total_quantity_ordered ?? 0 }}</td>
+                                           <td>{{ $report->total_quantity_sold ?? 0 }}</td>
+                                           <td>{{ $report->total_wastage_quantity ?? 0 }}</td>
+                                           <td>{{ $report->total_quantity_ordered - ($report->total_quantity_sold + $report->total_wastage_quantity ?? 0) }}</td>
                                            <td>${{ number_format($report->total_revenue, 2) }}</td>
                                        </tr>
                                        @endforeach
