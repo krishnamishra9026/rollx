@@ -70,56 +70,6 @@ session()->put('route', $route);
                                                 <td>
                                                     {{ ucfirst($order->status) }}
                                                 </td>
-                                                {{-- <td>
-                                                    <button type="button" class="btn btn-sm btn-success"
-                                                        id="changeStatus{{ $order->id }}"
-                                                        onclick="showHide({{ $order->id }})">{{ ucfirst($order->status) }}</button>
-                                                    <select class="form-select form-select-sm custom-select"
-                                                        id="changeSelect{{ $order->id }}"
-                                                        onchange="changeStatus({{ $order->id }}, this.value)"
-                                                        style="display: none">
-                                                        @if ($order->status != 'pending')
-                                                            <option value="pending"
-                                                                {{ $order->status == 'pending' ? 'selected' : '' }}>Pending
-                                                            </option>
-                                                        @endif
-                                                        @if ($order->status != 'processed')
-                                                            <option value="processed"
-                                                                {{ $order->status == 'processed' ? 'selected' : '' }}>
-                                                                Processed</option>
-                                                        @endif
-                                                        @if ($order->status != 'cancelled')
-                                                            <option value="cancelled"
-                                                                {{ $order->status == 'cancelled' ? 'selected' : '' }}>
-                                                                Cancelled</option>
-                                                        @endif
-                                                        @if ($order->status != '25% Assembled')
-                                                            <option value="25% Assembled"
-                                                                {{ $order->status == '25% Assembled' ? 'selected' : '' }}>
-                                                                25% Assembled</option>
-                                                        @endif
-                                                        @if ($order->status != '50% Assembled')
-                                                            <option value="50% Assembled"
-                                                                {{ $order->status == '50% Assembled' ? 'selected' : '' }}>
-                                                                50% Assembled</option>
-                                                        @endif
-                                                        @if ($order->status != '100% Assembled')
-                                                            <option value="100% Assembled"
-                                                                {{ $order->status == '100% Assembled' ? 'selected' : '' }}>
-                                                                100% Assembled</option>
-                                                        @endif
-                                                        @if ($order->status != 'shipped')
-                                                            <option value="shipped"
-                                                                {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped
-                                                            </option>
-                                                        @endif
-                                                        @if ($order->status != 'completed')
-                                                            <option value="completed"
-                                                                {{ $order->status == 'completed' ? 'selected' : '' }}>
-                                                                Completed</option>
-                                                        @endif
-                                                    </select>
-                                                </td> --}}
                                                 <td>
                                                     <a href="#"
                                                         class="border bg-white dropdown-toggle arrow-none card-drop"
@@ -133,6 +83,12 @@ session()->put('route', $route);
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View</a>
                                                         @endcan
+
+                                                        @if($order->sales->count() > 0)
+                                                        <a href="{{ route('admin.order.sales.index', ['order' => $order->id] ) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Sales</a>
+                                                        @endif
 
                                                         @can('Delete Order')
                                                         <a href="javascript:void(0);"
