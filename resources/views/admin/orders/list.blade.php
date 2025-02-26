@@ -40,8 +40,10 @@ session()->put('route', $route);
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Order Id</th>
-                                            <th class="fw-bold">Date</th>
+                                            <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Sub Total</th>
+                                            <th class="fw-bold">Total</th>
                                             <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Franchise</th>
                                             <th class="fw-bold">Product Name</th>
@@ -53,8 +55,10 @@ session()->put('route', $route);
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->id }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>{{ $order->quantity }}</td>
+                                                <td>{{ $order->sub_total }}</td>
+                                                <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.franchises.show', $order->franchise_id) }}"
@@ -148,6 +152,10 @@ session()->put('route', $route);
                 }],
                 columns: [{
                     orderable: !0,
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

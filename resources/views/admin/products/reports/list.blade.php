@@ -30,15 +30,15 @@
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th>Product Id</th>
+                                            <th>Prod Id</th>
                                             <th>Product Name</th>
-                                            <th>Total Orders</th>
-                                            <th>Total Sales</th>
-                                            <th>Total Quantity Ordered</th>
-                                            <th>Total Quantity Sold</th>
-                                            <th>Total Quantity Wastage</th>
-                                            <th>Total Quantity Remaining</th>
-                                            <th>Total Revenue</th>
+                                            <th>Orders</th>
+                                            <th>Sales</th>
+                                            <th>Qty. Ordered</th>
+                                            <th>Qty. Sold</th>
+                                            <th>Qty. Wastage</th>
+                                            <th>Qty. Left</th>
+                                            <th>Revenue</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,8 +46,8 @@
                                         <tr>
                                             <td>{{ $report->id }}</td>
                                            <td> <a href="{{ route('admin.products.show', $report->id) }}" title=""> {{ $report->name }} </a></td>
-                                           <td>{{ $report->total_orders }}</td>
-                                           <td>{{ $report->total_sales }}</td>
+                                           <td> <a href="{{ route('admin.orders.index', ['product' => $report->id]) }}"> {{ $report->total_orders }} </a></td>
+                                           <td> <a href="{{ route('admin.sales.index', ['product' => $report->id]) }}"> {{ $report->total_sales }} </a></td>
                                            <td>{{ $report->total_quantity_ordered ?? 0 }}</td>
                                            <td>{{ $report->total_quantity_sold ?? 0 }}</td>
                                            <td>{{ $report->total_wastage_quantity ?? 0 }}</td>

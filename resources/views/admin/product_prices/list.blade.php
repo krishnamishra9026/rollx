@@ -46,6 +46,7 @@
                                             <th>Id</th>
                                             <th>Product Name</th>
                                             <th>Franchise Name</th>
+                                            <th>Product Price</th>
                                             <th title="Double Click on quantity to edit quantity of a particular product after enter quantity click outside to save Quantity!"> <i class="mdi mdi-map-marker-outline" style="color: red;"></i> Price</th>
                                             <th>Date Added</th>
                                             <th class="text-end">Action</th>
@@ -62,7 +63,7 @@
                                                 <td><a href="{{ route('admin.franchises.show', $product_price->franchise_id) }}"
                                                     class="text-body fw-semibold">{{ $product_price->franchise->firstname }} {{ $product_price->franchise->lastname }}</a>
                                                 </td>
-
+                                                <td>{{ $product_price->product->price }}</td>
                                                <td>
                                                     <span class="quantity-text" style="cursor: pointer;" data-id="{{ $product_price->id }}">{{ $product_price->price }}</span>
                                                     <input type="number" class="edit-quantity" data-id="{{ $product_price->id }}" value="{{ $product_price->price }}" style="display: none; width: 40%">
@@ -183,6 +184,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

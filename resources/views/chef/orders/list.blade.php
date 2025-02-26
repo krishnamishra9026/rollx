@@ -34,8 +34,10 @@
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Sub Total</th>
+                                            <th class="fw-bold">Total</th>
                                             <th class="fw-bold">Stock</th>
-                                            <th class="fw-bold">Order Date</th>
+                                            <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Status</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
@@ -46,8 +48,10 @@
                                                 <td>{{ $order->id }}</td>
                                                 <td> {{ $order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
+                                                <td>{{ $order->sub_total }}</td>
+                                                <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"
                                                         id="changeStatus{{ $order->id }}"
@@ -133,6 +137,10 @@
                 }],
                 columns: [{
                     orderable: !0,
+                }, {
+                    orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0,
                 }, {
