@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\WarehouseItemController;
 use App\Http\Controllers\Admin\WarehouseInventoryController;
 use App\Http\Controllers\Admin\ProductSaleReportController;
+use App\Http\Controllers\Admin\FranchiseSaleReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\SaleController;
@@ -105,6 +106,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
             Route::resource('reports', ProductSaleReportController::class);
+        });
+    });
+
+    Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
+        Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+            Route::resource('reports', FranchiseSaleReportController::class);
         });
     });
     

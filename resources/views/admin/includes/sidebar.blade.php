@@ -92,7 +92,10 @@
                             <a href="{{ route('admin.product.sale.reports.index') }}">Product Sale</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.sale.reports.index') }}">Franchise Sale</a>
+                            <a href="{{ route('admin.franchise.sale.reports.index') }}">Franchise Sale</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.sale.reports.index') }}">Sales</a>
                         </li>
                     </ul>
                 </div>
