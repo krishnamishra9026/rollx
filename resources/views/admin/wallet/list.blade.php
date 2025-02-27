@@ -38,7 +38,8 @@
                                         @foreach ($franchises as $franchise)
                                             <tr>
                                                 <td>{{ $franchise->id }}</td>
-                                                <td>{{ $franchise->firstname }} {{ $franchise->lastname }}</td>
+                                                <td> <a href="{{ route('admin.franchises.show', $transaction->wallet->owner->id) }}"
+                                                    class="text-body fw-semibold"> {{ $franchise->firstname }} {{ $franchise->lastname }} </a></td>
                                                 <td>{{ $franchise->wallet->balance ?? 0 }}</td>
                                                 <td>
 
