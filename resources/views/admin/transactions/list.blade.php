@@ -31,8 +31,8 @@
                                             <th>Franchise Name</th>
                                             <th>Amount</th>
                                             <th>Description</th>
-                                            <th>Wallet Balance</th>
-                                            <th>Transaction Type</th>
+                                            <th>Balance</th>
+                                            <th>Type</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
