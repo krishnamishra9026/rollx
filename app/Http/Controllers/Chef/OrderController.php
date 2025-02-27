@@ -88,7 +88,13 @@ class OrderController extends Controller
 
         $order = Order::create($input);
 
-        $user->wallet->withdraw($total, ['description' => 'Purchase of Product Id #'.$product->id.' Order Id #'.$order->id]);
+        $product_url = route('admin.products.show', $order->product_id);
+        $order_url = route('admin.orders.show', $order->id);
+
+        $user->wallet->deposit($total, [
+            'description' => 'Purchase of <a href="'.$product_url.'">Product Id #'.$order->product_id.'</a> 
+            Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+        ]);
 
         return redirect()->route('chef.orders.index')->with('success', 'Order added successfully');
     }
