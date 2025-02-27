@@ -17,7 +17,7 @@
         </div>
         @include('admin.includes.flash-message')
 
-        @include('admin.products.reports.filter')
+        @include('admin.franchises.reports.filter')
 
         <div class="row">
             <div class="col-12">

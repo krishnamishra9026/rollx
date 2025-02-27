@@ -43,17 +43,17 @@ class FranchiseSaleReportController extends Controller
                 $query->where('status', 'wastage');
             }], 'quantity');
 
-        if (request()->has('product')) {
-            $query->where('id', request('product'));
+        if (request()->has('franchise')) {
+            $query->where('id', request('franchise'));
         }
 
 
         // Paginate results
         $sales = $query->latest()->paginate(20);
 
+        $franchises = Franchise::all();
 
-
-        return view('admin.franchises.reports.list', compact('sales'));
+        return view('admin.franchises.reports.list', compact('sales', 'franchises'));
     }
 
     /**
