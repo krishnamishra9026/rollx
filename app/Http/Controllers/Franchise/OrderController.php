@@ -100,7 +100,7 @@ class OrderController extends Controller
             $order_url = route('admin.orders.show', $order->id);
 
             $user->wallet->deposit($total, [
-                'description' => 'Purchase of <a href="'.$product_url.'">Product Id #'.$order->product_id.'</a> 
+                'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
                 Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
             ]);
         }
@@ -149,7 +149,7 @@ class OrderController extends Controller
         $order_url = route('admin.orders.show', $order->id);
 
         $user->wallet->deposit($total, [
-            'description' => 'Purchase of <a href="'.$product_url.'">Product Id #'.$order->product_id.'</a> 
+            'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
             Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
         ]);
 

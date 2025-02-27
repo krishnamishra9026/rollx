@@ -442,7 +442,7 @@ class OrderController extends Controller
             $order_url = route('admin.orders.show', $order->id);
 
             $user->wallet->deposit($order->total, [
-                'description' => 'Return for Purchase of <a href="'.$product_url.'">Product Id #'.$order->product_id.'</a> 
+                'description' => 'Return for Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
                 Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
             ]);
 
