@@ -45,7 +45,7 @@
                                         @foreach ($sales as $report)
                                         <tr>
                                             <td>{{ $report->id }}</td>
-                                           <td> <a href="{{ route('admin.franchises.show', $report->id) }}" title=""> {{ $report->first_name }} {{ $report->last_name }} </a></td>
+                                           <td> <a href="{{ route('admin.franchises.show', $report->id) }}" title=""> {{ $report->firstname }} {{ $report->lastname }} </a></td>
                                            <td> <a href="{{ route('admin.orders.index', ['product' => $report->id]) }}"> {{ $report->total_orders }} </a></td>
                                            <td> <a href="{{ route('admin.sales.index', ['product' => $report->id]) }}"> {{ $report->total_sales }} </a></td>
                                            <td>{{ $report->total_quantity_ordered ?? 0 }}</td>
