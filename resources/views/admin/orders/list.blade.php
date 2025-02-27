@@ -39,7 +39,7 @@ session()->put('route', $route);
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th class="fw-bold">Order Id</th>
+                                            <th class="fw-bold">Id</th>
                                             <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Sub Total</th>
@@ -48,7 +48,7 @@ session()->put('route', $route);
                                             <th class="fw-bold">Franchise</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Status</th>
-                                            <th class="fw-bold">Action</th>
+                                            <th class="fw-bold"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
