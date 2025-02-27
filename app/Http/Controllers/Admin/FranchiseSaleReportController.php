@@ -51,6 +51,9 @@ class FranchiseSaleReportController extends Controller
         // Paginate results
         $sales = $query->latest()->paginate(20);
 
+              echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
+              
+
         $franchises = Franchise::all();
 
         return view('admin.franchises.reports.list', compact('sales', 'franchises'));
