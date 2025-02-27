@@ -438,7 +438,13 @@ class OrderController extends Controller
 
             $user = Franchise::find($order->franchise_id);
 
-            $user->wallet->deposit($order->total, ['description' => 'Return for Purchase of Product Id #'.$order->product_id.' Order Id #'.$order->id]);
+            $product_url = route('admin.products.show', $order->product_id);
+            $order_url = route('admin.orders.show', $order->id);
+
+            $user->wallet->deposit($order->total, [
+                'description' => 'Return for Purchase of <a href="'.$product_url.'">Product Id #'.$order->product_id.'</a> 
+                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+            ]);
 
         }
 
