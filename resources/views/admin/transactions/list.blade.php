@@ -64,7 +64,7 @@
                                                 </td>
 
                                                 <td>
-                                                    {{ $transaction->meta['description'] ?? 'Added Balance to Wallet' }}
+                                                    {!! $transaction->meta['description'] ?? 'Added Balance to Wallet' !!}
                                                 </td>
 
                         
