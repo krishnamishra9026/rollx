@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Chef;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Franchise;
 use App\Models\Order;
 use App\Models\OrderHistory;
 use Auth;
@@ -91,7 +92,9 @@ class OrderController extends Controller
         $product_url = route('admin.products.show', $order->product_id);
         $order_url = route('admin.orders.show', $order->id);
 
-        $user->wallet->deposit($total, [
+        $franchise = Franchise::find(auth()->user()->franchise_id); 
+
+        $franchise->wallet->withdraw($total, [
             'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
             Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
         ]);

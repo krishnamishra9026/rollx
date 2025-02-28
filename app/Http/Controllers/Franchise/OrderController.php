@@ -99,7 +99,7 @@ class OrderController extends Controller
             $product_url = route('admin.products.show', $order->product_id);
             $order_url = route('admin.orders.show', $order->id);
 
-            $user->wallet->deposit($total, [
+            $user->wallet->withdraw($total, [
                 'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
                 Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
             ]);
@@ -112,7 +112,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {            
-              
         $request->validate([
             'quantity'            => ['required'],
         ]);
@@ -148,7 +147,7 @@ class OrderController extends Controller
         $product_url = route('admin.products.show', $order->product_id);
         $order_url = route('admin.orders.show', $order->id);
 
-        $user->wallet->deposit($total, [
+        $user->wallet->withdraw($total, [
             'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
             Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
         ]);
