@@ -19,13 +19,13 @@
                         </div>                                                
                         <div class="col-sm-12 text-end">
                             @can('View Leads')
-                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end"><i
-                                class="mdi mdi-account-arrow-right ms-1"></i> Lead</a>
+                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end ms-1"><i
+                                class="mdi mdi-plus"></i> Lead</a>
                         @endcan
                             <button type="submit" class="btn btn-sm btn-secondary ms-1" >Filter</button>
                             <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark" >Reset</a>
                             <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark"><i
-                                class="mdi mdi-plus"></i> Assign Leads</a>
+                                class="mdi mdi-account-arrow-right"></i> Leads</a>
                         </div>
                     </div>
                 </form>
