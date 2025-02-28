@@ -94,6 +94,10 @@
                                                             View Orders</a>
                                                         @endif
 
+                                                        <a href="{{ route('admin.product-prices.create', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            Add Franchise Price</a>
+
                                                         @if($product->sales->count() > 0)
                                                         <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>

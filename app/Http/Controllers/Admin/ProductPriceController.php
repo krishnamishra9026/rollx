@@ -34,7 +34,7 @@ class ProductPriceController extends Controller
         return view('admin.product_prices.list', compact('product_prices', 'filter', 'products', 'franchises'));
     }
 
-     public function create()
+    public function create()
     {
         $products = Product::all();
         $franchises = Franchise::all();
