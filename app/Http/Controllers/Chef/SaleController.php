@@ -155,7 +155,7 @@ class SaleController extends Controller
 
         $franchise->notify(new OrderSaleNotification($sale));
 
-        return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
+        return redirect()->back()->with('success', 'Sale recorded successfully');
     }
 
     public function saveOld(Request $request)
