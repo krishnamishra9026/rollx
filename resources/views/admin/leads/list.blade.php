@@ -17,9 +17,9 @@
                                 class="mdi mdi-plus"></i> Lead</a>
                         @endcan
 
-                        <button type="submit" class="btn btn-sm btn-secondary ms-1" >Filter </button> 
+                        <button type="submit" class="btn btn-sm btn-secondary ms-1" > <i class="mdi mdi-filter"></i> Filter </button> 
 
-                        <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1" >Reset</a>
+                        <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1" > <i class="mdi mdi-refresh"></i> Reset</a>
                         &nbsp;
 
                         <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark float-end"><i
