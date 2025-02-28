@@ -168,6 +168,7 @@
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Price</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
                                         </tr>
@@ -179,6 +180,7 @@
                                                 <td><a href="{{ route('chef.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 <td>{{ $sale->order->product->name }}</td>
                                                 <td>{{ $sale->quantity }}</td>
+                                                <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"
@@ -249,8 +251,9 @@
                     orderable: !0
                 }, {
                     orderable: !0
+                }, {               
+                    orderable: !0
                 }, {
-               
                     orderable: !0
                 }, {
                     orderable: !1

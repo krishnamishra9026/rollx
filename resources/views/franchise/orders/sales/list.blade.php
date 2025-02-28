@@ -108,6 +108,7 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Chef Name</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Price</th>
                                             <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
                                         </tr>
@@ -124,6 +125,7 @@
                                                 <td>---</td>
                                                 @endif
                                                 <td>{{ $sale->quantity }}</td>
+                                                <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-success"
@@ -190,6 +192,8 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
