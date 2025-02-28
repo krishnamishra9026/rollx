@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
-                        @can('View Lead')
+                        @can('View Leads')
                         <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-dark float-end"><i
                                 class="mdi mdi-plus"></i> Add
                             Lead</a>
@@ -119,10 +119,10 @@
                                                             Edit Lead</a>
                                                         @endcan
 
-                                                        @can('View Lead')
+                                                        @can('View Leads')
                                                         <a href="{{ route('admin.leads.show', $lead->id) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            View Lead</a>
+                                                            View Leads</a>
                                                         @endcan
 
                                                         <a href="{{ route('admin.leads.convert', $lead->id) }}"
