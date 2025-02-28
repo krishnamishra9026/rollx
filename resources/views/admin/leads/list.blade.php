@@ -14,8 +14,7 @@
                     <div class="page-title-right">
                         @can('View Leads')
                         <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add
-                            Lead</a>
+                                class="mdi mdi-plus"></i> Lead</a>
                         @endcan
 
                         <button type="submit" class="btn btn-sm btn-secondary" >Filter </button> 
@@ -24,7 +23,7 @@
                         &nbsp;
 
                         <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Assign Leads</a>
+                                class="mdi mdi-account-arrow-right"></i> Assign</a>
 
                     </div>
                     <h4 class="page-title">Leads</h4>
