@@ -48,7 +48,7 @@
                                         @foreach ($chefs as $chef)
                                             <tr>
                                                 <td>
-                                                    #{{ $chef->id }}
+                                                    {{ $chef->id }}
                                                 </td>
                                                 <td class="table-user">
 
