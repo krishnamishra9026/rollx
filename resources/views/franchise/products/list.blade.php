@@ -10,6 +10,7 @@
         .quantity-box {
             display: flex;
             align-items: center;
+            height: 19px;
             gap: 5px;
         }
         .quantity-box button {
