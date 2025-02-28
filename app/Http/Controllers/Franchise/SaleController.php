@@ -30,6 +30,7 @@ class SaleController extends Controller
         $filter['status']           = $request->status;
         $filter['product']           = $request->product;
         $filter['order']           = $request->order;
+        $filter['chef']           = $request->chef;
 
         $order_id = $request->order_id;
 

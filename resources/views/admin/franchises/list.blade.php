@@ -38,6 +38,8 @@
                                             <th>Contact Person</th>
                                             <th>Email</th>
                                             <th>Phone</th>
+                                             <th>Orders</th>
+                                             <th>Sales</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -54,6 +56,12 @@
                                                 </td>
                                                 <td>{{ $franchise->email }}</td>
                                                 <td>{{ $franchise->phone }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}"   class="dropdown-item"> {{ $franchise->orders->count() }}</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin.sales.index', ['franchise' => $franchise->id]) }}"   class="dropdown-item"> {{ $franchise->sales->count() }}</a>
+                                                </td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -176,6 +184,10 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

@@ -19,7 +19,7 @@
 
                         <button type="submit" class="btn btn-sm btn-danger ms-1" > <i class="mdi mdi-filter"></i> Filter </button> 
 
-                        <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1" > <i class="mdi mdi-primary"></i> Reset</a>
+                        <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-primary ms-1" > <i class="mdi mdi-refresh"></i> Reset</a>
                         &nbsp;
 
                         <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark float-end"><i
@@ -43,8 +43,8 @@
                                     style="font-size: 14px;">
                                     <thead class="bg-dark">
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Contact Person</th>
+                                            <th class="fw-bold">Id</th>
+                                            <th class="fw-bold">Contact Person</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>City</th>

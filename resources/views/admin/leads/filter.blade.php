@@ -18,12 +18,13 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-12 d-flex flex-wrap justify-content-end gap-1">
+                            
+                            <button type="submit" class="btn btn-sm btn-danger"> <i class="mdi mdi-filter"></i> Filter</button>
+                            <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-primary"> <i class="mdi mdi-refresh"></i> Reset</a>
+                            <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark"><i class="mdi mdi-account-arrow-right"></i> Leads</a>
                             @can('View Leads')
                                 <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary"><i class="mdi mdi-plus"></i> Lead</a>
                             @endcan
-                            <button type="submit" class="btn btn-sm btn-danger"> <i class="mdi mdi-filter"></i> Filter</button>
-                            <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark"> <i class="mdi mdi-primary"></i> Reset</a>
-                            <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark"><i class="mdi mdi-account-arrow-right"></i> Leads</a>
                         </div>
                     </div>
                 </form>
