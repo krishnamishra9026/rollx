@@ -13,7 +13,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         @can('View Leads')
-                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end"><i
+                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end ms-1"><i
                                 class="mdi mdi-plus"></i> Lead</a>
                         @endcan
 
