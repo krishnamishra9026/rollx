@@ -18,7 +18,11 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-12 text-end">
-                            <button type="submit" class="btn btn-sm btn-secondary" >Filter</button>
+                            @can('View Leads')
+                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end"><i
+                                class="mdi mdi-plus"></i> Lead</a>
+                        @endcan
+                            <button type="submit" class="btn btn-sm btn-secondary ms-1" >Filter</button>
                             <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark" >Reset</a>
                             <a href="{{ route('admin.leads.assign-leads') }}" class="btn btn-sm btn-dark"><i
                                 class="mdi mdi-plus"></i> Assign Leads</a>

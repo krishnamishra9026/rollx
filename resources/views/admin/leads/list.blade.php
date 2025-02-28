@@ -13,11 +13,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         @can('View Leads')
-                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-dark float-end"><i
+                        <a href="{{ route('admin.leads.create') }}" class="btn btn-sm btn-secondary float-end"><i
                                 class="mdi mdi-plus"></i> Lead</a>
                         @endcan
 
-                        <button type="submit" class="btn btn-sm btn-secondary" >Filter </button> 
+                        <button type="submit" class="btn btn-sm btn-secondary ms-1" >Filter </button> 
 
                         <a href="{{ route('admin.leads.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1" >Reset</a>
                         &nbsp;
