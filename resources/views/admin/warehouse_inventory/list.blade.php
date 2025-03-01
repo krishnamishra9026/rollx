@@ -46,7 +46,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Quantity</th>
+                                            <th title="Double Click on quantity to edit quantity of a particular product after enter quantity click outside to save Quantity!"> <i class="mdi mdi-map-marker-outline" style="color: red;"></i> Quantity</th>
                                             <th>Cost</th>
                                             <th>Date Inward</th>
                                             <th>Date Outward</th>
@@ -59,7 +59,11 @@
                                             <tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td><a href="{{ route('admin.warehouse-items.edit', $item->warehouse_item_id) }}" class="text-body fw-semibold">{{ @$item->item->name }}</a></td>
-                                                <td>{{ $item->quantity }}</td>
+                                                <td>
+                                                    <span class="quantity-text" style="cursor: pointer;" data-id="{{ $item->id }}">{{ $item->quantity }}</span>
+                                                    <input type="number" class="edit-quantity" data-id="{{ $item->id }}" value="{{ $item->quantity }}" style="display: none; width: 40%">
+                                                </td>
+
                                                 <td>{{ $item->cost }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($item->date_inward)->format('M d, Y') }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($item->date_outward)->format('M d, Y') }}</td>

@@ -131,6 +131,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
 
+    Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+    Route::get('products/download-sample', [ProductController::class, 'downloadSampleCsv'])->name('products.download.sample.csv');
+
     Route::resource('products', ProductController::class);
     Route::resource('product-prices', ProductPriceController::class);
     Route::post('product-prices/update-price', [ProductPriceController::class, 'updatePrice'])->name('product-prices.update.price');

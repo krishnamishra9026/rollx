@@ -12,7 +12,10 @@ use App\Models\ProductSerialNo;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\Admin\ProductsExport;
+use App\Imports\Admin\ProductsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
 
 class ProductController extends Controller
 {
@@ -99,6 +102,29 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        Excel::import(new ProductsImport, $request->file('file'));
+
+        return back()->with('success', 'Products imported successfully!');
+    }
+
+    public function downloadSampleCsv(): BinaryFileResponse
+    {
+        $filePath = storage_path('sample_products.csv');
+
+        if (!file_exists($filePath)) {
+            $sampleData = "name,outlet_name,quantity,price,model_number\nSample Product,Outlet 1,10,50.00,MOD123";
+            file_put_contents($filePath, $sampleData);
+        }
+
+        return response()->download($filePath);
+    }
 
     public function export(Request $request)
     {              

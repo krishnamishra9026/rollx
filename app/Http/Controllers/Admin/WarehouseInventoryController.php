@@ -55,6 +55,20 @@ class WarehouseInventoryController extends Controller
         return redirect()->route('admin.warehouse-inventory.index', ['item_id' => $request->warehouse_item_id])->with('success', 'Inventory record added successfully.');
     }
 
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:0'
+        ]);
+
+        $product = WarehouseInventory::find($request->id);
+        $product->quantity = $request->quantity;
+        $product->save();
+
+        return response()->json(['success' => true, 'message' => 'Quantity updated successfully!']);
+    }
+
     public function add(Request $request)
     {              
         $request->validate([
