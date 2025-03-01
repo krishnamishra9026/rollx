@@ -57,10 +57,10 @@
                                                 <td>{{ $franchise->email }}</td>
                                                 <td>{{ $franchise->phone }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}"   class="dropdown-item"> {{ $franchise->orders->count() }}</a>
+                                                    <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->orders->count() }}</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.sales.index', ['franchise' => $franchise->id]) }}"   class="dropdown-item"> {{ $franchise->sales->count() }}</a>
+                                                    <a href="{{ route('admin.sales.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->sales->count() }}</a>
                                                 </td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
