@@ -12,6 +12,9 @@ use App\Models\Chef;
 use App\Models\Administrator;
 use App\Notifications\OrderSaleNotification;
 
+use App\Exports\Franchise\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SaleController extends Controller
 {
     /**
@@ -119,6 +122,12 @@ class SaleController extends Controller
         }
 
         return redirect()->route('franchise.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
+    }
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new SalesExport($filters), 'sales.xlsx');
     }
 
     /**

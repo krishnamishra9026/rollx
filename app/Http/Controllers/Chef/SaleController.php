@@ -186,7 +186,7 @@ class SaleController extends Controller
     public function export(Request $request)
     {              
         $filters = $request->only(['status', 'order_date', 'product', 'order']);
-        return Excel::download(new SalesExport($filters), 'orders.xlsx');
+        return Excel::download(new SalesExport($filters), 'sales.xlsx');
     }
 
     /**

@@ -11,6 +11,9 @@ use App\Models\Sale;
 use App\Models\Franchise;
 use App\Models\Chef;
 
+use App\Exports\Admin\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SaleController extends Controller
 {
     /**
@@ -112,6 +115,13 @@ class SaleController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function export(Request $request)
+    {                            
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new SalesExport($filters), 'sales.xlsx');
+    }
+
     public function show(string $id)
     {
         //

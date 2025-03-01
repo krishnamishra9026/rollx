@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Storage;
 use Kutia\Larafirebase\Facades\Larafirebase;
 use App\Notifications\OrderStatusNotification;
 
+use App\Exports\Admin\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class OrderController extends Controller
 {
     public function __construct()
@@ -401,6 +404,12 @@ class OrderController extends Controller
          }
 
          return redirect()->route('admin.orders.equipment-info', $id)->with('success', 'Order created successfully');
+    }
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new OrdersExport($filters), 'orders.xlsx');
     }
 
     /**

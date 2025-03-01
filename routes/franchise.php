@@ -67,6 +67,8 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
 
     Route::resource('wallet', WalletController::class);
+
+    Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
     
     Route::resource('orders', OrderController::class);
     Route::post('orders/save', [OrderController::class, 'save'])->name('orders.save');
@@ -80,11 +82,11 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::post('chefs/reset-password', [TechnicianController::class, 'resetPassword'])->name('chefs.reset-password');
     Route::post('chefs/bulk-delete', [TechnicianController::class, 'bulkDelete'])->name('chefs.bulk-delete');
 
+    Route::get('sales/export', [SaleController::class, 'export'])->name('sales.export');
     Route::resource('sales', SaleController::class);
 
 
     Route::get('sales/save', [SaleController::class, 'save'])->name('sales.save');
-    Route::resource('sales', SaleController::class);
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
@@ -94,7 +96,6 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
         Route::resource('reports', SaleReportController::class);
     });
-
 
     Route::put('orders/{id}/add-history', [OrderController::class, 'addHistory'])->name('orders.add-history');
 

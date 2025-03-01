@@ -10,6 +10,9 @@ use App\Models\Order;
 use App\Models\OrderHistory;
 use Auth;
 
+use App\Exports\Chef\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class OrderController extends Controller
 {
     /**
@@ -138,6 +141,12 @@ class OrderController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Order History added successfully');
+    }
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new OrdersExport($filters), 'orders.xlsx');
     }
 
     /**

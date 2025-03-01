@@ -11,6 +11,9 @@ use App\Models\OrderHistory;
 use App\Notifications\OrderCreatedNotification;
 use Auth;
 
+use App\Exports\Franchise\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class OrderController extends Controller
 {
     /**
@@ -153,6 +156,12 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('franchise.orders.index')->with('success', 'Order added successfully');
+    }
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new OrdersExport($filters), 'orders.xlsx');
     }
 
     public function changeStatus(Request $request){

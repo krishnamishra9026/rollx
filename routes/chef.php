@@ -66,6 +66,8 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     Route::resource('purchase-orders', PurchaseOrderController::class);
 
     Route::resource('wallet', WalletController::class);
+
+    Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
     
     Route::resource('orders', OrderController::class);
 

@@ -90,10 +90,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
     Route::resource('transactions', TransactionController::class);
-    Route::resource('sales', SaleController::class);
-        
+    Route::get('sales/export', [SaleController::class, 'export'])->name('sales.export');
     Route::resource('sales', SaleController::class);
 
+    
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);
     });
@@ -129,6 +129,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
     Route::resource('notifications', NotificationController::class);
 
+    Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
+
     Route::resource('products', ProductController::class);
     Route::resource('product-prices', ProductPriceController::class);
     Route::post('product-prices/update-price', [ProductPriceController::class, 'updatePrice'])->name('product-prices.update.price');
@@ -156,6 +158,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     | Order Route
     |--------------------------------------------------------------------------
     */
+
+    Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
 
     Route::resource('orders', OrderController::class);
     Route::get('orders/{id}/equipment-info', [OrderController::class, 'equipmentInfo'])->name('orders.equipment-info');

@@ -11,6 +11,9 @@ use App\Models\ProductImage;
 use App\Models\ProductSerialNo;
 use Illuminate\Support\Facades\DB;
 
+use App\Exports\Admin\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -96,6 +99,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new ProductsExport($filters), 'products.xlsx');
+    }
+
     public function show(string $id)
     {
         $product       = Product::find($id);

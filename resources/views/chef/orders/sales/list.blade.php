@@ -158,8 +158,8 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="{{ route('chef.sales.export', ['product' => request('product'), 'order_date' => request('order_date'), 'order' => request('order'), 'status' => request('status') ]) }}" class="btn btn-sm btn-primary float-left me-1"><i
-                                    class="mdi mdi-export"></i> Export</a>
-                    </div>
+                            class="mdi mdi-export"></i> Export</a>
+                        </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">
