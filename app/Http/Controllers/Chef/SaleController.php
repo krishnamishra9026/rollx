@@ -12,6 +12,9 @@ use App\Models\Administrator;
 use App\Models\Sale;
 use App\Notifications\OrderSaleNotification;
 
+use App\Exports\Chef\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SaleController extends Controller
 {
     /**
@@ -178,6 +181,12 @@ class SaleController extends Controller
         ]);
 
         return 1;
+    }
+
+    public function export(Request $request)
+    {              
+        $filters = $request->only(['status', 'order_date', 'product', 'order']);
+        return Excel::download(new SalesExport($filters), 'orders.xlsx');
     }
 
     /**

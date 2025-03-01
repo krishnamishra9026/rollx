@@ -70,6 +70,9 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     Route::resource('orders', OrderController::class);
 
     Route::get('sales/save', [SaleController::class, 'save'])->name('sales.save');
+
+    Route::get('sales/export', [SaleController::class, 'export'])->name('sales.export');
+
     Route::resource('sales', SaleController::class);
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
