@@ -49,6 +49,7 @@
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Unit</th>
+                                            <th>Total Inventory</th>
                                             <th>Total Quantity</th>
                                             <th>Date Added</th>
                                             <th>Inventory</th>
@@ -64,8 +65,9 @@
                                                 <td><a href="{{ route('admin.warehouse-items.edit', $item->id) }}"
                                                     class="text-body fw-semibold">{{ $item->name }}</a>
                                                 </td>
-                                                <td>{{ $item->unit }}</td>
-                                                <td>{{ $item->inventory()->count() }}</td>
+                                                <td class="text-center">{{ $item->unit }}</td>
+                                                <td class="text-center"> <a href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}">{{ $item->inventory()->count() }} </a></td>
+                                                <td>{{ $item->inventory()->sum('quantity') }}</td>
                                                
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
 
