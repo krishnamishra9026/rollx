@@ -75,7 +75,7 @@
                                             @endif
                                             <th>Status(Select to change)</th>
                                             <th>Next Call Date Time</th>
-                                            <th></th>
+                                            <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

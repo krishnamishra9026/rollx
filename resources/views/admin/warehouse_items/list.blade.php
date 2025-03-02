@@ -23,8 +23,8 @@
                         @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
                         <a href="{{ route('admin.warehouse-items.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Item</a>
                         @endif
-                       <!--  <a href="{{ route('admin.warehouse-items.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
-                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button> -->
+                        <a href="{{ route('admin.warehouse-items.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
+                        <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
                     </div>
 
                     <h4 class="page-title">Warehouse Items</h4>
@@ -72,8 +72,8 @@
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
 
                                                 <td>
-                                                    <a class="btn btn-primary" data-item_id="{{ $item->id }}" id="add-inventory">Add Inventory</a>
-                                                    <a class="btn btn-success" href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}">View Inventory</a>
+                                                    <a class="btn btn-sm btn-primary" data-item_id="{{ $item->id }}" id="add-inventory"><i  class="mdi mdi-plus"></i> Inventory</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}"><i  class="fa fa-eye me-1"></i> Inventory</a>
                                                 </td>
 
                                                 @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')

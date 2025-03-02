@@ -54,7 +54,7 @@
 
 
                                                             <div class="col-md-6">
-                                                                <button type="submit" class="btn btn-primary">Add Balance</button>
+                                                                <button type="submit" class="btn btn-sm btn-primary">Add Balance</button>
 
                                                             </div>
                                                         </div>

@@ -64,7 +64,8 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Qty</th>
+                                            <th>Stock</th>
+                                            <th>Quantity</th>
                                             <th>Price</th>
                                             <th>Total Price</th>
                                             <th>Date Added</th>
@@ -84,6 +85,7 @@
                                                 <td><a href="{{ route('franchise.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
+                                                <td>{{ $product->quantity }}</td>
                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
@@ -130,7 +132,7 @@
                                         @endforeach
                                         </tbody>
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="8">
                                         <button type="submit" class="btn btn-success text-end" form="CreateOrders" style="float: right;">Create Orders</button>
                                         </td>
                                     </tr>
@@ -177,6 +179,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

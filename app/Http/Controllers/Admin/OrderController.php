@@ -438,6 +438,16 @@ class OrderController extends Controller
             'status_changer_id' => Auth::user()->id
         ]);
 
+        $order = Order::find($id);
+
+        if (!in_array($order->status, ['completed', 'delivered']) && in_array($request->status, ['completed', 'delivered'])) {
+            Product::find($order->product_id)->decrement('quantity', $order->quantity);
+        }
+
+        if (!in_array($order->status, ['cancelled']) && in_array($request->status, ['cancelled'])) {
+            Product::find($order->product_id)->increment('quantity', $order->quantity);
+        }
+
         Order::find($id)->update([
             'status' => $request->status,
         ]);

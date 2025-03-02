@@ -43,16 +43,16 @@ session()->put('route', $route);
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th class="fw-bold">Id</th>
-                                            <th class="fw-bold">Order Date Time</th>
-                                            <th class="fw-bold">Quantity</th>
-                                            <th class="fw-bold">Sub Total</th>
-                                            <th class="fw-bold">Total</th>
-                                            <th class="fw-bold">Stock</th>
-                                            <th class="fw-bold">Franchise</th>
-                                            <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold">Status</th>
-                                            <th class="fw-bold"></th>
+                                            <th>Id</th>
+                                            <th>Order Date Time</th>
+                                            <th>Quantity</th>
+                                            <th>Sub Total</th>
+                                            <th>Total</th>
+                                            <th>Stock</th>
+                                            <th>Franchise</th>
+                                            <th>Product Name</th>
+                                            <th>Status</th>
+                                            <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
