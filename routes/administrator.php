@@ -191,6 +191,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('franchises/reset-password', [FranchiseController::class, 'resetPassword'])->name('franchises.reset-password');
     Route::post('franchises/bulk-delete', [FranchiseController::class, 'bulkDelete'])->name('franchises.bulk-delete');
 
+
+    Route::post('/leads/import', [LeadController::class, 'import'])->name('leads.import');
+    Route::get('/leads/export', [LeadController::class, 'export'])->name('leads.export');
+
+    Route::get('/leads/download/sample-csv', [LeadController::class, 'downloadSampleCSV'])->name('leads.download.sample.csv');
     
     Route::get('leads/assign-leads', [LeadController::class, 'assignLeads'])->name('leads.assign-leads');
     Route::post('leads/assign-leads/save', [LeadController::class, 'assignLeadsSave'])->name('leads.assign-leads-save');

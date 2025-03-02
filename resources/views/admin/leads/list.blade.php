@@ -36,6 +36,29 @@
             <div class="col-12">
                 <div class="card">
 
+                     <div class="card-header ">
+
+                        <div class="row">
+                            <div class="col-md-2 col-sm-12 mt-1 text-left">
+                                <a href="{{ route('admin.leads.export', ['product' => request('product'), 'order_date' => request('order_date'), 'order' => request('order'), 'status' => request('status') ]) }}" class="btn btn-sm btn-primary">
+                                    <i class="mdi mdi-export"></i> Export
+                                </a>
+                            </div>
+                            <div class="col-md-7 col-sm-12 mt-1 text-center" style="display: block;">
+                                <form action="{{ route('admin.leads.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-sm-row align-items-center gap-2">
+                                    @csrf
+                                    <input type="file" name="file" required class="form-control form-control-sm">
+                                    <button type="submit" class="btn btn-sm btn-success" style="white-space: nowrap;">Import CSV</button>
+                                </form>
+                            </div>
+                            <div class="col-md-3 col-sm-12 mt-1 text-center" style="display: block;">
+                                <a href="{{ route('admin.leads.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: center;">Download Sample CSV</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">

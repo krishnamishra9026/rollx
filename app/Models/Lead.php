@@ -83,4 +83,9 @@ class Lead extends Authenticatable
         return $this->hasOne(PurchaseOrder::class, 'supplier_id', 'id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Administrator::class, 'admin_id', 'id');
+    }
+
 }

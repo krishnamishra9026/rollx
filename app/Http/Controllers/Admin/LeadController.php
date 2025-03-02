@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
+use App\Imports\Admin\LeadsImport;
+use App\Exports\Admin\LeadsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class LeadController extends Controller
 {
     public function __construct()
@@ -46,6 +50,22 @@ class LeadController extends Controller
         $sale_employees     = Administrator::role('Sales')->orderBy('id', 'desc')->get(['id', 'firstname', 'lastname']);
 
         return view('admin.leads.list', compact('leads', 'filter', 'sale_employees'));
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv'
+        ]);
+
+        Excel::import(new LeadsImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Leads Imported Successfully');
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new LeadsExport($request), 'leads.xlsx');
     }
 
     /**
@@ -282,6 +302,35 @@ class LeadController extends Controller
         }
 
         return redirect()->route('admin.leads.index')->with('success', 'Lead assined to Sale Admin successfully!');
+    }
+
+    public function downloadSampleCSV()
+    {
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=sample_import_leads.csv",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $columns = ['name', 'email', 'phone', 'state', 'city'];
+        $data = [
+            ['John Doe', 'john@example.com', '1234567890', 'California', 'Los Angeles'],
+            ['Jane Smith', 'jane@example.com', '0987654321', 'Texas', 'Houston']
+        ];
+
+        $callback = function () use ($columns, $data) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($data as $row) {
+                fputcsv($file, $row);
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     public function resetPassword(Request $request)
