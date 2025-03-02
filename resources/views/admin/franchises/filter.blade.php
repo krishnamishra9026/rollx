@@ -19,11 +19,11 @@
                         </div>                                                
                         <div class="col-sm-12 text-end">
 
-                            <a href="{{ route('admin.franchises.create') }}" class="btn btn-sm btn-dark" ><i class="mdi mdi-plus"></i> Franchise</a>
+                            <a href="{{ route('admin.franchises.create') }}" class="btn btn-sm btn-dark" ><i class="mdi mdi-plus"></i>Franchise</a>
 
-                            <button type="submit" class="btn btn-sm btn-secondary" >Filter</button>
+                            <button type="submit" class="btn btn-sm btn-danger" > <i class="mdi mdi-filter"></i> Filter</button>
 
-                            <a href="{{ route('admin.franchises.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark" >Reset</a>
+                            <a href="{{ route('admin.franchises.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-primary">  <i class="mdi mdi-refresh"></i> Reset</a>
                         </div>
                     </div>
                 </form>

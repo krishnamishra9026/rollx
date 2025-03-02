@@ -18,12 +18,11 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-12 mb-2 text-end">
-                            <a href="{{ route('franchise.chefs.create') }}" class="btn btn-sm btn-dark"><i
-                                class="mdi mdi-plus"></i> Add Chef</a>
-                            <button type="submit" class="btn btn-sm btn-secondary"
-                               >Filter</button>
-                            <a href="{{ route('franchise.chefs.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-dark ms-1"
-                               >Reset</a>
+                            <a href="{{ route('franchise.chefs.create') }}" class="btn btn-sm btn-dark"><i  class="mdi mdi-plus"></i> Chef</a>
+                            <button type="submit" class="btn btn-sm btn-danger"
+                               > <i  class="mdi mdi-filter"></i> Filter</button>
+                            <a href="{{ route('franchise.chefs.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-primary  ms-1"
+                               ><i  class="mdi mdi-refresh"></i> Reset</a>
                         </div>
                     </div>
                 </form>

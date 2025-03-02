@@ -12,9 +12,11 @@
             <div class="col-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
-                        <a href="{{ route('admin.franchises.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                class="mdi mdi-plus"></i> Add
-                            Franchise</a>
+                        <a href="{{ route('admin.franchises.create') }}" class="btn btn-sm btn-dark float-end ms-1"><i
+                                class="mdi mdi-plus"></i>Franchise</a>
+                        <button type="submit" class="btn btn-sm btn-danger ms-1" > <i class="mdi mdi-filter"></i> Filter</button>
+
+                        <a href="{{ route('admin.franchises.index', ['status' => request()->get('status')]) }}" class="btn btn-sm btn-primary">  <i class="mdi mdi-refresh ms-1"></i> Reset</a>
 
                     </div>
                     <h4 class="page-title">Franchises</h4>
