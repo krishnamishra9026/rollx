@@ -68,21 +68,6 @@
                                                     <button type="button" class="btn btn-sm btn-success"
                                                         id="changeStatus{{ $sale->id }}"
                                                         onclick="showHideO({{ $sale->id }})">{{ ucfirst($sale->status) }}</button>
-                                                    <select style="display: none;" class="form-select form-select-sm custom-select"
-                                                        id="changeSelect{{ $sale->id }}"
-                                                        onchange="changeStatus({{ $sale->id }}, this.value)"
-                                                        style="display: block">
-                                                        <option value="pending" {{ $sale->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                        <option value="processing" {{ $sale->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                                        <option value="processed" {{ $sale->status == 'processed' ? 'selected' : '' }}>Processed</option>
-                                                        <option value="cancelled" {{ $sale->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                                        <option value="completed" {{ $sale->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                                        <option value="shipped" {{ $sale->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                                        <option value="delivered" {{ $sale->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                                        <option value="refunded" {{ $sale->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                                        <option value="failed" {{ $sale->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                                        <option value="returned" {{ $sale->status == 'returned' ? 'selected' : '' }}>Returned</option>
-                                                    </select>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -426,8 +426,8 @@ class OrderController extends Controller
     }
 
 
-    public function addHistory(Request $request, $id){
-
+    public function addHistory(Request $request, $id)
+    {
         $status = Order::find($id)->status;
 
         OrderHistory::create([
@@ -502,72 +502,66 @@ class OrderController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $status = Order::find($request->order_id)->status;
-
-        if($status == 'completed' && $request->status != 'completed'){
-            Order::find($request->order_id)->update([
-                'status' => $request->status,
-            ]);
-            Equipment::where('order_id', $request->order_id)->delete();
-        }
+        $id = $request->order_id;
+        $status = Order::find($id)->status;
 
         OrderHistory::create([
-            'order_id' => $request->order_id,
+            'order_id' => $id,
             'status'   => $request->status,
             'comment'  => "Order status has been changed to ".$request->status,
             'status_changed_by' => 'administrator',
             'status_changer_id' => Auth::user()->id
         ]);
 
-        Order::find($request->order_id)->update([
+        $order = Order::find($id);
+
+        if (!in_array($order->status, ['completed', 'delivered']) && in_array($request->status, ['completed', 'delivered'])) {
+            Product::find($order->product_id)->decrement('quantity', $order->quantity);
+        }
+
+        if (!in_array($order->status, ['cancelled']) && in_array($request->status, ['cancelled'])) {
+            Product::find($order->product_id)->increment('quantity', $order->quantity);
+        }
+
+        Order::find($id)->update([
             'status' => $request->status,
         ]);
 
-        if($request->status == 'completed'){
+        if($request->status == 'cancelled'){
+            $order = Order::find($id);
 
+            $user = Franchise::find($order->franchise_id);
 
+            $product_url = route('admin.products.show', $order->product_id);
+            $order_url = route('admin.orders.show', $order->id);
 
-            $order = Order::find($request->order_id);
-
-            $equipment = Equipment::create([
-                'supplier_id'               => 1,
-                'user_id'                   => $order->user_id,
-                'order_id'                  => $order->id,
-                'user_address_id'           => $order->user_address_id,
-                'equipment_assemble_type'   => $order->equipment_assemble_type,
-                'equipment_name'            => $order->equipment_name,
-                'installation_date'         => $order->installation_date,
-                'warranty_upto'             => $order->warranty_upto,
-                'warranty_date'             => $order->warranty_date,
-                'service_contract'          => $order->service_contract,
-                'service_start_date'        => $order->service_start_date,
-                'service_interval'          => $order->service_interval,
-                'status'                    => 1,
-                'serial_number'             => $order->serial_number,
-                'quotation_reference'       => $order->quotation_reference,
-                'remarks'                   => $order->remarks,
+            $user->wallet->deposit($order->total, [
+                'description' => 'Return for Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
+                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
             ]);
 
-            PartSerialNo::where("order_id", $order->id)->where("deducted", true)->where("replaced", false)->update(['equipment_id' => $equipment->id, "deducted" => true]);
+        }
 
-            foreach($order->parts as $part){
-                $order_part = EquipmentPart::create([
-                    'equipment_id'              => $equipment->id,
-                    'part_id'                   => $part->part_id,
-                    'quantity'                  => $part->quantity,
-                    'installation_date'         => $part->part_installation_date,
-                    'warranty_upto'             => $part->part_warranty_upto,
-                    'replace'                   => false
-                ]);
+        $order = Order::find($id);
+
+        //Order Status Notification
+
+        $franchise_id = $order->franchise_id;
+
+        $franchise = Franchise::find($franchise_id);
+
+        $franchise->notify(new OrderStatusNotification($order, route('franchise.orders.show', $order->id)));
+
+        if ($order->status == 'completed' || $order->status == 'delivered') {
+
+            foreach ($franchise->chefs as $key => $chef) {
+                $chef = Chef::find($chef->id);
+                $chef->notify(new OrderStatusNotification($order, route('chef.orders.show', $order->id)));
             }
         }
 
-        if($request->status == 'cancelled'){
-            $order = Order::find($request->order_id);
-            if($order->equipment_assemble_type == "inventory"){
-                InventoryEquipmentSerialNo::where("serial_no", $order->serial_number)->update(['deducted' => false]);
-            }
-        }
+        session()->flash('success', 'Order status changed successfully!');
+
         return response()->json(['success' => 'Order status changed successfully!'], 200);
     }
 

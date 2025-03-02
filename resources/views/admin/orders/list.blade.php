@@ -9,6 +9,13 @@ $route = url()->full();
 session()->put('route', $route);
 ?>
 @section('content')
+<style type="text/css">
+    
+    .no-wrap {
+    white-space: nowrap;
+}
+
+</style>
     <div class="container-fluid Local_Orders">
         <div class="row">
             <div class="col-12">
@@ -44,14 +51,14 @@ session()->put('route', $route);
                                     <thead class="text-dark">
                                         <tr>
                                             <th>Id</th>
-                                            <th>Order Date Time</th>
-                                            <th>Quantity</th>
-                                            <th>Sub Total</th>
+                                            <th class="no-wrap">Order Date Time</th>
+                                            <th>Qty</th>
+                                            <th class="no-wrap">Sub Total</th>
                                             <th>Total</th>
                                             <th>Stock</th>
-                                            <th>Franchise</th>
-                                            <th>Product Name</th>
-                                            <th>Status</th>
+                                            <th class="no-wrap">Franchise Name</th>
+                                            <th class="no-wrap">Product Name</th>
+                                            <th class="no-wrap">Change Status</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
@@ -74,9 +81,19 @@ session()->put('route', $route);
                                                     {{ $order->product->name }}   
                                                     </a>                                                
                                                 </td>
-                                        
                                                 <td>
-                                                    {{ ucfirst($order->status) }}
+                                                    <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)" >
+                                                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                            <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
+                                                            <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
+                                                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                            <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                                                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                                            <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
+                                                            <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
+                                                            <option value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
+                                                    </select>   
                                                 </td>
                                                 <td>
                                                     <a href="#"
@@ -233,12 +250,6 @@ session()->put('route', $route);
                     console.log(res);
                 }
             });
-        }
-    </script>
-    <script>
-        function showHide(id) {
-            $("#changeStatus" + id).hide();
-            $("#changeSelect" + id).show();
         }
     </script>
 @endpush
