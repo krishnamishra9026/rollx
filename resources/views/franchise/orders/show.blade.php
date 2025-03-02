@@ -50,10 +50,10 @@
 
 
 
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col-md-12 table-responive">
+                        <div class="table-responsive">
                             <table class="table table-striped" style="font-size: 14px" id="parts-table">
                                 <thead>
                                     <tr>
@@ -68,16 +68,21 @@
                                         <tr>
                                             <td>{{ \Carbon\Carbon::parse($history->created_at)->format('M d, Y h:i A') }}</td>
                                             <td>{{ $history->comment }}</td>
-                                            @if($history->status_changed_by == 'administrator')
-                                                <td>{{ \App\Models\Administrator::find($history->status_changer_id)->firstname }} {{ \App\Models\Administrator::find($history->status_changer_id)->lastname }}</td>
+                                            <td>
+                                                @if($history->status_changed_by == 'administrator')
+                                                    {{ optional(\App\Models\Administrator::find($history->status_changer_id))->firstname }} 
+                                                    {{ optional(\App\Models\Administrator::find($history->status_changer_id))->lastname }}
                                                 @else
-                                                <td>{{ \App\Models\Franchise::find($history->status_changer_id)->firstname }} {{ \App\Models\Franchise::find($history->status_changer_id)->lastname }}</td>
+                                                    {{ optional(\App\Models\Franchise::find($history->status_changer_id))->firstname }} 
+                                                    {{ optional(\App\Models\Franchise::find($history->status_changer_id))->lastname }}
                                                 @endif
+                                            </td>
                                             <td>
                                                 <h4>
-                                                    <span class="badge border badge-danger-lighten">{{ ucfirst($history->status) }}</span>
+                                                    <span class="badge border badge-danger-lighten text-capitalize">
+                                                        {{ $history->status }}
+                                                    </span>
                                                 </h4>
-                                           
                                             </td>
                                         </tr>
                                     @endforeach
@@ -87,6 +92,8 @@
                     </div>
                 </div>
             </div>
+
+
 
         </div>
     </div> <!-- container -->

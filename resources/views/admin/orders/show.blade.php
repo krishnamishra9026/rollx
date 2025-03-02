@@ -104,18 +104,19 @@
                 </div> <!-- end card-->
             </div>
 
-            <div class="col-md-12 table-responive">
-                <table class="table table-striped" style="font-size: 14px" id="parts-table">
-                    <thead>
-                        <tr>
-                            <th class="bg-dark text-white">Product ID</th>
-                            <th class="bg-dark text-white">Product Name</th>
-                            <th class="bg-dark text-white">Qty</th>
-                            <th class="bg-dark text-white">Model No</th>
-                            <th class="bg-dark text-white">Serial No</th>
-                        </tr>
-                    </thead>
-                    <tbody id="parts-row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="font-size: 14px" id="parts-table">
+                        <thead>
+                            <tr>
+                                <th class="bg-dark text-white">Product ID</th>
+                                <th class="bg-dark text-white">Product Name</th>
+                                <th class="bg-dark text-white">Qty</th>
+                                <th class="bg-dark text-white">Model No</th>
+                                <th class="bg-dark text-white">Serial No</th>
+                            </tr>
+                        </thead>
+                        <tbody id="parts-row">
                             <tr>
                                 <td>#{{ $order->product_id }}</td>
                                 <td>{{ $order->product->name }}</td>
@@ -123,9 +124,11 @@
                                 <td>{{ $order->product->model_number }}</td>
                                 <td>{{ $order->product->serial_number }}</td>
                             </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
 
 
             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
@@ -190,48 +193,59 @@
             @endif
 
 
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header"> <h4>Order Status History</h4> </div>
-                    <div class="card-body">
-                        <div class="col-md-12 table-responive">
-                            <table class="table table-striped" style="font-size: 14px" id="parts-table">
-                                <thead>
-                                    <tr>
-                                        <th class="bg-dark text-white">Date Added</th>
-                                        <th class="bg-dark text-white">Comment</th>
-                                        <th class="bg-dark text-white">Status Updated By</th>
-                                        <th class="bg-dark text-white">Order Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="parts-row">
-                                    @foreach ($order->histories as $history)
-                                        <tr>
-                                            <td>{{ \Carbon\Carbon::parse($history->created_at)->format('M d, Y h:i A') }}</td>
-                                            <td>{{ $history->comment }}</td>
-
-                                            @if($history->status_changed_by == 'administrator')
-                                            <td><a href="{{ route('admin.admins.show', $history->status_changer_id) }}">{{ \App\Models\Administrator::find($history->status_changer_id)->firstname }} {{ \App\Models\Administrator::find($history->status_changer_id)->lastname }}</a></td>
-                                            @else
-                                            <td><a href="{{ route('admin.suppliers.show', $history->status_changer_id) }}">{{ \App\Models\Franchises::find($history->status_changer_id)->firstname }} {{ \App\Models\Franchises::find($history->status_changer_id)->lastname }}</a></td>
-                                            @endif
-                                            <td>
-                                                @if ($history->status == 'pending')
-                                                    <span
-                                                        class="badge border badge-warning-lighten">{{ ucfirst($history->status) }}</span>
-                                                @else
-                                                    <span
-                                                        class="badge border badge-success-lighten">{{ ucfirst($history->status) }}</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Order Status History</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" style="font-size: 14px" id="parts-table">
+                    <thead>
+                        <tr>
+                            <th class="bg-dark text-white">Date Added</th>
+                            <th class="bg-dark text-white">Comment</th>
+                            <th class="bg-dark text-white">Status Updated By</th>
+                            <th class="bg-dark text-white">Order Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->histories as $history)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($history->created_at)->format('M d, Y h:i A') }}</td>
+                                <td>{{ $history->comment }}</td>
+                                <td>
+                                    @if ($history->status_changed_by == 'administrator')
+                                        @php
+                                            $admin = \App\Models\Administrator::find($history->status_changer_id);
+                                        @endphp
+                                        <a href="{{ route('admin.admins.show', $history->status_changer_id) }}">
+                                            {{ optional($admin)->firstname }} {{ optional($admin)->lastname }}
+                                        </a>
+                                    @else
+                                        @php
+                                            $franchise = \App\Models\Franchises::find($history->status_changer_id);
+                                        @endphp
+                                        <a href="{{ route('admin.suppliers.show', $history->status_changer_id) }}">
+                                            {{ optional($franchise)->firstname }} {{ optional($franchise)->lastname }}
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="badge border 
+                                        {{ $history->status == 'pending' ? 'badge-warning-lighten' : 'badge-success-lighten' }}">
+                                        {{ ucfirst($history->status) }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
+</div>
+
 
         </div>
     </div> <!-- container -->
