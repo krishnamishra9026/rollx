@@ -48,11 +48,11 @@
                                 <form action="{{ route('admin.leads.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-sm-row align-items-center gap-2">
                                     @csrf
                                     <input type="file" name="file" required class="form-control form-control-sm">
-                                    <button type="submit" class="btn btn-sm btn-success" style="white-space: nowrap;">Import CSV</button>
+                                    <button type="submit" class="btn btn-sm btn-success" style="white-space: nowrap;"><i class="mdi mdi-import"></i> Import CSV</button>
                                 </form>
                             </div>
                             <div class="col-md-3 col-sm-12 mt-1 text-center" style="display: block;">
-                                <a href="{{ route('admin.leads.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: center;">Download Sample CSV</a>
+                                <a href="{{ route('admin.leads.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: center;"><i class="mdi mdi-download"></i> Download Sample CSV</a>
                             </div>
                         </div>
 
