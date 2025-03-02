@@ -172,17 +172,17 @@
 
 <script type="text/javascript">
     
-    $(document).ready(function() {
 
-        $(".quantity-text").on("click", function() {
+        $(document).on("click", ".quantity-text", function() {
         let $span = $(this);
         let $input = $span.siblings(".edit-quantity");
 
         $span.hide(); // Hide the span
-        $input.show().focus(); // Show the input and focus on it
+        $input.show().focus(); 
     });
 
-    $(".edit-quantity").on("blur", function() {
+
+    $(document).on("blur", ".edit-quantity", function() {
         let $input = $(this);
         let newQuantity = $input.val();
         let productId = $input.data("id");
@@ -213,7 +213,6 @@
             }
         });
     });
-});
 
 </script>
 
