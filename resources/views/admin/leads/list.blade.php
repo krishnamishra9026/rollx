@@ -71,9 +71,9 @@
                                             <th>Phone</th>
                                             <th>City</th>
                                             @if( Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
-                                            <th>Sale Emplaoye(Select to assign)</th>
+                                            <th>Sale Employee</th>
                                             @endif
-                                            <th>Status(Select to change)</th>
+                                            <th>Change Status</th>
                                             <th>Next Call Date Time</th>
                                             <th class="text-right">Action</th>
                                         </tr>

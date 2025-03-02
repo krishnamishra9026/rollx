@@ -97,7 +97,7 @@ session()->put('route', $route);
                                                 </td>
                                                 <td>
                                                     <a href="#"
-                                                        class="border bg-white dropdown-toggle arrow-none card-drop"
+                                                        class="border bg-white dropdown-toggle arrow-none card-drop mt-11"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>

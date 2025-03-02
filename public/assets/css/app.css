@@ -10720,7 +10720,7 @@ body[data-layout="topnav"] .container-fluid, body[data-layout="topnav"] .contain
     margin-top: 0; }
   .card .card-drop {
     font-size: 20px;
-    line-height: 0;
+    /*line-height: 0;*/
     color: inherit; }
   .card .card-widgets {
     float: right;
