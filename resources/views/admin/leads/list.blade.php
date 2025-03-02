@@ -39,23 +39,22 @@
                      <div class="card-header ">
 
                         <div class="row">
-                            <div class="col-md-2 col-sm-12 mt-1 text-left">
-                                <a href="{{ route('admin.leads.export', ['product' => request('product'), 'order_date' => request('order_date'), 'order' => request('order'), 'status' => request('status') ]) }}" class="btn btn-sm btn-primary">
+                            <div class="col-md-8 col-sm-12 mt-1">
+                                <a href="{{ route('admin.leads.export', ['product' => request('product'), 'order_date' => request('order_date'), 'order' => request('order'), 'status' => request('status') ]) }}" class="btn btn-sm btn-primary text-left">
                                     <i class="mdi mdi-export"></i> Export
                                 </a>
+
+                                <a href="{{ route('admin.leads.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: right;" ><i class="mdi mdi-download"></i> Sample CSV</a>
+
                             </div>
-                            <div class="col-md-7 col-sm-12 mt-1 text-center" style="display: block;">
+                            <div class="col-md-4 col-sm-12 mt-1 text-center" style="display: block;">
                                 <form action="{{ route('admin.leads.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-sm-row align-items-center gap-2">
                                     @csrf
                                     <input type="file" name="file" required class="form-control form-control-sm">
                                     <button type="submit" class="btn btn-sm btn-success" style="white-space: nowrap;"><i class="mdi mdi-import"></i> Import CSV</button>
                                 </form>
                             </div>
-                            <div class="col-md-3 col-sm-12 mt-1 text-center" style="display: block;">
-                                <a href="{{ route('admin.leads.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: center;"><i class="mdi mdi-download"></i> Download Sample CSV</a>
-                            </div>
                         </div>
-
 
                     </div>
 
