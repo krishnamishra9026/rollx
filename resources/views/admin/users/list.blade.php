@@ -13,12 +13,11 @@
                     <div class="page-title-right">
 
                         @can('Create User')
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-dark float-end"><i
-                                    class="mdi mdi-plus"></i> Add User</a>
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-dark float-end ms-1"><i
+                                    class="mdi mdi-plus"></i> User</a>
                         @endcan
-                        <a href="javascript:void(0)" class="btn btn-sm btn-danger float-end me-1" style="display: none"
-                            id="delete-all">
-                            <i class="mdi mdi-delete"></i> {{ __('Delete') }}</a>
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-filter "></i> Filter</button>
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary"><i class="mdi mdi-refresh"></i>  Reset</a>
                     </div>
                     <h4 class="page-title">Users</h4>
                 </div>

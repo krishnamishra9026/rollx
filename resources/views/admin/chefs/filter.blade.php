@@ -18,8 +18,8 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-12 text-end">
-                            <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
-                            <a href="{{ route('admin.chefs.index') }}" class="btn btn-sm btn-dark">Reset</a>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-filter"></i> Filter</button>
+                            <a href="{{ route('admin.chefs.index') }}" class="btn btn-sm btn-primary"><i class="mdi mdi-refresh"></i> Reset</a>
                         </div>
                     </div>
                 </form>

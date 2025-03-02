@@ -31,11 +31,11 @@
                         </div>
                         <div class="col-sm-12 text-end">
                             @can('Create User')
-                                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-dark"><i class="mdi mdi-plus"></i> Add User</a>
+                                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-dark"><i class="mdi mdi-plus"></i> User</a>
                             @endcan
 
-                            <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-dark ">Reset</a>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-filter"></i> Filter</button>
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary"><i class="mdi mdi-refresh"></i>  Reset</a>
                         </div>
                     </div>
                 </form>
