@@ -47,16 +47,14 @@
                                             <tr>
                                                 <td>{{ $chef->id }}</td>
 
-                                                <td >
-                                                    
-                                                    <a href="{{ route('admin.chefs.show', $chef->id) }}"  class="text-body fw-semibold">{{ $chef->firstname }}  {{ $chef->lastname }}</a>
+                                                <td>
+                                                    <img style="height: 20px; width: 20px;" @isset($chef->avatar) src="{{ asset('storage/uploads/chef/' . $chef->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset  alt="table-user" class="me-2 rounded-circle"><a href="{{ route('admin.chefs.show', $chef->id) }}"  class="text-body fw-semibold">{{ $chef->firstname }}  {{ $chef->lastname }}</a>
                                                 </td>
 
                                                 <td>
 
-                                                    <img style="height: 30px; width: 30px;" @isset($chef->franchise->avatar) src="{{ asset('storage/uploads/franchise/' . $chef->franchise->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset
-                                                        alt="table-user" class="me-2 rounded-circle">
-                                                    <a href="{{ route('admin.franchises.show', $chef->franchise_id) }}"
+                                                    <img style="height: 20px; width: 20px;" @isset($chef->franchise->avatar) src="{{ asset('storage/uploads/franchise/' . $chef->franchise->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset
+                                                        alt="table-user" class="me-2 rounded-circle"><a href="{{ route('admin.franchises.show', $chef->franchise_id) }}"
                                                         class="text-body fw-semibold">{{ @$chef->franchise->firstname }}
                                                         {{ @$chef->franchise->lastname }}</a>
                                                     </td>
