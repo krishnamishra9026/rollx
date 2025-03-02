@@ -44,14 +44,14 @@
                                     <i class="mdi mdi-export"></i> Export
                                 </a>
                             </div>
-                            <div class="col-md-7 col-sm-12 mt-1 text-center" style="display: none;">
+                            <div class="col-md-7 col-sm-12 mt-1 text-center" style="display: block;">
                                 <form action="{{ route('admin.products.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-sm-row align-items-center gap-2">
                                     @csrf
                                     <input type="file" name="file" required class="form-control form-control-sm">
                                     <button type="submit" class="btn btn-sm btn-success" style="white-space: nowrap;">Import CSV</button>
                                 </form>
                             </div>
-                            <div class="col-md-3 col-sm-12 mt-1 text-center" style="display: none;">
+                            <div class="col-md-3 col-sm-12 mt-1 text-center" style="display: block;">
                                 <a href="{{ route('admin.products.download.sample.csv') }}" class="btn btn-sm btn-secondary" style="float: center;">Download Sample CSV</a>
                             </div>
                         </div>
