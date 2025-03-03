@@ -191,6 +191,111 @@
 
     </div>
 
+
+      <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">               
+                <h4 class="page-title">Scheduled Callbacks</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                
+                <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 table-responsive">
+                                <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100"
+                                    style="font-size: 14px;">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="fw-bold">Id</th>
+                                            <th class="fw-bold">Contact Person</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>City</th>
+                                            <th>Status</th>
+                                            <th>Next Call Date Time</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($leads_data as $lead)
+                                            <tr data-id="{{ $lead->id }}">
+                                                <td>{{ $lead->id }}</td>
+                                                <td class="table-user">
+
+                                                    <img @isset($lead->avatar) src="{{ asset('storage/uploads/technican/' . $lead->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset
+                                                        alt="table-user" class="me-2 rounded-circle">
+                                                    <a href="{{ route('admin.leads.show', $lead->id) }}"
+                                                        class="text-body fw-semibold">{{ $lead->firstname }}
+                                                        {{ $lead->lastname }}</a>
+                                                </td>
+                                                <td>{{ $lead->email }}</td>
+                                                <td>{{ $lead->phone }}</td>
+                                                <td>{{ $lead->city }}</td>
+
+                                                <td>
+
+                                                    <button class="btn btn-sm btn-success"> {{ ucfirst($lead->status) }}</button>
+
+                                                </td>
+                                                <td>                                                  
+                                                {{ $lead->next_call_datetime }} 
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        @can('Edit Lead')
+                                                        <a href="{{ route('admin.leads.edit', $lead->id) }}"
+                                                            class="dropdown-item"><i class="fa fa-edit me-1"></i>
+                                                            Edit Lead</a>
+                                                        @endcan
+
+                                                        @can('View Leads')
+                                                        <a href="{{ route('admin.leads.show', $lead->id) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Leads</a>
+                                                        @endcan
+
+                                                        <a href="{{ route('admin.leads.convert', $lead->id) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            Conver to Franchise</a>
+
+                                                        @can('Delete Lead')
+                                                         <a href="javascript:void(0);"
+                                                            onclick="confirmDelete({{ $lead->id }})"
+                                                            class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
+                                                            Delete</a>
+                                                        @endcan
+
+                                                             <form id='delete-form{{ $lead->id }}'
+                                                            action='{{ route('admin.leads.destroy', $lead->id) }}'
+                                                            method='POST'>
+                                                            <input type='hidden' name='_token'
+                                                                value='{{ csrf_token() }}'>
+                                                            <input type='hidden' name='_method' value='DELETE'>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $leads_data->appends(request()->query())->links('pagination::bootstrap-5') }}
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
     @endif
 
 

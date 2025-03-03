@@ -21,6 +21,42 @@
 
     @include('franchise.includes.flash-message')
 
+
+      <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <h4 class="page-title">Avilable Orders</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            @if ($orders && count($orders))
+                            @foreach ($orders as $order)
+                            <div class="col-sm-3 mt-2 d-flex">
+                                <a href="#" 
+                                    class="btn btn-{{ $order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex align-items-center justify-content-center">
+                                    {{ $order->product->name }}
+                                    <br/>
+                                    Avilable : {{ $order->stock }}
+                                </a>
+                            </div>
+                            @endforeach
+                            @else
+                            <p>No item avilable to sell...</p>
+                            @endif
+
+                     
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
     <div class="row">
         <div class="col-xl-4 col-lg-4">
             <div class="card tilebox-one">

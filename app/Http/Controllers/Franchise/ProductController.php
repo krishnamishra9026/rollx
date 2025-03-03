@@ -39,6 +39,24 @@ class ProductController extends Controller
         return view('franchise.products.list', compact('products', 'filter'));
     }
 
+    public function stocks(Request $request)
+    {
+        $filter                     = [];
+        $filter['name']             = $request->name;
+        $filter['model_number']     = $request->model_number;
+        $filter['serial_number']    = $request->serial_number;
+        $filter['parent_category']  = $request->parent_category;
+
+        $stocks              = Product::where('quantity', '>', 0);
+        $stocks              = isset($filter['name']) ? $stocks->where('name', 'LIKE', '%' . $filter['name'] . '%') : $stocks;
+        $stocks              = isset($filter['model_number']) ? $stocks->where('model_number', 'LIKE', '%' . $filter['model_number'] . '%') : $stocks;
+        $stocks              = isset($filter['serial_number']) ? $stocks->where('serial_number', 'LIKE', '%' . $filter['serial_number'] . '%') : $stocks;
+
+        $stocks              = $stocks->orderBy('id', 'desc')->paginate(20);
+
+        return view('franchise.stocks.list', compact('stocks', 'filter'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

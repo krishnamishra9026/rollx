@@ -31,8 +31,15 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('franchise/stocks') || request()->is('franchise/stocks/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.stocks') }}" class="side-nav-link">
+                    <i class="uil-shopping-cart-alt"></i>
+                    <span> Stocks </span>
+                </a>
+            </li>
 
-             <li class="side-nav-item {{ request()->is('franchise/products') || request()->is('franchise/products/*') ? 'menuitem-active' : '' }}">
+
+            <li class="side-nav-item {{ request()->is('franchise/products') || request()->is('franchise/products/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('franchise.products.index') }}" class="side-nav-link">
                     <i class="uil-shopping-cart-alt"></i>
                     <span> Live Products </span>

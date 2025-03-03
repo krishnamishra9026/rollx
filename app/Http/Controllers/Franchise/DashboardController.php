@@ -49,7 +49,15 @@ class DashboardController extends Controller
         });
 
 
-        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'totalSales', 'monthlySales', 'sales'));
+        $orders = Order::where('franchise_id', auth()->user()->id)
+                ->where('stock', '>', 0)
+                ->where(function ($query) {
+                    $query->where('status', 'completed')
+                          ->orWhere('status', 'delivered');
+                })->orderBy("id", "desc")->paginate(20);
+
+
+        return view('franchise.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'totalSales', 'monthlySales', 'sales', 'orders'));
     }
 
     public function updateToken(Request $request){

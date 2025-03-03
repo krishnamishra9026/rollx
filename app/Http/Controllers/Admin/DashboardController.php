@@ -39,7 +39,10 @@ class DashboardController extends Controller
         $monthlySales = Sale::whereMonth('created_at', now()->month)->sum('price');
 
         $users = Administrator::count();
-        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products', 'sales', 'monthlySales'));
+
+        $leads_data  = Lead::whereNotNull('next_call_datetime')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products', 'sales', 'monthlySales', 'leads_data'));
     }
 
     public function updateToken(Request $request){

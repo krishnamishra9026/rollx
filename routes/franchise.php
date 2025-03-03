@@ -104,6 +104,10 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
 
     Route::resource('products', ProductController::class);
+
+
+    Route::get('stocks', [ProductController::class, 'stocks'])->name('stocks');
+
     Route::delete('products/{id}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete-image');
     Route::delete('products/{id}/delete-document', [ProductController::class, 'deleteDocument'])->name('products.delete-document');
 
