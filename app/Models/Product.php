@@ -18,6 +18,8 @@ class Product extends Model
         'sold_color',
         'serial_number',
         'quantity',
+        'available_quantity',
+        'sold_quantity',
         'price',
         'status',
         'notification',

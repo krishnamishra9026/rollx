@@ -60,7 +60,9 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Stock</th>
+                                            <th>Total Qunatity</th>
+                                            <th>Sold Qunatity</th>
+                                            <th>Available Qunatity</th>
                                             <th>Price</th>
                                             <th>Franchise Price</th>
                                             <th>Date Added</th>
@@ -76,6 +78,8 @@
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
                                                 <td>{{ $product->quantity }}</td>
+                                                <td>{{ $product->available_quantity }}</td>
+                                                <td>{{ $product->sold_quantity }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>

@@ -78,6 +78,8 @@ class ProductController extends Controller
         $part->sold_color  = $request->sold_color;
         $part->serial_number = $request->serial_number;
         $part->quantity      = $request->quantity;
+        $part->available_quantity  = $request->quantity;
+        $part->sold_quantity = 0;
         $part->refrence      = $request->refrence;
         $part->status        = $request->status;
         $part->save();
@@ -183,6 +185,8 @@ class ProductController extends Controller
         $part->serial_number = $request->serial_number;
         $part->sold_color  = $request->sold_color;
         $part->quantity      = $request->quantity;
+        $part->available_quantity  = $request->quantity;
+        $part->sold_quantity = 0;
         $part->refrence      = $request->refrence;
         $part->status        = $request->status;
         $part->save();
