@@ -78,8 +78,8 @@
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
                                                 <td>{{ $product->quantity }}</td>
-                                                <td>{{ $product->available_quantity }}</td>
-                                                <td>{{ $product->sold_quantity }}</td>
+                                                <td>{{ $product->sold_quantity ?? $product->quantity }}</td>
+                                                <td>{{ $product->available_quantity ?? 0 }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
