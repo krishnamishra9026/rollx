@@ -74,7 +74,6 @@
                                             <th>Price</th>
                                             <th>Orders</th>
                                             <th>Sales</th>
-                                            <th>Model Number</th>
                                             <th>Date Added</th>
                                             <th class="text-end">Action</th>
                                         </tr>
@@ -98,7 +97,6 @@
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->orders->count() }}</td>
                                                 <td>{{ $product->sales->count() }}</td>
-                                                <td>{{ $product->model_number }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
@@ -238,6 +236,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0
