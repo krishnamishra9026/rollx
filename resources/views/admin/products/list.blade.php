@@ -69,6 +69,8 @@
                                             <th>Name</th>
                                             <th>Outlet Name</th>
                                             <th title="Double Click on quantity to edit quantity of a particular product after enter quantity click outside to save Quantity!"> <i class="mdi mdi-map-marker-outline" style="color: red;"></i> Qty</th>
+                                            <th>Sold Qty</th>
+                                            <th>Avilable Qty</th>
                                             <th>Price</th>
                                             <th>Orders</th>
                                             <th>Sales</th>
@@ -90,6 +92,8 @@
                                                     <input type="number" class="edit-quantity" data-id="{{ $product->id }}" value="{{ $product->quantity }}" style="display: none; width: 40%">
                                                 </td>
 
+                                                <td>{{ $product->sold_quantity ?? 0 }}</td>
+                                                <td>{{ $product->available_quantity ?? $product->quantity }}</td>
 
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->orders->count() }}</td>

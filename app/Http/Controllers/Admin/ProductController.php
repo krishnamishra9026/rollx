@@ -162,6 +162,7 @@ class ProductController extends Controller
 
         $product = Product::find($request->id);
         $product->quantity = $request->quantity;
+        $product->available_quantity = $request->quantity - $product->sold_quantity;
         $product->save();
 
         return response()->json(['success' => true, 'message' => 'Quantity updated successfully!']);
