@@ -213,8 +213,7 @@
                                         <tr>
                                             <th class="fw-bold">Id</th>
                                             <th class="fw-bold">Contact Person</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
+                                            <th>State</th>
                                             <th>City</th>
                                             <th>Status</th>
                                             <th>Next Call Date Time</th>
@@ -233,8 +232,7 @@
                                                         class="text-body fw-semibold">{{ $lead->firstname }}
                                                         {{ $lead->lastname }}</a>
                                                 </td>
-                                                <td>{{ $lead->email }}</td>
-                                                <td>{{ $lead->phone }}</td>
+                                                <td>{{ $lead->state }}</td>
                                                 <td>{{ $lead->city }}</td>
 
                                                 <td>
@@ -382,8 +380,6 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
-                }, {
-                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
