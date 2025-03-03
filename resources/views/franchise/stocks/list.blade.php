@@ -64,7 +64,7 @@
                                             <th>Sold Qunatity</th>
                                             <th>Available Qunatity</th>
                                             <th>Price</th>
-                                            <th>Franchise Price</th>
+                                            <th>My Price</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>    
@@ -128,8 +128,6 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !0
-                }, {
                     orderable: !0
                 }, {
                     orderable: !0

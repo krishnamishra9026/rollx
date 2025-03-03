@@ -38,11 +38,11 @@
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Sub Total</th>
                                             <th class="fw-bold">Total</th>
                                             <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Order Date Time</th>
-                                            <th class="fw-bold">Status</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
                                     </thead>
@@ -52,31 +52,12 @@
                                                 <td>{{ $order->id }}</td>
                                                 <td> {{ $order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
+                                                <td>{{ $order->stock }}</td>
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-success"
-                                                        id="changeStatus{{ $order->id }}"
-                                                        onclick="showHideO({{ $order->id }})">{{ ucfirst($order->status) }}</button>
-                                                    <select style="display: none;" class="form-select form-select-sm custom-select"
-                                                        id="changeSelect{{ $order->id }}"
-                                                        onchange="changeStatus({{ $order->id }}, this.value)"
-                                                        style="display: block">
-                                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                        <option value="accepted" {{ $order->status == 'accepted' ? 'selected' : '' }}>Accepted</option>
-                                                        <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                                        <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
-                                                        <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                                        <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                                        <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                                        <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                                        <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                                        <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                                        <option value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
-                                                    </select>
-                                                </td>
+                                        
                                                 <td>
                                                     <a href="#" class="border bg-white dropdown-toggle arrow-none card-drop"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,8 +128,6 @@
                     orderable: !0
                 }, {
                     orderable: !0,
-                }, {
-                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

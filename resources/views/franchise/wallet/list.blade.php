@@ -16,11 +16,13 @@
             </div>
         </div>
         @include('franchise.includes.flash-message')
-        @include('franchise.wallet.filter')
+        <!-- @include('franchise.wallet.filter') -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
+                    <div class="card-header">
+                        <p style="margin-bottom: 0"><strong>{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</strong> Wallet Balance is {{ auth()->user()->balance }}</p>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">
@@ -32,6 +34,7 @@
                                             <th class="fw-bold">Amount</th>
                                             <th class="fw-bold">Type</th>
                                             <th class="fw-bold">Description</th>
+                                            <th class="fw-bold">Balance</th>
                                             <th class="fw-bold">Created At</th>
                                         </tr>
                                     </thead>
@@ -39,9 +42,10 @@
                                         @foreach ($transactions as $transaction)
                                             <tr>
                                                 <td>{{ $transaction->id }}</td>
-                                                <td>{{ $transaction->amount }}</td>
-                                                <td>{{ $transaction->type }}</td>
+                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                <td>{{ ucfirst($transaction->type) }}</td>
                                                 <td>{!!  $transaction->meta['description'] ?? 'Added balance in wallet' !!}</td>
+                                                <td>{!!  $transaction->meta['balance'] ?? $transaction->wallet->balance !!}</td>
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                             </tr>
                                         @endforeach
@@ -88,6 +92,8 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

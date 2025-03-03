@@ -99,7 +99,8 @@ class OrderController extends Controller
 
         $franchise->wallet->withdraw($total, [
             'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
-            Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+            Order Id <a href="'.$order_url.'">#'.$order->id.'</a>',
+                'balance' => $franchise->wallet->balance - $total
         ]);
 
         return redirect()->route('chef.orders.index')->with('success', 'Order added successfully');

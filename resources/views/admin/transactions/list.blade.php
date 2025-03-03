@@ -39,38 +39,24 @@
                                     <tbody>
                                         @php $balance = 0; @endphp
                                         @foreach ($transactions as $transaction)
-                                            
-                                             @php
-                                                $ownerId = $transaction->wallet->owner->id;
-                                                
-                                                if (!isset($balances[$ownerId])) {
-                                                    $balances[$ownerId] = 0;
-                                                }
-
-                                                if ($transaction->type === 'deposit') {
-                                                    $balances[$ownerId] += $transaction->amount;
-                                                } elseif ($transaction->type === 'withdraw') {
-                                                    $balances[$ownerId] += $transaction->amount;
-                                                }
-                                            @endphp
 
                                             <tr>
                                                 <td>{{ $transaction->id }}</td>
                                                 <td><a href="{{ route('admin.franchises.show', $transaction->wallet->owner->id) }}"
                                                     class="text-body fw-semibold">{{ $transaction->wallet->owner->firstname }} {{ $transaction->wallet->owner->lastname }}</a>
                                                 </td>
-                                                <td>
-                                                    {{ $transaction->amount }}
-                                                </td>
+                                                    
+                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
 
                                                 <td>
                                                     {!! $transaction->meta['description'] ?? 'Added Balance to Wallet' !!}
                                                 </td>
 
-                        
+                                                 <td>
+                                                    {!! $transaction->meta['balance'] ?? $transaction->wallet->balance !!}
+                                                </td>
 
-                                                <td>{{ $transaction->wallet->balance }}</td>
-
+                    
                                                 <td>{{ ucfirst($transaction->type) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                               

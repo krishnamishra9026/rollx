@@ -42,7 +42,7 @@
 
             <li class="side-nav-item {{ request()->is('chef/sales') || request()->is('chef/sales/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('chef.sales.index') }}" class="side-nav-link">
-                    <i class="uil-shopping-cart-alt"></i>
+                    <i class="uil-dollar-sign-alt"></i>
                     <span> Sales </span>
                 </a>
             </li>

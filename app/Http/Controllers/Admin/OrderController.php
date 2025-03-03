@@ -464,7 +464,8 @@ class OrderController extends Controller
 
             $user->wallet->deposit($order->total, [
                 'description' => 'Return for Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
-                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>',
+                'balance' => $user->wallet->balance + $order->total
             ]);
 
         }
@@ -541,7 +542,8 @@ class OrderController extends Controller
 
             $user->wallet->deposit($order->total, [
                 'description' => 'Return for Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
-                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>',
+                'balance' => $user->wallet->balance + $order->total
             ]);
 
         }

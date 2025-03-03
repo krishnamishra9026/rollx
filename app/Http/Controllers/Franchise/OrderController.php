@@ -104,7 +104,8 @@ class OrderController extends Controller
 
             $user->wallet->withdraw($total, [
                 'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
-                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+                Order Id <a href="'.$order_url.'">#'.$order->id.'</a>',
+                'balance' => $user->wallet->balance - $total
             ]);
         }
 
@@ -152,7 +153,8 @@ class OrderController extends Controller
 
         $user->wallet->withdraw($total, [
             'description' => 'Purchase of Product Id <a href="'.$product_url.'"> #'.$order->product_id.'</a> 
-            Order Id <a href="'.$order_url.'">#'.$order->id.'</a>'
+            Order Id <a href="'.$order_url.'">#'.$order->id.'</a>',
+                'balance' => $user->wallet->balance - $total
         ]);
 
         return redirect()->route('franchise.orders.index')->with('success', 'Order added successfully');
