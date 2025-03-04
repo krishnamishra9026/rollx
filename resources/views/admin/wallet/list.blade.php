@@ -31,7 +31,7 @@
                                             <th class="fw-bold">Franchise Id</th>
                                             <th class="fw-bold">Franchise Name</th>
                                             <th class="fw-bold">Wallet balance</th>
-                                            <th class="fw-bold text-center">Action</th>
+                                            <th class="fw-bold  ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +47,7 @@
                                                         <div class="row g-2">
                                                             <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
                                                             
-                                                            <div class="col-md-5 col-12">
+                                                            <div class="col-md-3 col-12">
                                                                 <input type="number" name="amount" value="1" class="form-control" required min="1">
                                                             </div>
 
