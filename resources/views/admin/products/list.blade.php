@@ -96,7 +96,7 @@
 
                                                 <td>{{ $product->price }}</td>
                                                 <td> <a href="{{ route('admin.orders.index', ['product' => $product->id]) }}" >{{ $product->orders->count() }} </a></td>
-                                                <td> <a href="{{ route('admin.orders.index', ['product' => $product->id]) }}" >{{ $product->sales->count() }} </a></td>
+                                                <td> <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}" >{{ $product->sales->count() }} </a></td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
