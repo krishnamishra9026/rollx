@@ -166,8 +166,8 @@
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Sale Id</th>
-                                            <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
+                                            <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Price</th>
                                             <th class="fw-bold">Order Date</th>
@@ -178,8 +178,8 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td>{{ $sale->id }}</td>
-                                                <td><a href="{{ route('chef.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 <td>{{ $sale->order->product->name }}</td>
+                                                <td><a href="{{ route('chef.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>

@@ -109,8 +109,8 @@
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Sale Id</th>
-                                            <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
+                                            <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Chef Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Price</th>
@@ -122,8 +122,8 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td>{{ $sale->id }}</td>
-                                                <td><a href="{{ route('franchise.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 <td><a href="{{ route('franchise.products.show', $sale->order->product_id) }}">{{ $sale->order->product->name }}</a></td>
+                                                <td><a href="{{ route('franchise.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 @if($sale->chef_id)
                                                 <td><a href="{{ route('franchise.chefs.show', $sale->chef_id) }}">{{ $sale->chef->firstname }} {{ $sale->chef->lastname }}</a></td>
                                                 @else

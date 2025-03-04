@@ -237,7 +237,22 @@
 
                                                 <td>
 
-                                                    <button class="btn btn-sm btn-success" style="min-width: 140px;"> {{ ucfirst($lead->status) }}</button>
+                                                    @php
+                                                    $statusClasses = [
+                                                        'Pending' => 'bg-primary',
+                                                        'Fresh' => 'bg-secondary',
+                                                        'Interested' => 'bg-success',
+                                                        'Non Contactable' => 'bg-danger',
+                                                        'Paspect' => 'bg-warning',
+                                                        'Closed' => 'bg-info',
+                                                        'Not Interested' => 'bg-dark',
+                                                        'Converted' => 'bg-light text-dark',
+                                                    ];
+
+                                                    $badgeClass = $statusClasses[$lead->status] ?? 'bg-secondary';
+                                                    @endphp
+
+                                                    <button class="badge {{ $badgeClass }}" style="min-width: 95px;"> {{ ucfirst($lead->status) }}</button>
 
                                                 </td>
                                                 <td>                                                  
