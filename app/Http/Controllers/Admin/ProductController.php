@@ -179,7 +179,7 @@ class ProductController extends Controller
         $part->available_quantity  = $request->quantity;
         $part->sold_quantity = 0;
         $part->refrence      = $request->refrence;
-        $part->status        = $request->status;
+        $part->status        = $request->status ?? 1;
         $part->save();
 
        if($request->hasfile('images'))
