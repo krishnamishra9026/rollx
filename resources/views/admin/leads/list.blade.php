@@ -126,7 +126,7 @@
                                                     </select>
                                                 </td>
                                                 <td>                                                  
-                                                <input type="datetime-local" data-id="{{ $lead->id }}" id="next_call_datetime" name="next_call_datetime" value="{{ $lead->next_call_datetime }}" min="{{ date('Y-m-d') }}" class="form-control datetimepicker" required >
+                                                <input type="datetime-local" data-id="{{ $lead->id }}" id="next_call_datetime" name="next_call_datetime" value="{{ $lead->next_call_datetime }}" min="{{ date('Y-m-d H:i:s') }}" class="form-control datetimepicker" required >
                                                 </td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
