@@ -176,8 +176,8 @@ class ProductController extends Controller
         $part->price         = $request->price;
         $part->sold_color  = $request->sold_color;
         $part->quantity      = $request->quantity;
-        $part->available_quantity  = $request->quantity;
-        $part->sold_quantity = 0;
+        $part->available_quantity  = $request->quantity - $part->sold_quantity;
+        $part->sold_quantity = $part->sold_quantity;
         $part->refrence      = $request->refrence;
         $part->status        = $request->status ?? 1;
         $part->save();
