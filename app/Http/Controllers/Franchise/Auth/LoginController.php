@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Franchise\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Chef;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -52,5 +53,18 @@ class LoginController extends Controller
             Auth::guard('franchise')->logout();
             return redirect()->route('franchise.login');
         }
+    }
+
+    public function LoginController($id)
+    {
+        $chef = Chef::find($id);
+
+        if (!$chef) {
+            return redirect()->back()->with('error', 'Chef not found.');
+        }
+
+        $token = encrypt(['id' => $chef->id, 'expires' => now()->addMinutes(5)]);
+
+        return redirect()->away(route('chef.direct-login', urlencode($token)));
     }
 }

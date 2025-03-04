@@ -21,6 +21,32 @@ class LoginController extends Controller
         return view('chef.auth.login');
     }
 
+    public function directLogin($token)
+    {
+
+        if (!$token) {
+            return redirect()->route('chef.login')->with('error', 'Invalid token.');
+        }
+
+        try {
+            $data = decrypt($token);
+
+            if (now()->greaterThan($data['expires'])) {
+                return redirect()->route('chef.login')->with('error', 'Token expired.');
+            }
+
+            $chef = Chef::where('id', $data['id'])->first();
+            if ($chef) {
+                Auth::guard('chef')->login($chef);
+                return redirect()->intended(route('chef.dashboard'));
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('chef.login')->with('error', 'Invalid token.');
+        }
+
+    }
+
     public function login(Request $request)
     {              
         $this->validate($request, [

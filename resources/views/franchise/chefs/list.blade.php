@@ -44,6 +44,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Sales</th>
+                                            <th>Login as Chef</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -65,6 +66,10 @@
                                                 <td>{{ $chef->phone }}</td>
                                                 <td>
                                                     <a href="{{ route('franchise.sales.index', ['chef' => $chef->id]) }}"   class="dropdown-item"> {{ $chef->sales->count() }}</a>
+                                                </td>
+
+                                                <td>
+                                                     <a href="{{ route('franchise.login-chef', $chef->id) }}" class="btn btn-primary">Login as Chef</a>
                                                 </td>
                                                
                                                 <td class="text-end">
