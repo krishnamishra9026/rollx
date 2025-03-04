@@ -24,7 +24,6 @@ class ProductsImport implements ToModel, WithHeadingRow
                 'outlet_name' => $row['outlet_name'],
                 'quantity' => $row['quantity'],
                 'price' => $row['price'],
-                'model_number' => $row['model_number'],
             ]);
         }
 

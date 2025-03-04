@@ -77,33 +77,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="model_number">Model Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="model_number" name="model_number"
-                                        placeholder="Enter Model Number"
-                                        value="{{ old('model_number', $product->model_number) }}">
-                                    @error('model_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            {{-- <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="serial_number">Serial Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="serial_number" name="serial_number"
-                                        placeholder="Enter Serial Number"
-                                        value="{{ old('serial_number', $product->serial_number) }}">
-                                    @error('serial_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
+                            
 
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="quantity">Quantity</label>
@@ -131,34 +105,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="serial_number">Serial Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="serial_number" name="serial_number"
-                                        placeholder="Enter Serial Number" value="{{ old('serial_number', $product->serial_number) }}">
-                                    @error('serial_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
-
-                            <div class="row mb-2">
-                                <label for="refrence"
-                                    class="col-md-2 col-form-label text-md-start">{{ __('Product refrence') }}</label>
-
-                                <div class="col-md-10">
-                                    <textarea name="refrence" class="form-control @error('refrence') is-invalid @enderror" id="refrence" rows="3"
-                                        placeholder="Enter Product refrence">{{ old('refrence', $product->refrence) }}</textarea>
-                                    @error('refrence')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="row mb-2">
                                 <label for="sold_color"
@@ -185,28 +132,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="row mb-2">
-                                <label for="statuses"
-                                    class="col-md-2 col-form-label text-md-start">{{ __('Status') }}</label>
-                                <div class="col-md-10">
-                                    <select id="statuses" class="form-select @error('contact') is-invalid @enderror"
-                                        name="status">
-                                        <option value="">Select Status</option>
-                                        <option value="1"
-                                            {{ old('status', $product->status) == '1' ? 'selected' : '' }}>
-                                            Enable</option>
-                                        <option value="0"
-                                            {{ old('status', $product->status) == '0' ? 'selected' : '' }}>
-                                            Disable</option>
-                                    </select>
-                                    @error('status')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="row mb-2">
                                 <label class="col-md-2 col-form-label text-md-start">{{ __('Images') }}</label>

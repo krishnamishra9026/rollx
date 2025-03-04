@@ -31,13 +31,11 @@ class ProductController extends Controller
     {
         $filter                     = [];
         $filter['name']             = $request->name;
-        $filter['model_number']     = $request->model_number;
         $filter['serial_number']    = $request->serial_number;
         $filter['parent_category']  = $request->parent_category;
 
         $products              = Product::query();
         $products              = isset($filter['name']) ? $products->where('name', 'LIKE', '%' . $filter['name'] . '%') : $products;
-        $products              = isset($filter['model_number']) ? $products->where('model_number', 'LIKE', '%' . $filter['model_number'] . '%') : $products;
         $products              = isset($filter['serial_number']) ? $products->where('serial_number', 'LIKE', '%' . $filter['serial_number'] . '%') : $products;
 
         $products              = $products->orderBy('id', 'desc')->paginate(20);
@@ -62,10 +60,8 @@ class ProductController extends Controller
     {              
 
         $this->validate($request, [
-            'name'          => ['required'],
-            'model_number'      => ['required', 'unique:products'],
+            'name'      => ['required', 'unique:products'],
             'quantity'          => ['required'],
-            'status'            => ['required'],
 
         ]);
 
@@ -74,9 +70,7 @@ class ProductController extends Controller
         $part->outlet_name   = $request->outlet_name;
         $part->description   = $request->description;
         $part->price         = $request->price;
-        $part->model_number  = $request->model_number;
         $part->sold_color  = $request->sold_color;
-        $part->serial_number = $request->serial_number;
         $part->quantity      = $request->quantity;
         $part->available_quantity  = $request->quantity;
         $part->sold_quantity = 0;
@@ -121,7 +115,7 @@ class ProductController extends Controller
         $filePath = storage_path('sample_products.csv');
 
         if (!file_exists($filePath)) {
-            $sampleData = "name,outlet_name,quantity,price,model_number\nSample Product,Outlet 1,10,50.00,MOD123";
+            $sampleData = "name,outlet_name,quantity,price\nSample Product,Outlet 1,10,50.00";
             file_put_contents($filePath, $sampleData);
         }
 
@@ -171,10 +165,8 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'name'              => ['required'],
-            'model_number'      => ['required', 'unique:products,model_number,' . $id],
+            'name'              => ['required', 'unique:products,name,'.$id],
             'quantity'          => ['required'],
-            'status'            => ['required'],
         ]);
 
         $part                       = Product::find($id);
@@ -182,8 +174,6 @@ class ProductController extends Controller
         $part->outlet_name   = $request->outlet_name;
         $part->description   = $request->description;
         $part->price         = $request->price;
-        $part->model_number  = $request->model_number;
-        $part->serial_number = $request->serial_number;
         $part->sold_color  = $request->sold_color;
         $part->quantity      = $request->quantity;
         $part->available_quantity  = $request->quantity;

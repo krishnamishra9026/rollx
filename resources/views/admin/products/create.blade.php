@@ -75,31 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="model_number">Model Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="model_number" name="model_number"
-                                        placeholder="Enter Model Number" value="{{ old('model_number') }}">
-                                    @error('model_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="serial_number">Serial Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="serial_number" name="serial_number"
-                                        placeholder="Enter Serial Number" value="{{ old('serial_number') }}">
-                                    @error('serial_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            
 
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="quantity">Quantity</label>
@@ -128,19 +104,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <label for="refrence" class="col-md-2 col-form-label text-md-start">Product Refrence</label>
-
-                                <div class="col-md-10">
-                                    <textarea name="refrence" class="form-control @error('refrence') is-invalid @enderror" id="refrence" rows="3"
-                                        placeholder="Enter Product Description">{{ old('refrence') }}</textarea>
-                                    @error('refrence')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+    
 
 
                             <div class="row mb-2">
@@ -169,16 +133,16 @@
                             </div>
 
 
-                            <div class="row mb-2">
+                            <div class="row mb-2" style="display: none;">
                                 <label for="statuses"
                                     class="col-md-2 col-form-label text-md-start">{{ __('Status') }}</label>
                                 <div class="col-md-10">
                                     <select id="statuses" class="form-select @error('contact') is-invalid @enderror"
                                         name="status">
                                         <option value="">Select Status</option>
-                                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>
+                                        <option value="1" selected>
                                             Enable</option>
-                                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>
+                                        <option value="0" >
                                             Disable</option>
                                     </select>
                                     @error('status')
