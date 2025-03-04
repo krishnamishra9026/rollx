@@ -237,7 +237,7 @@
 
                                                 <td>
 
-                                                    <button class="btn btn-sm btn-success"> {{ ucfirst($lead->status) }}</button>
+                                                    <button class="btn btn-sm btn-success" style="min-width: 140px;"> {{ ucfirst($lead->status) }}</button>
 
                                                 </td>
                                                 <td>                                                  
