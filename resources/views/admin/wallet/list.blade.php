@@ -42,25 +42,22 @@
                                                     class="text-body fw-semibold"> {{ $franchise->firstname }} {{ $franchise->lastname }} </a></td>
                                                 <td>{{ $franchise->wallet->balance ?? 0 }}</td>
                                                 <td>
-
                                                     <form action="{{ route('admin.wallet.store') }}" method="POST" id="filterForm">
                                                         @csrf
-                                                        <div class="row col-md-12">
-                                                            <div class="col-md-5">
-
-                                                                <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
+                                                        <div class="row g-2">
+                                                            <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
+                                                            
+                                                            <div class="col-md-5 col-12">
                                                                 <input type="number" name="amount" value="1" class="form-control" required min="1">
                                                             </div>
 
-
-                                                            <div class="col-md-6">
-                                                                <button type="submit" class="btn btn-sm btn-primary">Add Balance</button>
-
+                                                            <div class="col-md-6 col-12">
+                                                                <button type="submit" class="btn btn-sm btn-primary w-100">Add Balance</button>
                                                             </div>
                                                         </div>
                                                     </form>
-
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
