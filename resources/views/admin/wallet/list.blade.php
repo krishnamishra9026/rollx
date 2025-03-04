@@ -48,7 +48,7 @@
                                                             <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
                                                             
                                                             <div class="col-md-3 col-12">
-                                                                <input type="number" name="amount" value="1" class="form-control" required min="1">
+                                                                <input type="number" style="height: 34px;" name="amount" value="1" class="form-control" required min="1">
                                                             </div>
 
                                                             <div class="col-md-3 col-12">
