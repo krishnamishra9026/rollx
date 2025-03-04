@@ -44,7 +44,7 @@
                                                 <td>{{ $transaction->id }}</td>
                                                 <td>{{ str_replace("-", "", $transaction->amount) }}</td>
                                                 <td>{{ ucfirst($transaction->type) }}</td>
-                                                <td>{!!  str_replace('/admin/', '/franchise/', $transaction->meta['description']) ?? 'Added balance in wallet' !!}</td>
+                                                <td>{!!  str_replace('/admin/', '/franchise/', $transaction->meta['description'] ?? 'Added balance in wallet') ?? 'Added balance in wallet' !!}</td>
                                                 <td>{!!  $transaction->meta['balance'] ?? $transaction->wallet->balance !!}</td>
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                             </tr>

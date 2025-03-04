@@ -34,7 +34,6 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     */
 
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::get('direct-login/{token}', [LoginController::class, 'directLogin'])->name('direct-login');
     Route::post('login', [LoginController::class, 'login'])->name('login.submit');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 

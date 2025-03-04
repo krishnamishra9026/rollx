@@ -42,6 +42,7 @@
                                             <th>Phone</th>
                                              <th>Orders</th>
                                              <th>Sales</th>
+                                             <th>Direct Login</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -63,6 +64,9 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.sales.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->sales->count() }}</a>
+                                                </td>
+                                                <td>
+                                                     <a target="_blank" href="{{ route('login-franchise', $franchise->id) }}" class="btn btn-sm btn-primary">Login</a>
                                                 </td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
@@ -186,6 +190,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

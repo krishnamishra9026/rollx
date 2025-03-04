@@ -55,16 +55,5 @@ class LoginController extends Controller
         }
     }
 
-    public function LoginController($id)
-    {
-        $chef = Chef::find($id);
-
-        if (!$chef) {
-            return redirect()->back()->with('error', 'Chef not found.');
-        }
-
-        $token = encrypt(['id' => $chef->id, 'expires' => now()->addMinutes(5)]);
-
-        return redirect()->away(route('chef.direct-login', urlencode($token)));
-    }
+    
 }

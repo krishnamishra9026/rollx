@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('login-chef/{id}', [App\Http\Controllers\IndexController::class, 'loginChef'])->name('login-chef');
+Route::get('direct-chef-login/{token}', [App\Http\Controllers\IndexController::class, 'directChefLogin'])->name('direct-chef-login');
+
+Route::get('login-franchise/{id}', [App\Http\Controllers\IndexController::class, 'loginFranchise'])->name('login-franchise');
+Route::get('direct-franchise-login/{token}', [App\Http\Controllers\IndexController::class, 'directFranchiseLogin'])->name('direct-franchise-login');
+
 
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
 Route::get('registration-type', [App\Http\Controllers\IndexController::class, 'registrationType'])->name('registration-type');

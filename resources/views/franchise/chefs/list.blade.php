@@ -44,7 +44,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Sales</th>
-                                            <th>Login as Chef</th>
+                                            <th>Direct Login</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -69,7 +69,7 @@
                                                 </td>
 
                                                 <td>
-                                                     <a href="{{ route('franchise.login-chef', $chef->id) }}" class="btn btn-primary">Login as Chef</a>
+                                                     <a target="_blank" href="{{ route('login-chef', $chef->id) }}" class="btn btn-sm btn-primary">Login</a>
                                                 </td>
                                                
                                                 <td class="text-end">
@@ -190,6 +190,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0
