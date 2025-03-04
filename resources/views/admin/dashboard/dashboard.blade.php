@@ -145,7 +145,7 @@
                     <h5 class="mt-0 text-uppercase">Paspect Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $paspect_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
-                        <small class="text-white">View Details </small>                   
+                        <small>View Details </small>                   
                     </a>
                 </div>
             </div>          
@@ -171,7 +171,7 @@
                     <h5 class="mt-0 text-uppercase">Not Interested Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $not_interested_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
-                        <small class="text-white">View Details </small>                   
+                        <small>View Details </small>                   
                     </a>
                 </div>
             </div>          
