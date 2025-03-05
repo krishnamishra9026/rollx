@@ -84,7 +84,9 @@
                                                 <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success">{{ ucfirst($sale->status) }}</button>
+                                                    <button type="button" class="badge {{ $sale->status == 'Sold' ? 'bg-success' : 'bg-primary' }}" style="min-width: 50px;">
+                                                        {{ ucfirst($sale->status) }}
+                                                    </button>
                                                   
                                                 </td>
                                             </tr>
