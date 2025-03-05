@@ -28,11 +28,12 @@
                                     <thead class="bg-dark">
                                         <tr>
                                             <th>Id</th>
-                                            <th>Franchise Name</th>
-                                            <th>Amount</th>
-                                            <th>Description</th>
-                                            <th>Balance</th>
+                                            <th>Franchise</th>
                                             <th>Type</th>
+                                            <th>Credited</th>
+                                            <th>Debited</th>
+                                            <th>Balance</th>
+                                            <th>Description</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
@@ -45,19 +46,30 @@
                                                 <td><a href="{{ route('admin.franchises.show', $transaction->wallet->owner->id) }}"
                                                     class="text-body fw-semibold">{{ $transaction->wallet->owner->firstname }} {{ $transaction->wallet->owner->lastname }}</a>
                                                 </td>
-                                                    
-                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
 
                                                 <td>
-                                                    {!! $transaction->meta['description'] ?? 'Added Balance to Wallet' !!}
+                                                    <button type="button" class="badge {{ $transaction->type == 'deposit' ? 'bg-primary' : 'bg-success' }}" style="min-width: 65px;">
+                                                        {{ucfirst($transaction->type)}}
+                                                    </button>
                                                 </td>
 
-                                                 <td>
+                                                @if($transaction->type == 'deposit')
+                                                    
+                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                <td>0</td>
+                                                @else
+                                                <td>0</td>
+                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                @endif
+
+                                                <td>
                                                     {!! $transaction->meta['balance'] ?? $transaction->wallet->balance !!}
                                                 </td>
 
-                    
-                                                <td>{{ ucfirst($transaction->type) }}</td>
+                                                <td>
+                                                    {!! $transaction->meta['description'] ?? 'Added Balance to Wallet' !!}
+                                                </td>                                              
+                                                
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                               
                                             </tr>
@@ -102,6 +114,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

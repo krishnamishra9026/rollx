@@ -26,19 +26,31 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $filter                     = [];
-        $filter['name']             = $request->name;
+        $filter = [
+            'name' => $request->name,
+            'type' => $request->type,
+        ];
 
         $searchName = $request->name;
 
-        $transactions = Transaction::whereHas('wallet.owner', function ($query) use ($searchName) {
-            $query->where('firstname', 'LIKE', "%{$searchName}%")
-            ->orWhere('lastname', 'LIKE', "%{$searchName}%")
-            ->orWhere(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', "%{$searchName}%");
-        })->with(['wallet', 'wallet.owner'])->latest()->paginate(20);
-              
+        $transactions = Transaction::with(['wallet', 'wallet.owner']);
+
+        if ($searchName) {
+            $transactions = $transactions->whereHas('wallet.owner', function ($query) use ($searchName) {
+                $query->where('firstname', 'LIKE', "%{$searchName}%")
+                ->orWhere('lastname', 'LIKE', "%{$searchName}%")
+                ->orWhere(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', "%{$searchName}%");
+            });
+        }
+
+        if ($request->type) {
+            $transactions = $transactions->where('type', 'LIKE', "%{$request->type}%");
+        }
+
+        $transactions = $transactions->latest()->paginate(20);
 
         $franchises = Franchise::all();
+
 
         return view('admin.transactions.list', compact('transactions', 'filter', 'franchises'));
     }

@@ -31,7 +31,7 @@
                                             <th class="fw-bold">Franchise Id</th>
                                             <th class="fw-bold">Franchise Name</th>
                                             <th class="fw-bold">Wallet balance</th>
-                                            <th class="fw-bold  ">Action</th>
+                                            <th class="fw-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,8 +40,8 @@
                                                 <td>{{ $franchise->id }}</td>
                                                 <td> <a href="{{ route('admin.franchises.show', $franchise->id) }}"
                                                     class="text-body fw-semibold"> {{ $franchise->firstname }} {{ $franchise->lastname }} </a></td>
-                                                <td>{{ $franchise->wallet->balance ?? 0 }}</td>
-                                                <td>
+                                                <td class="text-cente">{{ $franchise->wallet->balance ?? 0 }}</td>
+                                                <td  class="float-center">
                                                     <form action="{{ route('admin.wallet.store') }}" method="POST" id="filterForm">
                                                         @csrf
                                                         <div class="row g-2">

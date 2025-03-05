@@ -16,7 +16,7 @@
             </div>
         </div>
         @include('franchise.includes.flash-message')
-        <!-- @include('franchise.wallet.filter') -->
+        @include('franchise.wallet.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -31,10 +31,11 @@
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Id</th>
-                                            <th class="fw-bold">Amount</th>
                                             <th class="fw-bold">Type</th>
-                                            <th class="fw-bold">Description</th>
+                                            <th>Credited</th>
+                                            <th>Debited</th>
                                             <th class="fw-bold">Balance</th>
+                                            <th class="fw-bold">Description</th>
                                             <th class="fw-bold">Created At</th>
                                         </tr>
                                     </thead>
@@ -42,10 +43,24 @@
                                         @foreach ($transactions as $transaction)
                                             <tr>
                                                 <td>{{ $transaction->id }}</td>
+
+                                                <td>
+                                                    <button type="button" class="badge {{ $transaction->type == 'deposit' ? 'bg-primary' : 'bg-success' }}" style="min-width: 65px;">
+                                                        {{ucfirst($transaction->type)}}
+                                                    </button>
+                                                </td>
+
+                                                @if($transaction->type == 'deposit')
+                                                    
                                                 <td>{{ str_replace("-", "", $transaction->amount) }}</td>
-                                                <td>{{ ucfirst($transaction->type) }}</td>
-                                                <td>{!!  str_replace('/admin/', '/franchise/', $transaction->meta['description'] ?? 'Added balance in wallet') ?? 'Added balance in wallet' !!}</td>
+                                                <td>0</td>
+                                                @else
+                                                <td>0</td>
+                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                @endif
+
                                                 <td>{!!  $transaction->meta['balance'] ?? $transaction->wallet->balance !!}</td>
+                                                <td>{!!  str_replace('/admin/', '/franchise/', $transaction->meta['description'] ?? 'Added balance in wallet') ?? 'Added balance in wallet' !!}</td>
                                                 <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                             </tr>
                                         @endforeach
@@ -92,6 +107,8 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

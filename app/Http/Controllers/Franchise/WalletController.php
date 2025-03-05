@@ -17,12 +17,25 @@ class WalletController extends Controller
         $this->middleware('auth:franchise');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $transactions = $user->wallet->transactions()->orderBy('created_at', 'desc')->paginate(10);              
 
-        return view('franchise.wallet.list', compact('transactions'));
+        $filter = [
+            'type' => $request->type,
+        ];
+
+        $type = request('type');
+
+        $transactions = $user->wallet->transactions()
+        ->when($type, function ($query) use ($type) {
+            return $query->where('type', $type); 
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);           
+
+
+        return view('franchise.wallet.list', compact('transactions', 'filter'));
     }
 
     /**
