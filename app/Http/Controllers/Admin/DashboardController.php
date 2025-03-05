@@ -59,6 +59,18 @@ class DashboardController extends Controller
         }
     }
 
+
+    public function adminIntendLogin($id)
+    {
+        $user = Administrator::whereId($id)->first();
+        if (!is_null($user)) {
+            Auth::guard('administrator')->login($user);
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
+
     public function help(){
         $helps = Help::orderBy('id', 'desc')->paginate(20);
         return view('admin.support.list', compact('helps'));

@@ -41,6 +41,7 @@
                                             <th class="bg-green">Email</th>
                                             <th class="bg-green">Phone</th>
                                             <th class="bg-green">Enabled</th>
+                                            <th>Direct Login</th>
                                             <th class="bg-green"></th>
                                         </tr>
                                     </thead>
@@ -70,6 +71,11 @@
                                                     <label for="switch{{ $admin->id }}" data-on-label="Yes"
                                                         data-off-label="No"></label>
                                                 </td>
+
+                                                <td>
+                                                     <a target="_blank" href="{{ route('admin.intend-login', $admin->id) }}" class="btn btn-sm btn-primary">Login</a>
+                                                </td>
+                                                
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
