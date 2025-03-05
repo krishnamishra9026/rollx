@@ -52,7 +52,8 @@ class LoginController extends Controller
     {
         Auth::guard('administrator')->logout();
 
-        echo $adminId = $request->cookie('admin_id');
+
+        echo $adminId = Cookie::get('admin_id');
         die;
 
         if ($adminId) {
