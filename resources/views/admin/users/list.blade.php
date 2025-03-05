@@ -41,8 +41,8 @@
                                             <th class="bg-green">Email</th>
                                             <th class="bg-green">Phone</th>
                                             <th class="bg-green">Enabled</th>
-                                            <th>Direct Login</th>
-                                            <th class="bg-green"></th>
+                                            <th class="bg-green">Direct Login</th>
+                                            <th class="bg-green text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -200,6 +200,8 @@
                 }],
                 columns: [{
                     orderable: !1
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
