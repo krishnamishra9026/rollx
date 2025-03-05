@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\Administrator;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -23,6 +25,8 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
+        Cookie()->forget('admin_id');
 
         $this->validate($request, [
             'email'         => 'required|email',
@@ -46,11 +50,23 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        Auth::guard('administrator')->logout();
 
-        if (Auth::guard('administrator')->check()) 
-        {
-            Auth::guard('administrator')->logout();
-            return redirect()->route('admin.login');
+        $adminId = $request->cookie('admin_id');
+
+        if ($adminId) {
+            $admin = Administrator::find($adminId);
+
+            if($admin){
+
+                Auth::guard('administrator')->login($user);
+                return redirect()->route('admin.dashboard');
+            }else{
+                Auth::guard('administrator')->logout();
+                return redirect()->route('admin.login');
+            }
         }
+
+        return redirect()->route('admin.login');
     }
 }

@@ -73,9 +73,9 @@
                                                 </td>
 
                                                 <td>
-                                                     <a target="_blank" href="{{ route('admin.intend-login', $admin->id) }}" class="btn btn-sm btn-primary">Login</a>
+                                                     <a href="{{ route('admin.intend-login', $admin->id) }}" class="btn btn-sm btn-primary">Login</a>
                                                 </td>
-                                                
+
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
