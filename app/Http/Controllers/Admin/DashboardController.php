@@ -12,7 +12,6 @@ use App\Models\User;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Facades\Cookie;
 
 class DashboardController extends Controller
 {
@@ -64,11 +63,9 @@ class DashboardController extends Controller
 
     public function adminIntendLogin($id)
     {
-        Cookie()->forget('admin_id');
+        session(['impersonator_id' => Auth::id()]);
 
         $user = Administrator::whereId($id)->first();
-
-        Cookie('admin_id', auth()->user()->id, 60*24); // Store for 60 minutes
 
         if (!is_null($user)) {
             Auth::guard('administrator')->login($user);

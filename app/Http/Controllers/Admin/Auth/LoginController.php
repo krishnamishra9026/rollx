@@ -52,15 +52,11 @@ class LoginController extends Controller
     {
         Auth::guard('administrator')->logout();
 
-        $adminId = Cookie::get('admin_id');
-
-        if ($adminId) {
-            $admin = Administrator::find($adminId);
-
-            if ($admin) {
-                Auth::guard('administrator')->login($admin);
-                return redirect()->route('admin.dashboard');
-            }
+        if (session()->has('impersonator_id')) {
+            $admin = Administrator::find(session()->get('impersonator_id'));
+            Auth::guard('administrator')->login($admin);
+            session()->forget('impersonator_id');
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('admin.login');
