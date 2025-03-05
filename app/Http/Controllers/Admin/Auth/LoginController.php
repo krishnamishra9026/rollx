@@ -57,13 +57,9 @@ class LoginController extends Controller
         if ($adminId) {
             $admin = Administrator::find($adminId);
 
-            if($admin){
-
-                Auth::guard('administrator')->login($user);
+            if ($admin) {
+                Auth::guard('administrator')->login($admin);
                 return redirect()->route('admin.dashboard');
-            }else{
-                Auth::guard('administrator')->logout();
-                return redirect()->route('admin.login');
             }
         }
 
