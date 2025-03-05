@@ -22,7 +22,7 @@
             <div class="col-xl-4 col-lg-4">
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-primary">                    
-                        <h5 class="mt-0 text-uppercase">Total Qty.</h5>
+                        <h5 class="mt-0 text-uppercase">Total Quantity</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_quatity }}</h2>
                         <h5 class="mt-0 text-uppercase">Total Sale</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_sales }}</h2>
@@ -33,7 +33,7 @@
             <div class="col-xl-4 col-lg-4">
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-secondary">                    
-                        <h5 class="mt-0 text-uppercase">Total Sold Qty.</h5>
+                        <h5 class="mt-0 text-uppercase">Total Sold Quantity</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_sold_quatity }}</h2>
                         <h5 class="mt-0 text-uppercase">Total Sold Sale</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_sold_sales }}</h2>
@@ -44,7 +44,7 @@
             <div class="col-xl-4 col-lg-4">
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-success">                    
-                        <h5 class="mt-0 text-uppercase">Total Wastage Qty.</h5>
+                        <h5 class="mt-0 text-uppercase">Total Wastage Quantity</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_wastage_quatity }}</h2>
                         <h5 class="mt-0 text-uppercase">Total Wastage Sale</h5>
                         <h2 class="my-2" id="active-users-count">{{ @$total_wastage_sales }}</h2>
