@@ -11,6 +11,7 @@ use App\Models\Franchise;
 use App\Models\User;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Auth;
 
 class DashboardController extends Controller
 {
