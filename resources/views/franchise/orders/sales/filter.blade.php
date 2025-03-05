@@ -12,7 +12,7 @@
 
                         <div class="col-sm-2 mb-2">
                             <label class="col-form-label" for="chef">Chefs</label>
-                            <select class="form-select" id="chef" name="chef">
+                            <select class="form-select" data-toggle=select2 id="chef" name="chef">
                                 <option value="">All</option>
                                 @foreach($chefs as $chef)
                                 <option value="{{ $chef->id }}" {{ request('chef') == $chef->id ? 'selected' : '' }}>
@@ -24,7 +24,7 @@
 
                         <div class="col-sm-2 mb-2">
                             <label class="col-form-label" for="order">Orders</label>
-                            <select class="form-select" id="order" name="order">
+                            <select class="form-select" data-toggle=select2 id="order" name="order">
                                 <option value="">All</option>
                                 @foreach($orders as $order)
                                 <option value="{{ $order->id }}" {{ request('order') == $order->id ? 'selected' : '' }}>
@@ -36,7 +36,7 @@
 
                         <div class="col-sm-2 mb-2">
                             <label class="col-form-label" for="product">Products</label>
-                            <select class="form-select" id="product" name="product">
+                            <select class="form-select" data-toggle=select2 id="product" name="product">
                                 <option value="">All</option>
                                 @foreach($products as $product)
                                 <option value="{{ $product->id }}" {{ request('product') == $product->id ? 'selected' : '' }}>
@@ -48,7 +48,7 @@
 
                         <div class="col-sm-3 mb-2">
                             <label class="col-form-label" for="statuses">Status</label>
-                            <select class="form-select" id="statuses" name="status">
+                            <select class="form-select" data-toggle=select2 id="statuses" name="status">
                                 <option value="">All</option>
                                 <option value="Sold" {{ $filter['status'] == 'Sold'  ? 'selected' : '' }}>Sold</option>
                                 <option value="Wastage" {{ $filter['status'] == 'Wastage'  ? 'selected' : '' }}>Wastage</option>
@@ -60,7 +60,7 @@
                             <div class="page-title-box">
 
                                 @isset($order->id)
-                                <a href="{{ route('franchise.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> New</a>
+                                <a href="{{ route('franchise.order.sales.create', ['order_id' => request('order_id')]) }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> New</a>
                                 @else
 
                                 <a href="{{ route('franchise.order.sales.create') }}" class="btn btn-sm btn-dark float-end"><i

@@ -32,7 +32,7 @@
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="product">Products</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" id="product" name="product_id">
+                                    <select class="form-select" data-toggle=select2 id="product" name="product_id">
                                         <option value="">Select Product</option>
                                         @foreach($products as $product)
                                         <option value="{{ $product->id }}" {{ request('product')  == $product->id ? 'selected' : '' }}>
@@ -47,7 +47,7 @@
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="franchise">Franchises</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" id="franchise" name="franchise_id">
+                                    <select class="form-select" data-toggle=select2 id="franchise" name="franchise_id">
                                         <option value="">Select Franchise</option>
                                         @foreach($franchises as $franchise)
                                         <option value="{{ $franchise->id }}" {{ request('franchise_id') == $franchise->id ? 'selected' : '' }}>

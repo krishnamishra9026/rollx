@@ -8,7 +8,7 @@
 
                         <div class="col-sm-3 mb-2">
                             <label class="col-form-label" for="franchise">Transaction Type</label>
-                            <select class="form-select" id="type" name="type">
+                            <select class="form-select" data-toggle=select2 id="type" name="type">
                                 <option value="">All</option>
                                 <option value="deposit" {{ request('type') == 'deposit' ? 'selected' : '' }}>Deposit</option>
                                 <option value="withdraw" {{ request('type') == 'withdraw' ? 'selected' : '' }}>Withdraw</option>

@@ -74,7 +74,7 @@
 
                             <div class="col-sm-6">
                                 <label class="col-form-label" for="franchise_id">Franchise</label>
-                                <select class="form-select" id="franchise_id" name="franchise_id" disabled>
+                                <select class="form-select" data-toggle=select2 id="franchise_id" name="franchise_id" disabled>
                                     <option value="">All</option>
                                     @foreach($franchises as $franchise)
                                     <option value="{{ $franchise->id }}" {{ old('franchise_id', $chef->franchise_id) == $franchise->id ? 'selected' : '' }}>

@@ -1,6 +1,18 @@
 @extends('layouts.chef')
 @section('title', 'Create Purchase Order')
 @section('content')
+
+<style type="text/css">
+
+    input[type="checkbox"]:checked + label {
+        width: 60px; 
+    }
+
+    input[type="checkbox"]:not(:checked) + label {
+        width: 80px; 
+    }
+
+</style>
     <!-- Start Content-->
     <div class="container-fluid">
 
@@ -69,17 +81,10 @@
                             <div class="row mb-2">
                                 <label for="statuses" class="col-md-3 col-form-label text-md-start">{{ __('Status') }}</label>
                                 <div class="col-md-9">
-                                    <select id="statuses" class="form-select @error('contact') is-invalid @enderror"
-                                        name="status">
-                                        <option value="">Select Status</option>
-                                        <option value="Sold" {{ old('status') == 'Sold' ? 'selected' : '' }}>Sold</option>
-                                        <option value="Wastage" {{ old('status') == 'Wastage' ? 'selected' : '' }}>Wastage</option>
-                                    </select>
-                                    @error('status')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="hidden" name="status" value="Wastage">
+
+                                    <input type="checkbox" id="switch" checked data-switch="success" value="Sold" name="status" class="status" />
+                                    <label for="switch" data-on-label="Sold"  data-off-label="Wastage"></label>
                                 </div>
                             </div>
 

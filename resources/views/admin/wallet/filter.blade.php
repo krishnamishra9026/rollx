@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-sm-3 mb-2">
                             <label class="col-form-label" for="franchise">Franchises</label>
-                            <select class="form-select" id="franchise" name="franchise">
+                            <select class="form-select" data-toggle=select2 id="franchise" name="franchise">
                                 <option value="">All</option>
                                 @foreach($franchise_list as $franchise)
                                     <option value="{{ $franchise->id }}" 

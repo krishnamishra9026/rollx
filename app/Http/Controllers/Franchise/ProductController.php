@@ -23,38 +23,37 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $filter                     = [];
-        $filter['name']             = $request->name;
-        $filter['model_number']     = $request->model_number;
-        $filter['serial_number']    = $request->serial_number;
-        $filter['parent_category']  = $request->parent_category;
+        $filter                = [];
+        $filter['product']     = $request->product;
 
         $products              = Product::where('quantity', '>', 0);
-        $products              = isset($filter['name']) ? $products->where('name', 'LIKE', '%' . $filter['name'] . '%') : $products;
-        $products              = isset($filter['model_number']) ? $products->where('model_number', 'LIKE', '%' . $filter['model_number'] . '%') : $products;
-        $products              = isset($filter['serial_number']) ? $products->where('serial_number', 'LIKE', '%' . $filter['serial_number'] . '%') : $products;
+        $products              = isset($filter['product']) ? $products->where('id', $filter['product'] ) : $products;
 
         $products              = $products->orderBy('id', 'desc')->paginate(20);
 
-        return view('franchise.products.list', compact('products', 'filter'));
+        $product_data          = Product::all();
+
+        return view('franchise.products.list', compact('products', 'filter', 'product_data'));
     }
 
     public function stocks(Request $request)
     {
         $filter                     = [];
-        $filter['name']             = $request->name;
+        $filter['product']             = $request->product;
         $filter['model_number']     = $request->model_number;
         $filter['serial_number']    = $request->serial_number;
         $filter['parent_category']  = $request->parent_category;
 
         $stocks              = Product::where('quantity', '>', 0);
-        $stocks              = isset($filter['name']) ? $stocks->where('name', 'LIKE', '%' . $filter['name'] . '%') : $stocks;
+        $stocks              = isset($filter['product']) ? $stocks->where('id', $filter['product']) : $stocks;
         $stocks              = isset($filter['model_number']) ? $stocks->where('model_number', 'LIKE', '%' . $filter['model_number'] . '%') : $stocks;
         $stocks              = isset($filter['serial_number']) ? $stocks->where('serial_number', 'LIKE', '%' . $filter['serial_number'] . '%') : $stocks;
 
         $stocks              = $stocks->orderBy('id', 'desc')->paginate(20);
 
-        return view('franchise.stocks.list', compact('stocks', 'filter'));
+        $product_data          = Product::all();
+
+        return view('franchise.stocks.list', compact('stocks', 'filter', 'product_data'));
     }
 
     /**

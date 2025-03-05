@@ -35,7 +35,7 @@
 
                                 <div class="col-sm-6 mb-2 {{ $errors->has('admin_id') ? 'has-error' : '' }}">
                                     <label class="col-form-label" for="admin_id">Sale Employee</label>
-                                    <select class="form-select" id="admin_id" name="admin_id" data-toggle=select2>
+                                    <select class="form-select" data-toggle=select2 id="admin_id" name="admin_id" data-toggle=select2>
                                         <option value="">Select Sale Employee</option>
                                         @foreach($sale_employees as $sale_employee)
                                         <option value="{{ $sale_employee->id }}" {{ request('sale_employee') == $sale_employee->id ? 'selected' : '' }}>

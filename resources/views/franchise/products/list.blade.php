@@ -131,9 +131,9 @@
                                             </tr>                                          
                                         @endforeach
                                         </tbody>
-                                    <tr>
+                                    <tr >
                                         <td colspan="8">
-                                        <button type="submit" class="btn btn-success text-end" form="CreateOrders" style="float: right;">Create Orders</button>
+                                        <button type="submit" class="btn btn-sm btn-success text-end" form="CreateOrders" style="float: right;">Create Orders</button>
                                         </td>
                                     </tr>
 

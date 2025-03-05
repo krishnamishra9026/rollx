@@ -12,7 +12,7 @@
 
                         <div class="col-sm-4 mb-2">
                             <label class="col-form-label" for="product">Products</label>
-                            <select class="form-select" id="product" name="product">
+                            <select class="form-select" data-toggle=select2 id="product" name="product">
                                 <option value="">All</option>
                                 @foreach($products as $product)
                                 <option value="{{ $product->id }}" {{ request('product') == $product->id ? 'selected' : '' }}>
@@ -26,7 +26,7 @@
 
                         <div class="col-sm-4 mb-2">
                             <label class="col-form-label" for="statuses">Status</label>
-                            <select class="form-select" id="statuses" name="status">
+                            <select class="form-select" data-toggle=select2 id="statuses" name="status">
                                 <option value="">All</option>
                                 <option value="Sold" {{ request('status') == 'Sold'  ? 'selected' : '' }}>Sold</option>
                                 <option value="Wastage" {{ request('status') == 'Wastage'  ? 'selected' : '' }}>Wastage</option>

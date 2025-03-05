@@ -30,17 +30,17 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $filter                     = [];
-        $filter['name']             = $request->name;
-        $filter['serial_number']    = $request->serial_number;
-        $filter['parent_category']  = $request->parent_category;
+        $filter['product']             = $request->product;
+        $filter['outlet_name']    = $request->outlet_name;
 
         $products              = Product::query();
-        $products              = isset($filter['name']) ? $products->where('name', 'LIKE', '%' . $filter['name'] . '%') : $products;
-        $products              = isset($filter['serial_number']) ? $products->where('serial_number', 'LIKE', '%' . $filter['serial_number'] . '%') : $products;
+        $products              = isset($filter['product']) ? $products->where('id', $filter['product'] ) : $products;
+        $products              = isset($filter['outlet_name']) ? $products->where('outlet_name', 'LIKE', '%' . $filter['outlet_name'] . '%') : $products;
 
         $products              = $products->orderBy('id', 'desc')->paginate(20);
+        $product_data          = Product::all();
 
-        return view('admin.products.list', compact('products', 'filter'));
+        return view('admin.products.list', compact('products', 'filter', 'product_data'));
     }
 
     /**
