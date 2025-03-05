@@ -18,6 +18,7 @@
                             <input type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{ $filter['phone'] }}">
                         </div>                                                
                         <div class="col-sm-12 text-end">
+                            <a href="{{ route('admin.chefs.create') }}" class="btn btn-sm btn-dark float-end ms-1"><i class="mdi mdi-plus"></i> Chef</a>
                             <button type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-filter"></i> Filter</button>
                             <a href="{{ route('admin.chefs.index') }}" class="btn btn-sm btn-primary"><i class="mdi mdi-refresh"></i> Reset</a>
                         </div>

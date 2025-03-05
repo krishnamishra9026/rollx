@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Franchise;
 use App\Models\Notification;
 use App\Models\Chef;
 use Illuminate\Http\Request;
@@ -45,7 +46,8 @@ class ChefController extends Controller
      */
     public function create()
     {       
-        return view('admin.chefs.create');
+        $franchises = franchise::all();
+        return view('admin.chefs.create', compact('franchises'));
     }
 
     /**
@@ -63,19 +65,12 @@ class ChefController extends Controller
 
         $chef                       = new Chef();
         $chef->firstname            = $request->firstname;
-        $chef->admin_id               = auth()->user()->id;
+        $chef->franchise_id         = $request->franchise_id;
         $chef->lastname             = $request->lastname;
         $chef->email                = $request->email;
-        $chef->email_additional     = $request->email_additional;
         $chef->password             = Hash::make($request->password);
         $chef->dialcode             = $request->dialcode;
         $chef->phone                = $request->phone;
-        $chef->gender               = $request->gender;
-        $chef->address              = $request->address;
-        $chef->city                 = $request->city;
-        $chef->state                = $request->state;
-        $chef->zipcode              = $request->zipcode;
-        $chef->iso2                 = $request->iso2;
         $chef->status               = true;
         $chef->email_verified_at    = now();
 
@@ -113,8 +108,9 @@ class ChefController extends Controller
     public function edit(string $id)
     {
         $chef          = Chef::find($id);
+        $franchises = franchise::all();
         $chef->avatar  = isset($chef->avatar) ? asset('storage/uploads/admin/' . $chef->avatar) : URL::to('assets/images/users/avatar.png');       
-        return view('admin.chefs.edit', compact('chef'));
+        return view('admin.chefs.edit', compact('chef', 'franchises'));
     }
 
     /**

@@ -107,7 +107,7 @@ class FranchiseController extends Controller
     {
         $franchise          = Franchise::find($id);
         $franchise->avatar  = isset($franchise->avatar) ? asset('storage/uploads/franchise/' . $franchise->avatar) : URL::to('assets/images/users/avatar.png');
-        $franchise->country = Country::where('code', $franchise->iso2)->first()->name;
+        $franchise->country = Country::where('code', $franchise->iso2)->first()->name ?? '';
         return view('admin.franchises.show', compact('franchise'));
     }
 

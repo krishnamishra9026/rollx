@@ -12,9 +12,10 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
             
-                        <a href="javascript:void(0)" class="btn btn-sm btn-danger float-end me-1" style="display: none"
-                            id="delete-all">
-                            <i class="mdi mdi-delete"></i> {{ __('Delete') }}</a>
+                        <a href="{{ route('admin.chefs.create') }}" class="btn btn-sm btn-dark float-end ms-1"><i
+                                class="mdi mdi-plus"></i> Chef</a>
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-filter"></i> Filter</button>
+                        <a href="{{ route('admin.chefs.index') }}" class="btn btn-sm btn-primary"><i class="mdi mdi-refresh"></i> Reset</a>
                     </div>
                     <h4 class="page-title">Chefs</h4>
                 </div>

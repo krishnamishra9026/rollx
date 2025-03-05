@@ -33,10 +33,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 mb-2">
-                                <h4 class="text-dark">Personal Details</h4>
-                            </div>                            
+                        <div class="row">                           
                             <div class="col-sm-6 mb-2 {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <label class="col-form-label" for="firstname">Firstname</label>
                                 <input type="text" class="form-control" id="firstname" name="firstname"
@@ -72,23 +69,6 @@
                                 <input id="dial-code" name="dialcode" type="hidden"
                                     value="{{ old('dialcode') }}">
                             </div>
-                            <div class="col-sm-6 mb-2">
-                                <label class="col-form-label" for="gender">{{ __('Gender') }}</label>
-
-                                <select id="gender" class="form-select" name="gender">
-                                    <option value="">Select Gender</option>
-                                    <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                                    <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female
-                                    </option>
-                                    <option value="Other" {{ old('gender') == 'Other' ? 'selected' : '' }}>Other</option>
-                                </select>
-
-                                @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                             <div class="col-sm-6 mb-2 {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <label class="col-form-label" for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
@@ -107,6 +87,18 @@
                                         class="error invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-sm-6">
+                                <label class="col-form-label" for="franchise_id">Franchise</label>
+                                <select class="form-select" id="franchise_id" name="franchise_id">
+                                    <option value="">All</option>
+                                    @foreach($franchises as $franchise)
+                                    <option value="{{ $franchise->id }}" {{ old('franchise_id') == $franchise->id ? 'selected' : '' }}>
+                                        {{ $franchise->firstname }} {{ $franchise->lastname }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             
                             <div class="col-sm-6">
                                 <label class="col-form-label" for="avatar">Profile Picture</label>
@@ -122,58 +114,18 @@
                                 <img id="preview_img" src="{{ asset('assets/images/users/avatar.png') }}" class="mt-2"
                                     width="100" height="100" />
                             </div>
+
+                            <div class="card-footer text-end">
+                                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary me-1"><i
+                                    class="mdi mdi-chevron-double-left me-1"></i>Back</a>
+                                    <button type="submit" class="btn btn-sm btn-danger" form="customerForm"><i
+                                        class="mdi mdi-database me-1"></i>Save</button>
+                                    </div>
+
                         </div>
 
                     </div>
 
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 mb-2">
-                                <h4 class="text-dark">Contact Details</h4>
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('address') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Enter Address" value="{{ old('address') }}">
-                                @error('address')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('city') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="city">City</label>
-                                <input type="text" class="form-control" id="city" name="city"
-                                    placeholder="Enter City" value="{{ old('city') }}">
-                                @error('city')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('state') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="state">State</label>
-                                <input type="text" class="form-control" id="state" name="state"
-                                    placeholder="Enter State" value="{{ old('state') }}">
-                                @error('state')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-6 mb-2 {{ $errors->has('zipcode') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="zipcode">Zipcode</label>
-                                <input type="text" class="form-control" id="zipcode" name="zipcode"
-                                    placeholder="Enter Zipcode" value="{{ old('zipcode') }}">
-                                @error('zipcode')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-end">
-                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary me-1"><i
-                                class="mdi mdi-chevron-double-left me-1"></i>Back</a>
-                        <button type="submit" class="btn btn-sm btn-danger" form="customerForm"><i
-                                class="mdi mdi-database me-1"></i>Save</button>
-                    </div>
                 </div>
             </form>
         </div>

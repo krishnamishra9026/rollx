@@ -10708,7 +10708,7 @@ body[data-layout="topnav"] .container-fluid, body[data-layout="topnav"] .contain
     background-color: rgba(49, 58, 70, 0.2); }
 
 .card {
-  border: none;
+ /* border: none;*/
   -webkit-box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, 0.15);
           box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, 0.15);
   margin-bottom: 24px; }

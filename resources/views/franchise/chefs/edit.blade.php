@@ -34,10 +34,7 @@
                 @method('PUT')
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 mb-2">
-                                <h4 class="text-dark">Personal Details</h4>
-                            </div>                            
+                        <div class="row">                           
                             <div class="col-sm-6 mb-2 {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <label class="col-form-label" for="firstname">Firstname</label>
                                 <input type="text" class="form-control" id="firstname" name="firstname"
@@ -54,6 +51,7 @@
                                     <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="col-sm-6 mb-2 {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label class="col-form-label" for="email">Email Address</label>
                                 <input type="email" class="form-control" id="email" name="email"
@@ -61,15 +59,7 @@
                                 @error('email')
                                     <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
                                 @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('email_additional') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="email_additional">Email Address (Additional)</label>
-                                <input type="email" class="form-control" id="email_additional" name="email_additional"
-                                    placeholder="Enter Email Address (Additional)" value="{{ old('email_additional', $chef->email_additional) }}">
-                                @error('email_additional')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            </div>           
 
                             <div class="col-sm-6 mb-2 {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label class="col-form-label" for="phone">Phone Number</label>
@@ -81,23 +71,8 @@
                                 <input id="dial-code" name="dialcode" type="hidden"
                                     value="{{ isset($franchise) ? $franchise->dialcode : '' }}">
                             </div>
-                            <div class="col-sm-6 mb-2">
-                                <label class="col-form-label" for="gender">{{ __('Gender') }}</label>
 
-                                <select id="gender" class="form-select" name="gender">
-                                    <option value="">Select Gender</option>
-                                    <option value="Male" {{ old('gender', $chef->gender) == 'Male' ? 'selected' : '' }}>Male</option>
-                                    <option value="Female" {{ old('gender', $chef->gender) == 'Female' ? 'selected' : '' }}>Female
-                                    </option>
-                                    <option value="Other" {{ old('gender', $chef->gender) == 'Other' ? 'selected' : '' }}>Other</option>
-                                </select>
-
-                                @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>                           
+                                                         
                            
                             <div class="col-sm-6">
                                 <label class="col-form-label" for="avatar">Profile Picture</label>
@@ -117,67 +92,15 @@
 
                     </div>
 
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 mb-2">
-                                <h4 class="text-dark">Contact Details</h4>
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('address') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Enter Address" value="{{ old('address', $chef->address) }}">
-                                @error('address')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('city') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="city">City</label>
-                                <input type="text" class="form-control" id="city" name="city"
-                                    placeholder="Enter City" value="{{ old('city', $chef->city) }}">
-                                @error('city')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('state') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="state">State</label>
-                                <input type="text" class="form-control" id="state" name="state"
-                                    placeholder="Enter State" value="{{ old('state', $chef->state) }}">
-                                @error('state')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2">
-                                <label class="col-form-label" for="country">{{ __('Country') }}</label>
-
-                                <select id="country" class="form-select" name="iso2">
-                                    <option value="">Select Country</option>
-                                </select>
-
-                                @error('country')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-2 {{ $errors->has('zipcode') ? 'has-error' : '' }}">
-                                <label class="col-form-label" for="zipcode">Zipcode</label>
-                                <input type="text" class="form-control" id="zipcode" name="zipcode"
-                                    placeholder="Enter Zipcode" value="{{ old('zipcode', $chef->zipcode) }}">
-                                @error('zipcode')
-                                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
                     <div class="card-footer text-end">
                         <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary me-1"><i
                                 class="mdi mdi-chevron-double-left me-1"></i>Back</a>
                         <button type="submit" class="btn btn-sm btn-danger" form="chefForm"><i
                                 class="mdi mdi-database me-1"></i>Update</button>
                     </div>
+
                 </div>
+         
             </form>
         </div>
     </div>
