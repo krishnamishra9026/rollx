@@ -264,6 +264,8 @@
 
     <!-- Datatable Init js -->
     <script>
+
+        @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
         $(function() {
             $("#basic-datatable").DataTable({
                 paging: !1,
@@ -301,6 +303,46 @@
                 }, ]
             })
         });
+
+        @else
+
+        $(function() {
+            $("#basic-datatable").DataTable({
+                paging: !1,
+                pageLength: 20,
+                lengthChange: !1,
+                searching: !1,
+                ordering: !0,
+                info: !1,
+                autoWidth: !1,
+                responsive: !0,
+                order: [
+                    [0, "desc"]
+                ],
+                columnDefs: [{
+                    targets: [0],
+                    visible: !0,
+                    searchable: !0
+                }],
+                columns: [{
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                }, {
+                    orderable: !0
+                },  {
+                    orderable: !1
+                }, ]
+            })
+        });
+
+        @endif
 
         function confirmDelete(e) {
             Swal.fire({
