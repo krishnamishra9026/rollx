@@ -1,7 +1,7 @@
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
-        <li class="dropdown notification-list" style="display: none;">
+        <li class="dropdown notification-list" style="display: block;">
             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
                 <span class="noti-icon-badge"></span>
@@ -26,7 +26,7 @@
                     @if($key > 4) 
                     @php break; @endphp
                     @endif
-                    <div class="dropdown-item notify-item">
+                    <div class="dropdown-item notify-item border-bottom">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -39,7 +39,6 @@
                             <a href="{{ $notification->data['order_url'] }}">View Order #{{ $notification->data['order_id'] }}</a>
                             @endif
                         </p>
-                        <hr>
                     </div>
                     @endforeach
                     @else
