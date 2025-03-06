@@ -1,14 +1,3 @@
-<style type="text/css">
-    
-  @media (max-width: 768px) {
-    .dropdown-menu {
-      float: center;
-      transform: translateX(-50%) !important;
-      right: auto !important;
-    }
-  }
-
-</style>
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
