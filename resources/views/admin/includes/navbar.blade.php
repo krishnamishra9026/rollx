@@ -1,3 +1,14 @@
+<style type="text/css">
+    
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      float: center;
+      transform: translateX(-50%) !important;
+      right: auto !important;
+    }
+  }
+
+</style>
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
 
@@ -26,7 +37,7 @@
                     @if($key > 4) 
                     @php break; @endphp
                     @endif
-                    <div class="dropdown-item notify-item border-bottom">
+                    <div class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
@@ -39,6 +50,7 @@
                             <a href="{{ $notification->data['order_url'] }}">View Order #{{ $notification->data['order_id'] }}</a>
                             @endif
                         </p>
+                        <hr>
                     </div>
                     @endforeach
                     @else
