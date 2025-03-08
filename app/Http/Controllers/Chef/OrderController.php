@@ -48,7 +48,7 @@ class OrderController extends Controller
         $orders              = isset($filter['created_at']) ? $orders->whereDate('created_at', $filter['created_at']) : $orders;
         $orders              = $orders->orderBy("id", "desc")->paginate(20);
 
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('chef.orders.list', compact('orders', 'filter', 'products'));
     }

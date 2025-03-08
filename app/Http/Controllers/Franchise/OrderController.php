@@ -44,7 +44,7 @@ class OrderController extends Controller
         $orders              = isset($filter['product']) ? $orders->where('product_id',  $filter['product'] ) : $orders;
         $orders              = $orders->where('franchise_id', auth()->user()->id)->orderBy("id", "desc")->paginate(20);
 
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('franchise.orders.list', compact('orders', 'filter', 'products'));
     }

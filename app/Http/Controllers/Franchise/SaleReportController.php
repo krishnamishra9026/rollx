@@ -65,10 +65,10 @@ class SaleReportController extends Controller
 
               
 
-        $orders = Order::all();
-        $products = Product::all();
-        $franchises = Franchise::all();
-        $chefs = Chef::all();
+        $orders = Order::latest()->get();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
+        $chefs = Chef::latest()->get();
 
         return view('franchise.orders.sales.reports.list', compact('sales', 'filter', 'orders', 'products', 'chefs', 'franchises', 'total_sales', 'total_quatity', 'total_sold_sales', 'total_sold_quatity', 'total_wastage_sales', 'total_wastage_quatity'));
     }

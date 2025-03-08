@@ -71,7 +71,7 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Amount</th>
-                                            <th class="fw-bold">Order Dcreated_atate</th>
+                                            <th class="fw-bold">Order Date</th>
                                             <th class="fw-bold">Status</th>
                                         </tr>
                                     </thead>

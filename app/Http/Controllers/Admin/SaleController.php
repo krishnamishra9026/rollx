@@ -54,10 +54,10 @@ class SaleController extends Controller
 
         $order = Order::where('id', $order_id)->first();
 
-        $orders = Order::all();
-        $products = Product::all();
-        $franchises = Franchise::all();
-        $chefs = Chef::all();
+        $orders = Order::latest()->get();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
+        $chefs = Chef::latest()->get();
 
         return view('admin.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products', 'chefs', 'franchises'));
     }

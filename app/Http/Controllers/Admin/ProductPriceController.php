@@ -28,16 +28,16 @@ class ProductPriceController extends Controller
 
         $product_prices              = $product_prices->orderBy('id', 'desc')->paginate(20);
 
-        $products = Product::all();
-        $franchises = Franchise::all();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
 
         return view('admin.product_prices.list', compact('product_prices', 'filter', 'products', 'franchises'));
     }
 
     public function create()
     {
-        $products = Product::all();
-        $franchises = Franchise::all();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
 
         return view('admin.product_prices.create', compact('products', 'franchises'));
     }
@@ -80,8 +80,8 @@ class ProductPriceController extends Controller
     public function edit(string $id)
     {
         $product_prices       = ProductPrice::find($id);
-        $products = Product::all();
-        $franchises = Franchise::all();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
         return view('admin.product_prices.edit', compact('product_prices', 'products', 'franchises'));
     }
 

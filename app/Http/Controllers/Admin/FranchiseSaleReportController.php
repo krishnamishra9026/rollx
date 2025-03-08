@@ -49,14 +49,25 @@ class FranchiseSaleReportController extends Controller
 
 
         // Paginate results
-        $sales = $query->latest()->paginate(20);
+        $sales = $query->latest();
+
+        $sales_data = $sales->get();
+
+         $chartData = [
+            'labels' => $sales_data->map(fn($sale) => $sale->firstname . ' ' . $sale->lastname),
+            'sales' => $sales_data->pluck('total_sales'), // Total Sales
+            'revenue' => $sales_data->pluck('total_revenue'), // Revenue
+            'wastage' => $sales_data->pluck('total_wastage_quantity'), // Wastage
+        ];     
+
+        $sales = $sales->paginate('20');   
 
               // echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
               
 
-        $franchises = Franchise::all();
+        $franchises = Franchise::latest()->get();
 
-        return view('admin.franchises.reports.list', compact('sales', 'franchises'));
+        return view('admin.franchises.reports.list', compact('sales', 'franchises', 'chartData'));
     }
 
     /**

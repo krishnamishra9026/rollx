@@ -50,8 +50,8 @@ class SaleController extends Controller
 
         $order = Order::where('id', $order_id)->first();
 
-        $orders = Order::all();
-        $products = Product::all();
+        $orders = Order::latest()->get();
+        $products = Product::latest()->get();
 
         return view('chef.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products'));
     }

@@ -52,12 +52,14 @@ class ProductSaleReportController extends Controller
 
 
         // Paginate results
+        $sales = $query->latest();
+        $product_list = $sales->get();
         $sales = $query->latest()->paginate(20);
 
 
-        $products = Product::all();
+        $products = Product::latest()->get();
 
-        return view('admin.products.reports.list', compact('sales', 'filter', 'products'));
+        return view('admin.products.reports.list', compact('sales', 'filter', 'product_list', 'products'));
     }
 
     /**

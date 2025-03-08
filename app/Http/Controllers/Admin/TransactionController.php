@@ -49,10 +49,21 @@ class TransactionController extends Controller
 
         $transactions = $transactions->latest()->paginate(20);
 
+
+        $transaction_list = Transaction::select(DB::raw("DATE(created_at) as date"), 'type', DB::raw("COUNT(*) as count"))
+        ->groupBy('date', 'type')
+        ->orderBy('date', 'ASC');
+
+        if ($request->type) {
+            $transaction_list->where('type', 'LIKE', "%{$request->type}%");
+        }
+
+        $transaction_list = $transaction_list->get();
+
         $franchises = Franchise::all();
 
 
-        return view('admin.transactions.list', compact('transactions', 'filter', 'franchises'));
+        return view('admin.transactions.list', compact('transactions', 'filter', 'franchises', 'transaction_list'));
     }
 
     /**

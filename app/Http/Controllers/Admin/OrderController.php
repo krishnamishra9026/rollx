@@ -50,8 +50,8 @@ class OrderController extends Controller
 
         $orders              = $orders->orderBy('id', 'desc')->paginate(20);
 
-        $products = Product::all();
-        $franchises = Franchise::all();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
         
         return view('admin.orders.list', compact('orders', 'filter', 'products', 'franchises'));
     }

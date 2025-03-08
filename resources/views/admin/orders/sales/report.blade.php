@@ -11,19 +11,20 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <a href="{{ route('admin.order.sales.index') }}" class="btn btn-sm btn-primary float-end me-1">
+                    <a href="{{ route('admin.order.sale.reports.index') }}" class="btn btn-sm btn-primary float-end me-1">
                         <i class="mdi mdi-refresh"></i> Reset
                     </a>
                     <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm">
                         <i class="mdi mdi-filter"></i> Filter
                     </button>
                 </div>
-                <h4 class="page-title">Sales</h4>
+                <h4 class="page-title">Order Sales</h4>
             </div>
         </div>
     </div>
 
     @include('admin.includes.flash-message')
+    @include('admin.orders.sales.report_filter')
 
     <div class="row">
         <div class="col-12">
@@ -31,18 +32,20 @@
                 <div class="card-body">
                     <!-- Tabs -->
                     <ul class="nav nav-tabs" id="salesTabs" role="tablist">
+
                         <li class="nav-item">
-                            <a class="nav-link active" id="chart-tab" data-bs-toggle="tab" href="#chart" role="tab">Sales Chart</a>
+                            <a class="nav-link active" id="list-tab" data-bs-toggle="tab" href="#list" role="tab">Order Sale List</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" id="list-tab" data-bs-toggle="tab" href="#list" role="tab">Sales List</a>
+                            <a class="nav-link " id="chart-tab" data-bs-toggle="tab" href="#chart" role="tab">Order Sale Chart</a>
                         </li>
                     </ul>
 
                     <!-- Tab Content -->
                     <div class="tab-content mt-3" id="salesTabsContent">
                         <!-- Sales Chart Tab -->
-                        <div class="tab-pane fade show active" id="chart" role="tabpanel">
+                        <div class="tab-pane fade show " id="chart" role="tabpanel">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <canvas id="salesChart"></canvas>
@@ -51,7 +54,7 @@
                         </div>
 
                         <!-- Sales List Tab -->
-                        <div class="tab-pane fade" id="list" role="tabpanel">
+                        <div class="tab-pane active" id="list" role="tabpanel">
                             <div class="row">
                                 <div class="col-md-12 table-responsive">
                                     <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
