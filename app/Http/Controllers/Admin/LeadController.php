@@ -79,9 +79,7 @@ class LeadController extends Controller
     public function assignLeads()
     {
 
-        $leads = Lead::whereNull('admin_id')->get(['id', 'firstname', 'lastname']);
-
-              
+        $leads = Lead::whereNull('admin_id')->get(['id', 'firstname', 'lastname']);              
 
         $sale_employees     = Administrator::role('Sales')->orderBy('id', 'desc')->get(['id', 'firstname', 'lastname']);
 

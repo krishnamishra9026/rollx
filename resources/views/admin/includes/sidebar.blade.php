@@ -97,6 +97,9 @@
                         <li>
                             <a href="{{ route('admin.sale.reports.index') }}">Sales</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.order.sale.reports.index') }}">Order Sales</a>
+                        </li>
                     </ul>
                 </div>
             </li>
