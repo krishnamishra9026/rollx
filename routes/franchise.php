@@ -107,6 +107,12 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::resource('products', ProductController::class);
 
 
+    Route::get('notifications', function () {
+        $user = Auth::guard('franchise')->user();
+        return view('franchise.includes.notifications-list', ['notifications' => $user->unreadNotifications]);
+    })->name('notifications.fetch');
+
+
     Route::get('stocks', [ProductController::class, 'stocks'])->name('stocks');
 
     Route::delete('products/{id}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete-image');

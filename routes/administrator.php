@@ -222,7 +222,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     |--------------------------------------------------------------------------
     */
 
-
+    Route::get('notifications', function () {
+        $user = Auth::guard('administrator')->user();
+        return view('admin.includes.notifications-list', ['notifications' => $user->unreadNotifications]);
+    })->name('notifications.fetch');
         /*
     |--------------------------------------------------------------------------
     | User Management Route

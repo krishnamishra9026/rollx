@@ -64,6 +64,25 @@
         new Notification(title, {body});
     });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function fetchNotifications() {
+            $.ajax({
+                url: "{{ route('franchise.notifications.fetch') }}",
+                method: "GET",
+                success: function (data) {
+                    $("#notification-container").html(data);
+                }
+            });
+        }
+
+        setInterval(fetchNotifications, 10000);
+
+        fetchNotifications();
+    });
+
+</script>
 @stack('scripts')
 <!-- demo app -->
 {{-- <script src="{{ asset('assets/js/pages/demo.dashboard.js') }}"></script> --}}

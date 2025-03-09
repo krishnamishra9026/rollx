@@ -87,7 +87,7 @@
 
                                                     <td>{{ $sale->total_quantity }}</td>
                                                     <td><a href="{{ route('admin.sales.index', ['order' => $sale->order->id])  }}">{{ $sale->sales_ids }}</a></td>
-                                                    <td>Rs.{{ number_format($sale->total_sales, 2) }}</td>
+                                                    <td>₹{{ number_format($sale->total_sales, 2) }}</td>
                                                     <td>{{ $sale->order->created_at->format('d M Y H:i A') }}</td>
                                                 </tr>
                                             @endforeach

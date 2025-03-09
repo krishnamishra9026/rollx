@@ -64,6 +64,27 @@
         new Notification(title, {body});
     });
 </script>
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        function fetchChefNotifications() {
+            $.ajax({
+                url: "{{ route('chef.notifications.fetch') }}",
+                method: "GET",
+                success: function (data) {
+                    $("#chef-notification-container").html(data);
+                }
+            });
+        }
+
+        setInterval(fetchChefNotifications, 10000);
+
+        fetchChefNotifications();
+    });
+
+</script>
 @stack('scripts')
 <!-- demo app -->
 {{-- <script src="{{ asset('assets/js/pages/demo.dashboard.js') }}"></script> --}}

@@ -64,6 +64,27 @@
         return true;
     }
 </script>
+
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+    function fetchAdminNotifications() {
+        $.ajax({
+            url: "{{ route('admin.notifications.fetch') }}",
+            method: "GET",
+            success: function (data) {
+                $("#admin-notification-container").html(data);
+            }
+        });
+    }
+
+    setInterval(fetchAdminNotifications, 10000);
+
+    fetchAdminNotifications();
+});
+
+
+</script>
 @stack('scripts')
 <!-- demo app -->
 {{-- <script src="{{ asset('assets/js/pages/demo.dashboard.js') }}"></script> --}}

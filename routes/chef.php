@@ -103,6 +103,11 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     */
     Route::resource('my-account', MyAccountController::class);
 
+    Route::get('notifications', function () {
+        $user = Auth::guard('chef')->user();
+        return view('chef.includes.notifications-list', ['notifications' => $user->unreadNotifications]);
+    })->name('notifications.fetch');
+
     /*
     |--------------------------------------------------------------------------
     | Settings > Change Password Route
