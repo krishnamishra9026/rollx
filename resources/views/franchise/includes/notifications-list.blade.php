@@ -11,10 +11,14 @@
                 <strong>{{ $notification->data['message'] }}</strong>
                 <br/>
                 @if(isset($notification->data['sale_url']))
-                    <a href="{{ $notification->data['sale_url'] }}">View Sales #{{ $notification->data['sale_id'] }}</a> 
-                    of <a href="{{ $notification->data['order_url'] }}">Order #{{ $notification->data['order_id'] }}</a>
+                    View Sales <a href="{{ $notification->data['sale_url'] }}"> #{{ $notification->data['sale_id'] }}</a> 
+                    of Order <a href="{{ $notification->data['order_url'] }}"> #{{ $notification->data['order_id'] }}</a>
                 @else
-                    <a href="{{ $notification->data['order_url'] }}">View Order #{{ $notification->data['order_id'] }}</a>
+                    @if(isset($notification->data['order_url']))
+                        View Order <a href="{{ $notification->data['order_url'] }}"> #{{ $notification->data['order_id'] }}</a>
+                    @else
+                        View <a href="{{ route('franchise.wallet.index') }}">Wallet/Points</a>
+                    @endif
                 @endif
                 <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
             </p>

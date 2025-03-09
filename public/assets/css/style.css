@@ -5052,3 +5052,17 @@ body[data-leftbar-theme="dark"] .side-nav .menuitem-active>a {
     min-height: 545px;
   }
 }
+
+
+@media (max-width: 768px) {
+    .notification-list {
+        position: relative;
+    }
+    .notification-list .dropdown-menu {
+        right: 0 !important;
+        left: auto !important;
+        transform: translateX(0) !important;
+        width: 90vw; /* Adjust width for better visibility */
+        max-width: 320px; /* Limit maximum width */
+    }
+}

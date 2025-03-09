@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WalletTransaction;
+use App\Notifications\WalletBalanceAdded;
+
 
 use App\Models\Franchise;
 
@@ -55,6 +57,9 @@ class WalletController extends Controller
         $franchise = Franchise::find($franchise_id);
 
         $franchise->wallet->deposit($request->amount);
+
+        // Notify the franchise
+        $franchise->notify(new WalletBalanceAdded($request->amount, $franchise->balance));
 
         return redirect()->back()->with('success', 'Balance added successfully.');
     }
