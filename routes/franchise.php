@@ -106,10 +106,10 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
     Route::resource('products', ProductController::class);
 
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
 
-    Route::get('notifications', function () {
-        $user = Auth::guard('franchise')->user();
-        return view('franchise.includes.notifications-list', ['notifications' => $user->unreadNotifications]);
+    Route::get('notifications/fetch', function () {
+        return view('franchise.includes.notifications-list');
     })->name('notifications.fetch');
 
 

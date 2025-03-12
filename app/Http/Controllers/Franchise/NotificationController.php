@@ -39,7 +39,9 @@ class NotificationController extends Controller
 
     public function index()
     {
-        //
+        $notifications = auth()->guard('franchise')->user()->notifications()->paginate(20);
+
+        return view('franchise.notifications.list', compact('notifications'));
     }
 
     /**

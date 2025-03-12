@@ -40,7 +40,9 @@ class NotificationController extends Controller
 
     public function index()
     {
-        //
+        $notifications = auth()->guard('administrator')->user()->notifications()->paginate(20);
+
+        return view('admin.notifications.list', compact('notifications'));
     }
 
     /**

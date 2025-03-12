@@ -47,6 +47,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('chef/notifications') || request()->is('chef/notifications/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('chef.notifications.list') }}" class="side-nav-link">
+                    <i class="uil-notifications"></i>
+                    <span> Notifications </span>
+                </a>
+            </li>
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"

@@ -103,9 +103,10 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
     */
     Route::resource('my-account', MyAccountController::class);
 
-    Route::get('notifications', function () {
-        $user = Auth::guard('chef')->user();
-        return view('chef.includes.notifications-list', ['notifications' => $user->unreadNotifications]);
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
+
+    Route::get('notifications/fetch', function () {
+        return view('chef.includes.notifications-list');
     })->name('notifications.fetch');
 
     /*

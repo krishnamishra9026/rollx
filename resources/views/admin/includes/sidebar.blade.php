@@ -190,6 +190,14 @@
             @endif
 
 
+            <li class="side-nav-item {{ request()->is('admin/notifications') || request()->is('admin/notifications/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.notifications.list') }}" class="side-nav-link">
+                    <i class="uil-notifications"></i>
+                    <span> Notifications </span>
+                </a>
+            </li>
+
+
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"
                     aria-controls="sidebarSettings" class="side-nav-link">

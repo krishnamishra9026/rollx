@@ -84,6 +84,12 @@
                 </a>
             </li>
 
+             <li class="side-nav-item {{ request()->is('franchise/notifications') || request()->is('franchise/notifications/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.notifications.list') }}" class="side-nav-link">
+                    <i class="uil-notifications"></i>
+                    <span> Notifications </span>
+                </a>
+            </li>
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"
