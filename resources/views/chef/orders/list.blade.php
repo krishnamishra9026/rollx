@@ -38,7 +38,6 @@
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Quantity</th>
-                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Sub Total</th>
                                             <th class="fw-bold">Total</th>
                                             <th class="fw-bold">Stock</th>
@@ -52,7 +51,6 @@
                                                 <td>{{ $order->id }}</td>
                                                 <td> {{ $order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
-                                                <td>{{ $order->stock }}</td>
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
