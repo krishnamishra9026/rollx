@@ -192,7 +192,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/notifications') || request()->is('admin/notifications/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.notifications.list') }}" class="side-nav-link">
-                    <i class="uil-notifications"></i>
+                    <i class="uil-bell"></i>
                     <span> Notifications </span>
                 </a>
             </li>
