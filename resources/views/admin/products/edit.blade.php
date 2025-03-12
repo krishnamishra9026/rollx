@@ -105,6 +105,26 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                <label for="statusesq"
+                                    class="col-md-2 col-form-label text-md-start">{{ __('Selling Type') }}</label>
+                                <div class="col-md-10">
+                                    <select id="statusesq" class="form-select @error('selling_type') is-invalid @enderror"
+                                        name="selling_type">
+                                        <option value="">Select</option>
+                                        <option value="plate" {{ old('selling_type', $product->selling_type) == 'plate' ? 'selected' : '' }}>
+                                            Plate</option>
+                                        <option value="quantity" {{ old('selling_type', $product->selling_type) == 'quantity' ? 'selected' : '' }}>
+                                            Quantity</option>
+                                    </select>
+                                    @error('selling_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
 
                             <div class="row mb-2">

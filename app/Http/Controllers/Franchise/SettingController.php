@@ -5,12 +5,21 @@ namespace App\Http\Controllers\Franchise;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Product;
+use App\Models\Franchise;
+use App\Models\ProductPlateSetting;
 
 class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:franchise');
+    }
+
     public function index()
     {
         return view('franchise.settings.setting', [
@@ -34,6 +43,33 @@ class SettingController extends Controller
         //
     }
 
+
+    public function productPlateSettingSave(Request $request)
+    {              
+        $validated = $request->validate([
+            'product_id' => 'required|array',
+            'full_plate_quantity' => 'required|array',
+            'half_plate_quantity' => 'required|array',
+        ]);
+
+        foreach ($validated['product_id'] as $index => $productId) {
+
+            ProductPlateSetting::updateOrCreate(
+                [
+                    'franchise_id' => auth()->user()->id,
+                    'product_id' => $productId,
+                ],
+                [
+                    'full_plate_quantity' => $validated['full_plate_quantity'][$index],
+                    'half_plate_quantity' => $validated['half_plate_quantity'][$index],
+                ]
+            );
+        }
+
+
+        return redirect()->back()->with('success', 'Data has been saved!');
+    }
+
     /**
      * Display the specified resource.
      */
@@ -53,6 +89,35 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    public function productPlateSetting(Request $request)
+    {
+        $filter                     = [];
+        $filter['product']             = $request->product;
+
+        $productsQuery = Product::with('plateSetting');
+
+        if (isset($filter['product'])) {
+            $productsQuery->where('id', 'like', $filter['product']);
+        }
+
+        $products = $productsQuery->paginate(20)->through(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'full_plate_quantity' => $product->plateSetting->full_plate_quantity ?? 10,
+                'half_plate_quantity' => $product->plateSetting->half_plate_quantity ?? 5,
+            ];
+        });
+
+              // echo '<pre>'; print_r($products->toArray()); echo '</pre>'; exit();
+              
+
+        $product_list = Product::latest()->get();
+
+        return view('franchise.settings.plate_setting', compact('products', 'product_list'));
+    }
+
     public function update(Request $request)
     {
         $request->validate([

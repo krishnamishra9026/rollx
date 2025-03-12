@@ -97,6 +97,11 @@
                         <li>
                             <a href="{{ route('franchise.settings.index') }}">Plate Setting</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('franchise.settings.products-plate') }}">Product Plate Setting</a>
+                        </li>
+
                         <li>
                             <a href="{{ route('franchise.password.form') }}">Change Password</a>
                         </li>

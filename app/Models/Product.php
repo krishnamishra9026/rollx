@@ -12,6 +12,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'outlet_name',
+        'selling_type',
         'description',
         'refrence',
         'model_number',
@@ -76,6 +77,11 @@ class Product extends Model
     public function franchises()
     {
         return $this->belongsToMany(Franchise::class, 'product_prices');
+    }
+
+    public function plateSetting()
+    {
+        return $this->hasOne(ProductPlateSetting::class, 'product_id')->where('franchise_id', auth()->user()->id);
     }
 
 }

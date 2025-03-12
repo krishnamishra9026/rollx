@@ -75,6 +75,7 @@ class ProductController extends Controller
         $part->available_quantity  = $request->quantity;
         $part->sold_quantity = 0;
         $part->refrence      = $request->refrence;
+        $part->selling_type  = $request->selling_type;
         $part->status        = $request->status;
         $part->save();
 
@@ -176,6 +177,7 @@ class ProductController extends Controller
         $part->price         = $request->price;
         $part->sold_color  = $request->sold_color;
         $part->quantity      = $request->quantity;
+        $part->selling_type  = $request->selling_type;
         $part->available_quantity  = $request->quantity - $part->sold_quantity;
         $part->sold_quantity = $part->sold_quantity;
         $part->refrence      = $request->refrence;
