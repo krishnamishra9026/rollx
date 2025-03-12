@@ -86,13 +86,15 @@ session()->put('route', $route);
                                                             <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                                             <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
                                                             <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
+                                                            @if($order->status != 'completed' && $order->status != 'delivered')
                                                             <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                            @endif
                                                             <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                                            <option style="display: none;" value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
                                                             <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                                            <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                                            <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                                            <option value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
+                                                            <option style="display: none;" value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
+                                                            <option style="display: none;" value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
+                                                            <option style="display: none;" value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
                                                     </select>   
                                                 </td>
                                                 <td>
@@ -226,6 +228,13 @@ session()->put('route', $route);
     </script>
     <script>
         function changeStatus(id, value) {
+
+            if (!confirm("Are you sure you want to change the order status?")) {
+                 window.location.reload();
+                return; // Stop execution if user cancels
+            }
+
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}",
