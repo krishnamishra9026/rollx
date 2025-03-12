@@ -94,9 +94,6 @@
                 </a>
                 <div class="collapse" id="sidebarSettings">
                     <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('franchise.settings.index') }}">Plate Setting</a>
-                        </li>
 
                         <li>
                             <a href="{{ route('franchise.settings.products-plate') }}">Product Plate Setting</a>
