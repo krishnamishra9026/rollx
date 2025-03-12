@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.franchise')
 @section('title', 'Purchase Orders')
 @section('head')
     <link href="{{ asset('assets/css/vendor/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -43,7 +43,7 @@
                                                 <tr>
                                                     <td>{{ $product['id'] }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.products.show', $product['id']) }}" class="text-body fw-semibold">
+                                                        <a href="{{ route('franchise.products.show', $product['id']) }}" class="text-body fw-semibold">
                                                             {{ $product['name'] }}
                                                         </a>
                                                     </td>
