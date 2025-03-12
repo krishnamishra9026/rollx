@@ -78,6 +78,15 @@ class OrderController extends Controller
 
             $user = auth()->user();
 
+            if ($user->wallet->balance < $total) {
+                return redirect()->back()->with('error', 'Order not accepted due to insufficient funds/points!');
+            }
+
+            if ($product->available_quantity < $value['quantity']) {
+                return redirect()->back()->with('error', 'Order not accepted due to insufficient Product Quantity!');
+            }
+
+
             $input['product_id'] = $product->id;
             $input['sub_total'] = $value['price'];
             $input['product_name'] = $product->name;

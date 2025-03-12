@@ -43,6 +43,15 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
+
+    function getFranchiseProductTotalQuantity($franchiseId)
+    {
+        return Order::where('franchise_id', $franchiseId)
+                    ->where('product_id', $this->id)
+                    ->whereIn('status', ['completed', 'delivered'])
+                    ->sum('quantity');
+    }
+
     public function productFranchisePrices($franchise_id)
     {
         return $this->hasOne(ProductPrice::class)->where('franchise_id', $franchise_id);

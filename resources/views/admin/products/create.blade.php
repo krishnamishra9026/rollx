@@ -106,7 +106,7 @@
 
                             <div class="row mb-2">
                                 <label for="statusesq"
-                                    class="col-md-2 col-form-label text-md-start">{{ __('Selling Type') }}</label>
+                                    class="col-md-2 col-form-label text-md-start">{{ __('Sale Unit') }}</label>
                                 <div class="col-md-10">
                                     <select id="statusesq" class="form-select @error('selling_type') is-invalid @enderror"
                                         name="selling_type">

@@ -85,7 +85,7 @@
                                                 <td><a href="{{ route('franchise.products.show', $product->id) }}"
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
-                                                <td>{{ $product->quantity }}</td>
+                                                <td>{{ $product->available_quantity }}</td>
                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>

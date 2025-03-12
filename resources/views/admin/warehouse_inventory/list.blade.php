@@ -65,8 +65,8 @@
                                                 </td>
 
                                                 <td>{{ $item->cost }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->date_inward)->format('M d, Y') }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->date_outward)->format('M d, Y') }}</td>
+                                                <td>{{ $item->date_inward ? \Carbon\Carbon::parse($item->date_inward)->format('M d, Y') : '---' }}</td>
+                                                <td>{{$item->date_outward ?  \Carbon\Carbon::parse($item->date_outward)->format('M d, Y') : '---' }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"

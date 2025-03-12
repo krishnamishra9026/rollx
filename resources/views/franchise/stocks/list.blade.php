@@ -78,7 +78,7 @@
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
                                                 <td>{{ $product->quantity }}</td>
-                                                <td>{{ $product->sold_quantity ?? 0 }}</td>
+                                                <td>{{ $product->getFranchiseProductTotalQuantity(auth()->user()->id) }}</td>
                                                 <td>{{ $product->available_quantity ?? $product->quantity }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>

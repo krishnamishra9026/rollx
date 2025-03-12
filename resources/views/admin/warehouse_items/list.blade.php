@@ -146,11 +146,11 @@
                             </div>
                             <div class="mb-1">
                                 <label for="cost" class="form-label">Cost</label>
-                                <input type="number" step="0.01" class="form-control" id="cost" name="cost" required>
+                                <input type="number" step="0.01" class="form-control" id="cost" name="cost">
                             </div>
                             <div class="mb-1">
                                 <label for="date_inward" class="form-label">Date Inward</label>
-                                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" id="date_inward" name="date_inward" required>
+                                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" id="date_inward" name="date_inward" >
                             </div>
                             <div class="mb-1">
                                 <label for="date_outward" class="form-label">Date Outward</label>
