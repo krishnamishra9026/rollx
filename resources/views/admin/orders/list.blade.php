@@ -117,12 +117,14 @@ session()->put('route', $route);
                                                             View Sales</a>
                                                         @endif
 
+                                                        @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
                                                         @can('Delete Order')
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $order->id }})"
                                                             class="dropdown-item"><i class="fa fa-trash-alt me-1"></i>
                                                             Delete</a>
                                                         @endcan
+                                                        @endif
                                                         <form id='delete-form{{ $order->id }}'
                                                             action='{{ route('admin.orders.destroy', $order->id) }}'
                                                             method='POST'>
