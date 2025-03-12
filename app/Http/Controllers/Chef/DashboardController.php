@@ -30,16 +30,21 @@ class DashboardController extends Controller
         $delivered = Order::where('status', 'Delivered')->count();
         $completed = Order::where('status', 'Completed')->count();
 
+
         $orders = Order::where('franchise_id', auth()->user()->franchise_id)
-                ->where('stock', '>', 0)
-                ->where(function ($query) {
-                    $query->where('status', 'completed')
-                          ->orWhere('status', 'delivered');
-                })->orderBy("id", "desc")->paginate(20);
+            ->where('stock', '>', 0)
+            ->where(function ($query) {
+                $query->where('status', 'completed')
+                      ->orWhere('status', 'delivered');
+            })
+            ->orderBy("id", "desc")
+            ->with(['productPlateSetting' => function ($query) {
+                $query->select('product_id', 'franchise_id', 'full_plate_quantity', 'half_plate_quantity');
+            }])
+            ->paginate(20);            
 
-        $quantity_per_plate = Setting::get('quantity_per_plate');
 
-        return view('chef.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders', 'quantity_per_plate'));
+        return view('chef.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders'));
     }
 
     public function updateToken(Request $request){

@@ -44,4 +44,10 @@ class Order extends Model
     {
         return $this->hasMany(Sale::class, 'order_id', 'id');
     }
+
+    public function productPlateSetting()
+    {
+        return $this->hasOne(ProductPlateSetting::class, 'product_id', 'product_id')
+                    ->where('franchise_id', auth()->user()->franchise_id);
+    }
 }
