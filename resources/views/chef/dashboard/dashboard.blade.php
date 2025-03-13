@@ -1,4 +1,4 @@
-@extends('layouts.chef')
+    @extends('layouts.chef')
 @section('title', 'Dashboard')
 @section('content')
 <!-- Start Content-->
@@ -53,7 +53,7 @@
                         <div class="row">
                             @if ($orders && count($orders))
                             @foreach ($orders as $order)
-                                @if ($order->product->selling_type == 'plate')
+                                @if ($order->product->selling_type ?? '' == 'plate')
                                     <div class="col-sm-3 mt-2 d-flex">
                                         <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Sold']) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex align-items-center justify-content-center">
@@ -102,7 +102,7 @@
                         <div class="row">
                             @if ($orders && count($orders))
                             @foreach ($orders as $order)
-                                @if ($order->product->selling_type == 'plate')
+                                @if ($order->product->selling_type ?? '' == 'plate')
                                     <div class="col-sm-3 mt-2 d-flex">
                                         <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Wastage']) }}" 
                                            class="btn btn-{{ $order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex align-items-center justify-content-center">
