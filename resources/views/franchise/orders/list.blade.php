@@ -37,10 +37,12 @@
                                         <tr>
                                             <th class="fw-bold">Order Id</th>
                                             <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold">Quantity</th>
+                                            <th class="fw-bold">Qty</th>
                                             <th class="fw-bold">Sub Total</th>
                                             <th class="fw-bold">Total</th>
-                                            <th class="fw-bold">Sold Quantity</th>
+                                            <th class="fw-bold">Sold Qty</th>
+                                            <th class="fw-bold">Wastage Qty</th>
+                                            <th class="fw-bold">Total Qty</th>
                                             <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Status</th>
@@ -55,6 +57,8 @@
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
+                                                <td>{{ $order->sales()->where('status', 'Sold')->sum('quantity') }}</td>
+                                                <td>{{ $order->sales()->where('status', 'Wastage')->sum('quantity') }}</td>
                                                 <td>{{ $order->quantity - $order->stock }}</td>
                                                 <td>{{ $order->stock }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
@@ -150,6 +154,10 @@
                 }, {
                     orderable: !0
                 }, {
+                    orderable: !0
+                 }, {
+                    orderable: !0
+                     }, {
                     orderable: !0
                 }, {
                     orderable: !0
