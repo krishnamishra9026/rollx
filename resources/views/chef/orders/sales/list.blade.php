@@ -179,7 +179,7 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td>{{ $sale->id }}</td>
-                                                <td>{{ $sale->order->product->name }}</td>
+                                                <td>{{ @$sale->order->product->name }}</td>
                                                 <td><a href="{{ route('chef.orders.show', $sale->order_id) }}"> #{{ $sale->order_id }} </a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
