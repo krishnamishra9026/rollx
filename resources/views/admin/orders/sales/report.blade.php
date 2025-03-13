@@ -80,8 +80,8 @@
                                                     </td>
 
                                                     <td>
-                                                        <a href="{{ route('admin.products.show', $sale->order->product->id)  }}">
-                                                            {{ $sale->order->product->name ?? 'N/A' }}
+                                                        <a href="{{ route('admin.products.show', $sale->order->product->id ?? 1)  }}">
+                                                            {{ @$sale->order->product->name ?? 'N/A' }}
                                                         </a>
                                                     </td>
 
