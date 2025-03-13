@@ -63,7 +63,6 @@
                                             <th>Total Qunatity</th>
                                             <th>Sold Qunatity</th>
                                             <th>Available Qunatity</th>
-                                            <th>Price</th>
                                             <th>My Price</th>
                                             <th>Date Added</th>
                                         </tr>
@@ -80,8 +79,7 @@
                                                 <td>{{ $product->quantity }}</td>
                                                 <td>{{ $product->getFranchiseProductTotalQuantity(auth()->user()->id) }}</td>
                                                 <td>{{ $product->available_quantity ?? $product->quantity }}</td>
-                                                <td>{{ $product->price }}</td>
-                                                <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
+                                                <td>{{ $product->getPriceByFranchise(auth()->user()->id) ?? $product->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                             </tr>                                          
                                         @endforeach
