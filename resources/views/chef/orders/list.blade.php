@@ -49,7 +49,7 @@
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->id }}</td>
-                                                <td> {{ $order->product->name }}</td>
+                                                <td> {{ @$order->product->name }}</td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
