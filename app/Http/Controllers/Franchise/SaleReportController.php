@@ -51,7 +51,7 @@ class SaleReportController extends Controller
         $total_wastage_sales = Sale::where('franchise_id',  auth()->user()->id )->where('status', 'Wastage')->sum('price');
         $total_wastage_quatity = Sale::where('franchise_id',  auth()->user()->id )->where('status', 'Wastage')->sum('quantity');    
 
-        if( isset($filter['product']) && !isset(auth()->user()->id) ){
+        if( isset($filter['product']) ){
 
             $total_sales = Sale::where('franchise_id',  auth()->user()->id )->where('product_id',  $filter['product'] )->sum('price');
             $total_quatity = Sale::where('franchise_id',  auth()->user()->id )->where('product_id',  $filter['product'] )->sum('quantity');
