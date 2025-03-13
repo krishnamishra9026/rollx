@@ -79,7 +79,7 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td><a href="{{ route('admin.franchises.show', $sale->franchise->id)  }}">{{ @$sale->franchise->firstname }} {{ @$sale->franchise->lastname }}</a></td>
-                                                <td><a href="{{ route('admin.products.show', $sale->product->id)  }}">{{ @$sale->product->name }}</a></td>
+                                                <td><a href="{{ route('admin.products.show', $sale->product->id ?? 1)  }}">{{ @$sale->product->name }}</a></td>
                                                 <td>{{ $sale->quantity }}</td>
                                                 <td>{{ $sale->price }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('M d, Y') }}</td>
