@@ -227,7 +227,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
 
-    Route::get('notifications/fetch', function () {
+    Route::get('notifications-fetch', function () {
         return view('admin.includes.notifications-list');
     })->name('notifications.fetch');
 

@@ -86,15 +86,13 @@
                                                     class="text-body fw-semibold">{{ $product->name }}</a>
                                                 </td>
                                                 <td>{{ $product->available_quantity }}</td>
-                                               <td>
+                                                <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
                                                         <input type="number" name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->getPriceByFranchise(auth()->user()->id) }}" value="0" min="0" max="{{ $product->quantity }}">
                                                         <button type="button" class="increase">+</button>
                                                     </div>
                                                 </td>
-
-
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td class="total-cost">{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
@@ -226,28 +224,35 @@
                 $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
                 let rPoints = points - price;
                 if (rPoints > 0) {
-                $('.points').html(points - price);
-                input.val(value);
-            }else{
-                alert('Not sufficiant points to create order!');
-            }
+                    $('.points').html(points - price);
+                    input.val(value);
+                }else{
+                    alert('Not sufficiant points to create order!');
+                }
+            });
 
-
+            $(".quantity").blur(function() {
+                let input = $(this);
+                if (parseInt(input.val()) > 0) {
+                    let value= parseInt(input.val());
+                    var price = input.attr('data-price');
+                    let total = value * price;
+                    $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
+                    let points = parseInt($('.points').html());
+                    $('.points').html(points - parseInt(total));
+                }   
             });
 
             $(".decrease").click(function () {
                 let input = $(this).siblings(".quantity");
                 if (parseInt(input.val()) > 0) {
-
                     let value= parseInt(input.val()) - 1;
                     input.val(value);
-
                     var price = input.attr('data-price');
                     let total = value * price;
                     $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
                     let points = parseInt($('.points').html());
                     $('.points').html(points + parseInt(price));
-
                 }
             });
         });

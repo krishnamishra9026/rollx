@@ -2,8 +2,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('admin.product-prices.index') }}" id="filterForm">
-                    <div class="row">
+                <form action="{{ route('admin.product-franchises.index') }}" id="filterForm">
+                    <div class="row">                        
+
                         <div class="col-sm-6 mb-2">
                             <label class="col-form-label" for="franchise">Franchises</label>
                             <select class="form-select" data-toggle=select2 id="franchise" name="franchise">
@@ -28,12 +29,15 @@
                             </select>
                         </div>
 
-                        <div class="col-sm-12 mb-2">
-                            <a href="{{ route('admin.product-prices.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Price</a>
-                            <a href="{{ route('admin.product-prices.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
-                            <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
+                        <div class="col-sm-12 mb-1 mt-1 text-end">
+
+                            <div class="page-title-box">
+
+                                <a href="{{ route('admin.product-franchises.index') }}" class="btn btn-sm btn-primary float-end me-1"><i class="mdi mdi-refresh"></i> Reset</a>
+
+                                <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i class="mdi mdi-filter"></i> Filter</button>
+                            </div>
                         </div>
-                       
                     </div>
                 </form>
             </div>

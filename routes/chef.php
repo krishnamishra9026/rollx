@@ -105,7 +105,7 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
 
-    Route::get('notifications/fetch', function () {
+    Route::get('notifications-fetch', function () {
         return view('chef.includes.notifications-list');
     })->name('notifications.fetch');
 

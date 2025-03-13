@@ -16,6 +16,7 @@
             </div>
         </div>
         @include('admin.includes.flash-message')
+        @include('admin.product_franchises.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -115,9 +116,7 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
-                    }, {
-                    orderable: !0,
-                 }, {
+                }, {
                     orderable: !0,
                 }, {
                     orderable: !1

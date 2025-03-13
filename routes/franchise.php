@@ -108,7 +108,7 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
 
-    Route::get('notifications/fetch', function () {
+    Route::get('notifications-fetch', function () {
         return view('franchise.includes.notifications-list');
     })->name('notifications.fetch');
 

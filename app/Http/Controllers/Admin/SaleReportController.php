@@ -41,7 +41,7 @@ class SaleReportController extends Controller
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
         $sales              = isset($filter['order']) ? $sales->where('order_id',  $filter['order'] ) : $sales;
 
-        $sales              = $sales->orderBy('created_at', 'desc')->paginate(20);   
+        $sales              = $sales->orderBy('created_at', 'desc')->paginate(20);                 
 
 
         $total_sales = Sale::sum('price');
