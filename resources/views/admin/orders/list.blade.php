@@ -78,7 +78,7 @@ session()->put('route', $route);
                                                 <td>
                                                     <a href="{{ route('admin.products.show', $order->product_id) }}"
                                                         class="text-body fw-semibold">
-                                                    {{ $order->product->name }}   
+                                                    {{ @$order->product->name }}   
                                                     </a>                                                
                                                 </td>
                                                 <td>
