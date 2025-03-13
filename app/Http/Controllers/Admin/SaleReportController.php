@@ -11,6 +11,9 @@ use App\Models\Sale;
 use App\Models\Franchise;
 use App\Models\Chef;
 
+use App\Exports\Admin\SalesReportExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SaleReportController extends Controller
 {
     /**
@@ -97,6 +100,19 @@ class SaleReportController extends Controller
         $chefs = Chef::latest()->get();
 
         return view('admin.orders.sales.reports.list', compact('sales', 'filter', 'orders', 'products', 'chefs', 'franchises', 'total_sales', 'total_quatity', 'total_sold_sales', 'total_sold_quatity', 'total_wastage_sales', 'total_wastage_quatity'));
+    }
+
+
+    public function export(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $status = $request->input('status');
+        $product = $request->input('product');
+        $franchise = $request->input('franchise');
+
+
+        return Excel::download(new SalesReportExport($startDate, $endDate, $status, $product, $franchise), 'sales_report.xlsx');
     }
 
     /**

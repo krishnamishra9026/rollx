@@ -70,6 +70,8 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     Route::resource('wallet', WalletController::class);
 
     Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
+
+
     
     Route::resource('orders', OrderController::class);
     Route::post('orders/save', [OrderController::class, 'save'])->name('orders.save');
@@ -95,6 +97,7 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     });
 
     Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+        Route::get('reports/export', [SaleReportController::class, 'export'])->name('reports.export');
         Route::resource('reports', SaleReportController::class);
     });
 

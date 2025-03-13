@@ -109,6 +109,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
     Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+        Route::get('reports/export', [SaleReportController::class, 'export'])->name('reports.export');
         Route::resource('reports', SaleReportController::class);
     });
 
