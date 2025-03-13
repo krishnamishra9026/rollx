@@ -40,8 +40,8 @@
                                             <th class="fw-bold">Quantity</th>
                                             <th class="fw-bold">Sub Total</th>
                                             <th class="fw-bold">Total</th>
-                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Sold Quantity</th>
+                                            <th class="fw-bold">Stock</th>
                                             <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Status</th>
                                             <th class="fw-bold">Action</th>
@@ -147,6 +147,8 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
