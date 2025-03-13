@@ -418,9 +418,16 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         $order = Order::find($id);
-        if($order->equipment_assemble_type == "inventory"){
-            InventoryEquipmentSerialNo::where("serial_no", $order->serial_number)->update(['deducted' => false]);
+
+        if (!$order) {
+            return back()->with('error', 'Order not found.');
         }
+
+        if ($order->sales()->exists()) {
+            $issue = 'Order has sales records.';
+            return back()->with('error', $issue);
+        }
+        
         Order::find($id)->delete();
         return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully');
     }

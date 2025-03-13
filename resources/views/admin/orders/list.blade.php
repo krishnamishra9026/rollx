@@ -56,6 +56,7 @@ session()->put('route', $route);
                                             <th class="no-wrap">Sub Total</th>
                                             <th>Total</th>
                                             <th>Stock</th>
+                                            <th>Sales</th>
                                             <th class="no-wrap">Franchise Name</th>
                                             <th class="no-wrap">Product Name</th>
                                             <th class="no-wrap">Change Status</th>
@@ -71,13 +72,12 @@ session()->put('route', $route);
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
+                                                <td><a href="{{ route('admin.sales.index', ['order' => $order->id]) }}" >{{ $order->sales()->count() }} </a></td>
                                                 <td>
-                                                    <a href="{{ route('admin.franchises.show', $order->franchise_id) }}"
-                                                        class="text-body fw-semibold">{{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</a>
+                                                    <a href="{{ route('admin.franchises.show', $order->franchise_id) }}">{{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.products.show', $order->product_id) }}"
-                                                        class="text-body fw-semibold">
+                                                    <a href="{{ route('admin.products.show', $order->product_id) }}" >
                                                     {{ @$order->product->name }}   
                                                     </a>                                                
                                                 </td>
