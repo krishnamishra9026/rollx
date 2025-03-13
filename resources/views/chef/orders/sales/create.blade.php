@@ -40,7 +40,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row mb-2">
-                                <input type="hidden" name="product_id" value="{{ $order->product->id }}">
+                                <input type="hidden" name="product_id" value="{{ @$order->product->id }}">
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <label for="product_name"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Product Name') }}</label>
@@ -49,7 +49,7 @@
                                     <input id="product_name" type="text"
                                         class="form-control @error('product_name') is-invalid @enderror" name="product_name"
                                         placeholder="Enter Product Name"
-                                        value="{{ old('product_name', $order->product->name) }}" readonly>
+                                        value="{{ old('product_name', @$order->product->name) }}" readonly>
 
                                     @error('product_name')
                                         <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                             <div class="row mb-2">
                                 <label for="quantity" class="col-md-3 col-form-label text-md-start">{{ __('Quantity') }}</label>
                                 <label for="quantity" class="col-md-4 col-form-label text-md-start">Avilable Order {{ __('Quantity') }} : {{ $order->stock }} from total Quantitty {{ $order->quantity }}</label>
-                                <label for="quantity" class="col-md-4 col-form-label text-md-start">Product Price : {{ $order->product->price }}</label>
+                                <label for="quantity" class="col-md-4 col-form-label text-md-start">Product Price : {{ @$order->product->price }}</label>
                                 <div class="col-md-3">Sold Quantity</div>
                                 <div class="col-md-9">
                                     <input id="quantity" type="number"
