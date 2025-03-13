@@ -152,6 +152,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::delete('products/{id}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete-image');
     Route::delete('products/{id}/delete-document', [ProductController::class, 'deleteDocument'])->name('products.delete-document');
     Route::post('products/update-quantity', [ProductController::class, 'updateQuantity'])->name('products.update.quantity');
+    Route::get('products/change-status/{id}', [ProductController::class, 'changeStatus'])->name('products.change-status');
 
 
     Route::resource('warehouse-items', WarehouseItemController::class);

@@ -151,7 +151,7 @@
                             </div>
 
 
-                            <div class="row mb-2" style="display: none;">
+                            <div class="row mb-2">
                                 <label for="statuses"
                                     class="col-md-2 col-form-label text-md-start">{{ __('Status') }}</label>
                                 <div class="col-md-10">

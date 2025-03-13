@@ -88,6 +88,11 @@ class Product extends Model
         return $this->hasMany(ProductFranchise::class);
     }
 
+    public function plate_setting()
+    {
+        return $this->hasOne(ProductPlateSetting::class, 'product_id');
+    }
+
     public function plateSetting()
     {
         return $this->hasOne(ProductPlateSetting::class, 'product_id')->where('franchise_id', auth()->user()->id);

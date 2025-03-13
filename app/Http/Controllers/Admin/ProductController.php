@@ -162,6 +162,18 @@ class ProductController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Quantity updated successfully!']);
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if($product->status == '1'){
+            Product::find($id)->update(['status' => false]);
+            return redirect()->route('admin.products.index')->with('warning', 'Product has been disabled successfully!');
+        }else{
+            Product::find($id)->update(['status' => true]);
+            return redirect()->route('admin.products.index')->with('success', 'Product has been enabled successfully!');
+        }
+    }
     
     public function update(Request $request, string $id)
     {
@@ -205,7 +217,34 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return back()->with('error', 'Product not found.');
+        }
+
+        $issues = [];
+
+        if ($product->orders()->exists()) {
+            $issues[] = 'Product is linked to orders.';
+        }
+        if ($product->sales()->exists()) {
+            $issues[] = 'Product has sales records.';
+        }
+        if ($product->productPrices()->exists()) {
+            $issues[] = 'Product has franchise price records.';
+        }
+        if ($product->plate_setting()->exists()) {
+            $issues[] = 'Product is assigned to a franchise plate setting.';
+        }              
+
+        if (!empty($issues)) {
+            $product->update(['status' => 0]); 
+            return back()->with('errors', $issues);
+        }
+
         Product::find($id)->delete();
+
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
     }
 

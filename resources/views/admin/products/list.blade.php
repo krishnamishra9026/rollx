@@ -11,6 +11,21 @@
         content: "🔔 ";
         font-size: 16px;
     }
+
+    input[type="checkbox"].status:not(:checked) + label {
+    background-color: #dc3545 !important; /* Red color for disabled state */
+    border-color: #dc3545 !important;
+    color: white;
+}
+
+/* Change color when enabled */
+input[type="checkbox"].status:checked + label {
+    background-color: #28a745 !important; /* Green color for enabled state */
+    border-color: #28a745 !important;
+    color: white;
+}
+
+
 </style>
     <div class="container-fluid">
 
@@ -31,6 +46,16 @@
         </div>
 
         @include('admin.includes.flash-message')
+
+        @if(session('errors'))
+        @foreach(session('errors') as $error)
+        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong><i class="dripicons-wrong me-2"></i> </strong>{{ $error }}
+        </div>
+        @endforeach
+        @endif
+
         @include('admin.products.filter')
         <div class="row py-3">
             <div class="col-12">
@@ -74,6 +99,7 @@
                                             <th>Price</th>
                                             <th>Orders</th>
                                             <th>Sales</th>
+                                            <th>Status</th>
                                             <th>Date Added</th>
                                             <th class="text-end">Action</th>
                                         </tr>
@@ -97,6 +123,12 @@
                                                 <td>{{ $product->price }}</td>
                                                 <td> <a href="{{ route('admin.orders.index', ['product' => $product->id]) }}" >{{ $product->orders->count() }} </a></td>
                                                 <td> <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}" >{{ $product->sales->count() }} </a></td>
+                                                <td><input type="checkbox" id="switch{{ $product->id }}"
+                                                        @if ($product->status == true) checked @endif
+                                                        data-switch="success" value="{{ $product->id }}" class="status" />
+                                                    <label for="switch{{ $product->id }}" data-on-label="Enable"
+                                                        data-off-label="DIsable"></label>
+                                                </td>
                                                 <td>{{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y') }}</td>
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
@@ -274,5 +306,11 @@
                 t.isConfirmed && document.getElementById("delete-form" + e).submit()
             })
         }
+
+        $(".status").change(function() {
+            var url = '{{ route('admin.products.change-status', ':id') }}';
+            url = url.replace(':id', this.value);
+            window.location.href = url;
+        });
     </script>
 @endpush

@@ -152,6 +152,26 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                <label for="statuses"
+                                    class="col-md-2 col-form-label text-md-start">{{ __('Status') }}</label>
+                                <div class="col-md-10">
+                                    <select id="statuses" class="form-select @error('status') is-invalid @enderror"
+                                        name="status">
+                                        <option value="">Select Status</option>
+                                        <option value="1" {{ old('status', $product->status) == '1' ? 'selected' : '' }}>
+                                            Enable</option>
+                                        <option value="0"  {{ old('status', $product->status) == '0' ? 'selected' : '' }} >
+                                            Disable</option>
+                                    </select>
+                                    @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
                             <div class="row mb-2">
                                 <label class="col-md-2 col-form-label text-md-start">{{ __('Images') }}</label>
