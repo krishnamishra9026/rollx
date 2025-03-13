@@ -57,13 +57,13 @@
                                             <tr>
                                                 <td>{{ $product_price->id }}</td>
                                                 <td><a href="{{ route('admin.products.show', $product_price->product_id) }}"
-                                                    class="text-body fw-semibold">{{ $product_price->product->name }}</a>
+                                                    class="text-body fw-semibold">{{ @$product_price->product->name }}</a>
                                                 </td>
 
                                                 <td><a href="{{ route('admin.franchises.show', $product_price->franchise_id) }}"
                                                     class="text-body fw-semibold">{{ $product_price->franchise->firstname }} {{ $product_price->franchise->lastname }}</a>
                                                 </td>
-                                                <td>{{ $product_price->product->price }}</td>
+                                                <td>{{ @$product_price->product->price }}</td>
                                                <td>
                                                     <span class="quantity-text" style="cursor: pointer;" data-id="{{ $product_price->id }}">{{ $product_price->price }}</span>
                                                     <input type="number" class="edit-quantity" data-id="{{ $product_price->id }}" value="{{ $product_price->price }}" style="display: none; width: 40%">
