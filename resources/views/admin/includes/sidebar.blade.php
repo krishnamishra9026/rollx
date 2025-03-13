@@ -51,6 +51,11 @@
                         <li>
                             <a href="{{ route('admin.product-prices.index') }}">Product Pricing</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('admin.product-franchises.index') }}">Product Franchises</a>
+                        </li>
+
                     </ul>
                 </div>
             </li>

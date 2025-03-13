@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\WarehouseItemController;
 use App\Http\Controllers\Admin\WarehouseInventoryController;
+use App\Http\Controllers\Admin\ProductFranchiseController;
 use App\Http\Controllers\Admin\ProductSaleReportController;
 use App\Http\Controllers\Admin\FranchiseSaleReportController;
 use App\Http\Controllers\Admin\RoleController;
@@ -145,6 +146,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('products', ProductController::class);
     Route::resource('product-prices', ProductPriceController::class);
     Route::post('product-prices/update-price', [ProductPriceController::class, 'updatePrice'])->name('product-prices.update.price');
+
+    Route::resource('product-franchises', ProductFranchiseController::class);
 
     Route::delete('products/{id}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete-image');
     Route::delete('products/{id}/delete-document', [ProductController::class, 'deleteDocument'])->name('products.delete-document');

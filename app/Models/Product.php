@@ -85,7 +85,7 @@ class Product extends Model
 
     public function franchises()
     {
-        return $this->belongsToMany(Franchise::class, 'product_prices');
+        return $this->hasMany(productFranchise::class);
     }
 
     public function plateSetting()

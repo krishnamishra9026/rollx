@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Franchise;
+use App\Models\ProductFranchise;
 use App\Models\ProductPrice;
 use DB;
 
@@ -60,6 +61,16 @@ class ProductPriceController extends Controller
 
         ProductPrice::create($validated);
 
+        ProductFranchise::updateOrCreate(
+            [
+                'product_id' => $request->product_id,
+                'franchise_id' => $request->franchise_id
+            ],
+            [
+                'price' => $request->price
+            ]
+        );
+
         return redirect()->route('admin.product-prices.index')->with('success', 'Product Price added successfully!');
     }
 
@@ -93,6 +104,16 @@ class ProductPriceController extends Controller
 
         $productPrice = ProductPrice::findOrFail($id);
         $productPrice->update($validated);
+
+        ProductFranchise::updateOrCreate(
+            [
+                'product_id' => $productPrice->product_id,
+                'franchise_id' => $productPrice->franchise_id
+            ],
+            [
+                'price' => $request->price
+            ]
+        );
 
         return redirect()->route('admin.product-prices.index')->with('success', 'Product Price updated successfully!');
     }
