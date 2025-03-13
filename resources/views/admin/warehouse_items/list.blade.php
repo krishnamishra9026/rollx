@@ -67,7 +67,18 @@
                                                 </td>
                                                 <td>{{ $item->unit }}</td>
                                                 <td class="text-center"> <a href="{{ route('admin.warehouse-inventory.index', ['item_id' => $item->id]) }}">{{ $item->inventory()->count() }} </a></td>
-                                                <td class="text-center">{{ $item->inventory()->sum('quantity') }}</td>
+
+                                                @php
+
+                                                $totalQuantity = $item->inventory()
+                                                    ->whereNotNull('date_inward')
+                                                    ->sum('quantity') 
+                                                    - $item->inventory()
+                                                    ->whereNotNull('date_outward')
+                                                    ->sum('quantity');
+
+                                                @endphp
+                                                <td class="text-center">{{ $totalQuantity ?? 0 }}</td>
                                                
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
 
