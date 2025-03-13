@@ -281,6 +281,8 @@ input[type="checkbox"].status:checked + label {
                     orderable: !0
                 }, {
                     orderable: !0
+                }, {
+                    orderable: !0
                 },  {
                     orderable: !0
                  }, {
