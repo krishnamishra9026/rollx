@@ -95,7 +95,10 @@ class SettingController extends Controller
         $filter                     = [];
         $filter['product']             = $request->product;
 
-        $productsQuery = Product::with('plateSetting')->where('selling_type', 'plate');
+        $productsQuery = Product::with('plateSetting')
+            ->whereHas('franchises', function ($query) {
+                    $query->where('franchise_id', auth()->user()->id);
+            })->where('selling_type', 'plate');
 
         if (isset($filter['product'])) {
             $productsQuery->where('id', 'like', $filter['product']);
