@@ -14,4 +14,10 @@ class WalletTransaction extends Model
         return $this->morphOne(config('wallet.wallet_model'), 'owner')->where('wallet_id')->withDefault();
     }
 
+
+    public function isBalanceLow($threshold = 1.00)
+    {
+        return $this->wallet->balanace < $threshold;
+    }
+
 }

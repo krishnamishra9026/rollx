@@ -32,6 +32,17 @@
                 </a>
             </li>
 
+             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+            <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
+                    <i class="uil-users-alt"></i>
+                    <span> Leads </span>
+                </a>
+            </li>
+
+            @endif
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#inventoryMenu" aria-expanded="false" aria-controls="inventoryMenu"
@@ -74,7 +85,28 @@
                 </a>
             </li>
 
-            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+           
+
+
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Warehouse' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+            <li class="side-nav-item {{ request()->is('admin/warehouse-items') || request()->is('admin/warehouse-items/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.warehouse-items.index') }}" class="side-nav-link">
+                    <i class="uil-box"></i>
+                    <span> Warehouse Items </span>
+                </a>
+            </li>
+
+            @endif
+
+            <li class="side-nav-item {{ request()->is('admin/wallet') || request()->is('admin/wallet/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.wallet.index') }}" class="side-nav-link">
+                    <i class="uil-wallet"></i>
+                    <span> Wallet/Points </span>
+                </a>
+            </li>
+
+             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
 
             <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.transactions.index') }}" class="side-nav-link">
@@ -111,35 +143,7 @@
 
             @endif
 
-
-            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Warehouse' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
-
-            <li class="side-nav-item {{ request()->is('admin/warehouse-items') || request()->is('admin/warehouse-items/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('admin.warehouse-items.index') }}" class="side-nav-link">
-                    <i class="uil-box"></i>
-                    <span> Warehouse Items </span>
-                </a>
-            </li>
-
-            @endif
-
-            <li class="side-nav-item {{ request()->is('admin/wallet') || request()->is('admin/wallet/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('admin.wallet.index') }}" class="side-nav-link">
-                    <i class="uil-wallet"></i>
-                    <span> Wallet/Points </span>
-                </a>
-            </li>
-
-            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
-
-            <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
-                    <i class="uil-users-alt"></i>
-                    <span> Leads </span>
-                </a>
-            </li>
-
-            @endif
+           
 
 
              @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')

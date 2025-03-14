@@ -51,34 +51,18 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Gender</div>
-                                </div>
-                                <span>{{ $lead->gender }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
                                     <div class="fw-bold">Email</div>
                                 </div>
                                 <span>{{ $lead->email }}</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Email (Additional)</div>
-                                </div>
-                                <span>{{ $lead->email_additional }}</span>
-                            </li>
+           
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Contact Number</div>
                                 </div>
                                 <span> {{ $lead->phone }}</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Address</div>
-                                </div>
-                                <span>{{ $lead->address }}</span>
-                            </li>
+          
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">City</div>
@@ -91,18 +75,7 @@
                                 </div>
                                 <span>{{ $lead->state }}</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Country</div>
-                                </div>
-                                <span>{{ $lead->country }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Zipcode</div>
-                                </div>
-                                <span>{{ $lead->zipcode }}</span>
-                            </li>
+                           
                         </ul>                      
                     </div>                    
                 </div>

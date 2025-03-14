@@ -17,6 +17,52 @@
         </div>
         @include('admin.includes.flash-message')
 
+        <div class="row">       
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-primary">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Orderd</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_ordered_quantity'] }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Ordered</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_ordered_amount'] }}</h2>
+                    </div>
+                </div>          
+            </div>
+      
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-secondary">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Sold </h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_sold_quantity'] }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Sold</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_sold_amount'] }}</h2>
+                    </div>
+                </div>          
+            </div>
+       
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-success">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Wastage</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_wastage_quantity'] }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Wastage</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_wastage_amount'] }}</h2>
+                    </div>
+                </div>          
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-danger">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Left</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_left_quantity'] }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Left</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals['total_left_amount'] }}</h2>
+                    </div>
+                </div>          
+            </div>
+
         @include('admin.franchises.reports.filter')
 
         <div class="row">

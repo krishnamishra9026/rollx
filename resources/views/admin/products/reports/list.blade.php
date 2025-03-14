@@ -17,6 +17,56 @@
         </div>
         @include('admin.includes.flash-message')
 
+
+        <div class="row">       
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-primary">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Orderd</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_quantity_ordered }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Ordered</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_amount_ordered }}</h2>
+                    </div>
+                </div>          
+            </div>
+      
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-secondary">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Sold </h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_quantity_sold }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Sold</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_amount_sold }}</h2>
+                    </div>
+                </div>          
+            </div>
+       
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-success">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Wastage</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_quantity_wastage }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Wastage</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_amount_wastage }}</h2>
+                    </div>
+                </div>          
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-danger">                    
+                        <h5 class="mt-0 text-uppercase">Total Qty Left</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_quantity_ordered - $totals->total_quantity }}</h2>
+                        <h5 class="mt-0 text-uppercase">Total Amount Left</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $totals->total_amount_ordered - $totals->total_amount }}</h2>
+                    </div>
+                </div>          
+            </div>
+   
+        </div>
+
+
         @include('admin.products.reports.filter')
 
         <div class="row">
@@ -93,17 +143,17 @@
             labels: @json($product_list->pluck('name')),  // X-axis: Product Names
             datasets: [
                 {
-                    label: 'Total Sales',
-                    data: @json($product_list->pluck('total_sales')), // Y-axis: Sales Count
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    label: 'Total Quantity Ordered',
+                    data: @json($product_list->pluck('total_quantity_ordered')),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Total Quantity Sold',
-                    data: @json($product_list->pluck('total_quantity_sold')),
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    data: @json($product_list->pluck('total_quantity')),
+                    backgroundColor: 'rgba(54, 20, 343, 0.5)',
+                    borderColor: 'rgba(54, 20, 343, 1)',
                     borderWidth: 1
                 }
             ]

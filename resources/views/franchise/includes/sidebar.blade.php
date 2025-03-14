@@ -47,13 +47,6 @@
             </li>
 
 
-            <li class="side-nav-item {{ request()->is('franchise/wallet') || request()->is('franchise/wallet/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('franchise.wallet.index') }}" class="side-nav-link">
-                    <i class="uil-wallet"></i>
-                    <span> Wallet </span>
-                </a>
-            </li>
-
             <li class="side-nav-item {{ request()->is('franchise/orders') || request()->is('franchise/orders/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('franchise.orders.index') }}" class="side-nav-link">
                     <i class="uil-shopping-cart-alt"></i>
@@ -62,18 +55,24 @@
             </li>
 
 
-            <li class="side-nav-item {{ request()->is('franchise/chefs') || request()->is('franchise/chefs/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('franchise.chefs.index') }}" class="side-nav-link">
-                    <i class="uil-user-check"></i>
-                    <span> Chefs </span>
-                </a>
-            </li>
-
-
             <li class="side-nav-item {{ request()->is('franchise/sales') || request()->is('franchise/sales/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('franchise.sales.index') }}" class="side-nav-link">
                     <i class="uil-dollar-sign-alt"></i>
                     <span> Sales </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item {{ request()->is('franchise/wallet') || request()->is('franchise/wallet/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.wallet.index') }}" class="side-nav-link">
+                    <i class="uil-wallet"></i>
+                    <span> Wallet </span>
+                </a>
+            </li>
+            
+            <li class="side-nav-item {{ request()->is('franchise/chefs') || request()->is('franchise/chefs/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.chefs.index') }}" class="side-nav-link">
+                    <i class="uil-user-check"></i>
+                    <span> Chefs </span>
                 </a>
             </li>
 

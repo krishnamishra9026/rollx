@@ -19,33 +19,142 @@
         </div>
         @include('chef.includes.flash-message')
         <!-- end page title -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card" style="min-height: 282px;">
+                <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="min-height: 263px;">
                     <div class="card-header bg-dark text-white">
                         Order Details
+                    </div>
+                    <div class="card-body">
+
+                        <table style="width:100%; margin-bottom:10px">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 33.33%">
+                                        <span class="fw-bold">Order Id </span>
+                                        <br> #{{ $order->id }}
+                                    </td>
+                                    <td style="width:33.33%" class="text-end">
+                                        <span class="fw-bold">Order Date </span><br>
+                                        {{ \Carbon\Carbon::parse($order->date)->format('M d, Y') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width:100%; margin-bottom:10px">
+                            <tbody>
+                                <tr>
+                                    <td style="width:33.30%"><span class="fw-bold">Quantity </span><br>
+                                        {{ $order->quantity }}
+                                    </td>                             
+                                    <td style="width:33.30%" class="text-center"><span class="fw-bold">Sub Total </span><br>
+                                        {{ $order->sub_total }}
+                                    </td>                            
+                                    <td style="width:33.33%" class="text-end">
+                                        <span class="fw-bold">Total </span><br>
+                                        {{ $order->total }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width:100%; margin-bottom:10px">
+                            <tbody>
+                                <tr>
+
+                                    <td style="width:30%"><span class="fw-bold">Status </span><br>
+                                        @if ($order->status == 'pending')
+                                            <span
+                                                class="badge border badge-warning-lighten">{{ ucfirst($order->status) }}</span>
+                                        @else
+                                            <span
+                                                class="badge border badge-success-lighten">{{ ucfirst($order->status) }}</span>
+                                        @endif
+                                    </td>
+
+                                    <td style="width:70%" class="text-end">
+                                        <span class="fw-bold">Date Time </span><br>
+                                        {{ \Carbon\Carbon::parse($order->date)->format('d-m-Y H:i A') }}
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                        
+                    </div> <!-- end card-body-->
+                </div> <!-- end card-->
+            </div>
+
+            <div class="col-md-6">
+                <div class="card" style="min-height: 263px;">
+                    <div class="card-header bg-dark text-white">
+                        Franchise Details
                     </div>
                     <div class="card-body">
                         <table style="width:100%; margin-bottom:10px">
                             <tbody>
                                 <tr>
-                                    <td style="width: 50%"><span class="fw-bold">Project Reference </span><br> {{ $order->description }}</td>
-                                    <td style="width: 50%" class="text-end"><span class="fw-bold">Model Number </span><br> {{ $order->model_number }}</td>
+                                    <td style="width:33.30%"><span class="fw-bold">Name </span><br>
+                                        {{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</td>
+                                    <td style="width: 50%" class="text-end"><span class="fw-bold">Date Added </span><br>
+                                        {{ \Carbon\Carbon::parse($order->franchise->created_at)->format('M d, Y') }}</td>
                                 </tr>
                             </tbody>
                         </table>
+                        
                         <table style="width:100%; margin-bottom:10px">
                             <tbody>
                                 <tr>
-                                    <td style="width: 50%"><span class="fw-bold">Order Date </span><br> {{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y') }}</td>
+                                    <td ><span class="fw-bold">Email Address </span><br>
+                                        {{ $order->franchise->email }}</td>
                                 </tr>
                             </tbody>
                         </table>
-               
+
+
+                        <table style="width:100%; margin-bottom:10px">
+                            <tbody>
+                                <tr>
+                            
+                                    <td ><span class="fw-bold">Contact Number </span><br>
+                                        {{ $order->franchise->number ?? "" }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        </table>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div>
 
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="font-size: 14px" id="parts-table">
+                        <thead>
+                            <tr>
+                                <th class="bg-dark text-white">Product ID</th>
+                                <th class="bg-dark text-white">Product Name</th>
+                                <th class="bg-dark text-white">Qty Avilable</th>
+                                <th class="bg-dark text-white">Qty Order</th>
+                                <th class="bg-dark text-white">Product My Price</th>
+                                <th class="bg-dark text-white">Order Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="parts-row">
+                            <tr>
+                                <td>#{{ $order->product->idid }}</td>
+                                <td>{{ $order->product->name }}</td>
+                                <td>{{ $order->product->quantity }}</td>
+                                <td>{{ $order->quantity }}</td>
+                                <td>{{ $order->product->getPriceByFranchise(auth()->user()->id) }}</td>
+                                <td>{{ $order->sub_total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <div class="col-md-12">
                 <div class="card">

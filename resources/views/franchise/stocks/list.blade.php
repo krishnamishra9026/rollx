@@ -58,11 +58,11 @@
                                     style="font-size: 14px;">
                                     <thead class="bg-dark">
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Total Qunatity</th>
+                                            <th>Product Id</th>
+                                            <th>Product Name</th>
+                                            <th>Product Qunatity</th>
                                             <th>Sold Qunatity</th>
-                                            <th>Available Qunatity</th>
+                                            <th>Available Qty (Stock)</th>
                                             <th>My Price</th>
                                             <th>Date Added</th>
                                         </tr>

@@ -26,7 +26,66 @@ class SaleReportController extends Controller
         $this->middleware('auth:administrator');
     }
 
+
     public function index(Request $request)
+    {
+
+        $filter                     = [];
+        $filter['date']       = $request->date;
+        $filter['status']           = $request->status;
+        $filter['franchise']           = $request->franchise;
+        $filter['chef']           = $request->chef;
+        $filter['product']           = $request->product;
+        $filter['order']           = $request->order;
+
+        $sales = Sale::with('order', 'product', 'franchise', 'chef');
+
+        if (!empty($filter['date'])) {
+            $sales->whereDate('created_at', $filter['date']);
+        }
+        if (!empty($filter['status'])) {
+            $sales->where('status', 'LIKE', '%' . $filter['status'] . '%');
+        }
+        if (!empty($filter['franchise'])) {
+            $sales->where('franchise_id', $filter['franchise']);
+        }
+        if (!empty($filter['chef'])) {
+            $sales->where('chef_id', $filter['chef']);
+        }
+        if (!empty($filter['product'])) {
+            $sales->where('product_id', $filter['product']);
+        }
+        if (!empty($filter['order'])) {
+            $sales->where('order_id', $filter['order']);
+        }
+
+        $sales = $sales->orderBy('created_at', 'desc')->paginate(20);
+
+        $query = Sale::query();
+
+        if (!empty($filter['franchise'])) {
+            $query->where('franchise_id', $filter['franchise']);
+        }
+        if (!empty($filter['product'])) {
+            $query->where('product_id', $filter['product']);
+        }
+
+        $total_sales = $query->sum('price');
+        $total_quatity = $query->sum('quantity');
+        $total_sold_sales = (clone $query)->where('status', 'Sold')->sum('price');
+        $total_sold_quatity = (clone $query)->where('status', 'Sold')->sum('quantity');
+        $total_wastage_sales = (clone $query)->where('status', 'Wastage')->sum('price');
+        $total_wastage_quatity = (clone $query)->where('status', 'Wastage')->sum('quantity');
+
+        $orders = Order::latest()->get();
+        $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
+        $chefs = Chef::latest()->get();
+
+        return view('admin.orders.sales.reports.list', compact('sales', 'filter', 'orders', 'products', 'chefs', 'franchises', 'total_sales', 'total_quatity', 'total_sold_sales', 'total_sold_quatity', 'total_wastage_sales', 'total_wastage_quatity'));
+    }
+
+    public function indexOld(Request $request)
     {
         $filter                     = [];
         $filter['date']       = $request->date;

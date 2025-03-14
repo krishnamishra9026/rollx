@@ -51,15 +51,15 @@ session()->put('route', $route);
                                     <thead class="text-dark">
                                         <tr>
                                             <th>Id</th>
-                                            <th class="no-wrap">Order Date Time</th>
+                                            <th class="no-wrap">Product Name</th>
                                             <th>Qty</th>
                                             <th class="no-wrap">Sub Total</th>
                                             <th>Total</th>
                                             <th>Stock</th>
                                             <th>Sales</th>
                                             <th class="no-wrap">Franchise Name</th>
-                                            <th class="no-wrap">Product Name</th>
                                             <th class="no-wrap">Change Status</th>
+                                            <th class="no-wrap">Order Date Time</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
@@ -67,7 +67,11 @@ session()->put('route', $route);
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->id }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.products.show', $order->product_id) }}" >
+                                                    {{ @$order->product->name }}   
+                                                    </a>                                                
+                                                </td>
                                                 <td>{{ $order->quantity }}</td>
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
@@ -76,11 +80,7 @@ session()->put('route', $route);
                                                 <td>
                                                     <a href="{{ route('admin.franchises.show', $order->franchise_id) }}">{{ $order->franchise->firstname }} {{ $order->franchise->lastname }}</a>
                                                 </td>
-                                                <td>
-                                                    <a href="{{ route('admin.products.show', $order->product_id) }}" >
-                                                    {{ @$order->product->name }}   
-                                                    </a>                                                
-                                                </td>
+                                                
                                                 <td>
                                                     <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)" >
                                                             <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
@@ -97,6 +97,7 @@ session()->put('route', $route);
                                                             <option style="display: none;" value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
                                                     </select>   
                                                 </td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>
                                                     <a href="#"
                                                         class="border bg-white dropdown-toggle arrow-none card-drop mt-11"
@@ -177,6 +178,8 @@ session()->put('route', $route);
                 }],
                 columns: [{
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

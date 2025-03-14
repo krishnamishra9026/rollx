@@ -23,7 +23,90 @@ class FranchiseSaleReportController extends Controller
         $this->middleware('auth:administrator');
     }
 
+
     public function index(Request $request)
+    {
+        $query = Franchise::withCount([
+                'orders as total_orders' => function ($query) {
+                    $query->selectRaw('COUNT(DISTINCT orders.id)');
+                },
+                'sales as total_sales' => function ($query) {
+                    $query->selectRaw('COUNT(DISTINCT sales.id)');
+                }
+            ])
+            ->withSum('orders as total_quantity_ordered', 'quantity')
+            ->withSum([
+                'sales as total_quantity_sold' => function ($query) {
+                    $query->where('status', 'Sold');
+                }
+            ], 'quantity')
+            ->withSum('sales as total_revenue', 'price')
+            ->withSum([
+                'sales as total_wastage_quantity' => function ($query) {
+                    $query->where('status', 'wastage');
+                }
+            ], 'quantity')
+
+
+            ->withSum('sales as total_quantity', 'quantity')
+            ->withSum('orders as total_amount_ordered', 'total_price')
+            ->withSum(['sales as total_amount_sold' => function ($query) {
+                $query->where('status', 'Sold');
+            }], 'price')
+            ->withSum(['sales as total_amount_wastage' => function ($query) {
+                $query->where('status', 'wastage');
+            }], 'price');
+
+
+
+        if (request()->has('franchise')) {
+            $query->where('id', request('franchise'));
+        }
+
+        $sales = $query->latest();
+
+        $sales_data = $query->get();
+
+        // Calculate overall totals
+        $total_ordered_quantity = $sales_data->sum('total_quantity_ordered');
+        $total_sold_quantity = $sales_data->sum('total_quantity_sold');
+        $total_wastage_quantity = $sales_data->sum('total_wastage_quantity');
+        $total_left_quantity = $total_ordered_quantity - ($total_sold_quantity + $total_wastage_quantity);
+
+        $total_ordered_amount = $sales_data->sum('total_amount_ordered');
+        $total_sold_amount = $sales_data->sum('total_amount_sold');
+        $total_wastage_amount = $sales_data->sum('total_amount_wastage');
+        $total_left_amount = $total_ordered_amount - ($total_sold_amount + $total_wastage_amount);
+
+
+        $totals = [
+            'total_ordered_quantity' => $total_ordered_quantity,
+            'total_sold_quantity' => $total_sold_quantity,
+            'total_wastage_quantity' => $total_wastage_quantity,
+            'total_left_quantity' => $total_left_quantity,
+
+            'total_ordered_amount' => $total_ordered_amount,
+            'total_sold_amount' => $total_sold_amount,
+            'total_wastage_amount' => $total_wastage_amount,
+            'total_left_amount' => $total_left_amount,
+        ];
+
+        $chartData = [
+            'labels' => $sales_data->map(fn($sale) => $sale->firstname . ' ' . $sale->lastname),
+            'sales' => $sales_data->pluck('total_sales'),
+            'revenue' => $sales_data->pluck('total_revenue'), 
+            'wastage' => $sales_data->pluck('total_wastage_quantity'), 
+        ];     
+
+        $sales = $sales->paginate('20');                 
+
+        $franchises = Franchise::latest()->get();
+
+        return view('admin.franchises.reports.list', compact('sales', 'franchises', 'chartData', 'totals'));
+
+    }
+
+    public function indexOld(Request $request)
     {
 
         $query = Franchise::withCount([
@@ -53,17 +136,14 @@ class FranchiseSaleReportController extends Controller
 
         $sales_data = $sales->get();
 
-         $chartData = [
+        $chartData = [
             'labels' => $sales_data->map(fn($sale) => $sale->firstname . ' ' . $sale->lastname),
-            'sales' => $sales_data->pluck('total_sales'), // Total Sales
-            'revenue' => $sales_data->pluck('total_revenue'), // Revenue
-            'wastage' => $sales_data->pluck('total_wastage_quantity'), // Wastage
+            'sales' => $sales_data->pluck('total_sales'),
+            'revenue' => $sales_data->pluck('total_revenue'), 
+            'wastage' => $sales_data->pluck('total_wastage_quantity'), 
         ];     
 
-        $sales = $sales->paginate('20');   
-
-              // echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
-              
+        $sales = $sales->paginate('20');                 
 
         $franchises = Franchise::latest()->get();
 

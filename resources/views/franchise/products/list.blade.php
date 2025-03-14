@@ -46,6 +46,12 @@
                     </div>
                 </div>
         @include('franchise.includes.flash-message')
+        @if(auth()->user()->balance < 1 )
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong><i class="dripicons-warning me-2"></i> </strong> Your wallet balance is low, You can not create order, Please contact Admin!
+            </div>
+        @endif
         @include('franchise.products.filter')
         <div class="row py-3">
             <div class="col-12">
