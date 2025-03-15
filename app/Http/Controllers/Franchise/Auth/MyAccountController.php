@@ -96,12 +96,6 @@ class MyAccountController extends Controller
 
         if($request->hasfile('avatar')){
 
-            $image      = $request->file('avatar');
-
-            $name       = $image->getClientOriginalName();
-
-            $image->storeAs('uploads/franchise/', $name, 'public');
-
             if(isset($franchise->avatar)){
 
                 $path   = 'public/uploads/franchise/'.$franchise->avatar;
@@ -109,6 +103,12 @@ class MyAccountController extends Controller
                 Storage::delete($path);
 
             }
+
+            $image      = $request->file('avatar');
+
+            $name       = $image->getClientOriginalName();
+
+            $image->storeAs('uploads/franchise/', $name, 'public');
 
             $franchise->avatar = $name;
 
