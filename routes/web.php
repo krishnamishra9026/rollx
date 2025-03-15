@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/run-storage-link', function () {
      
-    $target = base_path('laravel_project/storage/app/public'); // Target folder
+    echo $target = base_path('laravel_project/storage/app/public'); // Target folder
+    die();
     $link = public_path('storage'); // Symlink path
 
     // Ensure the target directory exists
