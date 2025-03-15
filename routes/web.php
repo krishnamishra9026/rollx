@@ -20,23 +20,25 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/run-storage-link', function () {
      
-    echo $target = base_path('/storage/app/public'); // Target folder
+     $target = base_path('storage/app/public'); // Target folder
     $link = public_path('storage'); // Symlink path
 
-    // Ensure the target directory exists
+    // Check if target directory exists
     if (!File::exists($target)) {
-        return 'Error: Target directory does not exist!';
+        return 'Error: Target directory does not exist at ' . $target;
     }
 
-    // Delete the existing symlink if it exists
+    // Delete existing symlink if it exists
     if (File::exists($link)) {
         File::delete($link);
     }
 
-    // Create the symlink
-    symlink($target, $link);
-
-    return 'Storage link created successfully!';
+    // Create symlink
+    if (symlink($target, $link)) {
+        return 'Storage link created successfully!';
+    } else {
+        return 'Error: Failed to create symlink!';
+    }
 
 });
 
