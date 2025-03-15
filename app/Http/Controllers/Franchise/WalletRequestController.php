@@ -26,7 +26,14 @@ class WalletRequestController extends Controller
 
     public function index(Request $request)
     {
-        $requests = WalletRequest::with('franchise')->latest()->paginate(20);
+        $query = WalletRequest::with('franchise')->latest();
+
+        if ($request->has('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $requests = $query->paginate(20);
+        
         return view('franchise.wallet.requests.list', compact('requests'));
     }
 

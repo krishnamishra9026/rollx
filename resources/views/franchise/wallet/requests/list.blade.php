@@ -22,6 +22,7 @@
             </div>
         </div>
         @include('franchise.includes.flash-message')
+        @include('franchise.wallet.requests.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">

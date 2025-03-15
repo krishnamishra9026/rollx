@@ -16,6 +16,7 @@
             </div>
         </div>
         @include('admin.includes.flash-message')
+        @include('admin.wallet.requests.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
