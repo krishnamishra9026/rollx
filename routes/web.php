@@ -18,12 +18,20 @@ use Illuminate\Support\Facades\App;
 */
 
 Route::get('/run-storage-link', function () {
-     App::useStoragePath(base_path('laravel_project/storage'));
+     
+     $target = base_path('laravel_project/storage/app/public');
+    $link = public_path('storage');
 
-    // Run the artisan command
-    Artisan::call('storage:link');
+    // Delete existing symlink if it exists
+    if (file_exists($link)) {
+        unlink($link);
+    }
+
+    // Create a new symlink
+    symlink($target, $link);
 
     return 'Storage link created successfully!';
+    
 });
 
 
