@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,19 +20,24 @@ use Illuminate\Support\Facades\App;
 
 Route::get('/run-storage-link', function () {
      
-     $target = base_path('laravel_project/storage/app/public');
-    $link = public_path('storage');
+    $target = base_path('laravel_project/storage/app/public'); // Target folder
+    $link = public_path('storage'); // Symlink path
 
-    // Delete existing symlink if it exists
-    if (file_exists($link)) {
-        unlink($link);
+    // Ensure the target directory exists
+    if (!File::exists($target)) {
+        return 'Error: Target directory does not exist!';
     }
 
-    // Create a new symlink
+    // Delete the existing symlink if it exists
+    if (File::exists($link)) {
+        File::delete($link);
+    }
+
+    // Create the symlink
     symlink($target, $link);
 
     return 'Storage link created successfully!';
-    
+
 });
 
 
