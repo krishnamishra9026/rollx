@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,14 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/run-config', function () {
      
+     Storage::disk('public')->put('test.txt', 'This is a test');
+
      Artisan::call('cache:clear');
      Artisan::call('route:clear');
      Artisan::call('config:clear');
      Artisan::call('view:clear');
      Artisan::call('optimize:clear');
-     Artisan::call('storage:link');
+     //Artisan::call('storage:link');
      Artisan::call('optimize:clear');
 
       return 'Storage link created successfully!';
