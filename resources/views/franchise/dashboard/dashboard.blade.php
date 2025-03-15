@@ -43,7 +43,7 @@
                             <div class="col-sm-3 mt-2 d-flex">
                                 <a href="{{ route('franchise.orders.show', $order->id) }}" 
                                     class="btn btn-{{ $order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex align-items-center justify-content-center">
-                                    {{ $order->product->name }}
+                                    {{ @$order->product->name }}
                                     <br/>
                                     Avilable : {{ $order->stock }}
                                 </a>
