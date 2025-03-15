@@ -47,11 +47,11 @@ class WalletRequestController extends Controller
             'amount' => 'required|numeric|min:1',
         ]);
 
-        /*WalletRequest::create([
+        WalletRequest::create([
             'franchise_id' => auth()->user()->id,
             'amount' => $request->amount,
             'status' => 'pending',
-        ]);*/
+        ]);
 
         $franchise = auth()->user();
         $amount = request('amount');
