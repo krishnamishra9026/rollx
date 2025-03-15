@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/run-storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created successfully!';
+});
+
+
 Route::get('login-chef/{id}', [App\Http\Controllers\IndexController::class, 'loginChef'])->name('login-chef');
 Route::get('direct-chef-login/{token}', [App\Http\Controllers\IndexController::class, 'directChefLogin'])->name('direct-chef-login');
 
