@@ -63,10 +63,11 @@
                                                 <th>Order ID</th>
                                                 <th>Franchise Name</th>
                                                 <th>Product Name</th>
-                                                <th>Total Quantity</th>
+                                                <th>Qty Orderd</th>
+                                                <th>Qty Sold</th>
+                                                <th>Order Amount</th>
+                                                <th>Sale Amount</th>
                                                 <th>Sale Ids</th>
-                                                <th>Total Sales</th>
-                                                <th>Created At</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,10 +86,11 @@
                                                         </a>
                                                     </td>
 
+                                                    <td>{{ $sale->order->quantity }}</td>
                                                     <td>{{ $sale->total_quantity }}</td>
-                                                    <td><a href="{{ route('admin.sales.index', ['order' => $sale->order->id])  }}">{{ $sale->sales_ids }}</a></td>
+                                                    <td>₹{{ number_format($sale->order->total, 2) }}</td>
                                                     <td>₹{{ number_format($sale->total_sales, 2) }}</td>
-                                                    <td>{{ $sale->order->created_at->format('d M Y H:i A') }}</td>
+                                                    <td><a href="{{ route('admin.sales.index', ['order' => $sale->order->id])  }}">{{ $sale->sales_ids }}</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -165,6 +167,8 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
+                }, {
+                    orderable: !0
                 }, {
                     orderable: !0
                 }, {
