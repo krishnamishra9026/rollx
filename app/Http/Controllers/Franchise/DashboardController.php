@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
         $sales = $salesData->map(function ($sale) use ($productNames) {
             return [
-                'name' => $productNames[$sale->product_id],
+                'name' => $productNames[$sale->product_id] ?? '',
                 'quantity' => $sale->total_quantity,
                 'sales' => $sale->total_sales,
             ];
