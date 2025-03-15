@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Technician\ResetPassword;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Artisan;
@@ -56,16 +57,16 @@ Route::get('/run-storage-link', function () {
 });
 
 
-Route::get('login-chef/{id}', [App\Http\Controllers\IndexController::class, 'loginChef'])->name('login-chef');
-Route::get('direct-chef-login/{token}', [App\Http\Controllers\IndexController::class, 'directChefLogin'])->name('direct-chef-login');
+Route::get('login-chef/{id}', [IndexController::class, 'loginChef'])->name('login-chef');
+Route::get('direct-chef-login/{token}', [IndexController::class, 'directChefLogin'])->name('direct-chef-login');
 
-Route::get('login-franchise/{id}', [App\Http\Controllers\IndexController::class, 'loginFranchise'])->name('login-franchise');
-Route::get('direct-franchise-login/{token}', [App\Http\Controllers\IndexController::class, 'directFranchiseLogin'])->name('direct-franchise-login');
+Route::get('login-franchise/{id}', [IndexController::class, 'loginFranchise'])->name('login-franchise');
+Route::get('direct-franchise-login/{token}', [IndexController::class, 'directFranchiseLogin'])->name('direct-franchise-login');
 
 
-Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
-Route::get('registration-type', [App\Http\Controllers\IndexController::class, 'registrationType'])->name('registration-type');
-Route::get('login-type', [App\Http\Controllers\IndexController::class, 'loginType'])->name('login-type');
+Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('registration-type', [IndexController::class, 'registrationType'])->name('registration-type');
+Route::get('login-type', [IndexController::class, 'loginType'])->name('login-type');
 
 Route::get('contact', [ContactController::class, 'Contact'])->name('contact');
 Route::post('contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
