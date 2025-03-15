@@ -32,7 +32,7 @@
                 </a>
             </li>
 
-             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
 
             <li class="side-nav-item {{ request()->is('admin/leads') || request()->is('admin/leads/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.leads.index') }}" class="side-nav-link">
@@ -106,7 +106,18 @@
                 </a>
             </li>
 
-             @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Sales' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
+
+            <li class="side-nav-item {{ request()->is('admin/wallet-requests') || request()->is('admin/wallet-requests/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.wallet-requests.index') }}" class="side-nav-link">
+                    <i class="uil-exchange"></i>
+                    <span> Wallet Requests </span>
+                </a>
+            </li>
+
+            @endif
+
+            @if(Auth::guard('administrator')->user()->roles()->first()->name == 'Operations' || Auth::guard('administrator')->user()->roles()->first()->name == 'Administrator')
 
             <li class="side-nav-item {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.transactions.index') }}" class="side-nav-link">

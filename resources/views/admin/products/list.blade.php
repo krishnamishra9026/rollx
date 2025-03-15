@@ -150,10 +150,6 @@ input[type="checkbox"].status:checked + label {
                                                             View Orders</a>
                                                         @endif
 
-                                                        <a href="{{ route('admin.product-prices.create', ['product' => $product->id]) }}"
-                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
-                                                            Add Franchise Price</a>
-
                                                         @if($product->sales->count() > 0)
                                                         <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
@@ -164,6 +160,20 @@ input[type="checkbox"].status:checked + label {
                                                         <a href="{{ route('admin.product-prices.index', ['product' => $product->id]) }}"
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             View Prices</a>
+                                                        @else
+                                                        <a href="{{ route('admin.product-prices.create', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            Add Franchise Price</a>
+                                                        @endif
+
+                                                        @if($product->franchises->count() > 0)
+                                                        <a href="{{ route('admin.product-franchises.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            View Assigned Franchises</a>
+                                                        @else
+                                                        <a href="{{ route('admin.product-franchises.index', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                            Assign to Franchises</a>
                                                         @endif
 
                                                         <a href="javascript:void(0);"

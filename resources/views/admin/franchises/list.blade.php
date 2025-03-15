@@ -102,6 +102,16 @@
                                                                 View Sales</a>
                                                             @endif
 
+                                                            @if($franchise->products->count() > 0)
+                                                            <a href="{{ route('admin.product-franchises.index', ['franchise' => $franchise->id]) }}"
+                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                                View Assigned Franchises</a>
+                                                            @else
+                                                            <a href="{{ route('admin.product-franchises.index', ['franchise' => $franchise->id]) }}"
+                                                                class="dropdown-item"><i class="fa fa-eye me-1"></i>
+                                                                Assign to Franchises</a>
+                                                            @endif
+
                                                              <form id='delete-form{{ $franchise->id }}'
                                                             action='{{ route('admin.franchises.destroy', $franchise->id) }}'
                                                             method='POST'>

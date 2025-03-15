@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\SaleReportController;
+use App\Http\Controllers\Admin\WalletRequestController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
@@ -87,6 +88,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     */
 
     Route::resource('wallet', WalletController::class);
+    Route::resource('wallet-requests', WalletRequestController::class);
 
     Route::resource('chefs', ChefController::class);
        Route::post('chefs/reset-password', [FranchiseController::class, 'resetPassword'])->name('chefs.reset-password');

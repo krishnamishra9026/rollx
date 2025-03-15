@@ -11,6 +11,7 @@ use App\Http\Controllers\Franchise\OrderController;
 use App\Http\Controllers\Franchise\NotificationController;
 use App\Http\Controllers\Franchise\SaleReportController;
 use App\Http\Controllers\Franchise\SaleController;
+use App\Http\Controllers\Franchise\WalletRequestController;
 use App\Http\Controllers\Franchise\SettingController;
 use App\Http\Controllers\Franchise\ChefController;
 use App\Http\Controllers\Franchise\WalletController;
@@ -68,6 +69,7 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
 
     Route::resource('wallet', WalletController::class);
+    Route::resource('wallet-requests', WalletRequestController::class);
 
     Route::get('orders/export', [OrderController::class, 'export'])->name('orders.export');
 

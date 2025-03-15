@@ -84,7 +84,7 @@ class Franchise extends Authenticatable
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(ProductFranchise::class);
     }
 
     public function chefs()
@@ -100,6 +100,11 @@ class Franchise extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function walletRequests()
+    {
+        return $this->hasMany(WalletRequest::class);
     }
 
 }

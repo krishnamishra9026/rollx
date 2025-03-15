@@ -27,13 +27,21 @@ class ProductFranchiseController extends Controller
     {
         $filter                     = [];
         $filter['product']             = $request->product;
+        $filter['franchise']             = $request->franchise;
 
-        $products  = Product::with('franchises');
-        $products  = isset($filter['product']) ? $products->where('id', $filter['product']) : $products;
-        $products  = $products->orderBy('created_at', 'desc')->paginate(20);     
+        $products = Product::with('franchises');
 
-              // echo '<pre>'; print_r($products->toArray()); echo '</pre>'; exit();
-              
+        if (isset($filter['product'])) {
+            $products = $products->where('id', $filter['product']);
+        }
+
+        if (isset($filter['franchise'])) {
+            $products = $products->whereHas('franchises', function ($query) use ($filter) {
+                $query->where('franchise_id', $filter['franchise']);
+            });
+        }
+
+        $products = $products->orderBy('created_at', 'desc')->paginate(20);
 
         $product_list = Product::latest()->get();
         $franchises = Franchise::latest()->get(['id', 'firstname', 'lastname']);

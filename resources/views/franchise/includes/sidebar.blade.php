@@ -68,6 +68,13 @@
                     <span> Wallet </span>
                 </a>
             </li>
+
+            <li class="side-nav-item {{ request()->is('franchise/wallet-requests') || request()->is('franchise/wallet-requests/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('franchise.wallet-requests.index') }}" class="side-nav-link">
+                    <i class="uil-exchange"></i>
+                    <span> Wallet Requests </span>
+                </a>
+            </li>
             
             <li class="side-nav-item {{ request()->is('franchise/chefs') || request()->is('franchise/chefs/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('franchise.chefs.index') }}" class="side-nav-link">

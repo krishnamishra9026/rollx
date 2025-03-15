@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+
     <style type="text/css">
         .no-wrap {
             white-space: nowrap;
@@ -16,24 +17,15 @@
             <div class="col-12">
                 <div class="page-title-box">
   
-                    <h4 class="page-title">Wallet</h4>
+                    <h4 class="page-title">Wallet Balance Requests</h4>
                 </div>
             </div>
         </div>
         @include('franchise.includes.flash-message')
-
-        @if(auth()->user()->balance < 1 )
-            <div class="alert alert-warning alert-dismissiblew fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong><i class="dripicons-warning me-2"></i> </strong> Your wallet balance is low, Please contact Admin!
-            </div>
-        @endif
-
-        @include('franchise.wallet.filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    
+
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <p class="mb-0"><strong>{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</strong> Wallet Balance is {{ auth()->user()->balance }}</p>
 
@@ -51,43 +43,31 @@
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th class="fw-bold">Id</th>
-                                            <th class="fw-bold">Type</th>
-                                            <th>Credited</th>
-                                            <th>Debited</th>
-                                            <th class="fw-bold">Balance</th>
-                                            <th class="fw-bold">Description</th>
-                                            <th class="fw-bold">Created At</th>
+                                            <th class="fw-bold">ID</th>
+                                            <th class="fw-bold">Updated By</th>
+                                            <th class="fw-bold">Amount</th>
+                                            <th class="fw-bold">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($transactions as $transaction)
+                                         @foreach($requests as $request)
                                             <tr>
-                                                <td>{{ $transaction->id }}</td>
-
+                                                <td>{{ $request->id }}</td>
+                                          
+                                                <td>  {{ @$request->admin->firstname }} {{ @$request->admin->lastname }} </td>
+                                                <td class="text-cente">{{ $request->amount }}</td>
                                                 <td>
-                                                    <button type="button" class="badge {{ $transaction->type == 'deposit' ? 'bg-primary' : 'bg-success' }}" style="min-width: 65px;">
-                                                        {{ucfirst($transaction->type)}}
-                                                    </button>
+                                                    <span class="badge bg-{{ $request->status == 'approved' ? 'success' : ($request->status == 'rejected' ? 'danger' : 'warning') }}">
+                                                        {{ ucfirst($request->status) }}
+                                                    </span>
                                                 </td>
+                                   
 
-                                                @if($transaction->type == 'deposit')
-                                                    
-                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
-                                                <td>0</td>
-                                                @else
-                                                <td>0</td>
-                                                <td>{{ str_replace("-", "", $transaction->amount) }}</td>
-                                                @endif
-
-                                                <td>{!!  $transaction->meta['balance'] ?? $transaction->wallet->balance !!}</td>
-                                                <td>{!!  str_replace('/admin/', '/franchise/', $transaction->meta['description'] ?? 'Added balance in wallet') ?? 'Added balance in wallet' !!}</td>
-                                                <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $transactions->appends(request()->query())->links('pagination::bootstrap-5') }}
+                                {{ $requests->appends(request()->query())->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>
@@ -129,13 +109,11 @@
                 }, {
                     orderable: !0,
                 }, {
-                    orderable: !0
+                    orderable: !0,
                 }, {
-                    orderable: !0
+                    orderable: !0,
                 }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
+                    orderable: !0,
                 }, {
                     orderable: !1
                 }, ]
