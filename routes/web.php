@@ -50,6 +50,8 @@ Route::get('/run-storage-link', function () {
     // Create symlink
     if (symlink($target, $link)) {
         return 'Storage link created successfully!';
+        Artisan::call('optimize:clear');
+
     } else {
         return 'Error: Failed to create symlink!';
     }
