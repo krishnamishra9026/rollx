@@ -14,7 +14,13 @@
                     View Sales<a href="{{ $notification->data['sale_url'] }}"> #{{ $notification->data['sale_id'] }}</a> of Order
                     <a href="{{ $notification->data['order_url'] }}"> #{{ $notification->data['order_id'] }}</a>
                 @else
-                    View Order <a href="{{ $notification->data['order_url'] }}"> #{{ $notification->data['order_id'] }}</a>
+
+                @if(isset($notification->data['order_url']))
+                        View Order <a href="{{ $notification->data['order_url'] }}"> #{{ $notification->data['order_id'] }}</a>
+                    @else
+                        View <a href="{{ route('admin.wallet-requests.index') }}">Wallet/Points</a>
+                    @endif                   
+                    
                 @endif
                 <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
             </p>

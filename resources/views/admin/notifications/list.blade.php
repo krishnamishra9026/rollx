@@ -36,9 +36,18 @@
                                                 of Order <a href="{{ $notification->data['order_url'] }}" class="text-success fw-bold">#{{ $notification->data['order_id'] }}</a>
                                             </p>
                                         @else
+
+                                            @if(isset($notification->data['order_url']))
                                             <p class="mb-1">
                                                 View Order <a href="{{ $notification->data['order_url'] }}" class="text-success fw-bold">#{{ $notification->data['order_id'] }}</a>
                                             </p>
+                                            @else
+                                            <p class="mb-1">
+                                                View <a href="{{ route('admin.wallet-requests.index') }}">Wallet/Points</a>
+                                                </p>
+                                            @endif                   
+
+                                            
                                         @endif
                                         <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
                                     </div>

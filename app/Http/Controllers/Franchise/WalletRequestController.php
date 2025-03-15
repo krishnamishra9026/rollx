@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Models\WalletRequest;
 use App\Models\Franchise;
+use App\Models\Administrator;
+
+use App\Notifications\WalletBalanceRequestNotification;
+
 
 
 class WalletRequestController extends Controller
@@ -43,11 +47,25 @@ class WalletRequestController extends Controller
             'amount' => 'required|numeric|min:1',
         ]);
 
-        WalletRequest::create([
+        /*WalletRequest::create([
             'franchise_id' => auth()->user()->id,
             'amount' => $request->amount,
             'status' => 'pending',
-        ]);
+        ]);*/
+
+        $franchise = auth()->user();
+        $amount = request('amount');
+
+        $sale_admins = Administrator::role('sales')->get();
+        $admins = Administrator::role('Administrator')->get();
+              
+        foreach ($sale_admins as $admin) {
+            $admin->notify(new WalletBalanceRequestNotification($franchise, $amount));
+        }
+
+        foreach ($admins as $admin) {
+            $admin->notify(new WalletBalanceRequestNotification($franchise, $amount));
+        }
 
         return redirect()->back()->with('success', 'Request submitted successfully.');
     }
