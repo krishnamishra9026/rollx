@@ -25,7 +25,9 @@ Route::get('/run-config', function () {
      Artisan::call('config:clear');
      Artisan::call('view:clear');
      Artisan::call('optimize:clear');
-     
+     Artisan::call('storage:link');
+     Artisan::call('optimize:clear');
+
       return 'Storage link created successfully!';
 });
 
