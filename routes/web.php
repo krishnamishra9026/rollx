@@ -20,7 +20,12 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/run-config', function () {
      
+     Artisan::call('cache:clear');
+     Artisan::call('route:clear');
+     Artisan::call('config:clear');
+     Artisan::call('view:clear');
      Artisan::call('optimize:clear');
+     
       return 'Storage link created successfully!';
 });
 
