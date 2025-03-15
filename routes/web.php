@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\File;
 |
 */
 
+Route::get('/run-config', function () {
+     
+     Artisan::call('optimize:clear');
+      return 'Storage link created successfully!';
+});
+
 Route::get('/run-storage-link', function () {
      
      echo $target = base_path('storage/app/public'); // Target folder
