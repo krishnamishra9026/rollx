@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/run-storage-link', function () {
      
-     $target = base_path('storage/app/public'); // Target folder
-    $link = public_path('storage'); // Symlink path
+     echo $target = base_path('storage/app/public'); // Target folder
+    echo $link = public_path('storage'); // Symlink path
 
     // Check if target directory exists
     if (!File::exists($target)) {
