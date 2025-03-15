@@ -56,7 +56,10 @@ class WalletController extends Controller
 
         $franchise = Franchise::find($franchise_id);
 
-        $franchise->wallet->deposit($request->amount);
+        $franchise->wallet->deposit($request->amount, [
+                'description' => 'Added Balance to Wallet',
+                'balance' => $franchise->wallet->balance + $request->amount
+            ]);
 
         // Notify the franchise
         $franchise->notify(new WalletBalanceAdded($request->amount, $franchise->balance));

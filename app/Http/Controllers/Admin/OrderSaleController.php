@@ -59,6 +59,31 @@ class OrderSaleController extends Controller
             ->orderByDesc('order_id')
             ->paginate(20);
 
+
+        $totalStats = Sale::selectRaw('SUM(price) as total_sales, SUM(quantity) as total_quantity')
+            ->when($filter['date'], function ($query, $date) {
+                return $query->whereDate('created_at', $date);
+            })
+            ->when($filter['status'], function ($query, $status) {
+                return $query->whereHas('order', function ($q) use ($status) {
+                    $q->where('status', $status);
+                });
+            })
+            ->when($filter['franchise'], function ($query, $franchise) {
+                return $query->whereHas('order.franchise', function ($q) use ($franchise) {
+                    $q->where('id', $franchise);
+                });
+            })
+            ->when($filter['product'], function ($query, $product) {
+                return $query->whereHas('product', function ($q) use ($product) {
+                    $q->where('product_id', $product);
+                });
+            })
+            ->when($filter['order'], function ($query, $order) {
+                return $query->where('order_id', $order);
+            })
+            ->first();
+
         // Prepare data for Chart.js
         $chartData = [
             'labels' => $salesData->pluck('order_id')->toArray(),

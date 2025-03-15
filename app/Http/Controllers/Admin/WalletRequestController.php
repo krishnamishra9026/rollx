@@ -86,9 +86,16 @@ class WalletRequestController extends Controller
 
         $walletRequest = WalletRequest::find($id);
 
-        if ($request->status == 'approved') {
+        if ($request->status == 'approved') 
+        {
+
             $franchise = Franchise::find($walletRequest->franchise_id);
-            $franchise->wallet->deposit($walletRequest->amount);
+            
+            $franchise->wallet->deposit($walletRequest->amount, [
+                'description' => 'Added Balance to Wallet',
+                'balance' => $franchise->wallet->balance + $walletRequest->amount
+            ]);
+
             $franchise->notify(new WalletBalanceAdded($walletRequest->amount, $franchise->balance));
         }
 
