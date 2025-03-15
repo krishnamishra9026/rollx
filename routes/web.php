@@ -3,6 +3,9 @@
 use App\Http\Controllers\Technician\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\App;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/run-storage-link', function () {
+     App::useStoragePath(base_path('laravel_project/storage'));
+
+    // Run the artisan command
     Artisan::call('storage:link');
+
     return 'Storage link created successfully!';
 });
 
