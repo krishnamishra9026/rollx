@@ -10,6 +10,8 @@ use App\Models\Product;
 use App\Models\Franchise;
 use App\Models\User;
 use App\Models\Sale;
+use App\Models\Chef;
+use App\Models\WarehouseItem;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -23,8 +25,12 @@ class DashboardController extends Controller
     public function index()
     {
         $franchises = Franchise::count();
+        $chefs = Chef::count();
         $orders = Order::count();
         $products = Product::count();
+        $active_products = Product::whereStatus(1)->count();
+        $total_sales = Sale::count();
+        $warehouse_items = WarehouseItem::count();
 
         $leads = Lead::count();
         $fresh_leads = Lead::where('status', 'Fresh')->count();
@@ -43,7 +49,7 @@ class DashboardController extends Controller
 
         $leads_data  = Lead::whereNotNull('next_call_datetime')->whereNotIn('status', ['Converted'])->orderBy('id', 'desc')->paginate(20);
 
-        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products', 'sales', 'monthlySales', 'leads_data'));
+        return view('admin.dashboard.dashboard', compact('franchises', 'orders', 'users', 'leads', 'leads', 'fresh_leads', 'interested_leads', 'non_leads', 'paspect_leads', 'closed_leads', 'not_interested_leads', 'converted_leads', 'products', 'sales', 'monthlySales', 'leads_data', 'total_sales', 'chefs', 'active_products', 'warehouse_items'));
     }
 
     public function updateToken(Request $request){

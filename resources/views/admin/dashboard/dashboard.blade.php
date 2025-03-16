@@ -26,7 +26,7 @@
     
     <div class="row">       
 
-    <div class="col-xl-3 col-lg-4">
+        <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center btn btn-primary">                    
                     <h5 class="mt-0 text-uppercase">Products</h5>
@@ -41,14 +41,15 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center btn btn-secondary">                    
-                    <h5 class="mt-0 text-uppercase">Franchises</h5>
-                    <h2 class="my-2" id="active-users-count">{{ $franchises }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('admin.franchises.index') }}">    
+                    <h5 class="mt-0 text-uppercase">Active Products</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $active_products }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.products.index') }}">    
                         <small class="text-white">View Details </small>                   
                     </a>
                 </div>
             </div>          
-        </div>
+        </div>  
+
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center btn btn-success">                    
@@ -64,9 +65,58 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
                 <div class="card-body text-center btn btn-danger">                    
-                    <h5 class="mt-0 text-uppercase">Users</h5>
+                    <h5 class="mt-0 text-uppercase">Sales</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $total_sales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-warning">                    
+                    <h5 class="mt-0 text-uppercase">Admins && Employees</h5>
                     <h2 class="my-2" id="active-users-count">{{ $users }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.users.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-info">                    
+                    <h5 class="mt-0 text-uppercase">Franchises</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $franchises }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.franchises.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-dark">                    
+                    <h5 class="mt-0 text-uppercase">Chefs</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $chefs }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.chefs.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-light">                    
+                    <h5 class="mt-0 text-uppercase">Warehouse Items</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $warehouse_items }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.warehouse-items.index') }}">    
                         <small class="text-white">View Details </small>                   
                     </a>
                 </div>

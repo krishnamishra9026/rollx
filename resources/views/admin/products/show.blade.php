@@ -34,17 +34,17 @@
                             <tbody>
                                 <tr>
                                     
-                                    <td style="width:33%" class=""><span class="fw-bold">Product Name
+                                    <td style="width:33%" class=""><span class="fw-bold">Name
                                         </span><br>
                                         {{ ucfirst($product->name) }}
                                     </td>
 
-                                     <td style="width:33%" class="text-center"><span class="fw-bold">Product Description
+                                     <td style="width:33%" class="text-center"><span class="fw-bold">Description
                                         </span><br>
                                         {{ ucfirst($product->description) }}
                                     </td>
 
-                                    <td style="width:33%" class="text-end"><span class="fw-bold">Product Status
+                                    <td style="width:33%" class="text-end"><span class="fw-bold">Status
                                         </span><br>
                                         @if ($product->status)
                                             <span class="badge border badge-success-lighten">Enabled</span>
@@ -55,24 +55,51 @@
                                 </tr>
                             </tbody>
                         </table>
+              
                         <table style="width:100%; margin-bottom:20px">
                             <tbody>
                                 <tr>
-                                    <td style="width: 33%" class="text-start"><span class="fw-bold">Model Number
+
+                                    <td style="width:33%" class=""><span class="fw-bold">Outlet Name
                                         </span><br>
-                                        {{ $product->model_number }}
+                                        {{ ucfirst($product->outlet_name) }}
                                     </td>
-                                    <td style="width:33%" class="text-center"><span class="fw-bold">Serial Number
+
+                                    <td style="width: 33%" class="text-center"><span class="fw-bold">Sold Color
                                         </span><br>
-                                        {{ $product->serial_number }}
-                                    </td>
-                                    <td style="width: 33%" class="text-end"><span class="fw-bold">Quantity
+                                        {{ $product->sold_color }}
+                                    </td>                                   
+
+                                    <td style="width: 33%" class="text-end"><span class="fw-bold">Price
                                         </span><br>
-                                        {{ $product->quantity }}
+                                        {{ $product->price }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <table style="width:100%; margin-bottom:20px">
+                            <tbody>
+                                <tr>
+
+                                    <td style="width:33%" class=""><span class="fw-bold">Quantity
+                                        </span><br>
+                                        {{ ucfirst($product->quantity) }}
+                                    </td>
+
+                                    <td style="width: 33%" class="text-center"><span class="fw-bold">Sold Quantity
+                                        </span><br>
+                                        {{ $product->sold_quantity }}
+                                    </td>                                   
+
+                                    <td style="width: 33%" class="text-end"><span class="fw-bold">Available Quantity
+                                        </span><br>
+                                        {{ $product->available_quantity }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                         <table style="width:100%; margin-bottom:20px">
                             <tbody>
                                 <tr>
@@ -81,25 +108,19 @@
                                     </span><br>
                                     {{ \Carbon\Carbon::parse($product->created_at)->format('M d, Y h:i A') }}
                                 </td>
-                                <td style="width: 33%" class="text-center"><span class="fw-bold">Updated At
+
+
+                                <td style="width: 33%" class="text-center"><span class="fw-bold">Selling Type
+                                        </span><br>
+                                        {{ $product->selling_type }}
+                                    </td> 
+
+                                <td style="width: 33%" class="text-end"><span class="fw-bold">Updated At
                                 </span><br>
                                 {{ \Carbon\Carbon::parse($product->updated_at)->format('M d, Y h:i A') }}
                             </td>
 
-                            <td style="width: 33%" class="text-end"><span class="fw-bold">Price
-                                        </span><br>
-                                        {{ $product->price }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table style="width:100%; margin-bottom:20px">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 100%" class="text-start"><span class="fw-bold">Product Description
-                                        </span><br>
-                                        {{ $product->reference ?? "Not Found" }}
-                                    </td>
+                          
 
                                     
                                 </tr>
