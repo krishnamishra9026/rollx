@@ -52,8 +52,8 @@
 
                 <a href="#" class="dropdown-item notify-item d-sm-block d-md-none">
                     <span class="account-user-avatar">
-                    @isset(Auth::guard('chef')->user()->avatar)
-                        <img  height="30" width="30" src="{{ asset('storage/uploads/chef/'.Auth::guard('chef')->user()->avatar) }}" alt="user-image" class="rounded-circle">
+                    @isset(Auth::guard('administrator')->user()->avatar)
+                        <img  height="30" width="30" src="{{ asset('storage/uploads/admin/'.Auth::guard('administrator')->user()->avatar) }}" alt="user-image" class="rounded-circle">
                     @else
                         <img  height="30" width="30" src="{{ asset('assets/images/users/avatar.png') }}" alt="user-image" class="rounded-circle">
                     @endisset
@@ -62,7 +62,7 @@
                         {{ Auth::guard('administrator')->user()->lastname }}</span>
                 </a>
 
-                <a href="{{ route('chef.my-account.edit', Auth::guard('chef')->id()) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin.my-account.edit', Auth::guard('administrator')->id()) }}" class="dropdown-item notify-item">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                         stroke="currentColor" width="20" height="20" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round"
