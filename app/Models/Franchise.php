@@ -107,4 +107,9 @@ class Franchise extends Authenticatable
         return $this->hasMany(WalletRequest::class);
     }
 
+    public function plate_settings()
+    {
+        return $this->hasMany(ProductPlateSetting::class);
+    }
+
 }

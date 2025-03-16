@@ -180,7 +180,32 @@ class FranchiseController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
+    {              
+        $franchise = Franchise::find($id);
+
+        if (!$franchise) {
+            return back()->with('error', 'Franchise not found.');
+        }
+
+        $issues = [];
+
+        if ($franchise->orders()->exists()) {
+            $issues[] = 'Franchise is linked to orders.';
+        }
+        if ($franchise->sales()->exists()) {
+            $issues[] = 'Franchise has sales records.';
+        }
+        if ($franchise->productPrices()->exists()) {
+            $issues[] = 'Franchise has franchise price records.';
+        }
+        if ($franchise->plate_settings()->exists()) {
+            $issues[] = 'Franchise is assigned to a product plate setting.';
+        }              
+
+        if (!empty($issues)) {
+            return back()->with('error_list', $issues);
+        }
+
         Franchise::find($id)->delete();
         return redirect()->back()->with('success', 'Franchise deleted successfully!');
     }

@@ -116,8 +116,8 @@
                 <div class="card-body text-center btn btn-light">                    
                     <h5 class="mt-0 text-uppercase">Warehouse Items</h5>
                     <h2 class="my-2" id="active-users-count">{{ $warehouse_items }}</h2>
-                    <a class="mb-0 text-blue" href="{{ route('admin.warehouse-items.index') }}">    
-                        <small class="text-blue">View Details </small>                   
+                    <a class="mb-0 text-dark" href="{{ route('admin.warehouse-items.index') }}">    
+                        <small class="text-dark">View Details </small>                   
                     </a>
                 </div>
             </div>          
@@ -144,7 +144,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-warning">                    
+                <div class="card-body text-center btn btn-primary">                    
                     <h5 class="mt-0 text-uppercase">Total Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -155,7 +155,7 @@
         </div>
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-info">                    
+                <div class="card-body text-center btn btn-secondary">                    
                     <h5 class="mt-0 text-uppercase">Fresh Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $fresh_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -167,7 +167,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-light">                    
+                <div class="card-body text-center btn btn-success">                    
                     <h5 class="mt-0 text-uppercase">Interested Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $interested_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -179,7 +179,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-dark">                    
+                <div class="card-body text-center btn btn-danger">                    
                     <h5 class="mt-0 text-uppercase">Non Contactable Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $non_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -191,7 +191,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-link">                    
+                <div class="card-body text-center btn btn-warning">                    
                     <h5 class="mt-0 text-uppercase">Paspect Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $paspect_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -204,7 +204,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-primary">                    
+                <div class="card-body text-center btn btn-info">                    
                     <h5 class="mt-0 text-uppercase">Closed Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $closed_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -217,7 +217,7 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-secondary">                    
+                <div class="card-body text-center btn btn-dark">                    
                     <h5 class="mt-0 text-uppercase">Not Interested Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $not_interested_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
@@ -229,11 +229,11 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-success">                    
+                <div class="card-body text-center btn btn-light">                    
                     <h5 class="mt-0 text-uppercase">Converted Leads</h5>
                     <h2 class="my-2" id="active-users-count">{{ $converted_leads }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.leads.index') }}">    
-                        <small class="text-white">View Details </small>                   
+                        <small class="text-dark">View Details </small>                   
                     </a>
                 </div>
             </div>          
@@ -381,9 +381,9 @@
 
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-danger">                    
-                    <h5 class="mt-0 text-uppercase">Total Sales</h5>
-                    <h2 class="my-2" id="active-users-count">{{ $sales }}</h2>
+                <div class="card-body text-center btn btn-primary">                    
+                    <h5 class="mt-0 text-uppercase">Total Sale Quantity</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $sale_quantity }}</h2>
                     <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
                         <small class="text-white">View Details </small>                   
                     </a>
@@ -392,10 +392,34 @@
         </div>
         <div class="col-xl-3 col-lg-4">
             <div class="card tilebox-one">
-                <div class="card-body text-center btn btn-warning">                    
+                <div class="card-body text-center btn btn-secondary">                    
+                    <h5 class="mt-0 text-uppercase">Tota Sale</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $sales }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-success">                    
+                    <h5 class="mt-0 text-uppercase">Monthly Sale Quantity</h5>
+                    <h2 class="my-2" id="active-users-count">{{ $monthlySalesQuantity }}</h2>
+                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                        <small class="text-white">View Details </small>                   
+                    </a>
+                </div>
+            </div>          
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card tilebox-one">
+                <div class="card-body text-center btn btn-danger">                    
                     <h5 class="mt-0 text-uppercase">This Month Sale</h5>
                     <h2 class="my-2" id="active-users-count">{{ $monthlySales }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('admin.sales.index') }}">    
+                    <a class="mb-0 text-white" href="{{ route('admin.sales.index') }}">    
                         <small class="text-white">View Details </small>                   
                     </a>
                 </div>

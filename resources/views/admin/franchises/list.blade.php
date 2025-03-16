@@ -24,6 +24,16 @@
             </div>
         </div>
         @include('admin.includes.flash-message')
+
+        @if(session('error_list'))
+        @foreach(session('error_list') as $error)
+        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong><i class="dripicons-wrong me-2"></i> </strong>{{ $error }}
+        </div>
+        @endforeach
+        @endif
+
         @include('admin.franchises.filter')
         <div class="row">
             <div class="col-12">

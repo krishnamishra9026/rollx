@@ -170,6 +170,12 @@ class ChefController extends Controller
      */
     public function destroy(string $id)
     {
+        $chef = Chef::find($id);
+
+        if ($chef->sales()->exists()) {
+            return back()->with('error', 'Chef has sales records.');
+        }    
+        
         Chef::find($id)->delete();
         return redirect()->back()->with('success', 'Chef deleted successfully!');
     }
