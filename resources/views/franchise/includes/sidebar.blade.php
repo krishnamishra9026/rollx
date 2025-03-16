@@ -83,14 +83,27 @@
                 </a>
             </li>
 
-            <li class="side-nav-item {{ request()->is('franchise/transactions') || request()->is('franchise/transactions/*') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('franchise.sale.reports.index') }}" class="side-nav-link">
-                    <i class="uil-analytics"></i>
-                    <span> Sales Report </span>
+
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#reportMenu" aria-expanded="false" aria-controls="reportMenu"
+                    class="side-nav-link">
+                    <i class="uil-money-bill"></i>
+                    <span> Reports </span>
+                    <span class="menu-arrow"></span>
                 </a>
+                <div class="collapse" id="reportMenu">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('franchise.product.sale.reports.index') }}">Product Sale</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('franchise.sale.reports.index') }}">Sales</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
-             <li class="side-nav-item {{ request()->is('franchise/notifications') || request()->is('franchise/notifications/*') ? 'menuitem-active' : '' }}">
+            <li class="side-nav-item {{ request()->is('franchise/notifications') || request()->is('franchise/notifications/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('franchise.notifications.list') }}" class="side-nav-link">
                     <i class="uil-bell"></i>
                     <span> Notifications </span>

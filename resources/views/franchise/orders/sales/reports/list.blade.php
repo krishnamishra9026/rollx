@@ -127,7 +127,7 @@
                 autoWidth: !1,
                 responsive: !0,
                 order: [
-                    [0, "desc"]
+                    [4, "desc"]
                 ],
                 columnDefs: [{
                     targets: [0],

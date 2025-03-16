@@ -9,6 +9,7 @@ use App\Http\Controllers\Franchise\DashboardController;
 use App\Http\Controllers\Franchise\ProductController;
 use App\Http\Controllers\Franchise\OrderController;
 use App\Http\Controllers\Franchise\NotificationController;
+use App\Http\Controllers\Franchise\ProductSaleReportController;
 use App\Http\Controllers\Franchise\SaleReportController;
 use App\Http\Controllers\Franchise\SaleController;
 use App\Http\Controllers\Franchise\WalletRequestController;
@@ -110,6 +111,12 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
 
     Route::resource('products', ProductController::class);
+
+    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+        Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+            Route::resource('reports', ProductSaleReportController::class);
+        });
+    });
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.list');
 
