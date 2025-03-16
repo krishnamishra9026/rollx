@@ -62,8 +62,13 @@
                                                             {{ ucfirst($transaction->type) }}
                                                         </button>
                                                     </td>
-                                                    <td>{{ $transaction->type == 'deposit' ? str_replace("-", "", $transaction->amount) : '0' }}</td>
-                                                    <td>{{ $transaction->type == 'withdrawal' ? str_replace("-", "", $transaction->amount) : '0' }}</td>
+                                                    @if($transaction->type == 'deposit')                                                    
+                                                    <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                    <td>0</td>
+                                                    @else
+                                                    <td>0</td>
+                                                    <td>{{ str_replace("-", "", $transaction->amount) }}</td>
+                                                    @endif
                                                     <td>{!! $transaction->meta['balance'] ?? $transaction->wallet->balance !!}</td>
                                                     <td>{!! $transaction->meta['description'] ?? 'Added Balance to Wallet' !!}</td>
                                                     <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('M d, Y') }}</td>
