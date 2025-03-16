@@ -116,8 +116,8 @@
                 <div class="card-body text-center btn btn-light">                    
                     <h5 class="mt-0 text-uppercase">Warehouse Items</h5>
                     <h2 class="my-2" id="active-users-count">{{ $warehouse_items }}</h2>
-                    <a class="mb-0 text-dark" href="{{ route('admin.warehouse-items.index') }}">    
-                        <small class="text-white">View Details </small>                   
+                    <a class="mb-0 text-blue" href="{{ route('admin.warehouse-items.index') }}">    
+                        <small class="text-blue">View Details </small>                   
                     </a>
                 </div>
             </div>          

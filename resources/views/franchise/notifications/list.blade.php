@@ -6,7 +6,13 @@
 @endsection
 
 @section('content')
-
+    <style type="text/css">
+        .notify-icon {
+          width: 36px;
+          text-align: center;
+          height: 36px;
+      }
+    </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
