@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>{{ $franchise->email }}</td>
                                                 <td>{{ $franchise->phone }}</td>
-                                                <td>{{ $franchise->wallet->balanace }}</td>
+                                                <td>{{ $franchise->balanace }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->orders->count() }}</a>
                                                 </td>
