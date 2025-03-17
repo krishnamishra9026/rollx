@@ -41,6 +41,7 @@
                                             <th class="fw-bold">Sub Total</th>
                                             <th class="fw-bold">Total</th>
                                             <th class="fw-bold">Stock</th>
+                                            <th class="fw-bold">Sales</th>
                                             <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
@@ -54,6 +55,7 @@
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
+                                                <td>{{ $order->sales->where('chef_id', auth()->user()->id)->count() }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                         
                                                 <td>
