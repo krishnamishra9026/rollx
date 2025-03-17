@@ -108,7 +108,7 @@
                                         Order <a href="{{ route('chef.orders.show', $order->id) }}">#{{ $order->id }}</a>
                                     </p>
 
-                                    @if (@$order->product->selling_type ?? '' == 'plate')
+                                    @if (($order->product->selling_type ?? '') != 'quantity')
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Wastage']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
