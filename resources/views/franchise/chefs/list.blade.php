@@ -65,7 +65,7 @@
                                                 <td>{{ $chef->email }}</td>
                                                 <td>{{ $chef->phone }}</td>
                                                 <td>
-                                                    <a href="{{ route('franchise.sales.index', ['chef' => $chef->id]) }}"   class="dropdown-item"> {{ $chef->sales->count() }}</a>
+                                                    <a href="{{ route('franchise.sales.index', ['chef' => $chef->id]) }}"> {{ $chef->sales->count() }}</a>
                                                 </td>
 
                                                 <td>
