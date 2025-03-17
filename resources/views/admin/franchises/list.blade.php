@@ -50,6 +50,7 @@
                                             <th>Contact Person</th>
                                             <th>Email</th>
                                             <th>Phone</th>
+                                            <th>Balance/Points</th>
                                              <th>Orders</th>
                                              <th>Sales</th>
                                              <th>Direct Login</th>
@@ -69,6 +70,7 @@
                                                 </td>
                                                 <td>{{ $franchise->email }}</td>
                                                 <td>{{ $franchise->phone }}</td>
+                                                <td>{{ $franchise->wallet->balanace }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->orders->count() }}</a>
                                                 </td>
@@ -210,6 +212,8 @@
                     searchable: !0
                 }],
                 columns: [{
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0
