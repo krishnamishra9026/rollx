@@ -26,7 +26,7 @@ class WalletRequestController extends Controller
 
     public function index(Request $request)
     {
-        $query = WalletRequest::with('franchise')->latest();
+        $query = WalletRequest::with('franchise')->where('franchise_id', auth()->user()->id)->latest();
 
         if ($request->has('status') && $request->status !== 'all') {
             $query->where('status', $request->status);
