@@ -53,6 +53,7 @@
                         <div class="row">
                             @if ($orders && count($orders))
                                 @foreach ($orders as $order)
+                                {{ $order->product->selling_type }}
                                     @if (@$order->product->selling_type ?? '' == 'plate')
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Sold']) }}" 
