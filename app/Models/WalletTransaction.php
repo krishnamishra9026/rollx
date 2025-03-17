@@ -17,7 +17,7 @@ class WalletTransaction extends Model
 
     public function isBalanceLow($threshold = 1.00)
     {
-        return $this->wallet->balanace < $threshold;
+        return $this->wallet->balance < $threshold;
     }
 
 }
