@@ -55,7 +55,7 @@
                                                 <td>{{ $order->sub_total }}</td>
                                                 <td>{{ $order->total }}</td>
                                                 <td>{{ $order->stock }}</td>
-                                                <td>{{ $order->sales->where('chef_id', auth()->user()->id)->count() }}</td>
+                                                <td><a href="{{ route('chef.sales.index', ['order' => $order->id]) }}">{{ $order->sales->where('chef_id', auth()->user()->id)->count() }}</a></td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                         
                                                 <td>

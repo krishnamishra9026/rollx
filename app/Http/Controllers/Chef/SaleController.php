@@ -43,7 +43,7 @@ class SaleController extends Controller
         $sales              = isset($filter['date']) ? $sales->whereDate('created_at', $filter['date']) : $sales;
         $sales              = isset($filter['status']) ? $sales->where('status', 'LIKE', '%' . $filter['status'] . '%') : $sales;
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
-        $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
+        $sales              = isset($filter['order']) ? $sales->where('order_id',  $filter['order'] ) : $sales;
 
         $sales              = $sales->where('franchise_id', auth()->user()->franchise_id)->where('chef_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
 
