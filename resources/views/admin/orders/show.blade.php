@@ -135,12 +135,12 @@
                     <table class="table table-striped" style="font-size: 14px" id="parts-table">
                         <thead>
                             <tr>
-                                <th class="bg-dark text-white">Product ID</th>
-                                <th class="bg-dark text-white">Product Name</th>
-                                <th class="bg-dark text-white">Qty Avilable</th>
-                                <th class="bg-dark text-white">Qty Order</th>
-                                <th class="bg-dark text-white">Product My Price</th>
-                                <th class="bg-dark text-white">Order Price</th>
+                                <th class="bg-dark text-white text-nowrap">Product ID</th>
+                                <th class="bg-dark text-white text-nowrap">Product Name</th>
+                                <th class="bg-dark text-white text-nowrap">Qty Avilable</th>
+                                <th class="bg-dark text-white text-nowrap">Qty Order</th>
+                                <th class="bg-dark text-white text-nowrap">Product My Price</th>
+                                <th class="bg-dark text-white text-nowrap">Order Price</th>
                             </tr>
                         </thead>
                         <tbody id="parts-row">
@@ -231,10 +231,10 @@
                 <table class="table table-striped table-bordered" style="font-size: 14px" id="parts-table">
                     <thead>
                         <tr>
-                            <th class="bg-dark text-white">Date Added</th>
-                            <th class="bg-dark text-white">Comment</th>
-                            <th class="bg-dark text-white">Status Updated By</th>
-                            <th class="bg-dark text-white">Order Status</th>
+                            <th class="bg-dark text-white text-nowrap">Date Added</th>
+                            <th class="bg-dark text-white text-nowrap">Comment</th>
+                            <th class="bg-dark text-white text-nowrap">Status Updated By</th>
+                            <th class="bg-dark text-white text-nowrap">Order Status</th>
                         </tr>
                     </thead>
                     <tbody>
