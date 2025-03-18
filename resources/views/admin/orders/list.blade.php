@@ -82,20 +82,20 @@ session()->put('route', $route);
                                                 </td>
                                                 
                                                 <td>
-                                                    <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)" >
-                                                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                            <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                                            <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
-                                                            @if($order->status != 'completed' && $order->status != 'delivered')
-                                                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                                            @endif
-                                                            <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                                            <option style="display: none;" value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                                            <option style="display: none;" value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                                            <option style="display: none;" value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                                            <option style="display: none;" value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
-                                                    </select>   
+                                                    <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)">
+                                                    @php
+                                                        $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
+                                                        $currentIndex = array_search($order->status, $statuses);
+                                                    @endphp
+
+                                                    @foreach ($statuses as $index => $status)
+                                                        <option value="{{ $status }}" 
+                                                            {{ $order->status == $status ? 'selected' : '' }} 
+                                                            {{ $index < $currentIndex ? 'disabled' : '' }}>
+                                                            {{ ucfirst($status) }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>

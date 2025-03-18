@@ -46,7 +46,11 @@ class ProductFranchiseController extends Controller
         $product_list = Product::latest()->get();
         $franchises = Franchise::latest()->get(['id', 'firstname', 'lastname']);
 
-        return view('admin.product_franchises.list', compact('products', 'product_list', 'franchises'));
+        $franchise_list = Franchise::latest()->get(['id', 'firstname', 'lastname']);
+
+
+
+        return view('admin.product_franchises.list', compact('products', 'product_list', 'franchises', 'franchise_list'));
     }
 
     /**
