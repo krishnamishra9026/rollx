@@ -121,8 +121,11 @@ class SaleController extends Controller
 
          $franchise->notify(new OrderSaleNotification($sale, 'franchise'));
 
+         if ($order->status == 'Sold') {
+            return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sold quantity Sale recorded successfully');            
+        }
 
-        return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sale recorded successfully');
+        return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Wastage quantity Sale recorded successfully');
     }
 
     public function save(Request $request)
