@@ -83,19 +83,19 @@ session()->put('route', $route);
                                                 
                                                 <td>
                                                     <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)">
-                                                    @php
-                                                        $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
-                                                        $currentIndex = array_search($order->status, $statuses);
-                                                    @endphp
+                                                        @php
+                                                            $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
+                                                            $currentIndex = array_search($order->status, $statuses);
+                                                        @endphp
 
-                                                    @foreach ($statuses as $index => $status)
-                                                        <option value="{{ $status }}" 
-                                                            {{ $order->status == $status ? 'selected' : '' }} 
-                                                            {{ $index < $currentIndex ? 'disabled' : '' }}>
-                                                            {{ ucfirst($status) }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                        @foreach ($statuses as $index => $status)
+                                                            <option value="{{ $status }}" 
+                                                                {{ $order->status == $status ? 'selected' : '' }} 
+                                                                {{ $index < $currentIndex ? 'disabled' : '' }}>
+                                                                {{ ucfirst($status) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>

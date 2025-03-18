@@ -171,16 +171,18 @@
                                     <label for="statuses" class="col-sm-2 col-form-label text-sm-start">Order Status</label>
                                     <div class="col-sm-10">
                                         <select id="statuses" class="form-select " name="status">
-                                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                            <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                            <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
-                                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                            <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                            <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
-                                            <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Failed</option>
-                                            <option value="returned" {{ $order->status == 'returned' ? 'selected' : '' }}>Returned</option>
+                                            @php
+                                                $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
+                                                $currentIndex = array_search($order->status, $statuses);
+                                            @endphp
+
+                                            @foreach ($statuses as $index => $status)
+                                                <option value="{{ $status }}" 
+                                                    {{ $order->status == $status ? 'selected' : '' }} 
+                                                    {{ $index < $currentIndex ? 'disabled' : '' }}>
+                                                    {{ ucfirst($status) }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
