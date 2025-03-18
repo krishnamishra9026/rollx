@@ -41,14 +41,27 @@ class ProductFranchiseController extends Controller
             });
         }
 
-        $products = $products->orderBy('created_at', 'desc')->paginate(20);
+        $products = $products->orderBy('created_at', 'desc')->paginate(20);              
 
         $product_list = Product::latest()->get();
         $franchises = Franchise::latest()->get(['id', 'firstname', 'lastname']);
 
-        $franchise_list = Franchise::latest()->get(['id', 'firstname', 'lastname']);
+        $franchiseQuery = Franchise::with('products');
 
+        // Filter by franchise (if a specific franchise is selected)
+        if (isset($filter['franchise'])) {
+            $franchiseQuery->where('id', request('franchise'));
+        }
 
+        // Filter by product (if a specific product is selected)
+        if (isset($filter['product'])) {
+            $franchiseQuery->whereHas('products', function ($query) {
+                $query->where('products.id', request('product'));
+            });
+        }
+
+        // Get paginated results
+        $franchise_list = $franchiseQuery->latest()->paginate(20);           
 
         return view('admin.product_franchises.list', compact('products', 'product_list', 'franchises', 'franchise_list'));
     }

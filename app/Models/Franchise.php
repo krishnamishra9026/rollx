@@ -84,7 +84,7 @@ class Franchise extends Authenticatable
 
     public function products()
     {
-        return $this->hasMany(ProductFranchise::class);
+        return $this->belongsToMany(Product::class, 'product_franchises', 'franchise_id', 'product_id');
     }
 
     public function chefs()

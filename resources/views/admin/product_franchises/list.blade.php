@@ -20,68 +20,105 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 table-responsive">
-                                <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100"
-                                    style="font-size: 13px;">
-                                    <thead class="text-dark">
-                                        <tr>
-                                            <th class="fw-bold">Product Id</th>
-                                            <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold" colspan="3" width="65%">Select Franchises</th>
-                                            <th class="fw-bold">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($products as $product)
+                        <ul class="nav nav-tabs" id="franchiseTabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Product Franchise List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Franchise Product List</a>
+                            </li>
+                        </ul>
 
-                                        @php
-                                            $assignedFranchises = $product->franchises->pluck('franchise_id')->toArray();
-                                        @endphp
-                                        <tr>
-
-                                            <form action="{{ route('admin.product-franchises.store') }}" method="POST" id="filterForm">
-                                                @csrf
-                                                <td>{{ $product->id }}</td>
-                                                <td> <a href="{{ route('admin.products.show', $product->id) }}"
-                                                    class="text-body fw-semibold"> {{ $product->name }} </a></td>
-                                                    <td colspan="3" width="65%">
-
-                                                        <select name="franchise_id[{{ $product->id }}][]" class="form-control" multiple  data-toggle=select2 >
-                                                             <option disabled selected>Select</option>
-                                                            @foreach ($franchises as $franchise)
-                                                            <option value="{{ $franchise->id }}" 
-                                                                {{ in_array($franchise->id, old('franchise_id.' . $product->id, $assignedFranchises)) ? 'selected' : '' }}>
-                                                                {{ $franchise->firstname }} {{ $franchise->lastname }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                        @error('franchise_id')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-sm btn-success w-50">Assign</button>
-                                                    </td>
-                                                </form>
-
+                        <div class="tab-content mt-3">
+                            <!-- Product Franchise List -->
+                            <div class="tab-pane fade show active" id="productList">
+                                <div class="table-responsive">
+                                    <table id="product-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
+                                        <thead class="text-dark">
+                                            <tr>
+                                                <th class="fw-bold text-nowrap">Product Id</th>
+                                                <th class="fw-bold text-nowrap">Product Name</th>
+                                                <th class="fw-bold" colspan="3" width="65%" >Select Franchises</th>
+                                                <th class="fw-bold">Action</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $product)
+                                                @php
+                                                    $assignedFranchises = $product->franchises->pluck('id')->toArray();
+                                                @endphp
+                                                <tr>
+                                                    <form action="{{ route('admin.product-franchises.store') }}" method="POST">
+                                                        @csrf
+                                                        <td>{{ $product->id }}</td>
+                                                        <td>
+                                                            <a href="{{ route('admin.products.show', $product->id) }}" class="text-body fw-semibold text-nowrap">
+                                                                {{ $product->name }}
+                                                            </a>
+                                                        </td>
+                                                        <td colspan="3" width="65%">
+                                                            <select name="franchise_id[{{ $product->id }}][]" class="form-control" multiple data-toggle="select2">
+                                                                <option disabled selected>Select</option>
+                                                                @foreach ($franchises as $franchise)
+                                                                    <option value="{{ $franchise->id }}" 
+                                                                        {{ in_array($franchise->id, old('franchise_id.' . $product->id, $assignedFranchises)) ? 'selected' : '' }}>
+                                                                        {{ $franchise->firstname }} {{ $franchise->lastname }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('franchise_id')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" class="btn btn-sm btn-success w-50">Assign</button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
+                                </div>
+                            </div>
+
+                            <!-- Franchise Product List -->
+                            <div class="tab-pane fade" id="franchiseList">
+                                <div class="table-responsive">
+                                    <table id="franchise-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
+                                        <thead class="text-dark">
+                                            <tr>
+                                                <th class="fw-bold">Franchise Id</th>
+                                                <th class="fw-bold">Franchise Name</th>
+                                                <th class="fw-bold" width="65%">Assigned Products</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($franchise_list as $franchise)
+                                                <tr>
+                                                    <td>{{ $franchise->id }}</td>
+                                                    <td>{{ $franchise->firstname }} {{ $franchise->lastname }}</td>
+                                                    <td>
+                                                        @foreach ($franchise->products as $product)
+                                                            <span class="badge bg-primary">{{ $product->name }}</span>
+                                                        @endforeach
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $franchise_list->appends(request()->query())->links('pagination::bootstrap-5') }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 @push('scripts')

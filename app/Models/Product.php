@@ -85,7 +85,7 @@ class Product extends Model
 
     public function franchises()
     {
-        return $this->hasMany(ProductFranchise::class);
+        return $this->belongsToMany(Franchise::class, 'product_franchises', 'product_id', 'franchise_id');
     }
 
     public function plate_setting()
