@@ -26,7 +26,7 @@ class ProductController extends Controller
         $filter                = [];
         $filter['product']     = $request->product;
 
-        $products = Product::where('quantity', '>', 0)->where('status', 1)
+        $products = Product::where('available_quantity', '>', 0)->where('status', 1)
             ->whereHas('franchises', function ($query) {
                     $query->where('franchise_id', auth()->user()->id);
             });
@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         if ($products->count() <= 0) 
         {
-            $products              = Product::where('quantity', '>', 0)->where('status', 1);
+            $products              = Product::where('available_quantity', '>', 0)->where('status', 1);
             $products              = isset($filter['product']) ? $products->where('id', $filter['product'] ) : $products;
             $products              = $products->orderBy('id', 'desc')->paginate(20);
         }
@@ -54,7 +54,7 @@ class ProductController extends Controller
         $filter                        = [];
         $filter['product']             = $request->product;
 
-        $stocks = Product::where('quantity', '>', 0)->where('status', 1)
+        $stocks = Product::where('available_quantity', '>', 0)->where('status', 1)
             ->whereHas('franchises', function ($query) {
                     $query->where('franchise_id', auth()->user()->id);
             });
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
         if ($stocks->count() <= 0) 
         {
-            $stocks              = Product::where('quantity', '>', 0)->where('status', 1);
+            $stocks              = Product::where('available_quantity', '>', 0)->where('status', 1);
             $stocks              = isset($filter['product']) ? $stocks->where('id', $filter['product'] ) : $stocks;
             $stocks              = $stocks->orderBy('id', 'desc')->paginate(20);
         }
