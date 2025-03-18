@@ -60,8 +60,8 @@
                                         <tr>
                                             <th>Product Id</th>
                                             <th>Product Name</th>
-                                            <th>Product Qunatity</th>
-                                            <th>Sold Qunatity</th>
+                                            <th>Product Qty</th>
+                                            <th>Purchase Qty</th>
                                             <th>Available Qty (Stock)</th>
                                             <th>My Price</th>
                                             <th>Date Added</th>
