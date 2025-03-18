@@ -62,10 +62,8 @@
                                             <tr>
                                                 <td>{{ $franchise->id }}</td>
                                                 <td class="table-user">
-                                                    <img height="30" width="30" @isset($franchise->avatar) src="{{ asset('storage/uploads/franchise/' . $franchise->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset
-                                                        alt="table-user" class="me-2 rounded-circle">
-                                                    <a href="{{ route('admin.franchises.show', $franchise->id) }}"
-                                                        class="text-body fw-semibold">{{ $franchise->firstname }}
+                                                    <img height="20" width="20" @isset($franchise->avatar) src="{{ asset('storage/uploads/franchise/' . $franchise->avatar) }}" @else src="{{ asset('assets/images/users/avatar.png') }}" @endisset  class="me-1 rounded-circle">
+                                                    <a href="{{ route('admin.franchises.show', $franchise->id) }}"  class="text-body fw-semibold">{{ $franchise->firstname }}
                                                         {{ $franchise->lastname }}</a>
                                                 </td>
                                                 <td>{{ $franchise->email }}</td>
