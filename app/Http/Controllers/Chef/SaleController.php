@@ -121,7 +121,7 @@ class SaleController extends Controller
 
          $franchise->notify(new OrderSaleNotification($sale, 'franchise'));
 
-         if ($order->status == 'Sold') {
+         if ($sale->status == 'Sold') {
             return redirect()->route('chef.order.sales.index', ['order_id' => $order->id])->with('success', 'Sold quantity Sale recorded successfully');            
         }
 
@@ -161,7 +161,7 @@ class SaleController extends Controller
 
         $franchise->notify(new OrderSaleNotification($sale));
 
-        if ($order->status == 'Sold') {
+        if ($sale->status == 'Sold') {
             return redirect()->back()->with('success', 'Sold quantity Sale recorded successfully');            
         }
 
