@@ -54,7 +54,7 @@ class ProductController extends Controller
         $filter                        = [];
         $filter['product']             = $request->product;
 
-        $stocks = Product::where('available_quantity', '>', 0)->where('status', 1)
+        $stocks = Product::where('available_quantity', '>', 0)
             ->whereHas('franchises', function ($query) {
                     $query->where('franchise_id', auth()->user()->id);
             });
