@@ -145,7 +145,7 @@
                         </thead>
                         <tbody id="parts-row">
                             <tr>
-                                <td>#{{ $order->product->idid }}</td>
+                                <td>#{{ $order->product->id }}</td>
                                 <td>{{ $order->product->name }}</td>
                                 <td>{{ $order->product->quantity }}</td>
                                 <td>{{ $order->quantity }}</td>
