@@ -161,7 +161,11 @@ class SaleController extends Controller
 
         $franchise->notify(new OrderSaleNotification($sale));
 
-        return redirect()->back()->with('success', 'Sale recorded successfully');
+        if ($order->status == 'Sold') {
+            return redirect()->back()->with('success', 'Sold quantity Sale recorded successfully');            
+        }
+
+        return redirect()->back()->with('success', 'Wastage quantity Sale recorded successfully');
     }
 
     public function saveOld(Request $request)
