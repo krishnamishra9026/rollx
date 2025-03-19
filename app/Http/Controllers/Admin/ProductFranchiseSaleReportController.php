@@ -11,7 +11,7 @@ use App\Models\Sale;
 use App\Models\Franchise;
 use App\Models\Chef;
 
-class ProductSaleReportController extends Controller
+class FranchiseProductSaleReportController extends Controller
 {
     /**
      * Display a listing of the resource.

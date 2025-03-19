@@ -143,6 +143,9 @@
                             <a href="{{ route('admin.franchise.sale.reports.index') }}">Franchise Sale</a>
                         </li>
                         <li>
+                            <a href="{{ route('admin.franchise.product.sale.reports.index') }}">Franchise Product Sale</a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.sale.reports.index') }}">Sales</a>
                         </li>
                         <li>

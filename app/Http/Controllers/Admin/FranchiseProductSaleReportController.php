@@ -11,7 +11,7 @@ use App\Models\Sale;
 use App\Models\Franchise;
 use App\Models\Chef;
 
-class ProductSaleReportController extends Controller
+class FranchiseProductSaleReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,62 +27,35 @@ class ProductSaleReportController extends Controller
     {
         $filter = [];
         $filter['product'] = $request->product;
+        $filter['franchise'] = $request->franchise;
 
-        $query = Product::withCount([
-                'orders as total_orders' => function ($query) {
-                    $query->selectRaw('COUNT(DISTINCT orders.id)');
-                },
-                'sales as total_sales' => function ($query) {
-                    $query->selectRaw('COUNT(DISTINCT sales.id)');
-                }
-            ])
-            ->withSum('orders as total_quantity_ordered', 'quantity')
-            ->withSum(['sales as total_quantity_sold' => function ($query) {
-                $query->where('status', 'Sold');
-            }], 'quantity')
-            ->withSum('sales as total_revenue', 'price')
-            ->withSum('sales as total_quantity', 'quantity')
-            ->withSum(['sales as total_wastage_quantity' => function ($query) {
-                $query->where('status', 'wastage');
-            }], 'quantity')
-            // Total amount ordered (Ordered Quantity * Price in Orders Table)
-            ->withSum(['orders as total_amount_ordered' => function ($query) {
-                $query->selectRaw('SUM(total_price)');
-            }], 'quantity')
-            // Total amount sold (Sold Quantity * Price in Sales Table)
-            ->withSum(['sales as total_amount_sold' => function ($query) {
-                $query->selectRaw('SUM(price)');
-            }], 'quantity');
+        $productId = $request->product;
+        $franchise = $request->franchise;
 
-        if (request()->has('product')) {
-            $query->where('id', request('product'));
-        }
-
-        // Fetch total sums across all products
-        $productId = request('product'); 
-
-        $totals = Product::selectRaw("
-                SUM((SELECT SUM(quantity) FROM orders WHERE orders.product_id = products.id)) as total_quantity_ordered,
-                SUM((SELECT SUM(quantity) FROM sales WHERE sales.product_id = products.id AND sales.status = 'Sold')) as total_quantity_sold,
-                SUM((SELECT SUM(quantity) FROM sales WHERE sales.product_id = products.id AND sales.status = 'Wastage')) as total_quantity_wastage,
-                SUM((SELECT SUM(quantity) FROM sales WHERE sales.product_id = products.id )) as total_quantity,
-                SUM((SELECT SUM(total_price) FROM orders WHERE orders.product_id = products.id)) as total_amount_ordered,
-                SUM((SELECT SUM(price) FROM sales WHERE sales.product_id = products.id AND sales.status = 'Sold')) as total_amount_sold,
-                SUM((SELECT SUM(price) FROM sales WHERE sales.product_id = products.id AND sales.status = 'Wastage')) as total_amount_wastage,
-                SUM((SELECT SUM(price) FROM sales WHERE sales.product_id = products.id )) as total_amount
-            ")
-            ->when($productId, function ($query) use ($productId) {
-                $query->where('id', $productId);
+        $sales = Franchise::with(['products' => function($query) use ($productId) {
+        $query->select('products.id', 'products.name') // Selecting specific columns
+            ->when($productId, function ($q) use ($productId) {
+                $q->where('products.id', $productId); // Apply filter for specific product ID
             })
-            ->first();
-
-        $sales = $query->latest();
-        $product_list = $sales->get();
-        $sales = $query->latest()->paginate(20);             
+            ->withSum(['orders as ordered_quantity' => function ($query) {
+                $query->selectRaw('sum(quantity)');
+            }], 'quantity')
+            ->withSum(['sales as sold_quantity' => function ($query) {
+                $query->where('status', 'sold'); // Assuming 'type' column differentiates sold and wastage
+            }], 'quantity')
+            ->withSum(['sales as wastage_quantity' => function ($query) {
+                $query->where('status', 'wastage'); // Assuming 'type' column differentiates sold and wastage
+            }], 'quantity');
+        }])
+        ->when($franchise, function ($q) use ($franchise) {
+            $q->where('franchises.id', $franchise); // Apply filter for specific franchise group ID
+        })
+        ->paginate(20);
 
         $products = Product::latest()->get();
+        $franchises = Franchise::latest()->get();
 
-        return view('admin.products.reports.list', compact('sales', 'filter', 'product_list', 'products', 'totals'));
+        return view('admin.franchises.products.reports.list', compact('filter', 'sales', 'products', 'franchises'));
 
     }
 
