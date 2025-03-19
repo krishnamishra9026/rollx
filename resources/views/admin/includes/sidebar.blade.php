@@ -64,6 +64,10 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('admin.product.quantity') }}">Product Quantities</a>
+                        </li>
+
+                        <li>
                             <a href="{{ route('admin.product-franchises.index') }}">Product Franchises</a>
                         </li>
 
@@ -145,6 +149,11 @@
                         <li>
                             <a href="{{ route('admin.franchise.product.sale.reports.index') }}">Franchise Product Sale</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('admin.product.franchise.sale.reports.index') }}">Product Franchise Sale</a>
+                        </li>
+
                         <li>
                             <a href="{{ route('admin.sale.reports.index') }}">Sales</a>
                         </li>

@@ -43,6 +43,11 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
+    public function productFranchisePrices($franchise_id)
+    {
+        return $this->hasOne(ProductPrice::class)->where('franchise_id', $franchise_id);
+    }
+
 
     function getFranchiseProductTotalQuantity($franchiseId)
     {
@@ -52,9 +57,10 @@ class Product extends Model
                     ->sum('quantity');
     }
 
-    public function productFranchisePrices($franchise_id)
+
+    public function quantityLogs()
     {
-        return $this->hasOne(ProductPrice::class)->where('franchise_id', $franchise_id);
+        return $this->hasMany(ProductQuantityLog::class);
     }
 
 

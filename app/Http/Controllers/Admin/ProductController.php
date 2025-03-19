@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductDocument;
 use App\Models\ProductImage;
-use App\Models\ProductSerialNo;
+use App\Models\ProductQuantityLog;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\Admin\ProductsExport;
@@ -56,6 +56,38 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function productQuantity(Request $request)
+    {
+        $filter                     = [];
+        $filter['product']             = $request->product;
+        $filter['date']             = $request->date;
+
+        $products = Product::query();
+
+        if (isset($filter['product'])) {
+            $products = $products->where('id', $filter['product']);
+        }
+
+        $products = $products->orderBy('created_at', 'desc')->paginate(20);              
+
+        $product_list = Product::latest()->get();   
+
+        $query = ProductQuantityLog::orderBy('date_added', 'desc');
+
+        if ($request->has('product') && !empty($request->product)) {
+            $query->where('product_id', $request->product);
+        }
+
+        if ($request->has('date') && !empty($request->date)) {
+            $query->whereDate('date_added', $request->date);
+        }
+
+        $logs = $query->paginate(20);    
+
+        return view('admin.products.quantity.list', compact('products', 'product_list', 'logs', 'filter'));
+    }
+
     public function store(Request $request)
     {              
 

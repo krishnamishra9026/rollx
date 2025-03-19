@@ -82,7 +82,7 @@
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="quantity">Quantity</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="quantity" name="quantity"
+                                    <input type="number" readonly class="form-control" id="quantity" name="quantity"
                                         placeholder="Enter Quantity" value="{{ old('quantity', $product->quantity) }}">
                                     @error('quantity')
                                         <span class="invalid-feedback" role="alert">

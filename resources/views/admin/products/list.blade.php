@@ -36,6 +36,7 @@ input[type="checkbox"].status:checked + label {
                     <div class="page-title-right">
 
                         <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-dark float-end"><i  class="mdi mdi-plus"></i> Product</a>
+                        <a href="{{ route('admin.product.quantity') }}" class="btn btn-sm btn-secondary float-end me-1"><i  class="mdi mdi-plus"></i> Quantity</a>
                         <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-primary float-end me-1"><i  class="mdi mdi-refresh"></i> Reset</a>
                         <button type="submit" class="btn btn-sm btn-danger float-end me-1" form="filterForm"><i  class="mdi mdi-filter"></i> Filter</button>
                     </div>
@@ -175,6 +176,10 @@ input[type="checkbox"].status:checked + label {
                                                             class="dropdown-item"><i class="fa fa-eye me-1"></i>
                                                             Assign to Franchises</a>
                                                         @endif
+
+                                                        <a href="{{ route('admin.product.quantity', ['product' => $product->id]) }}"
+                                                            class="dropdown-item"><i class="fa fa-plus me-1"></i>
+                                                            Add Quantity</a>
 
                                                         <a href="javascript:void(0);"
                                                             onclick="confirmDelete({{ $product->id }})"

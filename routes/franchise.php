@@ -153,6 +153,10 @@ Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
     
     Route::post('settings/products-plate', [SettingController::class, 'productPlateSettingSave'])->name('settings.products-plate.save');
 
+    Route::get('settings/products-price', [SettingController::class, 'productPriceSetting'])->name('settings.products-price');
+    
+    Route::post('settings/products-price', [SettingController::class, 'productPriceSettingSave'])->name('settings.products-price.save');
+
     Route::post('settings/company-details', [CompanyController::class, 'companyDetails'])->name('company-details');
 
 });

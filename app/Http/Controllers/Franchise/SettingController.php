@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Product;
+use App\Models\ProductPrice;
 use App\Models\Franchise;
 use App\Models\ProductPlateSetting;
 
@@ -43,53 +44,6 @@ class SettingController extends Controller
         //
     }
 
-
-    public function productPlateSettingSave(Request $request)
-    {              
-        $validated = $request->validate([
-            'product_id' => 'required|array',
-            'full_plate_quantity' => 'required|array',
-            'half_plate_quantity' => 'required|array',
-        ]);
-
-        foreach ($validated['product_id'] as $index => $productId) {
-
-            ProductPlateSetting::updateOrCreate(
-                [
-                    'franchise_id' => auth()->user()->id,
-                    'product_id' => $productId,
-                ],
-                [
-                    'full_plate_quantity' => $validated['full_plate_quantity'][$index],
-                    'half_plate_quantity' => $validated['half_plate_quantity'][$index],
-                ]
-            );
-        }
-
-
-        return redirect()->back()->with('success', 'Data has been saved!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-
     public function productPlateSetting(Request $request)
     {
         $filter                     = [];
@@ -120,6 +74,102 @@ class SettingController extends Controller
 
         return view('franchise.settings.plate_setting', compact('products', 'product_list'));
     }
+
+
+    public function productPlateSettingSave(Request $request)
+    {              
+        $validated = $request->validate([
+            'product_id' => 'required|array',
+            'full_plate_quantity' => 'required|array',
+            'half_plate_quantity' => 'required|array',
+        ]);
+
+        foreach ($validated['product_id'] as $index => $productId) {
+
+            ProductPlateSetting::updateOrCreate(
+                [
+                    'franchise_id' => auth()->user()->id,
+                    'product_id' => $productId,
+                ],
+                [
+                    'full_plate_quantity' => $validated['full_plate_quantity'][$index],
+                    'half_plate_quantity' => $validated['half_plate_quantity'][$index],
+                ]
+            );
+        }
+
+
+        return redirect()->back()->with('success', 'Data has been saved!');
+    }
+
+
+    public function productPriceSetting(Request $request)
+    {
+        $filter                     = [];
+        $filter['product']             = $request->product;
+
+        $productsQuery = Product::whereHas('franchises', function ($query) {
+                    $query->where('franchise_id', auth()->user()->id);
+            });
+
+        if (isset($filter['product'])) {
+            $productsQuery->where('id', 'like', $filter['product']);
+        }
+
+        $products = $productsQuery->latest()->paginate(20);  
+                                      
+
+        $product_list = Product::latest()->get();
+
+        return view('franchise.settings.price_setting', compact('products', 'product_list'));
+    }
+
+
+    public function productPriceSettingSave(Request $request)
+    {                            
+        $validated = $request->validate([
+            'product_id' => 'required|array',
+            'price' => 'required|array',
+        ]);
+
+        foreach ($validated['product_id'] as $index => $productId) {
+
+            ProductPrice::updateOrCreate(
+                [
+                    'franchise_id' => auth()->user()->id,
+                    'product_id' => $productId,
+                ],
+                [
+                    'price' => $validated['price'][$index],
+                ]
+            );
+        }
+
+
+        return redirect()->back()->with('success', 'Data has been saved!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+
+    
 
     public function update(Request $request)
     {

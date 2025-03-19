@@ -30,6 +30,9 @@
                                  <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-primary">
                                     <i class="mdi mdi-refresh"></i> Reset
                                 </a>
+
+                                <a href="{{ route('admin.product.quantity') }}" class="btn btn-sm btn-secondary float-end"><i  class="mdi mdi-plus"></i> Quantity</a>
+
                                 <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-dark">
                                     <i class="mdi mdi-plus"></i> Product
                                 </a>

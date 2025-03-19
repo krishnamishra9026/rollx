@@ -125,6 +125,11 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('franchise.settings.products-price') }}">Product Price Setting</a>
+                        </li>
+
+
+                        <li>
                             <a href="{{ route('franchise.password.form') }}">Change Password</a>
                         </li>
                         <li>

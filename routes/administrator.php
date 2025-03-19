@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\WarehouseItemController;
+use App\Http\Controllers\Admin\ProductFranchiseSaleReportController;
 use App\Http\Controllers\Admin\WarehouseInventoryController;
 use App\Http\Controllers\Admin\ProductFranchiseController;
 use App\Http\Controllers\Admin\ProductSaleReportController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderSaleController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\FranchiseProductSaleReportController;
+use App\Http\Controllers\Admin\ProductQuantityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
@@ -117,8 +119,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+        Route::get('quantity', [ProductController::class, 'productQuantity'])->name('quantity');
+
         Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
             Route::resource('reports', ProductSaleReportController::class);
+        });
+
+        Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
+
+            Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
+                Route::resource('reports', ProductFranchiseSaleReportController::class);
+            });
+
         });
     });
 
@@ -157,6 +169,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('products/download-sample', [ProductController::class, 'downloadSampleCsv'])->name('products.download.sample.csv');
 
     Route::resource('products', ProductController::class);
+
+    Route::resource('product-quantities', ProductQuantityController::class);
+
     Route::resource('product-prices', ProductPriceController::class);
     Route::post('product-prices/update-price', [ProductPriceController::class, 'updatePrice'])->name('product-prices.update.price');
 
