@@ -11,12 +11,12 @@
             <div class="col-12">
                 <div class="page-title-box">
   
-                    <h4 class="page-title">Price Setting</h4>
+                    <h4 class="page-title">Plate Setting</h4>
                 </div>
             </div>
         </div>
         @include('franchise.includes.flash-message')
-        @include('franchise.settings.price-filter')
+        @include('franchise.settings.plate-filter')
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -31,8 +31,7 @@
                                         <tr>
                                             <th class="fw-bold">Product Id</th>
                                             <th class="fw-bold">Product Name</th>
-                                            <th class="fw-bold">Price</th>
-                                            <th></th>
+                                            <th class="fw-bold">Product Price</th>
                                         </tr>
                                     </thead>
                                     <form method="POST" action="{{ route('franchise.settings.products-price.save') }}" id="CreateOrders">
@@ -40,20 +39,19 @@
                                         <tbody>
                                             @foreach ($products as $product)
                                                 <tr>
-                                                    <td>{{ $product->id }}</td>
+                                                    <td>{{ $product['id'] }}</td>
                                                     <td>
-                                                        <a href="{{ route('franchise.products.show', $product->id) }}" class="text-body fw-semibold">
-                                                            {{ $product->name }}
+                                                        <a href="{{ route('franchise.products.show', $product['id']) }}" class="text-body fw-semibold">
+                                                            {{ $product['name'] }}
                                                         </a>
                                                     </td>
 
                                                     <td class="float-center">
                                                         <input type="number" name="price[]" value="{{ $product->getPriceByFranchise(auth()->user()->id) ?? $product->price }}" class="form-control" required min="1">
-                                                    </td>
-
-                                                    <td class="float-center">
                                                         <input type="hidden" name="product_id[]" value="{{ $product['id'] }}">
                                                     </td>
+
+                                                 
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -104,11 +102,9 @@
                 }],
                 columns: [{
                     orderable: !0,
-                }, {
+                    }, {
                     orderable: !0,
-                }, {
-                    orderable: !0,
-                }, {
+                 }, {
                     orderable: !0,
                 }, {
                     orderable: !1
@@ -116,7 +112,19 @@
             })
         });
 
-
+        function confirmDelete(e) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "PO needs to be deleted on Moneyworks manually!",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete it!"
+            }).then(t => {
+                t.isConfirmed && document.getElementById("delete-form" + e).submit()
+            })
+        }
     </script>
 
     <script>

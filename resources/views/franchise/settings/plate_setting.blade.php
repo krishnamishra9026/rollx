@@ -33,7 +33,6 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Full Plate Quantity</th>
                                             <th class="fw-bold">Half Plate Quantity</th>
-                                            <td></td>
                                         </tr>
                                     </thead>
                                     <form method="POST" action="{{ route('franchise.settings.products-plate.save') }}" id="CreateOrders">
@@ -54,11 +53,11 @@
 
                                                     <td class="float-center">
                                                         <input type="number" name="half_plate_quantity[]" value="{{ $product['half_plate_quantity'] }}" class="form-control" required min="1">
-                                                    </td>
 
-                                                    <td class="float-center">
                                                         <input type="hidden" name="product_id[]" value="{{ $product['id'] }}">
                                                     </td>
+
+                                                 
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -110,8 +109,7 @@
                 columns: [{
                     orderable: !0,
                 }, {
-                    orderable: !0,
-                 }, {
+                
                     orderable: !0,
                 }, {
                     orderable: !1
