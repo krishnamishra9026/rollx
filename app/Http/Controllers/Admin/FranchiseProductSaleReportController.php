@@ -49,7 +49,7 @@ class FranchiseProductSaleReportController extends Controller
         }])
         ->when($franchise, function ($q) use ($franchise) {
             $q->where('franchises.id', $franchise); // Apply filter for specific franchise group ID
-        })
+        })->latest()
         ->paginate(20);
 
         $products = Product::latest()->get();

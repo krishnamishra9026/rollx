@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="page-title-box">
                
-                    <h4 class="page-title">Sale Report</h4>
+                    <h4 class="page-title">Products Franchise waise Sale Report</h4>
                 </div>
             </div>
         </div>
@@ -124,12 +124,6 @@
                     orderable: !0,
                 }, {
                     orderable: !0,
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
                 }, {
                     orderable: !0
                 }, {

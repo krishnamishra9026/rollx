@@ -30,7 +30,9 @@ class ProductSaleReportController extends Controller
 
         $franchiseId = auth()->user()->id; // Get franchise_id from request
 
-        $query = Product::withCount([
+        $query = Product::whereHas('franchises', function ($query) {
+                $query->where('franchise_id', auth()->user()->id);
+            })->withCount([
                 'orders as total_orders' => function ($query) use ($franchiseId) {
                     $query->where('franchise_id', $franchiseId)
                         ->selectRaw('COUNT(DISTINCT orders.id)');
@@ -69,7 +71,9 @@ class ProductSaleReportController extends Controller
         }
 
         // Fetch total sums across all products for the given franchise
-        $totals = Product::selectRaw("
+        $totals = Product::whereHas('franchises', function ($query) {
+                    $query->where('franchise_id', auth()->user()->id);
+                })->selectRaw("
                 SUM((SELECT SUM(quantity) FROM orders WHERE orders.product_id = products.id AND orders.franchise_id = ?)) as total_quantity_ordered,
                 SUM((SELECT SUM(quantity) FROM sales WHERE sales.product_id = products.id AND sales.franchise_id = ? AND sales.status = 'Sold')) as total_quantity_sold,
                 SUM((SELECT SUM(quantity) FROM sales WHERE sales.product_id = products.id AND sales.franchise_id = ? AND sales.status = 'Wastage')) as total_quantity_wastage,

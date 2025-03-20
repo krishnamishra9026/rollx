@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="page-title-box">
   
-                    <h4 class="page-title">Plate Setting</h4>
+                    <h4 class="page-title">Price Setting</h4>
                 </div>
             </div>
         </div>

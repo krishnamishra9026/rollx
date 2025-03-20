@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="page-title-box">
                
-                    <h4 class="page-title">Sale Report</h4>
+                    <h4 class="page-title">Franchises Product waise Sale Report</h4>
                 </div>
             </div>
         </div>
@@ -70,9 +70,8 @@
                                                         @endforeach
                                                     @else
                                                         <tr>
-                                                            <td>{{ $report->id }}</td>
                                                             <td><a href="{{ route('admin.franchises.show', $report->id) }}">{{ $report->firstname }} {{ $report->lastname }}</a></td>
-                                                            <td colspan="8" class="text-center">No Products Assigned</td>
+                                                            <td colspan="5" class="text-center">No Products Assigned</td>
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -120,15 +119,9 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !0,
+                    orderable: !1,
                 }, {
-                    orderable: !0,
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
-                }, {
-                    orderable: !0
+                    orderable: !1,
                 }, {
                     orderable: !0
                 }, {
