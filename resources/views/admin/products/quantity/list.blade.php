@@ -24,10 +24,10 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="franchiseTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Product Franchise List</a>
+                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Add Quantity</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Franchise Product List</a>
+                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Add History </a>
                             </li>
                         </ul>
 
@@ -99,9 +99,10 @@
 
                             <!-- Franchise Product List -->
                             <div class="tab-pane fade" id="franchiseList">
-                                <div class="table-responsive">
-                                    <table id="franchise-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
-                                        <thead class="text-dark">
+
+                                <div class="col-md-12 table-responsive">
+                                    <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
+                                        <thead class="bg-dark">
                                             <tr>
                                                 <th class="fw-bold">Product Id</th>
                                                 <th class="fw-bold">Product Name</th>
@@ -149,7 +150,7 @@
     <!-- Datatable Init js -->
     <script>
         $(function() {
-            $("#franchise-datatable").DataTable({
+            $("#basic-datatable").DataTable({
                 paging: !1,
                 pageLength: 20,
                 lengthChange: !1,
