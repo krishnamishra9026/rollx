@@ -115,19 +115,7 @@
             })
         });
 
-        function confirmDelete(e) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "PO needs to be deleted on Moneyworks manually!",
-                icon: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Delete it!"
-            }).then(t => {
-                t.isConfirmed && document.getElementById("delete-form" + e).submit()
-            })
-        }
+
     </script>
 
     <script>
