@@ -32,6 +32,7 @@
                                             <th class="fw-bold">Product Id</th>
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Price</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <form method="POST" action="{{ route('franchise.settings.products-price.save') }}" id="CreateOrders">

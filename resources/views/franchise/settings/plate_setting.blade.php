@@ -33,6 +33,7 @@
                                             <th class="fw-bold">Product Name</th>
                                             <th class="fw-bold">Full Plate Quantity</th>
                                             <th class="fw-bold">Half Plate Quantity</th>
+                                            <td></td>
                                         </tr>
                                     </thead>
                                     <form method="POST" action="{{ route('franchise.settings.products-plate.save') }}" id="CreateOrders">
