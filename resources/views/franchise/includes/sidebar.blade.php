@@ -96,6 +96,11 @@
                         <li>
                             <a href="{{ route('franchise.product.sale.reports.index') }}">Product Sale</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('franchise.product.sales.reports.index') }}">Date Wise Sale</a>
+                        </li>
+
                         <li>
                             <a href="{{ route('franchise.sale.reports.index') }}">Sales</a>
                         </li>
