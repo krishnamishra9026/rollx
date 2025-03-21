@@ -78,8 +78,8 @@ class SaleProductFranchiseReportController extends Controller
                 'sale_date' => $sale->sale_date,
                 'franchise_id' => $sale->franchise->id,
                 'franchise_name' => $sale->franchise->firstname . ' ' . $sale->franchise->lastname,
-                'product_id' => $sale->product->id,
-                'product_name' => $sale->product->name,
+                'product_id' => $sale->product->id ?? 1,
+                'product_name' => $sale->product->name ?? '',
                 'total_ordered' => $sale->total_ordered ?? 0, // Ensure it doesn't return null
                 'total_sold' => $sale->total_sold,
                 'total_wastage' => $sale->total_wastage,
