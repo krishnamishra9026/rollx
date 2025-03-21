@@ -37,14 +37,19 @@ class FranchiseProductSaleReportController extends Controller
             ->when($productId, function ($q) use ($productId) {
                 $q->where('products.id', $productId); // Apply filter for specific product ID
             })
-            ->withSum(['orders as ordered_quantity' => function ($query) {
-                $query->selectRaw('sum(quantity)');
+            ->withSum(['orders as ordered_quantity' => function ($q) {
+                $q->whereColumn('orders.product_id', 'product_franchises.product_id') // Ensure product matches
+                  ->whereColumn('orders.franchise_id', 'product_franchises.franchise_id'); // Ensure franchise matches
             }], 'quantity')
-            ->withSum(['sales as sold_quantity' => function ($query) {
-                $query->where('status', 'sold'); // Assuming 'type' column differentiates sold and wastage
+            ->withSum(['sales as sold_quantity' => function ($q) {
+                $q->whereColumn('sales.product_id', 'product_franchises.product_id') // Ensure product matches
+                  ->whereColumn('sales.franchise_id', 'product_franchises.franchise_id') // Ensure franchise matches
+                  ->where('status', 'Sold'); // Only sold items
             }], 'quantity')
-            ->withSum(['sales as wastage_quantity' => function ($query) {
-                $query->where('status', 'wastage'); // Assuming 'type' column differentiates sold and wastage
+            ->withSum(['sales as wastage_quantity' => function ($q) {
+                $q->whereColumn('sales.product_id', 'product_franchises.product_id') // Ensure product matches
+                  ->whereColumn('sales.franchise_id', 'product_franchises.franchise_id') // Ensure franchise matches
+                  ->where('status', 'Wastage'); // Only wastage items
             }], 'quantity');
         }])
         ->when($franchise, function ($q) use ($franchise) {

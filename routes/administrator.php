@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\MyAccountController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SaleProductFranchiseReportController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\Admin\ProductController;
@@ -132,6 +133,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
             Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
                 Route::resource('reports', ProductFranchiseSaleReportController::class);
+            });
+
+            Route::group(['prefix' => 'sales', 'as' => 'sales.'], function () {
+                Route::resource('reports', SaleProductFranchiseReportController::class);
             });
 
         });

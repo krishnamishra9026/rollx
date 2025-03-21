@@ -151,6 +151,10 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('admin.product.franchise.sales.reports.index') }}">Date Wise Sale</a>
+                        </li>
+
+                        <li>
                             <a href="{{ route('admin.product.franchise.sale.reports.index') }}">Product Franchise Sale</a>
                         </li>
 
