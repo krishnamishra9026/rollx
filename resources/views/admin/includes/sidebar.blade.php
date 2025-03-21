@@ -231,7 +231,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/inquiries') || request()->is('admin/inquiries/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.inquiries.index') }}" class="side-nav-link">
-                    <i class="uil-bell"></i>
+                    <i class="uil-envelope"></i>
                     <span> Inquiries </span>
                 </a>
             </li>
