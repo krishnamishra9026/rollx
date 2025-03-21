@@ -49,9 +49,9 @@
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Email</th>
-                                            <th>Phone</th>
                                             <th>Points</th>
                                              <th>Direct Login</th>
+                                             <th>Products</th>
                                              <th>Orders</th>
                                              <th>Sales</th>
                                             <th class="text-end">Action</th>
@@ -67,10 +67,12 @@
                                                         {{ $franchise->lastname }}</a>
                                                 </td>
                                                 <td>{{ $franchise->email }}</td>
-                                                <td>{{ $franchise->phone }}</td>
                                                 <td>{{ $franchise->balance }}</td>
                                                 <td>
                                                      <a target="_blank" href="{{ route('login-franchise', $franchise->id) }}" class="btn btn-sm btn-primary">Login</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin.product-franchises.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->products->count() }}</a>
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.orders.index', ['franchise' => $franchise->id]) }}" > {{ $franchise->orders->count() }}</a>

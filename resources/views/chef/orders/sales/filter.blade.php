@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="col-sm-12 mb-2">
-                            @isset($order->id)
+                            @isset($order_id)
                             <a href="{{ route('chef.order.sales.create', ['order_id' => $order->id]) }}" class="btn btn-sm btn-dark float-end"><i class="mdi mdi-plus"></i> Sale</a>
                             @else
 
