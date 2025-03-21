@@ -229,6 +229,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('admin/inquiries') || request()->is('admin/inquiries/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.inquiries.index') }}" class="side-nav-link">
+                    <i class="uil-bell"></i>
+                    <span> Inquiries </span>
+                </a>
+            </li>
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"

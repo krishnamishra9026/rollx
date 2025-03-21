@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\FranchiseProductSaleReportController;
 use App\Http\Controllers\Admin\ProductQuantityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\SaleReportController;
@@ -90,6 +91,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     |--------------------------------------------------------------------------
     */
 
+    Route::resource('inquiries', InquiryController::class);
+    
     Route::resource('wallet', WalletController::class);
     Route::resource('wallet-requests', WalletRequestController::class);
 
