@@ -70,7 +70,7 @@ class SaleProductFranchiseReportController extends Controller
         }
 
         // Apply pagination
-        $sales = $query->paginate(20);
+        $sales = $query->latest()->paginate(20);
 
         // Transform data before returning JSON response
         $sales->getCollection()->transform(function ($sale) {
