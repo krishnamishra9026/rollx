@@ -40,7 +40,7 @@
         @if($sales && count($sales))
         <div class="row">       
 
-            <div class="col-xl-4 col-lg-4">
+            <div class="col-xl-3 col-lg-4">
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-primary">                    
                         <h5 class="mt-0 text-uppercase">Total Quantity</h5>
@@ -52,11 +52,23 @@
                 </div>          
             </div> 
 
-            <div class="col-xl-4 col-lg-4">
+            <div class="col-xl-3 col-lg-4">
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-secondary">                    
                         <h5 class="mt-0 text-uppercase">Sold Quantity</h5>
-                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
+                        <h2 class="my-2" id="active-users-count">{{ $sales->where('status', 'Sold')->sum('quantity') }}</h2>
+                        <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
+                            <small>View Details </small>                   
+                        </a>
+                    </div>
+                </div>          
+            </div> 
+
+            <div class="col-xl-3 col-lg-4">
+                <div class="card tilebox-one">
+                    <div class="card-body text-center btn btn-danger">                    
+                        <h5 class="mt-0 text-uppercase">Wastage Quantity</h5>
+                        <h2 class="my-2" id="active-users-count">{{ $sales->where('status', 'Wastage')->sum('quantity') }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   
                         </a>
@@ -65,10 +77,10 @@
             </div> 
 
 
-             <div class="col-xl-4 col-lg-4">
+            <div class="col-xl-3 col-lg-4">
                 <div class="card tilebox-one">
-                    <div class="card-body text-center btn btn-danger">                    
-                        <h5 class="mt-0 text-uppercase">Not Sold Quantity</h5>
+                    <div class="card-body text-center btn btn-success">                    
+                        <h5 class="mt-0 text-uppercase">Left Quantity</h5>
                         <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->stock }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   

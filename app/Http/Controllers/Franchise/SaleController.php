@@ -38,9 +38,9 @@ class SaleController extends Controller
         $order_id = $request->order_id;
 
         if (isset($order_id)) {
-            $sales = Sale::where('order_id', $order_id)->with('order', 'product');
+            $sales          = Sale::where('order_id', $order_id)->with('order', 'product');
         }else{
-            $sales              = Sale::with('order', 'product');
+            $sales          = Sale::with('order', 'product');
         }
         $sales              = isset($filter['date']) ? $sales->whereDate('created_at', $filter['date']) : $sales;
         $sales              = isset($filter['status']) ? $sales->where('status', 'LIKE', '%' . $filter['status'] . '%') : $sales;
@@ -48,6 +48,9 @@ class SaleController extends Controller
         $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
         $sales              = isset($filter['chef']) ? $sales->where('chef_id',  $filter['chef'] ) : $sales;
         $sales              = $sales->where('franchise_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
+
+              // echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
+              
 
 
         $order = Order::where('id', $order_id)->first();
