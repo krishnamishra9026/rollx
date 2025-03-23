@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <div class="text-center">
             <h2>{{ $blog->title }}</h2>
-            <img src="{{ asset('storage/'.$blog->image) }}" class="img-fluid my-4" alt="{{ $blog->title }}">
+            <img src="{{ asset('storage/uploads/blogs/'.$blog->header_image) }}" height="10px" class="img-fluid my-4" alt="{{ $blog->title }}">
         </div>
 
         <p>{!! $blog->content !!}</p>

@@ -28,7 +28,7 @@
                         <div class="row">
                             <h2>{{ $blog->title }}</h2>
                             @if ($blog->header_image)
-                                <img src="{{ asset($blog->header_image) }}" width="100%">
+                                <img src="{{ asset('storage/uploads/blogs/'.$blog->header_image) }}" width="100%">
                             @endif
                             <h3>{{ $blog->heading }}</h3>
                             <div>{!! $blog->content !!}</div>
