@@ -68,7 +68,7 @@
                                         <img src="{{ asset('assets/images/image-placeholder.png') }}"></label>
                                     <span class="gallery">
                                         @if ($blog->header_image)
-                                            <img src="{{ asset($blog->header_image) }}" width="100">
+                                            <img src="{{ asset('storage/uploads/blogs/'.$blog->header_image) }}" width="100">
                                         @endif
                                     </span>
                                 </div>
