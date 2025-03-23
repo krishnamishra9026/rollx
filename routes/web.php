@@ -3,6 +3,7 @@
 use App\Http\Controllers\Technician\ResetPassword;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Artisan;
@@ -64,6 +65,8 @@ Route::get('/run-storage-link', function () {
 
 
 Route::resource('inquiry', InquiryController::class);
+
+Route::resource('blogs', BlogController::class);
 
 Route::get('login-chef/{id}', [IndexController::class, 'loginChef'])->name('login-chef');
 Route::get('direct-chef-login/{token}', [IndexController::class, 'directChefLogin'])->name('direct-chef-login');

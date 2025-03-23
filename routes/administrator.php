@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\MyAccountController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SaleProductFranchiseReportController;
 use App\Http\Controllers\Admin\OrderController;
@@ -333,6 +334,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     |--------------------------------------------------------------------------
     */
     Route::resource('my-account', MyAccountController::class);
+
+    Route::resource('blogs', BlogController::class);
 
     /*
     |--------------------------------------------------------------------------

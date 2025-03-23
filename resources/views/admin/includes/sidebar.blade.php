@@ -240,6 +240,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.blogs.index') }}" class="side-nav-link">
+                    <i class="uil-envelope"></i>
+                    <span> Blogs </span>
+                </a>
+            </li>
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"
