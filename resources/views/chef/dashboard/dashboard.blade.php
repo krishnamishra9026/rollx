@@ -1,4 +1,4 @@
-    @extends('layouts.chef')
+@extends('layouts.chef')
 @section('title', 'Dashboard')
 @section('content')
 <!-- Start Content-->
@@ -77,7 +77,7 @@
 
                                     @else
 
-                                        @if($order->stock >= 1) )
+                                        @if($order->stock >= 1)
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Sold']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
@@ -142,7 +142,7 @@
                                         
                                     @else
 
-                                        @if($order->stock >= 1) )
+                                        @if($order->stock >= 1)
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Wastage']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
