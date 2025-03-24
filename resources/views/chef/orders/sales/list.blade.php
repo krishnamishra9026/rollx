@@ -34,7 +34,7 @@
 
         @include('chef.orders.sales.filter')
 
-        @if(isset($order->id))
+        @if(isset($order_id))
 
         @if($sales && count($sales))
 
@@ -44,7 +44,7 @@
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-primary">                    
                         <h5 class="mt-0 text-uppercase">Total Quantity</h5>
-                        <h2 class="my-2" id="active-users-count">{{ $order->quantity }}</h2>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   
                         </a>
@@ -56,7 +56,7 @@
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-secondary">                    
                         <h5 class="mt-0 text-uppercase">Sold Quantity</h5>
-                        <h2 class="my-2" id="active-users-count">{{ $order->sales->where('status', 'Sold')->sum('quantity') }}</h2>
+                        <h2 class="my-2" id="active-users-count">{{ $sales[0]->order->quantity  - $sales[0]->order->stock }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   
                         </a>
@@ -69,7 +69,7 @@
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-success">                    
                         <h5 class="mt-0 text-uppercase"> Quantity Sold By Me</h5>
-                        <h2 class="my-2" id="active-users-count">{{ $order->sales->where('status', 'Sold')->sum('quantity') }}</h2>
+                        <h2 class="my-2" id="active-users-count">{{ $sales->where('chef_id', auth()->user()->id)->sum('quantity') }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   
                         </a>
@@ -81,7 +81,7 @@
                 <div class="card tilebox-one">
                     <div class="card-body text-center btn btn-danger">                    
                         <h5 class="mt-0 text-uppercase">NOt sold Quantity</h5>
-                        <h2 class="my-2" id="active-users-count">{{  $order->stock }}</h2>
+                        <h2 class="my-2" id="active-users-count">{{  $sales[0]->order->stock }}</h2>
                         <a class="mb-0 text-dark" href="{{ route('chef.orders.index') }}">    
                             <small>View Details </small>                   
                         </a>

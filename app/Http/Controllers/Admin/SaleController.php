@@ -35,7 +35,7 @@ class SaleController extends Controller
         $filter['product']           = $request->product;
         $filter['order']           = $request->order;
 
-        $order_id = $request->order_id;
+        $order_id = $request->order;
 
         if (isset($order_id)) {
             $sales = Sale::where('order_id', $order_id)->with('order', 'product');
@@ -57,7 +57,7 @@ class SaleController extends Controller
         $orders = Order::latest()->get();
         $products = Product::latest()->get();
         $franchises = Franchise::latest()->get();
-        $chefs = Chef::latest()->get();
+        $chefs = Chef::latest()->get();              
 
         return view('admin.orders.sales.list', compact('sales', 'filter', 'order', 'order_id', 'orders', 'products', 'chefs', 'franchises'));
     }
