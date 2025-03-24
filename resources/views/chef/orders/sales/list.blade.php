@@ -34,7 +34,7 @@
 
         @include('chef.orders.sales.filter')
 
-        @if(isset($order_id))
+        @if(isset($order->id))
 
         @if($sales && count($sales))
 
