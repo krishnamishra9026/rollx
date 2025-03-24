@@ -138,6 +138,8 @@
                                                 <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
                                             </a>
                                         </div>
+                                        @endif
+                                        
                                     @else
 
                                         @if($order->stock >= 1) )
