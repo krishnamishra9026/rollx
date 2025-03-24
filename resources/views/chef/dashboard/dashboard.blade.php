@@ -119,6 +119,8 @@
                                     </p>
 
                                     @if (($order->product->selling_type ?? '') != 'quantity')
+
+                                        @if($order->stock >= ($order->ProductPlateSetting->full_plate_quantity ?? 1) )
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Wastage']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
@@ -126,7 +128,9 @@
                                                 <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
                                             </a>
                                         </div>
+                                        @endif
 
+                                        @if($order->stock >= ($order->ProductPlateSetting->half_plate_quantity ?? 1) )
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->half_plate_quantity ?? 1), 'status' => 'Wastage']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'danger' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
@@ -135,6 +139,8 @@
                                             </a>
                                         </div>
                                     @else
+
+                                        @if($order->stock >= 1) )
                                         <div class="col-sm-3 mt-2 d-flex">
                                             <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Wastage']) }}" 
                                                class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
@@ -142,6 +148,8 @@
                                                 <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
                                             </a>
                                         </div>
+                                        @endif
+
                                     @endif
                                 @endforeach
                             @else
