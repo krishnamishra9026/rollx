@@ -35,13 +35,11 @@
                             <!-- Product Franchise List -->
                             <div class="tab-pane fade show active" id="productList">
 
-                                
+                                <div class="card-dd mb-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-sm btn-success me-1 mb-2" form="CreateOrders">Save</button>
+                                </div>
 
-                                <div class="table-responsive">
-
-                                    <div class="card-dd mb-2">
-                                        <button type="submit" class="btn btn-sm btn-success me-1 mb-2" style="float: right;" form="CreateOrders">Save</button>
-                                    </div>
+                                <div class="table-responsive">                                    
 
                                     <table id="product-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
                                         <thead class="text-dark">
