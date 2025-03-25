@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Administrator;
+use App\Models\LoginLog;
 use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
@@ -25,9 +26,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
-        Cookie()->forget('admin_id');
-
         $this->validate($request, [
             'email'         => 'required|email',
             'password'      => 'required|min:6'
@@ -35,6 +33,13 @@ class LoginController extends Controller
 
 
         if (Auth::guard('administrator')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+
+            LoginLog::create([
+                'admin_id' => Auth::guard('administrator')->user()->id,
+                'user_type' => 'admin',
+                'ip_address' => $request->ip(),
+            ]);
+
             return redirect()->intended(route('admin.dashboard'));
         } else {
 

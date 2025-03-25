@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Franchise;
 use App\Models\User;
 use App\Models\Sale;
+use App\Models\LoginLog;
 use App\Models\Chef;
 use App\Models\WarehouseItem;
 use Illuminate\Http\Request;
@@ -69,7 +70,7 @@ class DashboardController extends Controller
     }
 
 
-    public function adminIntendLogin($id)
+    public function adminIntendLogin(Request $request, $id)
     {
         session(['impersonator_id' => Auth::id()]);
 
@@ -77,6 +78,13 @@ class DashboardController extends Controller
 
         if (!is_null($user)) {
             Auth::guard('administrator')->login($user);
+
+            LoginLog::create([
+                'admin_id' => Auth::guard('administrator')->user()->id,
+                'user_type' => 'admin',
+                'ip_address' => $request->ip(),
+            ]);
+
             return redirect()->route('admin.dashboard');
         } else {
             return redirect()->back()->with('error', 'Something went wrong');

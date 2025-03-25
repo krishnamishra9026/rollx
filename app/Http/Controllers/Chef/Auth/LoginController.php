@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Chef;
+use App\Models\LoginLog;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -31,6 +32,13 @@ class LoginController extends Controller
 
 
         if (Auth::guard('chef')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+
+            LoginLog::create([
+                'chef_id' => Auth::guard('chef')->user()->id,
+                'user_type' => 'chef',
+                'ip_address' => $request->ip(),
+            ]);
+
             return redirect()->intended(route('chef.dashboard'));
         } else {
 

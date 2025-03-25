@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Franchise\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Chef;
+use App\Models\LoginLog;
+use App\Models\Franchise;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -32,6 +33,13 @@ class LoginController extends Controller
 
 
         if (Auth::guard('franchise')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+
+            LoginLog::create([
+                'franchise_id' => Auth::guard('franchise')->user()->id,
+                'user_type' => 'franchise',
+                'ip_address' => $request->ip(),
+            ]);
+
             return redirect()->intended(route('franchise.dashboard'));
         } else {
 

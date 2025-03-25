@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SaleProductFranchiseReportController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\WalletController;
+use App\Http\Controllers\Admin\loginLogController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\WarehouseItemController;
@@ -336,6 +337,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('my-account', MyAccountController::class);
 
     Route::resource('blogs', BlogController::class);
+    Route::resource('login-logs', loginLogController::class);
 
     /*
     |--------------------------------------------------------------------------

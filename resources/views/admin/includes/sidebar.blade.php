@@ -247,6 +247,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('admin.login-logs.index') }}" class="side-nav-link">
+                    <i class="uil-envelope"></i>
+                    <span> Login Logs </span>
+                </a>
+            </li>
+
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarSettings" aria-expanded="false"

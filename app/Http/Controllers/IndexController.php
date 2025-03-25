@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Franchise;
 use App\Models\Chef;
+use App\Models\LoginLog;
 use Auth;
 
 class IndexController extends Controller
@@ -95,6 +96,13 @@ class IndexController extends Controller
 
             if ($chef) {
                 Auth::guard('chef')->login($chef);
+
+                LoginLog::create([
+                    'chef_id' => Auth::guard('chef')->user()->id,
+                    'user_type' => 'chef',
+                    'ip_address' => $request->ip(),
+                ]);
+
                 return redirect()->route('chef.dashboard');
             }
 
@@ -134,6 +142,13 @@ class IndexController extends Controller
 
             if ($franchise) {
                 Auth::guard('franchise')->login($franchise);
+
+                LoginLog::create([
+                    'franchise_id' => Auth::guard('franchise')->user()->id,
+                    'user_type' => 'franchise',
+                    'ip_address' => $request->ip(),
+                ]);
+                    
                 return redirect()->route('franchise.dashboard');
             }
 
