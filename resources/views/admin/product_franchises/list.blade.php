@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+
     <div class="container-fluid Purchase_Orders">
         <div class="row">
             <div class="col-12">
@@ -23,10 +24,10 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="franchiseTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Assign Franchise</a>
+                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Assign Franchise to Product</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Assigned List</a>
+                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Assigned Franchise to Product</a>
                             </li>
                         </ul>
 
@@ -132,7 +133,7 @@
     <!-- Datatable Init js -->
     <script>
         $(function() {
-            $("#basic-datatable").DataTable({
+            $("#product-datatable").DataTable({
                 paging: !1,
                 pageLength: 20,
                 lengthChange: !1,
