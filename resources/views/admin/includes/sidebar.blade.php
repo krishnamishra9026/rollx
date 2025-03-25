@@ -249,7 +249,7 @@
 
             <li class="side-nav-item {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.login-logs.index') }}" class="side-nav-link">
-                    <i class="uil-envelope"></i>
+                    <i class="uil uil-history"></i>
                     <span> Login Logs </span>
                 </a>
             </li>
