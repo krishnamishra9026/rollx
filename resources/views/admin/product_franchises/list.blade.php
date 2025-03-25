@@ -23,10 +23,10 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="franchiseTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Product Franchises</a>
+                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Assign Franchise</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Franchise Products</a>
+                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Assigned List</a>
                             </li>
                         </ul>
 
