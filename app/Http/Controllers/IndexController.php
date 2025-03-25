@@ -79,7 +79,7 @@ class IndexController extends Controller
         return redirect()->to(route('direct-chef-login', urlencode($token)));
     }
 
-    public function directChefLogin($token)
+    public function directChefLogin(Request $request, $token)
     {              
         if (!$token) {
             return redirect()->route('chef.login')->with('error', 'Invalid token.');
@@ -125,7 +125,7 @@ class IndexController extends Controller
         return redirect()->to(route('direct-franchise-login', urlencode($token)));
     }
 
-    public function directFranchiseLogin($token)
+    public function directFranchiseLogin(Request $request, $token)
     {              
         if (!$token) {
             return redirect()->route('franchise.login')->with('error', 'Invalid token.');

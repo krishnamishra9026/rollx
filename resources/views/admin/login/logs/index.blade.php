@@ -29,23 +29,25 @@
                                                     <th>Role ID</th>
                                                     <th>Login Type</th>
                                                     <th>Login User Name</th>
+                                                    <th>Login Ip</th>
                                                     <th >Login Date Time  </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($logs as $role)
+                                                @foreach ($logs as $log)
                                                     <tr>
-                                                        <td>{{ $role->id }}</td>
-                                                        <td>{{ ucfirst($role->user_type) }}</td>
-                                                        @if($role->user_type == 'admin')
-                                                        <td><a href="{{ route('admin.users.show', $role->admin_id) }}">{{ $role->admin?->firstname }} {{ $role->admin?->lastname }} </a></td>
-                                                        @elseif($role->user_type == 'chef')
-                                                        <td><a href="{{ route('admin.chefs.show', $role->chef_id) }}">{{ $role->chef?->firstname }} {{ $role->chef?->lastname }} </a></td>
+                                                        <td>{{ $log->id }}</td>
+                                                        <td>{{ ucfirst($log->user_type) }}</td>
+                                                        @if($log->user_type == 'admin')
+                                                        <td><a href="{{ route('admin.users.show', $log->admin_id) }}">{{ $log->admin?->firstname }} {{ $log->admin?->lastname }} </a></td>
+                                                        @elseif($log->user_type == 'chef')
+                                                        <td><a href="{{ route('admin.chefs.show', $log->chef_id) }}">{{ $log->chef?->firstname }} {{ $log->chef?->lastname }} </a></td>
                                                         @else
-                                                        <td><a href="{{ route('admin.franchises.show', $role->franchise_id) }}">{{ $role->franchise?->firstname }} {{ $role->franchise?->lastname }} </a></td>
+                                                        <td><a href="{{ route('admin.franchises.show', $log->franchise_id) }}">{{ $log->franchise?->firstname }} {{ $log->franchise?->lastname }} </a></td>
                                                         @endif
+                                                        <td>{{ $log->ip_address }}</td>
 
-                                                        <td>{{ date('d-m-y H:i:s A', strtotime($role->login_time)) }} </td>
+                                                        <td>{{ date('d-m-y H:i:s A', strtotime($log->login_time)) }} </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
