@@ -40,7 +40,7 @@
                                             <th class="bg-green">User</th>
                                             <th class="bg-green">Email</th>
                                             <th class="bg-green">Phone</th>
-                                            <th class="bg-green">Enabled</th>
+                                            <th class="bg-green" style="display: none;">Enabled</th>
                                             <th class="bg-green">Direct Login</th>
                                             <th class="bg-green text-end">Action</th>
                                         </tr>
@@ -65,7 +65,7 @@
                                                 
                                                 <td>{{ $admin->email }}</td>
                                                 <td>{{ $admin->dialcode }} {{ $admin->phone }}</td>
-                                                <td><input type="checkbox" id="switch{{ $admin->id }}"
+                                                <td style="display: none;"><input type="checkbox" id="switch{{ $admin->id }}"
                                                         @if ($admin->status == true) checked @endif
                                                         data-switch="success" value="{{ $admin->id }}" class="status" />
                                                     <label for="switch{{ $admin->id }}" data-on-label="Yes"
