@@ -38,9 +38,9 @@
                                             <th>Chef</th>                                            
                                             <th>Franchise</th>                                            
                                             <th>Email</th>
-                                            <th>Phone</th>
                                             <th>Sales</th>
                                             <th>Direct Login</th>
+                                            <th>Phone</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -63,7 +63,7 @@
 
                                                                                            
                                                 <td>{{ $chef->email }}</td>
-                                                <td>{{ $chef->phone }}</td>
+                                                
                                                 <td>
                                                     <a href="{{ route('admin.sales.index', ['chef' => $chef->id]) }}" > {{ $chef->sales->count() }}</a>
                                                 </td>
@@ -71,6 +71,8 @@
                                                 <td>
                                                      <a target="_blank" href="{{ route('login-chef', $chef->id) }}" class="btn btn-sm btn-primary">Login</a>
                                                 </td>
+
+                                                <td>{{ $chef->phone }}</td>
                                                
                                                 <td class="text-end">
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
