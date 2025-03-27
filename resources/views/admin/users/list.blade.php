@@ -40,7 +40,6 @@
                                             <th class="bg-green">User</th>
                                             <th class="bg-green">Email</th>
                                             <th class="bg-green">Phone</th>
-                                            <th class="bg-green" style="display: none;">Enabled</th>
                                             <th class="bg-green">Direct Login</th>
                                             <th class="bg-green text-end">Action</th>
                                         </tr>
@@ -65,12 +64,7 @@
                                                 
                                                 <td>{{ $admin->email }}</td>
                                                 <td>{{ $admin->dialcode }} {{ $admin->phone }}</td>
-                                                <td style="display: none;"><input type="checkbox" id="switch{{ $admin->id }}"
-                                                        @if ($admin->status == true) checked @endif
-                                                        data-switch="success" value="{{ $admin->id }}" class="status" />
-                                                    <label for="switch{{ $admin->id }}" data-on-label="Yes"
-                                                        data-off-label="No"></label>
-                                                </td>
+                                                
 
                                                 <td>
                                                      <a href="{{ route('admin.intend-login', $admin->id) }}" class="btn btn-sm btn-primary">Login</a>
@@ -299,3 +293,11 @@
         </script>
     @enderror
 @endpush
+
+
+<!-- <td style="display: none;"><input type="checkbox" id="switch{{ $admin->id }}"
+                                                        @if ($admin->status == true) checked @endif
+                                                        data-switch="success" value="{{ $admin->id }}" class="status" />
+                                                    <label for="switch{{ $admin->id }}" data-on-label="Yes"
+                                                        data-off-label="No"></label>
+                                                </td> -->
