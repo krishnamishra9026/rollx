@@ -87,6 +87,7 @@
                             </div>
 
                             <!-- Franchise Product List -->
+
                             <div class="tab-pane fade" id="franchiseList">
                                 <div class="table-responsive">
                                     <table id="franchise-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
@@ -133,7 +134,7 @@
     <!-- Datatable Init js -->
     <script>
         $(function() {
-            $("#product-datatable").DataTable({
+            $("#franchise-datatable").DataTable({
                 paging: !1,
                 pageLength: 20,
                 lengthChange: !1,
@@ -160,25 +161,5 @@
             })
         });
 
-        function confirmDelete(e) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "PO needs to be deleted on Moneyworks manually!",
-                icon: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Delete it!"
-            }).then(t => {
-                t.isConfirmed && document.getElementById("delete-form" + e).submit()
-            })
-        }
-    </script>
-
-    <script>
-        function showHide(id) {
-            $("#changeStatus" + id).hide();
-            $("#changeSelect" + id).show();
-        }
     </script>
 @endpush
