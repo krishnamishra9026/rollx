@@ -99,6 +99,15 @@ Route::get('pages/{slug}', [PagesController::class, 'page'])->name('page.show');
     return view('welcome');
 });*/
 
+
+Route::get('/about', function () { return view('guest.pages.about'); });
+Route::get('/services', function () { return view('guest.pages.services'); });
+Route::get('/projects', function () { return view('guest.pages.projects'); });
+Route::get('/blog', function () { return view('guest.pages.blog'); });
+Route::get('/contact', function () { return view('guest.pages.contact'); });
+Route::get('/blog-details', function () { return view('guest.pages.blog-details'); });
+Route::get('/project-details', function () { return view('guest.pages.project-details'); });
+
 Route::get('/leads/create', function () {
     return view('contact');
 });
