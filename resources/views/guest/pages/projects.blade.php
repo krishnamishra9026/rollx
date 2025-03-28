@@ -39,7 +39,7 @@
       <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="frontend/assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">UpConstruction</h1> <span>.</span>
+        <h1 class="sitename">ROLL.X</h1> <span></span>
       </a>
 
       <nav id="navmenu" class="navmenu">
