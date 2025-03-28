@@ -30,7 +30,6 @@ class DashboardController extends Controller
         $delivered = Order::where('status', 'Delivered')->count();
         $completed = Order::where('status', 'Completed')->count();
 
-
         $orders = Order::where('franchise_id', auth()->user()->franchise_id)
             ->where('stock', '>', 0)
             ->where(function ($query) {
@@ -42,7 +41,6 @@ class DashboardController extends Controller
                 $query->select('product_id', 'franchise_id', 'full_plate_quantity', 'half_plate_quantity');
             }])
             ->paginate(20);            
-
 
         return view('chef.dashboard.dashboard', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders'));
     }
