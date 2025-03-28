@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Cache;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,15 +26,11 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/run-config', function () {
-     
-     Storage::disk('public')->put('test.txt', 'This is a test');
-
+    
      Artisan::call('cache:clear');
      Artisan::call('route:clear');
      Artisan::call('config:clear');
      Artisan::call('view:clear');
-     Artisan::call('optimize:clear');
-     //Artisan::call('storage:link');
      Artisan::call('optimize:clear');
 
       return 'Storage link created successfully!';
@@ -100,13 +98,53 @@ Route::get('pages/{slug}', [PagesController::class, 'page'])->name('page.show');
 });*/
 
 
-Route::get('/about', function () { return view('guest.pages.about'); });
-Route::get('/services', function () { return view('guest.pages.services'); });
-Route::get('/projects', function () { return view('guest.pages.projects'); });
-Route::get('/blog', function () { return view('guest.pages.blog'); });
-Route::get('/contact', function () { return view('guest.pages.contact'); });
-Route::get('/blog-details', function () { return view('guest.pages.blog-details'); });
-Route::get('/project-details', function () { return view('guest.pages.project-details'); });
+Route::get('/about', function () {
+    return Cache::remember('about_page', 86400, function () {
+        return view('guest.pages.about');
+    });
+});
+
+Route::get('/services', function () {
+    return Cache::remember('services_page', 86400, function () {
+        return view('guest.pages.services');
+    });
+});
+
+Route::get('/projects', function () {
+    return Cache::remember('projects_page', 86400, function () {
+        return view('guest.pages.projects');
+    });
+});
+
+Route::get('/blog', function () {
+    return Cache::remember('blog_page', 86400, function () {
+        return view('guest.pages.blog');
+    });
+});
+
+Route::get('/contact', function () {
+    return Cache::remember('contact_page', 86400, function () {
+        return view('guest.pages.contact');
+    });
+});
+
+Route::get('/blog-details', function () {
+    return Cache::remember('blog_details_page', 86400, function () {
+        return view('guest.pages.blog-details');
+    });
+});
+
+Route::get('/project-details', function () {
+    return Cache::remember('project_details_page', 86400, function () {
+        return view('guest.pages.project-details');
+    });
+});
+
+Route::get('/starter-page', function () {
+    return Cache::remember('starter_page', 86400, function () {
+        return view('guest.pages.starter-page');
+    });
+});
 
 Route::get('/leads/create', function () {
     return view('contact');
