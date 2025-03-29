@@ -33,8 +33,8 @@
                                         <tr>
                                             <th class="fw-bold">Id</th>
                                             <th class="fw-bold">Heading</th>
-                                            <th class="fw-bold">Title</th>
                                             <th class="fw-bold">Image</th>
+                                            <th class="fw-bold">Title</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
                                     </thead>

@@ -11,6 +11,12 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:administrator');
+    }
+
     public function index()
     {
         $blogs = Blog::latest()->paginate(20);
@@ -32,6 +38,8 @@ class BlogController extends Controller
         ]);
 
         $data = $request->all();
+
+        $data['admin_id'] = auth()->user()->id;
         
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -68,6 +76,8 @@ class BlogController extends Controller
         ]);
 
         $data = $request->all();
+
+        $data['admin_id'] = auth()->user()->id;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
