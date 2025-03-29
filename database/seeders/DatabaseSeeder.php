@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ChefSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(PermissionSeeder::class);
+        $this->call(BlogSeeder::class);
     }
 }

@@ -12,8 +12,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::latest()->get();
-        return view('blogs.list', compact('blogs'));
+        $blogs = Blog::latest()->paginate(12);
+              
+        return view('guest.pages.blog', compact('blogs'));
     }
 
     public function create()
@@ -43,8 +44,10 @@ class BlogController extends Controller
         return redirect()->route('blogs.index')->with('success', 'Blog created successfully!');
     }
 
-    public function show(Blog $blog)
-    {
-        return view('blogs.show', compact('blog'));
+    public function show($id)
+    {                 
+        $blog = Blog::find($id);
+             
+        return view('guest.pages.blog-details', compact('blog'));
     }
 }

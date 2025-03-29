@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('administrators')->onUpdate('cascade')->onDelete('cascade');
+            
             $table->string('title');
             $table->string('header_image')->nullable();
             $table->string('heading')->nullable();
