@@ -31,10 +31,10 @@
                                     style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
-                                            <th class="fw-bold">ID</th>
+                                            <th class="fw-bold">Id</th>
                                             <th class="fw-bold">Heading</th>
-                                            <th class="fw-bold">Image</th>
                                             <th class="fw-bold">Title</th>
+                                            <th class="fw-bold">Image</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
                                     </thead>
@@ -127,8 +127,6 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !0,
-                }, {
                     orderable: !0,
                 }, {
                     orderable: !0,
