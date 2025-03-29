@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TinymceController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Artisan;
@@ -81,7 +82,6 @@ Route::get('registration-type', [IndexController::class, 'registrationType'])->n
 Route::get('login-type', [IndexController::class, 'loginType'])->name('login-type');
 
 Route::get('contact', [ContactController::class, 'Contact'])->name('contact');
-Route::post('contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
 Route::get('about-us', [AboutController::class, 'About'])->name('about-us');
 Route::get('faq', [FaqController::class, 'Faq'])->name('faq');
 Route::get('terms-and-conditions', [TermsAndConditionsController::class, 'index'])->name('terms-and-conditions');
@@ -106,10 +106,10 @@ Route::get('/blog-details/{id}', [BlogController::class, 'show']);
 Route::get('/project-details', function () { return view('guest.pages.project-details'); });
 
 Route::get('/leads/create', function () {
-    return view('contact');
+    return view('guest.pages.create-lead');
 });
 
-Route::post('contact/save', [App\Http\Controllers\ContactController::class, 'saveContact'])->name('contact.save');
+Route::post('contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
 
 Auth::routes();
 

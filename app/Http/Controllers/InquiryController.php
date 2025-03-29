@@ -32,7 +32,7 @@ class InquiryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {              
         $validated = $request->validate([
             'name'    => 'required|string|max:255',
             'email'   => 'required|email',

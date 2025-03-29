@@ -107,35 +107,53 @@
         </div>
 
         <div class="row gy-4 mt-1">
+
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong><i class="dripicons-checkmark me-2"></i> </strong>{{ $message }}
+            </div>
+            @endif
+
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div><!-- End Google Maps -->
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+            <form action="{{ route('inquiry.store') }}" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+              @csrf
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" value="{{ old('name') }}" class="form-control {{ $errors->has('name') ? 'has-error' : '' }}" placeholder="Your Name" required="">
                 </div>
 
+                @error('name')
+                    <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
+                @enderror
+
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Your Email" required="">
+                  @error('email')
+                      <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="number" class="form-control" name="phone" placeholder="Phone Number" required="">
+                  @error('phone')
+                      <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  @error('message')
+                      <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
                   <button type="submit">Send Message</button>
                 </div>
 
@@ -238,7 +256,6 @@
 
   <!-- Vendor JS Files -->
   <script src="frontend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="frontend/assets/vendor/php-email-form/validate.js"></script>
   <script src="frontend/assets/vendor/aos/aos.js"></script>
   <script src="frontend/assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="frontend/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
