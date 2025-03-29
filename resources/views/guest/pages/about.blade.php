@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>About - UpConstruction Bootstrap Template</title>
+  <title>About - Roll.X Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -543,7 +543,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="/" class="logo d-flex align-items-center">
-            <span class="sitename">UpConstruction</span>
+            <span class="sitename">Roll.X</span>
           </a>
           <div class="footer-contact pt-3">
             <p>A108 Adam Street</p>
@@ -607,7 +607,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">UpConstruction</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Roll.X</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         
         
