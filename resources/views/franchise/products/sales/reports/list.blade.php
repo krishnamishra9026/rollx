@@ -63,7 +63,11 @@
                                                     <td>{{ $report->ordered_quantity ?? 0 }}</td>
                                                     <td>{{ $report->sold_quantity ?? 0 }}</td>
                                                     <td>{{ $report->wastage_quantity ?? 0 }}</td>
-                                                    <td>{{ $report->ordered_quantity - ($report->sold_quantity + $report->wastage_quantity ?? $left_quantity) }}</td>
+
+                                                    @php 
+                                                    $left_qty = $report->ordered_quantity - ($report->sold_quantity + $report->wastage_quantity ?? $left_quantity);
+                                                    @endphp
+                                                    <td>{{ ($left_qty < 0 ? 0 : $left_qty) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
