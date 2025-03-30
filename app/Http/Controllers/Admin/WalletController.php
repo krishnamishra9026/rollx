@@ -49,7 +49,8 @@ class WalletController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric',
+            'deduct' => 'required|numeric',
         ]);
 
         $franchise_id = $request->franchise_id;
