@@ -44,7 +44,7 @@ class ProductFranchiseController extends Controller
         $products = $products->orderBy('created_at', 'desc')->paginate(20);              
 
         $product_list = Product::latest()->get();
-        $franchises = Franchise::latest()->get(['id', 'firstname', 'lastname']);
+        $franchises = Franchise::oldest('firstname')->get(['id', 'firstname', 'lastname']);
 
         $franchiseQuery = Franchise::with('products');
 
