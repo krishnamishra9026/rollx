@@ -63,6 +63,7 @@ class WalletController extends Controller
                 'balance' => $franchise->wallet->balance + $request->amount
             ]);
 
+
             $franchise->notify(new WalletBalanceAdded($request->amount, $franchise->balance));
         }
 
@@ -72,6 +73,7 @@ class WalletController extends Controller
                 'description' => 'Withdraw Balance from Wallet',
                 'balance' => $franchise->wallet->balance - $request->deduct
             ]);
+
 
             $franchise->notify(new WalletBalanceAdded($request->deduct, $franchise->balance));
         }
