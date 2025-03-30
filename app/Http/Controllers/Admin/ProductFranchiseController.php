@@ -61,7 +61,7 @@ class ProductFranchiseController extends Controller
         }
 
         // Get paginated results
-        $franchise_list = $franchiseQuery->latest()->paginate(20);           
+        $franchise_list = $franchiseQuery->oldest('firstname')->paginate(20);           
 
         return view('admin.product_franchises.list', compact('products', 'product_list', 'franchises', 'franchise_list'));
     }
