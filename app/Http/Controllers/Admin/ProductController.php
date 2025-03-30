@@ -83,9 +83,21 @@ class ProductController extends Controller
             $query->whereDate('date_added', $request->date);
         }
 
-        $logs = $query->paginate(20);    
+        $logs = $query->where('type', 'add')->paginate(20);    
 
-        return view('admin.products.quantity.list', compact('products', 'product_list', 'logs', 'filter'));
+
+        $query_log = ProductQuantityLog::orderBy('date_added', 'desc');
+
+        if ($request->has('product') && !empty($request->product)) {
+            $query_log->where('product_id', $request->product);
+        }
+
+        if ($request->has('date') && !empty($request->date)) {
+            $query_log->whereDate('date_added', $request->date);
+        }
+        $deducted_logs = $query_log->where('type', 'deduct')->paginate(20);                  
+
+        return view('admin.products.quantity.list', compact('products', 'product_list', 'logs', 'filter', 'deducted_logs'));
     }
 
     public function store(Request $request)

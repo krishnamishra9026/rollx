@@ -36,11 +36,12 @@ class ProductQuantityController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-         
+    {             
+
         $validated = $request->validate([
             'product_id' => 'required|array',
             'quantity' => 'required|array',
+            'deduct' => 'required|array',
         ]);
 
         foreach ($validated['product_id'] as $index => $productId) {
@@ -48,32 +49,60 @@ class ProductQuantityController extends Controller
 
             $product = Product::findOrFail($productId);
             $addedQuantity = $validated['quantity'][$index];
+            $deductedQuantity = $validated['deduct'][$index];
 
-            if ($addedQuantity < 1) {
-                continue;
+            $oldQuntity = $product->quantity;
+
+            if($addedQuantity > 0){
+                $product->quantity += $addedQuantity;
+                $product->available_quantity += $addedQuantity;
+
+                $product->save();
+
+
+                ProductQuantityLog::updateOrCreate(
+                    [
+                        'product_id' => $productId,
+                        'date_added' => now()->toDateTimeString(),
+                    ],
+                    [
+                        'admin_id' => auth()->user()->id,
+                        'type' => 'add',
+                        'added_quantity' => $addedQuantity ?? 0,
+                        'old_quantity' => $oldQuntity,
+                        'new_quantity' => $product->quantity,
+                    ]
+                );
             }
 
             $oldQuntity = $product->quantity;
-            $product->quantity += $addedQuantity;
-            $product->available_quantity += $addedQuantity;
-            $product->save();
+
+            if ($deductedQuantity > 0) {
+                $product->quantity -= $deductedQuantity;
+                $product->available_quantity -= $deductedQuantity;
+
+                $product->save();
 
 
-            ProductQuantityLog::updateOrCreate(
-                [
-                    'product_id' => $productId,
-                    'date_added' => now()->toDateTimeString(),
-                ],
-                [
-                    'admin_id' => auth()->user()->id,
-                    'added_quantity' => $addedQuantity,
-                    'old_quantity' => $oldQuntity,
-                    'new_quantity' => $product->quantity,
-                ]
-            );
-       }
+                ProductQuantityLog::updateOrCreate(
+                    [
+                        'product_id' => $productId,
+                        'date_added' => now()->toDateTimeString(),
+                    ],
+                    [
+                        'admin_id' => auth()->user()->id,
+                        'type' => 'deduct',
+                        'deducted_quantity' => $deductedQuantity ?? 0,
+                        'old_quantity' => $oldQuntity,
+                        'new_quantity' => $product->quantity,
+                    ]
+                );
+            }
 
-       return redirect()->back()->with('success', 'Data has been saved!');
+
+        }
+
+        return redirect()->back()->with('success', 'Data has been saved!');
 
     }
 

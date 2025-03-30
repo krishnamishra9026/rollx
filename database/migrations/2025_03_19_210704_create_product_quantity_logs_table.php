@@ -21,10 +21,12 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('added_quantity')->default(0);
+            $table->integer('deducted_quantity')->default(0);
             $table->integer('old_quantity')->default(0);
             $table->integer('new_quantity')->default(0);
 
             $table->datetime('date_added');
+            $table->enum('type', ['add', 'deduct'])->default('add');
 
             $table->timestamps();
         });

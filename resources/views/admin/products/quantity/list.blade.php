@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="page-title-box">
   
-                    <h4 class="page-title">Add Quantity to Product</h4>
+                    <h4 class="page-title">Add/Deduct Quantity to Product</h4>
                 </div>
             </div>
         </div>
@@ -24,10 +24,13 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="franchiseTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Add Quantity</a>
+                                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#productList">Add/Deduct Quantity</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseList">Add History </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="franchise-tab" data-bs-toggle="tab" href="#franchiseProductList">Deduct History </a>
                             </li>
                         </ul>
 
@@ -50,6 +53,7 @@
                                                 <th class="fw-bold text-nowrap">Product Sold Quantity</th>
                                                 <th class="fw-bold text-nowrap">Product Avilable Quantity</th>
                                                 <th class="fw-bold text-nowrap">Add Quantity</th>
+                                                <th class="fw-bold text-nowrap">Deduct Quantity</th>
                                             </tr>
                                         </thead>
                                         <form method="POST" action="{{ route('admin.product-quantities.store') }}" id="CreateOrders">
@@ -77,6 +81,10 @@
 
                                                     <td class="float-center">
                                                         <input type="number" name="quantity[]" value="0" class="form-control" required min="0">
+                                                    </td>
+
+                                                    <td class="float-center">
+                                                        <input type="number" name="deduct[]" value="0" class="form-control" required min="0">
                                                         <input type="hidden" name="product_id[]" value="{{ $product['id'] }}">
                                                     </td>
 
@@ -129,6 +137,41 @@
                                     
                                 </div>
                             </div>
+
+                            <div class="tab-pane fade" id="franchiseProductList">
+
+                                <div class="col-md-12 table-responsive">
+                                    <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100" style="font-size: 13px;">
+                                        <thead class="bg-dark">
+                                            <tr>
+                                                <th class="fw-bold">Product Id</th>
+                                                <th class="fw-bold">Product Name</th>
+                                                <th class="fw-bold">Product Old Quantity</th>
+                                                <th class="fw-bold">Product Deducted Quantity</th>
+                                                <th class="fw-bold">Product New Quantity</th>
+                                                <th class="fw-bold">Added On</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach ($deducted_logs as $log)
+                                                <tr>
+                                                    <td>{{ $log->product_id }}</td>
+                                                    <td>{{ $log->product->name }}</td>
+                                                    <td>{{ $log->old_quantity }}</td>
+                                                    <td>{{ $log->deducted_quantity }}</td>
+                                                    <td>{{ $log->new_quantity }}</td>
+                                                    <td>{{ date('d-m-Y H:i:s A', strtotime($log->date_added)) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $deducted_logs->appends(request()->query())->links('pagination::bootstrap-5') }}
+                                           
+                                    
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

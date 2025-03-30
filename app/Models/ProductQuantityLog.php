@@ -9,7 +9,7 @@ class ProductQuantityLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id', 'product_id', 'added_quantity', 'old_quantity', 'new_quantity', 'date_added'];
+    protected $fillable = ['admin_id', 'product_id', 'added_quantity', 'deducted_quantity', 'type', 'old_quantity', 'new_quantity', 'date_added'];
 
     public function product()
     {
