@@ -24,13 +24,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 table-responsive">
-                                <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100"
-                                    style="font-size: 13px;">
+                                <table id="basic-datatable" class="table table-striped border dt-responsive nowrap w-100"style="font-size: 13px;">
                                     <thead class="text-dark">
                                         <tr>
                                             <th class="fw-bold">Franchise Id</th>
                                             <th class="fw-bold">Franchise Name</th>
-                                            <th class="fw-bold">Wallet balance</th>
+                                            <th class="fw-bold">Wallet Balance</th>
+                                            <th class="fw-bold">Add Amount</th>
+                                            <th class="fw-bold">Deduct Amount</th>
                                             <th class="fw-bold">Action</th>
                                         </tr>
                                     </thead>
@@ -38,30 +39,37 @@
                                         @foreach ($franchises as $franchise)
                                             <tr>
                                                 <td>{{ $franchise->id }}</td>
-                                                <td> <a href="{{ route('admin.franchises.show', $franchise->id) }}"
-                                                    class="text-body fw-semibold"> {{ $franchise->firstname }} {{ $franchise->lastname }} </a></td>
-                                                <td class="text-cente">{{ $franchise->wallet->balance ?? 0 }}</td>
-                                                <td  class="float-center">
-                                                    <form action="{{ route('admin.wallet.store') }}" method="POST" id="filterForm">
+                                                <td>
+                                                    <a href="{{ route('admin.franchises.show', $franchise->id) }}" class="text-body fw-semibold">
+                                                        {{ $franchise->firstname }} {{ $franchise->lastname }}
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">{{ $franchise->wallet->balance ?? 0 }}</td>
+                                                
+                                                <td>
+                                                    <form action="{{ route('admin.wallet.store') }}" method="POST">
                                                         @csrf
-                                                        <div class="row g-2">
-                                                            <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
-                                                            
-                                                            <div class="col-md-3 col-12">
-                                                                <input type="number" style="height: 34px;" name="amount" value="1" class="form-control" required min="1">
-                                                            </div>
-
-                                                            <div class="col-md-3 col-12">
-                                                                <button type="submit" class="btn btn-sm btn-primary w-100">Add Balance</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                        <input type="hidden" name="franchise_id" value="{{ $franchise->id }}">
+                                                        <input type="number" style="height: 34px;" name="amount" value="0" 
+                                                               class="form-control" required>
                                                 </td>
 
+                                                <td>
+                                                        <input type="number" style="height: 34px;" name="deduct" value="0" 
+                                                               class="form-control" required>
+                                                </td>
+
+                                                <td>
+                                                        <button type="submit" class="btn btn-sm btn-primary w-100">
+                                                            Update Balance
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
                                 {{ $franchises->appends(request()->query())->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
