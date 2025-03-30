@@ -38,7 +38,7 @@ class ProductPriceController extends Controller
     public function create()
     {
         $products = Product::latest()->get();
-        $franchises = Franchise::latest('firstname')->get();
+        $franchises = Franchise::oldest('firstname')->get();
 
         return view('admin.product_prices.create', compact('products', 'franchises'));
     }
