@@ -62,9 +62,9 @@ class ProductQuantityController extends Controller
             ProductQuantityLog::updateOrCreate(
                 [
                     'product_id' => $productId,
+                    'date_added' => now()->toDateTimeString(),
                 ],
                 [
-                    'date_added' => now()->toDateTimeString(),
                     'admin_id' => auth()->user()->id,
                     'added_quantity' => $addedQuantity,
                     'old_quantity' => $oldQuntity,
