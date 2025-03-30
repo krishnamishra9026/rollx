@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('old_quantity')->default(0);
             $table->integer('new_quantity')->default(0);
 
-            $table->date('date_added');
+            $table->datetime('date_added');
 
             $table->timestamps();
         });

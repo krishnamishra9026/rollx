@@ -64,7 +64,7 @@ class ProductQuantityController extends Controller
                     'product_id' => $productId,
                 ],
                 [
-                    'date_added' => now()->toDateString(),
+                    'date_added' => now()->toDateTimeString(),
                     'admin_id' => auth()->user()->id,
                     'added_quantity' => $addedQuantity,
                     'old_quantity' => $oldQuntity,
