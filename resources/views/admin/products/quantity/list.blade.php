@@ -119,7 +119,7 @@
                                                     <td>{{ $log->old_quantity }}</td>
                                                     <td>{{ $log->added_quantity }}</td>
                                                     <td>{{ $log->new_quantity }}</td>
-                                                    <td>{{ date('d-m-Y', strtotime($log->date_added)) }}</td>
+                                                    <td>{{ date('d-m-Y H:i:s A', strtotime($log->date_added)) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
