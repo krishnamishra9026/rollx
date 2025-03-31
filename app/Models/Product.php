@@ -43,6 +43,16 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
+    public function getSalePriceByFranchise($franchise_id)
+    {
+        if ($franchise_id) {
+            $franchisePrice = $this->productFranchisePrices($franchise_id)->first();  
+            return $franchisePrice ? $franchisePrice->sale_price : $this->price; 
+        }
+
+        return $this->attributes['price'];
+    }
+
     public function productFranchisePrices($franchise_id)
     {
         return $this->hasOne(ProductPrice::class)->where('franchise_id', $franchise_id);

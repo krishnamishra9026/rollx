@@ -51,7 +51,7 @@
                                                     </td>
 
                                                     <td class="float-center">
-                                                        <input type="number" name="sale_price[]" value="{{ $product->getPriceByFranchise(auth()->user()->id) ?? $product->sale_price }}" class="form-control" required min="1">
+                                                        <input type="number" name="sale_price[]" value="{{ $product->getSalePriceByFranchise(auth()->user()->id) ?? $product->price }}" class="form-control" required min="1">
                                                         <input type="hidden" name="product_id[]" value="{{ $product['id'] }}">
                                                     </td>
 
