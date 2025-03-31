@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Franchise;
 use App\Models\Administrator;
 use App\Models\Sale;
+use App\Models\ProductPrice;
 use App\Notifications\OrderSaleNotification;
 
 use App\Exports\Chef\SalesExport;
@@ -99,13 +100,23 @@ class SaleController extends Controller
         $order->stock -= $request->quantity;
         $order->save();
 
+
+        $product_id = $order->product_id;
+        $franchise_id = $order->franchise_id;
+
+        $price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('price') ?? $order->product_price;
+        
+        $sale_price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('sale_price') ?? $order->product_price; 
+
         $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
             'franchise_id' => $order->franchise_id,
             'chef_id' => auth()->user()->id,
             'quantity' => $request->quantity,
-            'price' => $request->quantity * $order->product_price ,
+            'price' => $sale_price,
+            'product_price' => $price,
+            'sale_price' => $order->product_price,
             'status' => $request->status ?? 'Sold'
         ]);
 
