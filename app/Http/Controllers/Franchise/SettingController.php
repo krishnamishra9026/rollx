@@ -126,9 +126,7 @@ class SettingController extends Controller
 
 
     public function productPriceSettingSave(Request $request)
-    {                 
-          echo '<pre>'; print_r($request->all()); echo '</pre>'; exit();
-                                
+    {                                                 
         $validated = $request->validate([
             'product_id' => 'required|array',
             'price' => 'required|array',
