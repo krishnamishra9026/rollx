@@ -20,7 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('franchise_id')->nullable();
             $table->foreign('franchise_id')->references('id')->on('franchises')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('sale_price', 8, 2)->default(0);
 
             $table->unique(['product_id', 'franchise_id']);
 

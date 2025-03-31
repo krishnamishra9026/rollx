@@ -28,6 +28,8 @@ return new class extends Migration
 
             $table->integer('quantity')->default(1);
             $table->decimal('price', 10, 2);
+            $table->decimal('product_price', 10, 2);
+            $table->decimal('sale_price', 10, 2);
 
             $table->enum('status', ['Sold', 'Wastage'])->default('Wastage');
 

@@ -67,7 +67,8 @@ class ProductPriceController extends Controller
                 'franchise_id' => $request->franchise_id
             ],
             [
-                'price' => $request->price
+                'price' => $request->price,
+                'sale_price' => $request->price
             ]
         );
 

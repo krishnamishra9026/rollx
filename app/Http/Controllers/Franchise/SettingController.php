@@ -130,6 +130,7 @@ class SettingController extends Controller
         $validated = $request->validate([
             'product_id' => 'required|array',
             'price' => 'required|array',
+            'sale_price' => 'required|array',
         ]);
 
         foreach ($validated['product_id'] as $index => $productId) {
@@ -141,6 +142,7 @@ class SettingController extends Controller
                 ],
                 [
                     'price' => $validated['price'][$index],
+                    'sale_price' => $validated['sale_price'][$index],
                 ]
             );
         }
