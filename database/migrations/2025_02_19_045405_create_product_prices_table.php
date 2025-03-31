@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->decimal('price', 8, 2)->default(0);
             $table->decimal('sale_price', 8, 2)->default(0);
+            $table->decimal('product_price', 8, 2)->default(0);
 
             $table->unique(['product_id', 'franchise_id']);
 
