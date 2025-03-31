@@ -115,9 +115,9 @@ class SaleController extends Controller
             'product_id' => $order->product_id,
             'franchise_id' => auth()->user()->id,
             'quantity' => $request->quantity,
-            'price' => $price ?? $order->product_price,
-            'product_price' => $order->product_price,
-            'sale_price' => $sale_price ?? $order->product_price,
+            'price' => $sale_price,
+            'product_price' => $price,
+            'sale_price' => $sale_price,
             'status' => $request->status ?? 'Sold'
         ]);
 
