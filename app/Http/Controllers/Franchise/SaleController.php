@@ -86,7 +86,7 @@ class SaleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {            
+    {                          
                                               
         $request->validate([
             'order_id' => 'required|exists:orders,id',
@@ -108,8 +108,8 @@ class SaleController extends Controller
 
         $price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('price') ?? $order->product_price;
         
-        $sale_price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('sale_price') ?? $order->product_price;              
-
+        $sale_price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('sale_price') ?? $order->product_price;   
+        
         $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
@@ -118,7 +118,7 @@ class SaleController extends Controller
             'price' => $request->quantity * $sale_price,
             'product_price' => $price,
             'sale_price' => $order->product_price,
-            'status' => $request->status ?? 'Sold'
+            'status' => $request->status == 'Sold' ? 'Sold' : 'Wastage'
         ]);
 
 
