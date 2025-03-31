@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\ProductPrice;
 use App\Models\Chef;
 use App\Models\Administrator;
 use App\Notifications\OrderSaleNotification;
@@ -47,11 +48,7 @@ class SaleController extends Controller
         $sales              = isset($filter['product']) ? $sales->where('product_id',  $filter['product'] ) : $sales;
         $sales              = isset($filter['order']) ? $sales->where('order',  $filter['order'] ) : $sales;
         $sales              = isset($filter['chef']) ? $sales->where('chef_id',  $filter['chef'] ) : $sales;
-        $sales              = $sales->where('franchise_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
-
-              // echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
-              
-
+        $sales              = $sales->where('franchise_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);            
 
         $order = Order::where('id', $order_id)->first();
 
@@ -106,12 +103,17 @@ class SaleController extends Controller
         $order->stock -= $request->quantity;
         $order->save();
 
+        $product_id = $order->product_id;
+        $franchise_id = auth()->user()->id;
+
+        $price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('price') ?? $order->product_price;
+
         $sale = Sale::create([
             'order_id' => $order->id,
             'product_id' => $order->product_id,
             'franchise_id' => auth()->user()->id,
             'quantity' => $request->quantity,
-            'price' => $request->quantity * $order->product_price,
+            'price' => $price ?? $order->product_price,
             'status' => $request->status ?? 'Sold'
         ]);
 
