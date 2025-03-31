@@ -107,6 +107,8 @@ class SaleController extends Controller
         $franchise_id = auth()->user()->id;
 
         $price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('price') ?? $order->product_price;
+        
+        $sale_price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('sale_price') ?? $order->product_price;
 
         $sale = Sale::create([
             'order_id' => $order->id,
@@ -115,7 +117,7 @@ class SaleController extends Controller
             'quantity' => $request->quantity,
             'price' => $price ?? $order->product_price,
             'product_price' => $order->product_price,
-            'sale_price' => $price ?? $order->product_price,
+            'sale_price' => $sale_price ?? $order->product_price,
             'status' => $request->status ?? 'Sold'
         ]);
 
