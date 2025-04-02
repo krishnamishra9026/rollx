@@ -58,7 +58,7 @@ class SettingController extends Controller
             $productsQuery->where('id', 'like', $filter['product']);
         }
 
-        $products = $productsQuery->paginate(20)->through(function ($product) {
+        $products = $productsQuery->latest()->paginate(20)->through(function ($product) {
             return [
                 'id' => $product->id,
                 'name' => $product->name,
