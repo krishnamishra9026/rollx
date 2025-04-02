@@ -128,10 +128,7 @@ class ProductSaleReportController extends Controller
         // Paginate results
         $sales = $query->latest();
         $product_list = $sales->get();
-        $sales = $query->latest()->paginate(20);
-
-              echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
-              
+        $sales = $query->latest()->paginate(20);             
 
 
         $products = Product::latest()->get();
