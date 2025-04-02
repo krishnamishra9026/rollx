@@ -97,7 +97,7 @@ class ProductSaleReportController extends Controller
 
     }
 
-    public function indexOld(Request $request)
+    public function indexOlddffd(Request $request)
     {
         $filter                     = [];
         $filter['product']           = $request->product;
