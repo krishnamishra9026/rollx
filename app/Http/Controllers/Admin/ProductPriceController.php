@@ -59,6 +59,8 @@ class ProductPriceController extends Controller
             return redirect()->back()->with('error', 'Product Price Already exists, please edit!')->withInput($request->all());
         }
 
+        $validated['sale_price'] = $request->price;
+
         ProductPrice::create($validated);
 
         ProductFranchise::updateOrCreate(
@@ -68,7 +70,6 @@ class ProductPriceController extends Controller
             ],
             [
                 'price' => $request->price,
-                'sale_price' => $request->price
             ]
         );
 
