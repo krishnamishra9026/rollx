@@ -20,7 +20,7 @@ class LoginLogController extends Controller
      */
     public function index()
     {
-        $logs = LoginLog::paginate(20);
+        $logs = LoginLog::latest()->paginate(20);
         return view('admin.login.logs.index', compact('logs'));
     }
 

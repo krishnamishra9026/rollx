@@ -86,7 +86,7 @@ class DateWiseSaleReportController extends Controller
         $sales = $salesQuery->paginate(20);
 
 
-              // echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
+              echo '<pre>'; print_r($sales->toArray()); echo '</pre>'; exit();
                                                                           
 
         $products = Product::latest()->get();

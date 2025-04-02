@@ -240,14 +240,14 @@
                 </a>
             </li>
 
-            <li class="side-nav-item {{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'menuitem-active' : '' }}">
+            <li style="display: none;" class="side-nav-item {{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.blogs.index') }}" class="side-nav-link">
                     <i class="uil-envelope"></i>
                     <span> Blogs </span>
                 </a>
             </li>
 
-            <li class="side-nav-item {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'menuitem-active' : '' }}">
+            <li style="display: none;" class="side-nav-item {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('admin.login-logs.index') }}" class="side-nav-link">
                     <i class="uil uil-history"></i>
                     <span> Login Logs </span>
@@ -268,8 +268,7 @@
                             <a href="{{ route('admin.password.form') }}">Change Password</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.my-account.edit', Auth::guard('administrator')->id()) }}">My
-                                Account</a>
+                            <a href="{{ route('admin.my-account.edit', Auth::guard('administrator')->id()) }}">My Account</a>
                         </li>
 
                     </ul>
