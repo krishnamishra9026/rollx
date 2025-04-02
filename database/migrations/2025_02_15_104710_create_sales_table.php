@@ -27,9 +27,9 @@ return new class extends Migration
             $table->foreign('chef_id')->references('id')->on('chefs')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('quantity')->default(1);
-            $table->decimal('price', 10, 2);
-            $table->decimal('product_price', 10, 2);
-            $table->decimal('sale_price', 10, 2);
+            $table->decimal('price', 8, 2);
+            $table->decimal('product_price', 8, 2);
+            $table->decimal('sale_price', 8, 2);
 
             $table->enum('status', ['Sold', 'Wastage'])->default('Wastage');
 

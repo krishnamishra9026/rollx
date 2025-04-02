@@ -109,6 +109,17 @@ class SaleController extends Controller
         $price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('price') ?? $order->product_price;
         
         $sale_price = ProductPrice::where(['product_id' => $product_id, 'franchise_id' => $franchise_id])->value('sale_price') ?? $order->product_price;   
+              echo '<pre>'; print_r([
+            'order_id' => $order->id,
+            'product_id' => $order->product_id,
+            'franchise_id' => auth()->user()->id,
+            'quantity' => $request->quantity,
+            'price' => $request->quantity * $sale_price,
+            'product_price' => $price,
+            'sale_price' => $order->product_price,
+            'status' => $request->status == 'Sold' ? 'Sold' : 'Wastage'
+        ]); echo '</pre>'; exit();
+              
         
         $sale = Sale::create([
             'order_id' => $order->id,
