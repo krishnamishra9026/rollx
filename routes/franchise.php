@@ -30,6 +30,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/run-config', function () {
+     
+     Artisan::call('cache:clear');
+     Artisan::call('route:clear');
+     Artisan::call('config:clear');
+     Artisan::call('view:clear');
+     Artisan::call('optimize:clear');
+     Artisan::call('optimize:clear');
+
+      return 'Storage link crfully!';
+});
+
 Route::group(['prefix' => 'franchise', 'as' => 'franchise.'], function () {
 
     /*
