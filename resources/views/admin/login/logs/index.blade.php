@@ -26,7 +26,7 @@
                                         <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                             <thead>
                                                 <tr>
-                                                    <th>Role ID</th>
+                                                    <th>Id</th>
                                                     <th>Login Type</th>
                                                     <th>Login User Name</th>
                                                     <th>Login Ip</th>
@@ -83,7 +83,7 @@
                 autoWidth: !1,
                 responsive: !0,
                 order: [
-                    [0, "asc"]
+                    [0, "desc"]
                 ],
                 columnDefs: [{
                     targets: [0],
