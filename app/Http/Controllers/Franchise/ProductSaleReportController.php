@@ -93,47 +93,10 @@ class ProductSaleReportController extends Controller
 
         $products = Product::latest()->get();
 
+        
+
         return view('franchise.products.reports.list', compact('sales', 'filter', 'product_list', 'products', 'totals'));
 
-    }
-
-    public function indexOlddffd(Request $request)
-    {
-        $filter                     = [];
-        $filter['product']           = $request->product;
-
-       
-       $query = Product::withCount([
-                'orders as total_orders' => function ($query) {
-                    $query->selectRaw('COUNT(DISTINCT orders.id)');
-                },
-                'sales as total_sales' => function ($query) {
-                    $query->selectRaw('COUNT(DISTINCT sales.id)');
-                }
-            ])
-            ->withSum('orders as total_quantity_ordered', 'quantity')
-            ->withSum(['sales as total_quantity_sold' => function ($query) {
-                $query->where('status', 'Sold');
-            }], 'quantity')
-            ->withSum('sales as total_revenue', 'price')
-            ->withSum(['sales as total_wastage_quantity' => function ($query) {
-                $query->where('status', 'wastage');
-            }], 'quantity');
-
-        if (request()->has('product')) {
-            $query->where('id', request('product'));
-        }
-
-
-        // Paginate results
-        $sales = $query->latest();
-        $product_list = $sales->get();
-        $sales = $query->latest()->paginate(20);             
-
-
-        $products = Product::latest()->get();
-
-        return view('franchise.products.reports.list', compact('sales', 'filter', 'product_list', 'products'));
     }
 
     /**
