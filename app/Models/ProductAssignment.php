@@ -13,7 +13,8 @@ class ProductAssignment extends Model
         'quantity',
         'comment',
         'assigned_by',
-        'assigned_at'
+        'assigned_at',
+        'status'
     ];
 
     protected $casts = [
