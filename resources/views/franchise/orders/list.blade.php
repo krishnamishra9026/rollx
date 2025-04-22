@@ -157,9 +157,11 @@
                     orderable: !0
                 }, {
                     orderable: !0
-                 }, {
+                }, {
                     orderable: !0
-                     }, {
+                }, {
+                    orderable: !0
+                }, {
                     orderable: !0
                 }, {
                     orderable: !0

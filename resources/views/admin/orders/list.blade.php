@@ -199,6 +199,8 @@ session()->put('route', $route);
                 }, {
                     orderable: !0
                 }, {
+                    orderable: !0
+                }, {
                     orderable: !1
                 }, ]
             })
