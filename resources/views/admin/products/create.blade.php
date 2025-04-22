@@ -27,13 +27,6 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <div class="row mb-2">
-                                <label class="col-form-label col-sm-2" for="product">Product Id</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name='product_id' value="{{ $nextId }}"
-                                        disabled>
-                                </div>
-                            </div>
 
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="name">Product Name</label>
@@ -75,7 +68,24 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="row mb-2">
+                                <label class="col-form-label col-sm-2" for="unit">Product Unit</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select @error('unit_id') is-invalid @enderror" id="unit_id" name="unit_id">
+                                        <option value="">Select Unit</option>
+                                        @foreach($units as $unit)
+                                            <option value="{{ $unit->id }}" {{ old('unit_id') == $unit->id ? 'selected' : '' }}>
+                                                {{ $unit->name }} ({{ $unit->abbreviation }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('unit_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="row mb-2">
                                 <label class="col-form-label col-sm-2" for="quantity">Quantity</label>
@@ -185,6 +195,49 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                <label class="col-md-2 col-form-label text-md-start">Product Availability</label>
+                                <div class="col-md-10">
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" class="form-check-input" id="warehouse_inventory" 
+                                            name="warehouse_inventory" value="1" 
+                                            {{ old('warehouse_inventory') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="warehouse_inventory">Available for warehouse inventory</label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" class="form-check-input" id="franchise_sale" 
+                                            name="franchise_sale" value="1" 
+                                            {{ old('franchise_sale') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="franchise_sale">Available for sale to Franchise</label>
+                                    </div>
+                                    
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="customer_sale" 
+                                            name="customer_sale" value="1" 
+                                            {{ old('customer_sale') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="customer_sale">Available for sale to Customer</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label class="col-form-label col-sm-2" for="threshold">Threshold</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control @error('threshold') is-invalid @enderror" 
+                                        id="threshold" name="threshold" min="0"
+                                        placeholder="Enter minimum stock threshold" 
+                                        value="{{ old('threshold', 0) }}">
+                                    <small class="form-text text-muted">
+                                        Set minimum stock level for notifications
+                                    </small>
+                                    @error('threshold')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                         </div>
                         <div class="card-footer text-end">

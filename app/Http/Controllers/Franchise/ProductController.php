@@ -26,7 +26,9 @@ class ProductController extends Controller
         $filter                = [];
         $filter['product']     = $request->product;
 
-        $products = Product::where('available_quantity', '>', 0)->where('status', 1)
+        $products = Product::where('available_quantity', '>', 0)
+            ->where('status', 1)
+            ->where('franchise_sale', 1)
             ->whereHas('franchises', function ($query) {
                     $query->where('franchise_id', auth()->user()->id);
             });
@@ -39,7 +41,7 @@ class ProductController extends Controller
 
         if ($products->count() <= 0) 
         {
-            $products              = Product::where('available_quantity', '>', 0)->where('status', 1);
+            $products              = Product::where('available_quantity', '>', 0)->where('status', 1)->where('franchise_sale', 1);
             $products              = isset($filter['product']) ? $products->where('id', $filter['product'] ) : $products;
             $products              = $products->orderBy('id', 'desc')->paginate(20);
         }

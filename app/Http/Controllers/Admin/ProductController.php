@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductDocument;
 use App\Models\ProductImage;
 use App\Models\ProductQuantityLog;
+use App\Models\ProductUnit;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\Admin\ProductsExport;
@@ -48,9 +49,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $statement = DB::select("SHOW TABLE STATUS LIKE 'products'");
-        $nextId = $statement[0]->Auto_increment;
-        return view('admin.products.create', compact('nextId'));
+        $units = ProductUnit::where('status', 1)->get();
+        return view('admin.products.create', compact('units'));
     }
 
     /**
@@ -106,7 +106,11 @@ class ProductController extends Controller
         $this->validate($request, [
             'name'      => ['required', 'unique:products'],
             'quantity'          => ['required'],
-
+            'unit_id' => 'required|exists:product_units,id',
+            'warehouse_inventory' => 'nullable|boolean',
+            'franchise_sale' => 'nullable|boolean',
+            'customer_sale' => 'nullable|boolean',
+            'threshold' => 'required|integer|min:0',
         ]);
 
         $part                = new Product();
@@ -121,6 +125,11 @@ class ProductController extends Controller
         $part->refrence      = $request->refrence;
         $part->selling_type  = $request->selling_type;
         $part->status        = $request->status;
+        $part->unit_id = $request->unit_id;
+        $part->warehouse_inventory = $request->has('warehouse_inventory');
+        $part->franchise_sale = $request->has('franchise_sale');
+        $part->customer_sale = $request->has('customer_sale');
+        $part->threshold     = $request->threshold;              
         $part->save();
 
        if($request->hasfile('images'))
@@ -184,8 +193,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product       = Product::find($id);
-        return view('admin.products.edit', compact('product'));
+        $product = Product::find($id);
+        $units = ProductUnit::where('status', 1)->get();
+        return view('admin.products.edit', compact('product', 'units'));
     }
 
     /**
@@ -222,25 +232,35 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'name'              => ['required', 'unique:products,name,'.$id],
-            'quantity'          => ['required'],
+            'name' => ['required', 'unique:products,name,'.$id],
+            'quantity' => ['required'],
+            'unit_id' => 'required|exists:product_units,id',
+            'warehouse_inventory' => 'nullable|boolean',
+            'franchise_sale' => 'nullable|boolean',
+            'customer_sale' => 'nullable|boolean',
+            'threshold' => 'required|integer|min:0',
         ]);
 
-        $part                       = Product::find($id);
-        $part->name          = $request->name;
-        $part->outlet_name   = $request->outlet_name;
-        $part->description   = $request->description;
-        $part->price         = $request->price;
-        $part->sold_color  = $request->sold_color;
-        $part->quantity      = $request->quantity;
-        $part->selling_type  = $request->selling_type;
-        $part->available_quantity  = $request->quantity - $part->sold_quantity;
+        $part = Product::find($id);
+        $part->name = $request->name;
+        $part->outlet_name = $request->outlet_name;
+        $part->description = $request->description;
+        $part->price = $request->price;
+        $part->sold_color = $request->sold_color;
+        $part->quantity = $request->quantity;
+        $part->selling_type = $request->selling_type;
+        $part->available_quantity = $request->quantity - $part->sold_quantity;
         $part->sold_quantity = $part->sold_quantity;
-        $part->refrence      = $request->refrence;
-        $part->status        = $request->status ?? 1;
-        $part->save();
+        $part->refrence = $request->refrence;
+        $part->status = $request->status ?? 1;
+        $part->unit_id = $request->unit_id;
+        $part->warehouse_inventory = $request->has('warehouse_inventory');
+        $part->franchise_sale = $request->has('franchise_sale');
+        $part->customer_sale = $request->has('customer_sale');
+        $part->threshold = $request->threshold;
+        $part->save();              
 
-       if($request->hasfile('images'))
+        if($request->hasfile('images'))
         {
            foreach($request->file('images') as $file)
            {

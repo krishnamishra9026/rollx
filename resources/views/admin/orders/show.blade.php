@@ -172,7 +172,7 @@
                                     <div class="col-sm-10">
                                         <select id="statuses" class="form-select " name="status">
                                             @php
-                                                $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
+                                                $statuses = ['pending', 'accepted', 'rejected', 'ready', 'delivered'];
                                                 $currentIndex = array_search($order->status, $statuses);
                                             @endphp
 

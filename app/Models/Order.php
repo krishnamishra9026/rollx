@@ -23,6 +23,7 @@ class Order extends Model
      'total',
      'description',
      'status',
+     'delivery_date'
  ];
 
     public function product()

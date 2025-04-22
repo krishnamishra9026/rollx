@@ -75,7 +75,9 @@ Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
 
     Route::get('sales/export', [SaleController::class, 'export'])->name('sales.export');
 
-    Route::resource('sales', SaleController::class);
+    Route::get('sales/wastage', [SaleController::class, 'wastageSale'])->name('sales.wastage.index');
+
+    Route::resource('sales', SaleController::class);    
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::resource('sales', SaleController::class);

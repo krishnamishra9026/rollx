@@ -271,6 +271,9 @@
                             <a href="{{ route('admin.my-account.edit', Auth::guard('administrator')->id()) }}">My Account</a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('admin.product-unit.edit', Auth::guard('administrator')->id()) }}">Product Unit</a>
+                        </li>
                     </ul>
                 </div>
             </li>

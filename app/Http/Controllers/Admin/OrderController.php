@@ -448,8 +448,8 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if (!in_array($order->status, ['completed', 'delivered']) && in_array($request->status, ['completed', 'delivered'])) {
-            Product::find($order->product_id)->increment('sold_quantity', $order->quantity);
-            Product::find($order->product_id)->decrement('available_quantity', $order->quantity);
+            /*Product::find($order->product_id)->increment('sold_quantity', $order->quantity);
+            Product::find($order->product_id)->decrement('available_quantity', $order->quantity);*/
         }
 
         if (!in_array($order->status, ['cancelled']) && in_array($request->status, ['cancelled'])) {
@@ -526,8 +526,8 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if (!in_array($order->status, ['completed', 'delivered']) && in_array($request->status, ['completed', 'delivered'])) {
-            Product::find($order->product_id)->increment('sold_quantity', $order->quantity);
-            Product::find($order->product_id)->decrement('available_quantity', $order->quantity);
+            /*Product::find($order->product_id)->increment('sold_quantity', $order->quantity);
+            Product::find($order->product_id)->decrement('available_quantity', $order->quantity);*/
         }
 
         if (!in_array($order->status, ['cancelled']) && in_array($request->status, ['cancelled'])) {

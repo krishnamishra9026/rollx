@@ -63,7 +63,7 @@ class OrderController extends Controller
      */
 
     public function save(Request $request)
-    {                            
+    {                                                     
         foreach ($request->data as $key => $value) {                  
 
             if ($value['quantity'] <= 0) {
@@ -93,12 +93,16 @@ class OrderController extends Controller
             $input['model_number'] = $product->model_number;
             $input['stock'] = $value['quantity'];
             $input['quantity'] = $value['quantity'];
+            $input['delivery_date'] = $value['delivery_date'];
             $input['product_price'] = $value['price'];
             $input['total_price'] = $total;
             $input['franchise_id'] = auth()->user()->id;
             $input['total'] = $value['price'] * $value['quantity'];
 
             $order = Order::create($input);
+
+            Product::find($order->product_id)->increment('sold_quantity', $order->quantity);
+            Product::find($order->product_id)->decrement('available_quantity', $order->quantity);
 
             //Order created notification
 

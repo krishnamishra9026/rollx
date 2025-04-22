@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SaleProductFranchiseReportController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\WalletController;
+use App\Http\Controllers\Admin\ProductUnitController;
 use App\Http\Controllers\Admin\LoginLogController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\UserManagement\AdminController;
 use App\Http\Controllers\Admin\UserManagement\SuperadminController;
+use App\Http\Controllers\Admin\ProductAssignmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -179,6 +181,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('products/download-sample', [ProductController::class, 'downloadSampleCsv'])->name('products.download.sample.csv');
 
     Route::resource('products', ProductController::class);
+
+    Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+        Route::post('assign', [ProductAssignmentController::class, 'assign'])->name('assign');
+        Route::get('assignments/{product}', [ProductAssignmentController::class, 'history'])->name('assignments.history');
+        Route::get('assignments/create/{product}', [ProductAssignmentController::class, 'create'])->name('assignments.create');
+        Route::get('assignments/{assignment}/edit', [ProductAssignmentController::class, 'edit'])->name('assignments.edit');
+        Route::put('assignments/{assignment}', [ProductAssignmentController::class, 'update'])->name('assignments.update');
+    });
 
     Route::resource('product-quantities', ProductQuantityController::class);
 
@@ -352,4 +362,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::post('settings/company-details', [CompanyController::class, 'companyDetails'])->name('company-details');
 
+});
+
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:administrator']], function () {
+    Route::get('product-unit', [ProductUnitController::class, 'edit'])->name('product-unit.edit');
+    Route::post('product-unit', [ProductUnitController::class, 'store'])->name('product-unit.store');
+    Route::put('product-unit/{id}', [ProductUnitController::class, 'update'])->name('product-unit.update');
+    Route::delete('product-unit/{id}', [ProductUnitController::class, 'destroy'])->name('product-unit.destroy');
 });

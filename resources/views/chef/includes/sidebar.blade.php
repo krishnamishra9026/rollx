@@ -47,6 +47,15 @@
                 </a>
             </li>
 
+            
+
+            <li class="side-nav-item {{ request()->is('chef/sales/wastage') || request()->is('chef/sales/wastage/*') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('chef.sales.wastage.index') }}" class="side-nav-link">
+                    <i class="uil-dollar-sign-alt"></i>
+                    <span> Wastage Sale </span>
+                </a>
+            </li>
+
             <li class="side-nav-item {{ request()->is('chef/notifications') || request()->is('chef/notifications/*') ? 'menuitem-active' : '' }}">
                 <a href="{{ route('chef.notifications.list') }}" class="side-nav-link">
                     <i class="uil-bell"></i>

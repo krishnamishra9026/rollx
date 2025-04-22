@@ -121,3 +121,5 @@ Route::get('/privacy-policy', function () {
 
 Route::get('technician/password/reset/{token}', [ResetPassword::class, 'showResetForm'])->name('technician.password.form');
 Route::post('technician/password/update', [ResetPassword::class, 'updatePassword'])->name('technician.password.update');
+
+

@@ -72,6 +72,7 @@
                                             <th>Name</th>
                                             <th>Stock</th>
                                             <th>Quantity</th>
+                                            <th>Delivery Date</th>
                                             <th>Price</th>
                                             <th>Total Price</th>
                                             <th>Date Added</th>
@@ -95,9 +96,18 @@
                                                 <td>
                                                     <div class="quantity-box">
                                                         <button type="button" class="decrease">-</button>
-                                                        <input type="number" name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->getPriceByFranchise(auth()->user()->id) }}" value="0" min="0" max="{{ $product->quantity }}">
+                                                        <input type="number" required name="data[{{ $key }}][quantity]" class="quantity" data-price="{{ $product->getPriceByFranchise(auth()->user()->id) }}" value="0" min="0" max="{{ $product->quantity }}">
                                                         <button type="button" class="increase">+</button>
                                                     </div>
+                                                </td>
+                                                <td>
+                                                    <input type="date" 
+                                                       class="form-control @error('delivery_date') is-invalid @enderror" 
+                                                       id="delivery_date" 
+                                                       name="data[{{ $key }}][delivery_date]" 
+                                                       min="{{ date('Y-m-d') }}"
+                                                       required>
+                                                    
                                                 </td>
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
                                                 <td class="total-cost">{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
@@ -136,7 +146,7 @@
                                         @endforeach
                                         </tbody>
                                     <tr >
-                                        <td colspan="8">
+                                        <td colspan="10">
                                         <button type="submit" class="btn btn-sm btn-success text-end" form="CreateOrders" style="float: right;">Create Orders</button>
                                         </td>
                                     </tr>
@@ -183,8 +193,6 @@
                     searchable: !0
                 }],
                 columns: [{
-                    orderable: !0
-                }, {
                     orderable: !0
                 }, {
                     orderable: !0

@@ -24,8 +24,18 @@ class Product extends Model
         'price',
         'status',
         'notification',
+        'unit_id',
+        'warehouse_inventory',
+        'franchise_sale',
+        'customer_sale',
+        'threshold'
     ];
 
+    protected $casts = [
+        'warehouse_inventory' => 'boolean',
+        'franchise_sale' => 'boolean',
+        'customer_sale' => 'boolean'
+    ];
 
     public function images()
     {
@@ -112,6 +122,11 @@ class Product extends Model
     public function plateSetting()
     {
         return $this->hasOne(ProductPlateSetting::class, 'product_id')->where('franchise_id', auth()->user()->id);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(ProductUnit::class, 'unit_id');
     }
 
 }

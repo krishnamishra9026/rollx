@@ -60,6 +60,33 @@ class SaleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function wastageSale(Request $request)
+    {
+       $total_orders = Order::count();
+       $not_started = Order::where('status', 'PO Generated')->count();
+       $in_progress = Order::where('status', 'In Progress')->count();
+       $delivered = Order::where('status', 'Delivered')->count();
+       $completed = Order::where('status', 'Completed')->count();
+
+       $orders = Order::where('franchise_id', auth()->user()->franchise_id)
+           ->where('stock', '>', 0)
+           ->whereHas('product', function ($query) {
+                $query->where('customer_sale', 1);
+            })
+           ->where(function ($query) {
+                $query->where('status', 'completed')
+            ->orWhere('status', 'delivered');
+            })
+               ->orderBy("id", "desc")
+               ->with(['productPlateSetting' => function ($query) {
+                    $query->select('product_id', 'franchise_id', 'full_plate_quantity', 'half_plate_quantity');
+            }])
+        ->paginate(20);      
+
+        return view('chef.orders.sales.wastage', compact('total_orders', 'not_started', 'in_progress', 'delivered', 'completed', 'orders'));     
+    }
+
     public function create(Request $request)
     {
         $order_id = $request->order_id;

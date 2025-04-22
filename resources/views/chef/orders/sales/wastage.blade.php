@@ -33,7 +33,7 @@
                         <li class="breadcrumb-item">Dashboard</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">Wastage Sale</h4>
             </div>
         </div>
     </div>
@@ -42,78 +42,6 @@
     @include('chef.includes.flash-message')
 
      <div class="row">
-            <div class="col-12">
-                <div class="card">
-
-                    <div class="card-header">
-                        <h4 class="page-title">Click on bellow buttons to record Sold Items</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row">
-                            @if ($orders && count($orders))
-                                @foreach ($orders as $order)
-                                    @if (($order->product->selling_type ?? '') != 'quantity')
-
-                                        @if($order->stock >= ($order->ProductPlateSetting->full_plate_quantity ?? 1) )
-                                        <div class="col-sm-3 mt-2 d-flex">
-                                            <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => ($order->ProductPlateSetting->full_plate_quantity ?? 1), 'status' => 'Sold']) }}" 
-                                               class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
-                                                <span>Full Plate ({{ ($order->ProductPlateSetting->full_plate_quantity ?? 1) }} Quantity)</span>  
-                                                <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
-                                            </a>
-                                        </div>
-                                        @endif
-
-                                        @if($order->stock >= ($order->ProductPlateSetting->half_plate_quantity ?? 1) )
-                                        <div class="col-sm-3 mt-2 d-flex">
-                                            <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $order->ProductPlateSetting->half_plate_quantity ?? 1, 'status' => 'Sold']) }}" 
-                                               class="btn btn-{{ @$order->product->sold_color ?? 'danger' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
-                                                <span>Half Plate ({{ ($order->ProductPlateSetting->half_plate_quantity ?? 1) }} Quantity)</span>  
-                                                <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
-                                            </a>
-                                        </div>
-                                        @endif
-
-                                        @if($order->stock > 0 && ($order->stock < ($order->ProductPlateSetting->half_plate_quantity ?? 1)) )
-
-                                        <div class="col-sm-3 mt-2 d-flex">
-                                            <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => $order->stock, 'status' => 'Sold']) }}" 
-                                               class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
-                                                <span>Full Plate ({{ $order->stock }} Quantity)</span>  
-                                                <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
-                                            </a>
-                                        </div>
-                                        @endif
-
-                                    @else
-
-                                        @if($order->stock >= 1)
-                                        <div class="col-sm-3 mt-2 d-flex">
-                                            <a href="{{ route('chef.sales.save', ['order_id' => $order->id, 'quantity' => 1, 'status' => 'Sold']) }}" 
-                                               class="btn btn-{{ @$order->product->sold_color ?? 'success' }} rounded-pill w-100 d-flex flex-column align-items-center justify-content-center text-center">
-                                                <span>Full Plate (1 Quantity)</span>  
-                                                <span class="d-block fw-bold">{{ @$order->product->name }} #{{ $order->id }}</span>
-                                            </a>
-                                        </div>
-                                        @endif
-
-                                    @endif
-                                @endforeach
-                            @else
-                                <p>No item available to sell...</p>
-                            @endif
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-
-     <div class="row" style="display: none;">
             <div class="col-12">
                 <div class="card">
 

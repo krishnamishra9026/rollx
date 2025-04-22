@@ -44,6 +44,7 @@
                                             <th class="fw-bold">Wastage Qty</th>
                                             <th class="fw-bold">Total Qty</th>
                                             <th class="fw-bold">Stock</th>
+                                            <th class="fw-bold">Delivery Date</th>
                                             <th class="fw-bold">Order Date Time</th>
                                             <th class="fw-bold">Status</th>
                                             <th class="fw-bold">Action</th>
@@ -61,6 +62,7 @@
                                                 <td>{{ $order->sales()->where('status', 'Wastage')->sum('quantity') }}</td>
                                                 <td>{{ $order->quantity - $order->stock }}</td>
                                                 <td>{{ $order->stock }}</td>
+                                                <td>{{ $order->delivery_date ? date('d-m-Y', strtotime($order->delivery_date)) : '--' }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>
                                                 @php

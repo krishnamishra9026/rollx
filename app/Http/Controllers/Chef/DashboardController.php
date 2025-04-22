@@ -32,9 +32,12 @@ class DashboardController extends Controller
 
         $orders = Order::where('franchise_id', auth()->user()->franchise_id)
             ->where('stock', '>', 0)
+            ->whereHas('product', function ($query) {
+                $query->where('customer_sale', 1);
+            })
             ->where(function ($query) {
                 $query->where('status', 'completed')
-                      ->orWhere('status', 'delivered');
+                  ->orWhere('status', 'delivered');
             })
             ->orderBy("id", "desc")
             ->with(['productPlateSetting' => function ($query) {

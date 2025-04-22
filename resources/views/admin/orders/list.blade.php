@@ -84,7 +84,7 @@ session()->put('route', $route);
                                                 <td>
                                                     <select class="form-select form-select-sm custom-select" onchange="changeStatus({{ $order->id }}, this.value)">
                                                         @php
-                                                            $statuses = ['pending', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered'];
+                                                            $statuses = ['pending', 'accepted', 'rejected', 'ready', 'delivered'];
                                                             $currentIndex = array_search($order->status, $statuses);
                                                         @endphp
 

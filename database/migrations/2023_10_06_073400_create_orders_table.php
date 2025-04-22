@@ -36,7 +36,7 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
-            $table->enum('status', ['pending', 'accepted', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered', 'refunded', 'failed', 'returned'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'processing', 'processed', 'cancelled', 'completed', 'shipped', 'delivered', 'refunded', 'failed', 'returned', 'rejected', 'ready'])->default('pending');
 
             $table->timestamps();
         });
