@@ -59,6 +59,7 @@ session()->put('route', $route);
                                             <th>Sales</th>
                                             <th class="no-wrap">Franchise Name</th>
                                             <th class="no-wrap">Change Status</th>
+                                            <th class="fw-bold">Delivery Date</th>
                                             <th class="no-wrap">Order Date Time</th>
                                             <th class="text-right">Action</th>
                                         </tr>
@@ -97,6 +98,7 @@ session()->put('route', $route);
                                                         @endforeach
                                                     </select>
                                                 </td>
+                                                <td>{{ $order->delivery_date ? date('d-m-Y', strtotime($order->delivery_date)) : '--' }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i A') }}</td>
                                                 <td>
                                                     <a href="#"
