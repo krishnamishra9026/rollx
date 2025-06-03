@@ -10,13 +10,25 @@ return new class extends Migration
     {
         Schema::create('product_assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('product_id');
             $table->enum('assignment_type', ['kitchen', 'cart', 'new_opening', 'franchise']);
             $table->integer('quantity');
             $table->text('comment')->nullable();
-            $table->foreignId('assigned_by')->constrained('administrators');
+            $table->unsignedBigInteger('assigned_by');
             $table->dateTime('assigned_at');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
+
+            // Add foreign key constraints
+            $table->foreign('product_id')
+                  ->references('id')
+                  ->on('products')
+                  ->onDelete('cascade');
+                  
+            $table->foreign('assigned_by')
+                  ->references('id')
+                  ->on('administrators')
+                  ->onDelete('restrict');
         });
     }
 

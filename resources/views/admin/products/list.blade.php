@@ -93,7 +93,15 @@
                                             </div>
                                         </td>
                                         <td>{{ $product->sold_quantity ?? 0 }}</td>
-                                        <td>{{ $product->available_quantity ?? $product->quantity }}</td>
+
+                                        <td>
+                                            <div class="quantity-cell {{ $product->available_quantity <= $product->threshold ? 'threshold-warning' : '' }}"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top"
+                                                title="{{ $product->available_quantity <= $product->threshold ? 'Stock below threshold ('.$product->threshold.')' : '' }}">
+                                                {{ $product->available_quantity ?? $product->quantity}}
+                                            </div>
+                                        </td>
                                         <td>{{ $product->price }}</td>
                                         <td> <a href="{{ route('admin.orders.index', ['product' => $product->id]) }}" >{{ $product->orders->count() }} </a></td>
                                         <td> <a href="{{ route('admin.sales.index', ['product' => $product->id]) }}" >{{ $product->sales->count() }} </a></td>
