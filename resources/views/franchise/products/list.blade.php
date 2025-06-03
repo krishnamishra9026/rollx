@@ -102,11 +102,10 @@
                                                 </td>
                                                 <td>
                                                     <input type="date" 
-                                                       class="form-control @error('delivery_date') is-invalid @enderror" 
+                                                       class="form-control delivery-date @error('delivery_date') is-invalid @enderror" 
                                                        id="delivery_date" 
                                                        name="data[{{ $key }}][delivery_date]" 
-                                                       min="{{ date('Y-m-d') }}"
-                                                       required>
+                                                       min="{{ date('Y-m-d') }}">
                                                     
                                                 </td>
                                                 <td>{{ $product->getPriceByFranchise(auth()->user()->id) }}</td>
@@ -267,6 +266,29 @@
                     $(this).closest("tr").find('.total-cost').html(total.toFixed(2));
                     let points = parseInt($('.points').html());
                     $('.points').html(points + parseInt(price));
+                }
+            });
+
+            $(".quantity").on('input change', function() {
+                let quantityInput = $(this);
+                let deliveryDateInput = quantityInput.closest('tr').find('.delivery-date');
+                
+                if (parseInt(quantityInput.val()) > 0) {
+                    deliveryDateInput.prop('required', true);
+                } else {
+                    deliveryDateInput.prop('required', false);
+                }
+            });
+
+            $(".increase, .decrease").click(function () {
+                let quantityInput = $(this).siblings(".quantity");
+                let deliveryDateInput = quantityInput.closest('tr').find('.delivery-date');
+                
+                // After updating the quantity value, check if it's greater than 0
+                if (parseInt(quantityInput.val()) > 0) {
+                    deliveryDateInput.prop('required', true);
+                } else {
+                    deliveryDateInput.prop('required', false);
                 }
             });
         });
