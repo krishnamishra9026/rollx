@@ -530,7 +530,7 @@ class OrderController extends Controller
             Product::find($order->product_id)->decrement('available_quantity', $order->quantity);*/
         }
 
-        if (!in_array($order->status, ['cancelled']) && in_array($request->status, ['cancelled'])) {
+        if (!in_array($order->status, ['rejected']) && in_array($request->status, ['rejected'])) {
             Product::find($order->product_id)->increment('available_quantity', $order->quantity);
             Product::find($order->product_id)->decrement('sold_quantity', $order->quantity);
         }
@@ -539,7 +539,7 @@ class OrderController extends Controller
             'status' => $request->status,
         ]);
 
-        if($request->status == 'cancelled'){
+        if($request->status == 'rejected'){
             $order = Order::find($id);
 
             $user = Franchise::find($order->franchise_id);
